@@ -2,7 +2,23 @@
 
 ## MX Platform Node
 
-This generator creates TypeScript/JavaScript client that utilizes [axios](https://github.com/axios/axios). The generated Node module can be used in the following environments:
+A Node.js library for the [MX Platform API](https://www.mx.com/products/platform-api).
+
+### Documentation
+
+See the [documentation](https://docs.mx.com/api).
+
+### Install
+
+To build and compile the typescript sources to javascript use:
+
+```shell
+$ npm install mx-platform-node
+```
+
+### Getting Started
+
+The [openapi-generator](https://github.com/OpenAPITools/openapi-generator) creates TypeScript/JavaScript client that utilizes [axios](https://github.com/axios/axios). The generated Node module can be used in the following environments:
 
 Environment
 * Node.js
@@ -17,31 +33,31 @@ Module system
 * CommonJS
 * ES6 module system
 
-It can be used in both TypeScript and JavaScript. In TypeScript, the definition should be automatically resolved via `package.json`. ([Reference](http://www.typescriptlang.org/docs/handbook/typings-for-npm-packages.html))
+In order to make requests, you will need to [sign up](https://dashboard.mx.com/sign_up) for the MX Platform API and get a `Client ID` and `API Key`.
 
-### Building
+```javascript
+import { Configuration, MxPlatformApi } from 'mx-platform-node'
 
-To build and compile the typescript sources to javascript use:
+const configuration = new Configuration({
+  basePath: 'https://int-api.mx.com',
+  username: 'Client ID',
+  password: 'API Key',
+  baseOptions: {
+    headers: {
+      Accept: 'application/vnd.mx.api.v1+json'
+    }
+  }
+});
+
+const client = new MxPlatformApi(configuration);
+
+const userGuid = 'USR-123';
+
+const response = await client.readUser(userGuid);
+
+console.log(response.data);
 ```
-npm install
-npm run build
-```
 
-### Publishing
+## Contributing
 
-First build the package then run ```npm publish```
-
-### Consuming
-
-navigate to the folder of your consuming project and run one of the following commands.
-
-_published:_
-
-```
-npm install mx-platform-node@0.1.0 --save
-```
-
-_unPublished (not recommended):_
-
-```
-npm install PATH_TO_GENERATED_PACKAGE --save
+Bug reports and pull requests are welcome on [GitHub](https://github.com/mxenabled/mx-platform-node).
