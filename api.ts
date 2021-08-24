@@ -681,10 +681,10 @@ export interface ChallengeResponse {
     image_data?: string;
     /**
      * 
-     * @type {Array<ChallengeResponseImageOptions>}
+     * @type {Array<ImageOptionResponse>}
      * @memberof ChallengeResponse
      */
-    image_options?: Array<ChallengeResponseImageOptions>;
+    image_options?: Array<ImageOptionResponse>;
     /**
      * 
      * @type {string}
@@ -693,60 +693,16 @@ export interface ChallengeResponse {
     label?: string;
     /**
      * 
-     * @type {Array<ChallengeResponseOptions>}
+     * @type {Array<OptionResponse>}
      * @memberof ChallengeResponse
      */
-    options?: Array<ChallengeResponseOptions>;
+    options?: Array<OptionResponse>;
     /**
      * 
      * @type {string}
      * @memberof ChallengeResponse
      */
     type?: string;
-}
-/**
- * 
- * @export
- * @interface ChallengeResponseImageOptions
- */
-export interface ChallengeResponseImageOptions {
-    /**
-     * 
-     * @type {string}
-     * @memberof ChallengeResponseImageOptions
-     */
-    data_uri?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ChallengeResponseImageOptions
-     */
-    label?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ChallengeResponseImageOptions
-     */
-    value?: string;
-}
-/**
- * 
- * @export
- * @interface ChallengeResponseOptions
- */
-export interface ChallengeResponseOptions {
-    /**
-     * 
-     * @type {string}
-     * @memberof ChallengeResponseOptions
-     */
-    label?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ChallengeResponseOptions
-     */
-    value?: string;
 }
 /**
  * 
@@ -1272,6 +1228,31 @@ export interface HoldingsResponseBody {
      * @memberof HoldingsResponseBody
      */
     pagination?: PaginationResponse;
+}
+/**
+ * 
+ * @export
+ * @interface ImageOptionResponse
+ */
+export interface ImageOptionResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof ImageOptionResponse
+     */
+    data_uri?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ImageOptionResponse
+     */
+    label?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ImageOptionResponse
+     */
+    value?: string;
 }
 /**
  * 
@@ -1813,6 +1794,25 @@ export interface OAuthWindowResponseBody {
      * @memberof OAuthWindowResponseBody
      */
     member?: OAuthWindowResponse;
+}
+/**
+ * 
+ * @export
+ * @interface OptionResponse
+ */
+export interface OptionResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof OptionResponse
+     */
+    label?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof OptionResponse
+     */
+    value?: string;
 }
 /**
  * 
