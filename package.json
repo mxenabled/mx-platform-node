@@ -1,6 +1,6 @@
 {
   "name": "mx-platform-node",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A Node library for the MX Platform API.",
   "author": "MX",
   "keywords": [
