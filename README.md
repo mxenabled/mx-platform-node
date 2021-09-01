@@ -36,7 +36,7 @@ Module system
 In order to make requests, you will need to [sign up](https://dashboard.mx.com/sign_up) for the MX Platform API and get a `Client ID` and `API Key`.
 
 ```javascript
-import { Configuration, MxPlatformApi } from 'mx-platform-node'
+import { Configuration, MxPlatformApi } from 'mx-platform-node';
 
 const configuration = new Configuration({
   basePath: 'https://int-api.mx.com',
