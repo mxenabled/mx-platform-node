@@ -300,6 +300,12 @@ export interface AccountResponse {
      * @type {string}
      * @memberof AccountResponse
      */
+    imported_at?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountResponse
+     */
     institution_code?: string;
     /**
      * 
@@ -357,6 +363,24 @@ export interface AccountResponse {
     member_guid?: string;
     /**
      * 
+     * @type {string}
+     * @memberof AccountResponse
+     */
+    member_id?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AccountResponse
+     */
+    member_is_managed_by_user?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountResponse
+     */
+    metadata?: string;
+    /**
+     * 
      * @type {number}
      * @memberof AccountResponse
      */
@@ -373,6 +397,12 @@ export interface AccountResponse {
      * @memberof AccountResponse
      */
     name?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountResponse
+     */
+    nickname?: string;
     /**
      * 
      * @type {number}
@@ -403,6 +433,12 @@ export interface AccountResponse {
      * @memberof AccountResponse
      */
     premium_amount?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountResponse
+     */
+    routing_number?: string;
     /**
      * 
      * @type {string}
@@ -439,6 +475,12 @@ export interface AccountResponse {
      * @memberof AccountResponse
      */
     user_guid?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountResponse
+     */
+    user_id?: string;
 }
 /**
  * 
@@ -1356,6 +1398,780 @@ export interface InstitutionsResponseBody {
 /**
  * 
  * @export
+ * @interface ManagedAccountCreateRequest
+ */
+export interface ManagedAccountCreateRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountCreateRequest
+     */
+    account_number?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountCreateRequest
+     */
+    apr?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountCreateRequest
+     */
+    apy?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountCreateRequest
+     */
+    available_balance?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountCreateRequest
+     */
+    available_credit?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountCreateRequest
+     */
+    balance: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountCreateRequest
+     */
+    cash_surrender_value?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountCreateRequest
+     */
+    credit_limit?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountCreateRequest
+     */
+    currency_code?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountCreateRequest
+     */
+    day_payment_is_due?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountCreateRequest
+     */
+    death_benefit?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountCreateRequest
+     */
+    id?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountCreateRequest
+     */
+    interest_rate?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ManagedAccountCreateRequest
+     */
+    is_closed?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ManagedAccountCreateRequest
+     */
+    is_hidden?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountCreateRequest
+     */
+    last_payment?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountCreateRequest
+     */
+    last_payment_at?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountCreateRequest
+     */
+    loan_amount?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountCreateRequest
+     */
+    matures_on?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountCreateRequest
+     */
+    metadata?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountCreateRequest
+     */
+    minimum_balance?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountCreateRequest
+     */
+    minimum_payment?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountCreateRequest
+     */
+    name: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountCreateRequest
+     */
+    nickname?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountCreateRequest
+     */
+    original_balance?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountCreateRequest
+     */
+    payment_due_at?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountCreateRequest
+     */
+    payoff_balance?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountCreateRequest
+     */
+    routing_number?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountCreateRequest
+     */
+    started_on?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountCreateRequest
+     */
+    subtype?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountCreateRequest
+     */
+    type: string;
+}
+/**
+ * 
+ * @export
+ * @interface ManagedAccountCreateRequestBody
+ */
+export interface ManagedAccountCreateRequestBody {
+    /**
+     * 
+     * @type {ManagedAccountCreateRequest}
+     * @memberof ManagedAccountCreateRequestBody
+     */
+    account?: ManagedAccountCreateRequest;
+}
+/**
+ * 
+ * @export
+ * @interface ManagedAccountUpdateRequest
+ */
+export interface ManagedAccountUpdateRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    account_number?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    apr?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    apy?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    available_balance?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    available_credit?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    balance?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    cash_surrender_value?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    credit_limit?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    currency_code?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    day_payment_is_due?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    death_benefit?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    id?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    interest_rate?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    is_closed?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    is_hidden?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    last_payment?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    last_payment_at?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    loan_amount?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    matures_on?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    metadata?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    minimum_balance?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    minimum_payment?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    name?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    nickname?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    original_balance?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    payment_due_at?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    payoff_balance?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    routing_number?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    started_on?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    subtype?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedAccountUpdateRequest
+     */
+    type?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ManagedAccountUpdateRequestBody
+ */
+export interface ManagedAccountUpdateRequestBody {
+    /**
+     * 
+     * @type {ManagedAccountUpdateRequest}
+     * @memberof ManagedAccountUpdateRequestBody
+     */
+    account?: ManagedAccountUpdateRequest;
+}
+/**
+ * 
+ * @export
+ * @interface ManagedMemberCreateRequest
+ */
+export interface ManagedMemberCreateRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedMemberCreateRequest
+     */
+    id?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedMemberCreateRequest
+     */
+    institution_code: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedMemberCreateRequest
+     */
+    metadata?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedMemberCreateRequest
+     */
+    name?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ManagedMemberCreateRequestBody
+ */
+export interface ManagedMemberCreateRequestBody {
+    /**
+     * 
+     * @type {ManagedMemberCreateRequest}
+     * @memberof ManagedMemberCreateRequestBody
+     */
+    member?: ManagedMemberCreateRequest;
+}
+/**
+ * 
+ * @export
+ * @interface ManagedMemberUpdateRequest
+ */
+export interface ManagedMemberUpdateRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedMemberUpdateRequest
+     */
+    id?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedMemberUpdateRequest
+     */
+    metadata?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedMemberUpdateRequest
+     */
+    name?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ManagedMemberUpdateRequestBody
+ */
+export interface ManagedMemberUpdateRequestBody {
+    /**
+     * 
+     * @type {ManagedMemberUpdateRequest}
+     * @memberof ManagedMemberUpdateRequestBody
+     */
+    member?: ManagedMemberUpdateRequest;
+}
+/**
+ * 
+ * @export
+ * @interface ManagedTransactionCreateRequest
+ */
+export interface ManagedTransactionCreateRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionCreateRequest
+     */
+    amount: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionCreateRequest
+     */
+    category?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionCreateRequest
+     */
+    check_number_string?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionCreateRequest
+     */
+    currency_code?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionCreateRequest
+     */
+    description: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionCreateRequest
+     */
+    id?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ManagedTransactionCreateRequest
+     */
+    is_international?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedTransactionCreateRequest
+     */
+    latitude?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionCreateRequest
+     */
+    localized_description?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionCreateRequest
+     */
+    localized_memo?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedTransactionCreateRequest
+     */
+    longitude?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionCreateRequest
+     */
+    memo?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedTransactionCreateRequest
+     */
+    merchant_category_code?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionCreateRequest
+     */
+    merchant_guid?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionCreateRequest
+     */
+    merchant_location_guid?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionCreateRequest
+     */
+    metadata?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionCreateRequest
+     */
+    posted_at?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionCreateRequest
+     */
+    status: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionCreateRequest
+     */
+    transacted_at: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionCreateRequest
+     */
+    type: string;
+}
+/**
+ * 
+ * @export
+ * @interface ManagedTransactionCreateRequestBody
+ */
+export interface ManagedTransactionCreateRequestBody {
+    /**
+     * 
+     * @type {ManagedTransactionCreateRequest}
+     * @memberof ManagedTransactionCreateRequestBody
+     */
+    transaction?: ManagedTransactionCreateRequest;
+}
+/**
+ * 
+ * @export
+ * @interface ManagedTransactionUpdateRequest
+ */
+export interface ManagedTransactionUpdateRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionUpdateRequest
+     */
+    amount?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionUpdateRequest
+     */
+    category?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionUpdateRequest
+     */
+    check_number_string?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionUpdateRequest
+     */
+    currency_code?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionUpdateRequest
+     */
+    description?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionUpdateRequest
+     */
+    id?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ManagedTransactionUpdateRequest
+     */
+    is_international?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedTransactionUpdateRequest
+     */
+    latitude?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionUpdateRequest
+     */
+    localized_description?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionUpdateRequest
+     */
+    localized_memo?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedTransactionUpdateRequest
+     */
+    longitude?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionUpdateRequest
+     */
+    memo?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ManagedTransactionUpdateRequest
+     */
+    merchant_category_code?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionUpdateRequest
+     */
+    merchant_guid?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionUpdateRequest
+     */
+    merchant_location_guid?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionUpdateRequest
+     */
+    metadata?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionUpdateRequest
+     */
+    posted_at?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionUpdateRequest
+     */
+    status?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionUpdateRequest
+     */
+    transacted_at?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedTransactionUpdateRequest
+     */
+    type?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ManagedTransactionUpdateRequestBody
+ */
+export interface ManagedTransactionUpdateRequestBody {
+    /**
+     * 
+     * @type {ManagedTransactionUpdateRequest}
+     * @memberof ManagedTransactionUpdateRequestBody
+     */
+    transaction?: ManagedTransactionUpdateRequest;
+}
+/**
+ * 
+ * @export
  * @interface MemberCreateRequest
  */
 export interface MemberCreateRequest {
@@ -1474,6 +2290,12 @@ export interface MemberResponse {
      * @type {boolean}
      * @memberof MemberResponse
      */
+    is_managed_by_user?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof MemberResponse
+     */
     is_oauth?: boolean;
     /**
      * 
@@ -1505,6 +2327,12 @@ export interface MemberResponse {
      * @memberof MemberResponse
      */
     user_guid?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MemberResponse
+     */
+    user_id?: string;
 }
 /**
  * 
@@ -1687,6 +2515,98 @@ export interface MembersResponseBody {
      * @memberof MembersResponseBody
      */
     pagination?: PaginationResponse;
+}
+/**
+ * 
+ * @export
+ * @interface MerchantLocationResponse
+ */
+export interface MerchantLocationResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof MerchantLocationResponse
+     */
+    city?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MerchantLocationResponse
+     */
+    country?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MerchantLocationResponse
+     */
+    created_at?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MerchantLocationResponse
+     */
+    guid?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof MerchantLocationResponse
+     */
+    latitude?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof MerchantLocationResponse
+     */
+    longitude?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof MerchantLocationResponse
+     */
+    merchant_guid?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MerchantLocationResponse
+     */
+    phone_number?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MerchantLocationResponse
+     */
+    postal_code?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MerchantLocationResponse
+     */
+    state?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MerchantLocationResponse
+     */
+    street_address?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MerchantLocationResponse
+     */
+    updated_at?: string;
+}
+/**
+ * 
+ * @export
+ * @interface MerchantLocationResponseBody
+ */
+export interface MerchantLocationResponseBody {
+    /**
+     * 
+     * @type {MerchantLocationResponse}
+     * @memberof MerchantLocationResponseBody
+     */
+    merchant_location?: MerchantLocationResponse;
 }
 /**
  * 
@@ -2182,6 +3102,12 @@ export interface TransactionResponse {
     account_guid?: string;
     /**
      * 
+     * @type {string}
+     * @memberof TransactionResponse
+     */
+    account_id?: string;
+    /**
+     * 
      * @type {number}
      * @memberof TransactionResponse
      */
@@ -2326,6 +3252,12 @@ export interface TransactionResponse {
     member_guid?: string;
     /**
      * 
+     * @type {boolean}
+     * @memberof TransactionResponse
+     */
+    member_is_managed_by_user?: boolean;
+    /**
+     * 
      * @type {string}
      * @memberof TransactionResponse
      */
@@ -2342,6 +3274,18 @@ export interface TransactionResponse {
      * @memberof TransactionResponse
      */
     merchant_guid?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionResponse
+     */
+    merchant_location_guid?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionResponse
+     */
+    metadata?: string;
     /**
      * 
      * @type {string}
@@ -2390,6 +3334,12 @@ export interface TransactionResponse {
      * @memberof TransactionResponse
      */
     user_guid?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionResponse
+     */
+    user_id?: string;
 }
 /**
  * 
@@ -3035,6 +3985,146 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
+         * Use this endpoint to create a partner-managed account.
+         * @summary Create managed account
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {ManagedAccountCreateRequestBody} managedAccountCreateRequestBody Managed account to be created.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createManagedAccount: async (userGuid: string, memberGuid: string, managedAccountCreateRequestBody: ManagedAccountCreateRequestBody, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('createManagedAccount', 'userGuid', userGuid)
+            // verify required parameter 'memberGuid' is not null or undefined
+            assertParamExists('createManagedAccount', 'memberGuid', memberGuid)
+            // verify required parameter 'managedAccountCreateRequestBody' is not null or undefined
+            assertParamExists('createManagedAccount', 'managedAccountCreateRequestBody', managedAccountCreateRequestBody)
+            const localVarPath = `/users/{user_guid}/managed_members/{member_guid}/accounts`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(managedAccountCreateRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to create a new partner-managed `member`.
+         * @summary Create managed member
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {ManagedMemberCreateRequestBody} managedMemberCreateRequestBody Managed member to be created.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createManagedMember: async (userGuid: string, managedMemberCreateRequestBody: ManagedMemberCreateRequestBody, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('createManagedMember', 'userGuid', userGuid)
+            // verify required parameter 'managedMemberCreateRequestBody' is not null or undefined
+            assertParamExists('createManagedMember', 'managedMemberCreateRequestBody', managedMemberCreateRequestBody)
+            const localVarPath = `/users/{user_guid}/managed_members`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(managedMemberCreateRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to create a new partner-managed `transaction`.
+         * @summary Create managed transaction
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {ManagedTransactionCreateRequestBody} managedTransactionCreateRequestBody Managed transaction to be created.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createManagedTransaction: async (userGuid: string, memberGuid: string, managedTransactionCreateRequestBody: ManagedTransactionCreateRequestBody, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('createManagedTransaction', 'userGuid', userGuid)
+            // verify required parameter 'memberGuid' is not null or undefined
+            assertParamExists('createManagedTransaction', 'memberGuid', memberGuid)
+            // verify required parameter 'managedTransactionCreateRequestBody' is not null or undefined
+            assertParamExists('createManagedTransaction', 'managedTransactionCreateRequestBody', managedTransactionCreateRequestBody)
+            const localVarPath = `/users/{user_guid}/managed_members/{member_guid}/transactions`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(managedTransactionCreateRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * This endpoint allows you to create a new member. Members are created with the required parameters credentials and institution_code, and the optional parameters id and metadata. When creating a member, youll need to include the correct type of credential required by the financial institution and provided by the user. You can find out which credential type is required with the `/institutions/{institution_code}/credentials` endpoint. If successful, the MX Platform API will respond with the newly-created member object. Once you successfully create a member, MX will immediately validate the provided credentials and attempt to aggregate data for accounts and transactions.
          * @summary Create member
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
@@ -3266,6 +4356,140 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             const localVarPath = `/users/{user_guid}/categories/{category_guid}`
                 .replace(`{${"category_guid"}}`, encodeURIComponent(String(categoryGuid)))
                 .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to delete a partner-managed account according to its unique GUID. If successful, the API will respond with a status of `204 No Content`.
+         * @summary Delete managed account
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteManagedAccount: async (memberGuid: string, userGuid: string, accountGuid: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'memberGuid' is not null or undefined
+            assertParamExists('deleteManagedAccount', 'memberGuid', memberGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('deleteManagedAccount', 'userGuid', userGuid)
+            // verify required parameter 'accountGuid' is not null or undefined
+            assertParamExists('deleteManagedAccount', 'accountGuid', accountGuid)
+            const localVarPath = `/users/{user_guid}/managed_members/{member_guid}/accounts/{account_guid}`
+                .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"account_guid"}}`, encodeURIComponent(String(accountGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to delete the specified partner-managed `member`. The endpoint will respond with a status of `204 No Content` without a resource.
+         * @summary Delete managed member
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteManagedMember: async (memberGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'memberGuid' is not null or undefined
+            assertParamExists('deleteManagedMember', 'memberGuid', memberGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('deleteManagedMember', 'userGuid', userGuid)
+            const localVarPath = `/users/{user_guid}/managed_members/{member_guid}`
+                .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to delete the specified partner-managed `transaction`. The endpoint will respond with a status of `204 No Content` without a resource.
+         * @summary Delete managed transaction
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} transactionGuid The unique id for a &#x60;transaction&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteManagedTransaction: async (memberGuid: string, userGuid: string, transactionGuid: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'memberGuid' is not null or undefined
+            assertParamExists('deleteManagedTransaction', 'memberGuid', memberGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('deleteManagedTransaction', 'userGuid', userGuid)
+            // verify required parameter 'transactionGuid' is not null or undefined
+            assertParamExists('deleteManagedTransaction', 'transactionGuid', transactionGuid)
+            const localVarPath = `/users/{user_guid}/managed_members/{member_guid}/transactions/{transaction_guid}`
+                .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"transaction_guid"}}`, encodeURIComponent(String(transactionGuid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4224,6 +5448,202 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
+         * Use this endpoint to retrieve a list of all the partner-managed accounts associated with the given partner-manage member.
+         * @summary List managed accounts
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listManagedAccounts: async (userGuid: string, memberGuid: string, page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('listManagedAccounts', 'userGuid', userGuid)
+            // verify required parameter 'memberGuid' is not null or undefined
+            assertParamExists('listManagedAccounts', 'memberGuid', memberGuid)
+            const localVarPath = `/users/{user_guid}/managed_members/{member_guid}/accounts`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This endpoint returns a list of institutions which can be used to create partner-managed members.
+         * @summary List managed institutions
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listManagedInstitutions: async (page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/managed_institutions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This endpoint returns a list of all the partner-managed members associated with the specified `user`.
+         * @summary List managed members
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listManagedMembers: async (userGuid: string, page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('listManagedMembers', 'userGuid', userGuid)
+            const localVarPath = `/users/{user_guid}/managed_members`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This endpoint returns a list of all the partner-managed transactions associated with the specified `account`, scoped through a `user` and a `member`.
+         * @summary List managed transactions
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listManagedTransactions: async (userGuid: string, memberGuid: string, page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('listManagedTransactions', 'userGuid', userGuid)
+            // verify required parameter 'memberGuid' is not null or undefined
+            assertParamExists('listManagedTransactions', 'memberGuid', memberGuid)
+            const localVarPath = `/users/{user_guid}/managed_members/{member_guid}/transactions`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Use this endpoint for information on what multi-factor authentication challenges need to be answered in order to aggregate a member. If the aggregation is not challenged, i.e., the member does not have a connection status of `CHALLENGED`, then code `204 No Content` will be returned. If the aggregation has been challenged, i.e., the member does have a connection status of `CHALLENGED`, then code `200 OK` will be returned - along with the corresponding credentials.
          * @summary List member challenges
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -5096,6 +6516,140 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
+         * Use this endpoint to read the attributes of a partner-managed account according to its unique guid.
+         * @summary Read managed account
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readManagedAccount: async (memberGuid: string, userGuid: string, accountGuid: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'memberGuid' is not null or undefined
+            assertParamExists('readManagedAccount', 'memberGuid', memberGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('readManagedAccount', 'userGuid', userGuid)
+            // verify required parameter 'accountGuid' is not null or undefined
+            assertParamExists('readManagedAccount', 'accountGuid', accountGuid)
+            const localVarPath = `/users/{user_guid}/managed_members/{member_guid}/accounts/{account_guid}`
+                .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"account_guid"}}`, encodeURIComponent(String(accountGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This endpoint returns the attributes of the specified partner-managed `member`.
+         * @summary Read managed member
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readManagedMember: async (memberGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'memberGuid' is not null or undefined
+            assertParamExists('readManagedMember', 'memberGuid', memberGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('readManagedMember', 'userGuid', userGuid)
+            const localVarPath = `/users/{user_guid}/managed_members/{member_guid}`
+                .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Requests to this endpoint will return the attributes of the specified partner-managed `transaction`.
+         * @summary Read managed transaction
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} transactionGuid The unique id for a &#x60;transaction&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readManagedTransaction: async (memberGuid: string, userGuid: string, transactionGuid: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'memberGuid' is not null or undefined
+            assertParamExists('readManagedTransaction', 'memberGuid', memberGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('readManagedTransaction', 'userGuid', userGuid)
+            // verify required parameter 'transactionGuid' is not null or undefined
+            assertParamExists('readManagedTransaction', 'transactionGuid', transactionGuid)
+            const localVarPath = `/users/{user_guid}/managed_members/{member_guid}/transactions/{transaction_guid}`
+                .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"transaction_guid"}}`, encodeURIComponent(String(transactionGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Use this endpoint to read the attributes of a specific member.
          * @summary Read member
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -5191,6 +6745,44 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             assertParamExists('readMerchant', 'merchantGuid', merchantGuid)
             const localVarPath = `/merchants/{merchant_guid}`
                 .replace(`{${"merchant_guid"}}`, encodeURIComponent(String(merchantGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This endpoint returns the specified merchant_location resource.
+         * @summary Read merchant location
+         * @param {string} merchantLocationGuid The unique id for a &#x60;merchant_location&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readMerchantLocation: async (merchantLocationGuid: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'merchantLocationGuid' is not null or undefined
+            assertParamExists('readMerchantLocation', 'merchantLocationGuid', merchantLocationGuid)
+            const localVarPath = `/merchant_locations/{merchant_location_guid}`
+                .replace(`{${"merchant_location_guid"}}`, encodeURIComponent(String(merchantLocationGuid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5518,10 +7110,11 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
          * @param {string} [referralSource] Must be either &#x60;BROWSER&#x60; or &#x60;APP&#x60; depending on the implementation. Defaults to &#x60;BROWSER&#x60;.
          * @param {string} [uiMessageWebviewUrlScheme] A scheme for routing the user back to the application state they were previously in.
+         * @param {boolean} [skipAggregation] Setting this parameter to &#x60;true&#x60; will prevent the member from automatically aggregating after being redirected from the authorization page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        requestOAuthWindowURI: async (memberGuid: string, userGuid: string, referralSource?: string, uiMessageWebviewUrlScheme?: string, options: any = {}): Promise<RequestArgs> => {
+        requestOAuthWindowURI: async (memberGuid: string, userGuid: string, referralSource?: string, uiMessageWebviewUrlScheme?: string, skipAggregation?: boolean, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('requestOAuthWindowURI', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -5550,6 +7143,10 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
             if (uiMessageWebviewUrlScheme !== undefined) {
                 localVarQueryParameter['ui_message_webview_url_scheme'] = uiMessageWebviewUrlScheme;
+            }
+
+            if (skipAggregation !== undefined) {
+                localVarQueryParameter['skip_aggregation'] = skipAggregation;
             }
 
 
@@ -5754,6 +7351,158 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(categoryUpdateRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to update the attributes of a partner-managed account according to its unique GUID.
+         * @summary Update managed account
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
+         * @param {ManagedAccountUpdateRequestBody} managedAccountUpdateRequestBody Managed account object to be updated (While no single parameter is required, the request body can\&#39;t be empty)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateManagedAccount: async (memberGuid: string, userGuid: string, accountGuid: string, managedAccountUpdateRequestBody: ManagedAccountUpdateRequestBody, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'memberGuid' is not null or undefined
+            assertParamExists('updateManagedAccount', 'memberGuid', memberGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('updateManagedAccount', 'userGuid', userGuid)
+            // verify required parameter 'accountGuid' is not null or undefined
+            assertParamExists('updateManagedAccount', 'accountGuid', accountGuid)
+            // verify required parameter 'managedAccountUpdateRequestBody' is not null or undefined
+            assertParamExists('updateManagedAccount', 'managedAccountUpdateRequestBody', managedAccountUpdateRequestBody)
+            const localVarPath = `/users/{user_guid}/managed_members/{member_guid}/accounts/{account_guid}`
+                .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"account_guid"}}`, encodeURIComponent(String(accountGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(managedAccountUpdateRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to update the attributes of the specified partner_managed `member`.
+         * @summary Update managed member
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {ManagedMemberUpdateRequestBody} managedMemberUpdateRequestBody Managed member object to be updated (While no single parameter is required, the request body can\&#39;t be empty)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateManagedMember: async (memberGuid: string, userGuid: string, managedMemberUpdateRequestBody: ManagedMemberUpdateRequestBody, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'memberGuid' is not null or undefined
+            assertParamExists('updateManagedMember', 'memberGuid', memberGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('updateManagedMember', 'userGuid', userGuid)
+            // verify required parameter 'managedMemberUpdateRequestBody' is not null or undefined
+            assertParamExists('updateManagedMember', 'managedMemberUpdateRequestBody', managedMemberUpdateRequestBody)
+            const localVarPath = `/users/{user_guid}/managed_members/{member_guid}`
+                .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(managedMemberUpdateRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to update the attributes of the specified partner_managed `transaction`.
+         * @summary Update managed transaction
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} transactionGuid The unique id for a &#x60;transaction&#x60;.
+         * @param {ManagedTransactionUpdateRequestBody} managedTransactionUpdateRequestBody Managed transaction object to be updated (While no single parameter is required, the request body can\&#39;t be empty)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateManagedTransaction: async (memberGuid: string, userGuid: string, transactionGuid: string, managedTransactionUpdateRequestBody: ManagedTransactionUpdateRequestBody, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'memberGuid' is not null or undefined
+            assertParamExists('updateManagedTransaction', 'memberGuid', memberGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('updateManagedTransaction', 'userGuid', userGuid)
+            // verify required parameter 'transactionGuid' is not null or undefined
+            assertParamExists('updateManagedTransaction', 'transactionGuid', transactionGuid)
+            // verify required parameter 'managedTransactionUpdateRequestBody' is not null or undefined
+            assertParamExists('updateManagedTransaction', 'managedTransactionUpdateRequestBody', managedTransactionUpdateRequestBody)
+            const localVarPath = `/users/{user_guid}/managed_members/{member_guid}/transactions/{transaction_guid}`
+                .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"transaction_guid"}}`, encodeURIComponent(String(transactionGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(managedTransactionUpdateRequestBody, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -6133,6 +7882,44 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Use this endpoint to create a partner-managed account.
+         * @summary Create managed account
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {ManagedAccountCreateRequestBody} managedAccountCreateRequestBody Managed account to be created.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createManagedAccount(userGuid: string, memberGuid: string, managedAccountCreateRequestBody: ManagedAccountCreateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createManagedAccount(userGuid, memberGuid, managedAccountCreateRequestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to create a new partner-managed `member`.
+         * @summary Create managed member
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {ManagedMemberCreateRequestBody} managedMemberCreateRequestBody Managed member to be created.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createManagedMember(userGuid: string, managedMemberCreateRequestBody: ManagedMemberCreateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createManagedMember(userGuid, managedMemberCreateRequestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to create a new partner-managed `transaction`.
+         * @summary Create managed transaction
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {ManagedTransactionCreateRequestBody} managedTransactionCreateRequestBody Managed transaction to be created.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createManagedTransaction(userGuid: string, memberGuid: string, managedTransactionCreateRequestBody: ManagedTransactionCreateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createManagedTransaction(userGuid, memberGuid, managedTransactionCreateRequestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * This endpoint allows you to create a new member. Members are created with the required parameters credentials and institution_code, and the optional parameters id and metadata. When creating a member, youll need to include the correct type of credential required by the financial institution and provided by the user. You can find out which credential type is required with the `/institutions/{institution_code}/credentials` endpoint. If successful, the MX Platform API will respond with the newly-created member object. Once you successfully create a member, MX will immediately validate the provided credentials and attempt to aggregate data for accounts and transactions.
          * @summary Create member
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
@@ -6201,6 +7988,44 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          */
         async deleteCategory(categoryGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCategory(categoryGuid, userGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to delete a partner-managed account according to its unique GUID. If successful, the API will respond with a status of `204 No Content`.
+         * @summary Delete managed account
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteManagedAccount(memberGuid: string, userGuid: string, accountGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteManagedAccount(memberGuid, userGuid, accountGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to delete the specified partner-managed `member`. The endpoint will respond with a status of `204 No Content` without a resource.
+         * @summary Delete managed member
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteManagedMember(memberGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteManagedMember(memberGuid, userGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to delete the specified partner-managed `transaction`. The endpoint will respond with a status of `204 No Content` without a resource.
+         * @summary Delete managed transaction
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} transactionGuid The unique id for a &#x60;transaction&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteManagedTransaction(memberGuid: string, userGuid: string, transactionGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteManagedTransaction(memberGuid, userGuid, transactionGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -6460,6 +8285,59 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Use this endpoint to retrieve a list of all the partner-managed accounts associated with the given partner-manage member.
+         * @summary List managed accounts
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listManagedAccounts(userGuid: string, memberGuid: string, page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountsResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listManagedAccounts(userGuid, memberGuid, page, recordsPerPage, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * This endpoint returns a list of institutions which can be used to create partner-managed members.
+         * @summary List managed institutions
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listManagedInstitutions(page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InstitutionsResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listManagedInstitutions(page, recordsPerPage, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * This endpoint returns a list of all the partner-managed members associated with the specified `user`.
+         * @summary List managed members
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listManagedMembers(userGuid: string, page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MembersResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listManagedMembers(userGuid, page, recordsPerPage, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * This endpoint returns a list of all the partner-managed transactions associated with the specified `account`, scoped through a `user` and a `member`.
+         * @summary List managed transactions
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listManagedTransactions(userGuid: string, memberGuid: string, page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionsResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listManagedTransactions(userGuid, memberGuid, page, recordsPerPage, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Use this endpoint for information on what multi-factor authentication challenges need to be answered in order to aggregate a member. If the aggregation is not challenged, i.e., the member does not have a connection status of `CHALLENGED`, then code `204 No Content` will be returned. If the aggregation has been challenged, i.e., the member does have a connection status of `CHALLENGED`, then code `200 OK` will be returned - along with the corresponding credentials.
          * @summary List member challenges
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -6697,6 +8575,44 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Use this endpoint to read the attributes of a partner-managed account according to its unique guid.
+         * @summary Read managed account
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async readManagedAccount(memberGuid: string, userGuid: string, accountGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.readManagedAccount(memberGuid, userGuid, accountGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * This endpoint returns the attributes of the specified partner-managed `member`.
+         * @summary Read managed member
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async readManagedMember(memberGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.readManagedMember(memberGuid, userGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Requests to this endpoint will return the attributes of the specified partner-managed `transaction`.
+         * @summary Read managed transaction
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} transactionGuid The unique id for a &#x60;transaction&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async readManagedTransaction(memberGuid: string, userGuid: string, transactionGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.readManagedTransaction(memberGuid, userGuid, transactionGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Use this endpoint to read the attributes of a specific member.
          * @summary Read member
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -6729,6 +8645,17 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          */
         async readMerchant(merchantGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MerchantResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.readMerchant(merchantGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * This endpoint returns the specified merchant_location resource.
+         * @summary Read merchant location
+         * @param {string} merchantLocationGuid The unique id for a &#x60;merchant_location&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async readMerchantLocation(merchantLocationGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MerchantLocationResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.readMerchantLocation(merchantLocationGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -6822,11 +8749,12 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
          * @param {string} [referralSource] Must be either &#x60;BROWSER&#x60; or &#x60;APP&#x60; depending on the implementation. Defaults to &#x60;BROWSER&#x60;.
          * @param {string} [uiMessageWebviewUrlScheme] A scheme for routing the user back to the application state they were previously in.
+         * @param {boolean} [skipAggregation] Setting this parameter to &#x60;true&#x60; will prevent the member from automatically aggregating after being redirected from the authorization page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async requestOAuthWindowURI(memberGuid: string, userGuid: string, referralSource?: string, uiMessageWebviewUrlScheme?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OAuthWindowResponseBody>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.requestOAuthWindowURI(memberGuid, userGuid, referralSource, uiMessageWebviewUrlScheme, options);
+        async requestOAuthWindowURI(memberGuid: string, userGuid: string, referralSource?: string, uiMessageWebviewUrlScheme?: string, skipAggregation?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OAuthWindowResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.requestOAuthWindowURI(memberGuid, userGuid, referralSource, uiMessageWebviewUrlScheme, skipAggregation, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -6880,6 +8808,47 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          */
         async updateCategory(categoryGuid: string, userGuid: string, categoryUpdateRequestBody: CategoryUpdateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoryResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateCategory(categoryGuid, userGuid, categoryUpdateRequestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to update the attributes of a partner-managed account according to its unique GUID.
+         * @summary Update managed account
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
+         * @param {ManagedAccountUpdateRequestBody} managedAccountUpdateRequestBody Managed account object to be updated (While no single parameter is required, the request body can\&#39;t be empty)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateManagedAccount(memberGuid: string, userGuid: string, accountGuid: string, managedAccountUpdateRequestBody: ManagedAccountUpdateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateManagedAccount(memberGuid, userGuid, accountGuid, managedAccountUpdateRequestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to update the attributes of the specified partner_managed `member`.
+         * @summary Update managed member
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {ManagedMemberUpdateRequestBody} managedMemberUpdateRequestBody Managed member object to be updated (While no single parameter is required, the request body can\&#39;t be empty)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateManagedMember(memberGuid: string, userGuid: string, managedMemberUpdateRequestBody: ManagedMemberUpdateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateManagedMember(memberGuid, userGuid, managedMemberUpdateRequestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to update the attributes of the specified partner_managed `transaction`.
+         * @summary Update managed transaction
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} transactionGuid The unique id for a &#x60;transaction&#x60;.
+         * @param {ManagedTransactionUpdateRequestBody} managedTransactionUpdateRequestBody Managed transaction object to be updated (While no single parameter is required, the request body can\&#39;t be empty)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateManagedTransaction(memberGuid: string, userGuid: string, transactionGuid: string, managedTransactionUpdateRequestBody: ManagedTransactionUpdateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateManagedTransaction(memberGuid, userGuid, transactionGuid, managedTransactionUpdateRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -7015,6 +8984,41 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
             return localVarFp.createCategory(userGuid, categoryCreateRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
+         * Use this endpoint to create a partner-managed account.
+         * @summary Create managed account
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {ManagedAccountCreateRequestBody} managedAccountCreateRequestBody Managed account to be created.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createManagedAccount(userGuid: string, memberGuid: string, managedAccountCreateRequestBody: ManagedAccountCreateRequestBody, options?: any): AxiosPromise<AccountResponseBody> {
+            return localVarFp.createManagedAccount(userGuid, memberGuid, managedAccountCreateRequestBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to create a new partner-managed `member`.
+         * @summary Create managed member
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {ManagedMemberCreateRequestBody} managedMemberCreateRequestBody Managed member to be created.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createManagedMember(userGuid: string, managedMemberCreateRequestBody: ManagedMemberCreateRequestBody, options?: any): AxiosPromise<MemberResponseBody> {
+            return localVarFp.createManagedMember(userGuid, managedMemberCreateRequestBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to create a new partner-managed `transaction`.
+         * @summary Create managed transaction
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {ManagedTransactionCreateRequestBody} managedTransactionCreateRequestBody Managed transaction to be created.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createManagedTransaction(userGuid: string, memberGuid: string, managedTransactionCreateRequestBody: ManagedTransactionCreateRequestBody, options?: any): AxiosPromise<TransactionResponseBody> {
+            return localVarFp.createManagedTransaction(userGuid, memberGuid, managedTransactionCreateRequestBody, options).then((request) => request(axios, basePath));
+        },
+        /**
          * This endpoint allows you to create a new member. Members are created with the required parameters credentials and institution_code, and the optional parameters id and metadata. When creating a member, youll need to include the correct type of credential required by the financial institution and provided by the user. You can find out which credential type is required with the `/institutions/{institution_code}/credentials` endpoint. If successful, the MX Platform API will respond with the newly-created member object. Once you successfully create a member, MX will immediately validate the provided credentials and attempt to aggregate data for accounts and transactions.
          * @summary Create member
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
@@ -7078,6 +9082,41 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          */
         deleteCategory(categoryGuid: string, userGuid: string, options?: any): AxiosPromise<void> {
             return localVarFp.deleteCategory(categoryGuid, userGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to delete a partner-managed account according to its unique GUID. If successful, the API will respond with a status of `204 No Content`.
+         * @summary Delete managed account
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteManagedAccount(memberGuid: string, userGuid: string, accountGuid: string, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteManagedAccount(memberGuid, userGuid, accountGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to delete the specified partner-managed `member`. The endpoint will respond with a status of `204 No Content` without a resource.
+         * @summary Delete managed member
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteManagedMember(memberGuid: string, userGuid: string, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteManagedMember(memberGuid, userGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to delete the specified partner-managed `transaction`. The endpoint will respond with a status of `204 No Content` without a resource.
+         * @summary Delete managed transaction
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} transactionGuid The unique id for a &#x60;transaction&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteManagedTransaction(memberGuid: string, userGuid: string, transactionGuid: string, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteManagedTransaction(memberGuid, userGuid, transactionGuid, options).then((request) => request(axios, basePath));
         },
         /**
          * Accessing this endpoint will permanently delete a member.
@@ -7316,6 +9355,55 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
             return localVarFp.listInstitutions(name, supportsAccountIdentification, supportsAccountStatement, supportsAccountVerification, supportsTransactionHistory, options).then((request) => request(axios, basePath));
         },
         /**
+         * Use this endpoint to retrieve a list of all the partner-managed accounts associated with the given partner-manage member.
+         * @summary List managed accounts
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listManagedAccounts(userGuid: string, memberGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<AccountsResponseBody> {
+            return localVarFp.listManagedAccounts(userGuid, memberGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This endpoint returns a list of institutions which can be used to create partner-managed members.
+         * @summary List managed institutions
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listManagedInstitutions(page?: number, recordsPerPage?: number, options?: any): AxiosPromise<InstitutionsResponseBody> {
+            return localVarFp.listManagedInstitutions(page, recordsPerPage, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This endpoint returns a list of all the partner-managed members associated with the specified `user`.
+         * @summary List managed members
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listManagedMembers(userGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<MembersResponseBody> {
+            return localVarFp.listManagedMembers(userGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This endpoint returns a list of all the partner-managed transactions associated with the specified `account`, scoped through a `user` and a `member`.
+         * @summary List managed transactions
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listManagedTransactions(userGuid: string, memberGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<TransactionsResponseBody> {
+            return localVarFp.listManagedTransactions(userGuid, memberGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Use this endpoint for information on what multi-factor authentication challenges need to be answered in order to aggregate a member. If the aggregation is not challenged, i.e., the member does not have a connection status of `CHALLENGED`, then code `204 No Content` will be returned. If the aggregation has been challenged, i.e., the member does have a connection status of `CHALLENGED`, then code `200 OK` will be returned - along with the corresponding credentials.
          * @summary List member challenges
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -7535,6 +9623,41 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
             return localVarFp.readInstitution(institutionCode, options).then((request) => request(axios, basePath));
         },
         /**
+         * Use this endpoint to read the attributes of a partner-managed account according to its unique guid.
+         * @summary Read managed account
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readManagedAccount(memberGuid: string, userGuid: string, accountGuid: string, options?: any): AxiosPromise<AccountResponseBody> {
+            return localVarFp.readManagedAccount(memberGuid, userGuid, accountGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This endpoint returns the attributes of the specified partner-managed `member`.
+         * @summary Read managed member
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readManagedMember(memberGuid: string, userGuid: string, options?: any): AxiosPromise<MemberResponseBody> {
+            return localVarFp.readManagedMember(memberGuid, userGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Requests to this endpoint will return the attributes of the specified partner-managed `transaction`.
+         * @summary Read managed transaction
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} transactionGuid The unique id for a &#x60;transaction&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readManagedTransaction(memberGuid: string, userGuid: string, transactionGuid: string, options?: any): AxiosPromise<TransactionResponseBody> {
+            return localVarFp.readManagedTransaction(memberGuid, userGuid, transactionGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Use this endpoint to read the attributes of a specific member.
          * @summary Read member
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -7565,6 +9688,16 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          */
         readMerchant(merchantGuid: string, options?: any): AxiosPromise<MerchantResponseBody> {
             return localVarFp.readMerchant(merchantGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This endpoint returns the specified merchant_location resource.
+         * @summary Read merchant location
+         * @param {string} merchantLocationGuid The unique id for a &#x60;merchant_location&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readMerchantLocation(merchantLocationGuid: string, options?: any): AxiosPromise<MerchantLocationResponseBody> {
+            return localVarFp.readMerchantLocation(merchantLocationGuid, options).then((request) => request(axios, basePath));
         },
         /**
          * Use this endpoint to read a JSON representation of the statement.
@@ -7650,11 +9783,12 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
          * @param {string} [referralSource] Must be either &#x60;BROWSER&#x60; or &#x60;APP&#x60; depending on the implementation. Defaults to &#x60;BROWSER&#x60;.
          * @param {string} [uiMessageWebviewUrlScheme] A scheme for routing the user back to the application state they were previously in.
+         * @param {boolean} [skipAggregation] Setting this parameter to &#x60;true&#x60; will prevent the member from automatically aggregating after being redirected from the authorization page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        requestOAuthWindowURI(memberGuid: string, userGuid: string, referralSource?: string, uiMessageWebviewUrlScheme?: string, options?: any): AxiosPromise<OAuthWindowResponseBody> {
-            return localVarFp.requestOAuthWindowURI(memberGuid, userGuid, referralSource, uiMessageWebviewUrlScheme, options).then((request) => request(axios, basePath));
+        requestOAuthWindowURI(memberGuid: string, userGuid: string, referralSource?: string, uiMessageWebviewUrlScheme?: string, skipAggregation?: boolean, options?: any): AxiosPromise<OAuthWindowResponseBody> {
+            return localVarFp.requestOAuthWindowURI(memberGuid, userGuid, referralSource, uiMessageWebviewUrlScheme, skipAggregation, options).then((request) => request(axios, basePath));
         },
         /**
          * This endpoint allows partners to get a URL by passing the `widget_type` in the request body, as well as configuring it in several different ways. In the case of Connect, that means setting the `widget_type` to `connect_widget`. Partners may also pass an optional `Accept-Language` header as well as a number of configuration options. Note that this is a `POST` request.
@@ -7704,6 +9838,44 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          */
         updateCategory(categoryGuid: string, userGuid: string, categoryUpdateRequestBody: CategoryUpdateRequestBody, options?: any): AxiosPromise<CategoryResponseBody> {
             return localVarFp.updateCategory(categoryGuid, userGuid, categoryUpdateRequestBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to update the attributes of a partner-managed account according to its unique GUID.
+         * @summary Update managed account
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
+         * @param {ManagedAccountUpdateRequestBody} managedAccountUpdateRequestBody Managed account object to be updated (While no single parameter is required, the request body can\&#39;t be empty)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateManagedAccount(memberGuid: string, userGuid: string, accountGuid: string, managedAccountUpdateRequestBody: ManagedAccountUpdateRequestBody, options?: any): AxiosPromise<AccountResponseBody> {
+            return localVarFp.updateManagedAccount(memberGuid, userGuid, accountGuid, managedAccountUpdateRequestBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to update the attributes of the specified partner_managed `member`.
+         * @summary Update managed member
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {ManagedMemberUpdateRequestBody} managedMemberUpdateRequestBody Managed member object to be updated (While no single parameter is required, the request body can\&#39;t be empty)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateManagedMember(memberGuid: string, userGuid: string, managedMemberUpdateRequestBody: ManagedMemberUpdateRequestBody, options?: any): AxiosPromise<MemberResponseBody> {
+            return localVarFp.updateManagedMember(memberGuid, userGuid, managedMemberUpdateRequestBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to update the attributes of the specified partner_managed `transaction`.
+         * @summary Update managed transaction
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} transactionGuid The unique id for a &#x60;transaction&#x60;.
+         * @param {ManagedTransactionUpdateRequestBody} managedTransactionUpdateRequestBody Managed transaction object to be updated (While no single parameter is required, the request body can\&#39;t be empty)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateManagedTransaction(memberGuid: string, userGuid: string, transactionGuid: string, managedTransactionUpdateRequestBody: ManagedTransactionUpdateRequestBody, options?: any): AxiosPromise<TransactionResponseBody> {
+            return localVarFp.updateManagedTransaction(memberGuid, userGuid, transactionGuid, managedTransactionUpdateRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
          * Use this endpoint to update a members attributes. Only the credentials, id, and metadata parameters can be updated. To get a list of the required credentials for the member, use the list member credentials endpoint.
@@ -7837,6 +10009,47 @@ export class MxPlatformApi extends BaseAPI {
     }
 
     /**
+     * Use this endpoint to create a partner-managed account.
+     * @summary Create managed account
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+     * @param {ManagedAccountCreateRequestBody} managedAccountCreateRequestBody Managed account to be created.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public createManagedAccount(userGuid: string, memberGuid: string, managedAccountCreateRequestBody: ManagedAccountCreateRequestBody, options?: any) {
+        return MxPlatformApiFp(this.configuration).createManagedAccount(userGuid, memberGuid, managedAccountCreateRequestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to create a new partner-managed `member`.
+     * @summary Create managed member
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {ManagedMemberCreateRequestBody} managedMemberCreateRequestBody Managed member to be created.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public createManagedMember(userGuid: string, managedMemberCreateRequestBody: ManagedMemberCreateRequestBody, options?: any) {
+        return MxPlatformApiFp(this.configuration).createManagedMember(userGuid, managedMemberCreateRequestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to create a new partner-managed `transaction`.
+     * @summary Create managed transaction
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+     * @param {ManagedTransactionCreateRequestBody} managedTransactionCreateRequestBody Managed transaction to be created.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public createManagedTransaction(userGuid: string, memberGuid: string, managedTransactionCreateRequestBody: ManagedTransactionCreateRequestBody, options?: any) {
+        return MxPlatformApiFp(this.configuration).createManagedTransaction(userGuid, memberGuid, managedTransactionCreateRequestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * This endpoint allows you to create a new member. Members are created with the required parameters credentials and institution_code, and the optional parameters id and metadata. When creating a member, youll need to include the correct type of credential required by the financial institution and provided by the user. You can find out which credential type is required with the `/institutions/{institution_code}/credentials` endpoint. If successful, the MX Platform API will respond with the newly-created member object. Once you successfully create a member, MX will immediately validate the provided credentials and attempt to aggregate data for accounts and transactions.
      * @summary Create member
      * @param {string} userGuid The unique id for a &#x60;user&#x60;.
@@ -7911,6 +10124,47 @@ export class MxPlatformApi extends BaseAPI {
      */
     public deleteCategory(categoryGuid: string, userGuid: string, options?: any) {
         return MxPlatformApiFp(this.configuration).deleteCategory(categoryGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to delete a partner-managed account according to its unique GUID. If successful, the API will respond with a status of `204 No Content`.
+     * @summary Delete managed account
+     * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public deleteManagedAccount(memberGuid: string, userGuid: string, accountGuid: string, options?: any) {
+        return MxPlatformApiFp(this.configuration).deleteManagedAccount(memberGuid, userGuid, accountGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to delete the specified partner-managed `member`. The endpoint will respond with a status of `204 No Content` without a resource.
+     * @summary Delete managed member
+     * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public deleteManagedMember(memberGuid: string, userGuid: string, options?: any) {
+        return MxPlatformApiFp(this.configuration).deleteManagedMember(memberGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to delete the specified partner-managed `transaction`. The endpoint will respond with a status of `204 No Content` without a resource.
+     * @summary Delete managed transaction
+     * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {string} transactionGuid The unique id for a &#x60;transaction&#x60;.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public deleteManagedTransaction(memberGuid: string, userGuid: string, transactionGuid: string, options?: any) {
+        return MxPlatformApiFp(this.configuration).deleteManagedTransaction(memberGuid, userGuid, transactionGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -8190,6 +10444,63 @@ export class MxPlatformApi extends BaseAPI {
     }
 
     /**
+     * Use this endpoint to retrieve a list of all the partner-managed accounts associated with the given partner-manage member.
+     * @summary List managed accounts
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public listManagedAccounts(userGuid: string, memberGuid: string, page?: number, recordsPerPage?: number, options?: any) {
+        return MxPlatformApiFp(this.configuration).listManagedAccounts(userGuid, memberGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This endpoint returns a list of institutions which can be used to create partner-managed members.
+     * @summary List managed institutions
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public listManagedInstitutions(page?: number, recordsPerPage?: number, options?: any) {
+        return MxPlatformApiFp(this.configuration).listManagedInstitutions(page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This endpoint returns a list of all the partner-managed members associated with the specified `user`.
+     * @summary List managed members
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public listManagedMembers(userGuid: string, page?: number, recordsPerPage?: number, options?: any) {
+        return MxPlatformApiFp(this.configuration).listManagedMembers(userGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This endpoint returns a list of all the partner-managed transactions associated with the specified `account`, scoped through a `user` and a `member`.
+     * @summary List managed transactions
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public listManagedTransactions(userGuid: string, memberGuid: string, page?: number, recordsPerPage?: number, options?: any) {
+        return MxPlatformApiFp(this.configuration).listManagedTransactions(userGuid, memberGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Use this endpoint for information on what multi-factor authentication challenges need to be answered in order to aggregate a member. If the aggregation is not challenged, i.e., the member does not have a connection status of `CHALLENGED`, then code `204 No Content` will be returned. If the aggregation has been challenged, i.e., the member does have a connection status of `CHALLENGED`, then code `200 OK` will be returned - along with the corresponding credentials.
      * @summary List member challenges
      * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -8445,6 +10756,47 @@ export class MxPlatformApi extends BaseAPI {
     }
 
     /**
+     * Use this endpoint to read the attributes of a partner-managed account according to its unique guid.
+     * @summary Read managed account
+     * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public readManagedAccount(memberGuid: string, userGuid: string, accountGuid: string, options?: any) {
+        return MxPlatformApiFp(this.configuration).readManagedAccount(memberGuid, userGuid, accountGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This endpoint returns the attributes of the specified partner-managed `member`.
+     * @summary Read managed member
+     * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public readManagedMember(memberGuid: string, userGuid: string, options?: any) {
+        return MxPlatformApiFp(this.configuration).readManagedMember(memberGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Requests to this endpoint will return the attributes of the specified partner-managed `transaction`.
+     * @summary Read managed transaction
+     * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {string} transactionGuid The unique id for a &#x60;transaction&#x60;.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public readManagedTransaction(memberGuid: string, userGuid: string, transactionGuid: string, options?: any) {
+        return MxPlatformApiFp(this.configuration).readManagedTransaction(memberGuid, userGuid, transactionGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Use this endpoint to read the attributes of a specific member.
      * @summary Read member
      * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -8480,6 +10832,18 @@ export class MxPlatformApi extends BaseAPI {
      */
     public readMerchant(merchantGuid: string, options?: any) {
         return MxPlatformApiFp(this.configuration).readMerchant(merchantGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This endpoint returns the specified merchant_location resource.
+     * @summary Read merchant location
+     * @param {string} merchantLocationGuid The unique id for a &#x60;merchant_location&#x60;.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public readMerchantLocation(merchantLocationGuid: string, options?: any) {
+        return MxPlatformApiFp(this.configuration).readMerchantLocation(merchantLocationGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -8580,12 +10944,13 @@ export class MxPlatformApi extends BaseAPI {
      * @param {string} userGuid The unique id for a &#x60;user&#x60;.
      * @param {string} [referralSource] Must be either &#x60;BROWSER&#x60; or &#x60;APP&#x60; depending on the implementation. Defaults to &#x60;BROWSER&#x60;.
      * @param {string} [uiMessageWebviewUrlScheme] A scheme for routing the user back to the application state they were previously in.
+     * @param {boolean} [skipAggregation] Setting this parameter to &#x60;true&#x60; will prevent the member from automatically aggregating after being redirected from the authorization page.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public requestOAuthWindowURI(memberGuid: string, userGuid: string, referralSource?: string, uiMessageWebviewUrlScheme?: string, options?: any) {
-        return MxPlatformApiFp(this.configuration).requestOAuthWindowURI(memberGuid, userGuid, referralSource, uiMessageWebviewUrlScheme, options).then((request) => request(this.axios, this.basePath));
+    public requestOAuthWindowURI(memberGuid: string, userGuid: string, referralSource?: string, uiMessageWebviewUrlScheme?: string, skipAggregation?: boolean, options?: any) {
+        return MxPlatformApiFp(this.configuration).requestOAuthWindowURI(memberGuid, userGuid, referralSource, uiMessageWebviewUrlScheme, skipAggregation, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -8643,6 +11008,50 @@ export class MxPlatformApi extends BaseAPI {
      */
     public updateCategory(categoryGuid: string, userGuid: string, categoryUpdateRequestBody: CategoryUpdateRequestBody, options?: any) {
         return MxPlatformApiFp(this.configuration).updateCategory(categoryGuid, userGuid, categoryUpdateRequestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to update the attributes of a partner-managed account according to its unique GUID.
+     * @summary Update managed account
+     * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
+     * @param {ManagedAccountUpdateRequestBody} managedAccountUpdateRequestBody Managed account object to be updated (While no single parameter is required, the request body can\&#39;t be empty)
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public updateManagedAccount(memberGuid: string, userGuid: string, accountGuid: string, managedAccountUpdateRequestBody: ManagedAccountUpdateRequestBody, options?: any) {
+        return MxPlatformApiFp(this.configuration).updateManagedAccount(memberGuid, userGuid, accountGuid, managedAccountUpdateRequestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to update the attributes of the specified partner_managed `member`.
+     * @summary Update managed member
+     * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {ManagedMemberUpdateRequestBody} managedMemberUpdateRequestBody Managed member object to be updated (While no single parameter is required, the request body can\&#39;t be empty)
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public updateManagedMember(memberGuid: string, userGuid: string, managedMemberUpdateRequestBody: ManagedMemberUpdateRequestBody, options?: any) {
+        return MxPlatformApiFp(this.configuration).updateManagedMember(memberGuid, userGuid, managedMemberUpdateRequestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to update the attributes of the specified partner_managed `transaction`.
+     * @summary Update managed transaction
+     * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {string} transactionGuid The unique id for a &#x60;transaction&#x60;.
+     * @param {ManagedTransactionUpdateRequestBody} managedTransactionUpdateRequestBody Managed transaction object to be updated (While no single parameter is required, the request body can\&#39;t be empty)
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public updateManagedTransaction(memberGuid: string, userGuid: string, transactionGuid: string, managedTransactionUpdateRequestBody: ManagedTransactionUpdateRequestBody, options?: any) {
+        return MxPlatformApiFp(this.configuration).updateManagedTransaction(memberGuid, userGuid, transactionGuid, managedTransactionUpdateRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
