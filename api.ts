@@ -5142,10 +5142,12 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * Use this endpoint to read the attributes of a specific user.
          * @summary List default categories
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listDefaultCategories: async (userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        listDefaultCategories: async (userGuid: string, page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('listDefaultCategories', 'userGuid', userGuid)
             const localVarPath = `/users/{user_guid}/categories/default`
@@ -5164,6 +5166,14 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             // authentication basicAuth required
             // http basic authentication required
             setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
 
 
     
@@ -5392,6 +5402,8 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * This endpoint returns a list of institutions based on the specified search term or parameter.
          * @summary List institutions
          * @param {string} [name] This will list only institutions in which the appended string appears.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
          * @param {boolean} [supportsAccountIdentification] Filter only institutions which support account identification.
          * @param {boolean} [supportsAccountStatement] Filter only institutions which support account statements.
          * @param {boolean} [supportsAccountVerification] Filter only institutions which support account verification.
@@ -5399,7 +5411,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listInstitutions: async (name?: string, supportsAccountIdentification?: boolean, supportsAccountStatement?: boolean, supportsAccountVerification?: boolean, supportsTransactionHistory?: boolean, options: any = {}): Promise<RequestArgs> => {
+        listInstitutions: async (name?: string, page?: number, recordsPerPage?: number, supportsAccountIdentification?: boolean, supportsAccountStatement?: boolean, supportsAccountVerification?: boolean, supportsTransactionHistory?: boolean, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/institutions`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5418,6 +5430,14 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
             if (name !== undefined) {
                 localVarQueryParameter['name'] = name;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
             }
 
             if (supportsAccountIdentification !== undefined) {
@@ -6222,10 +6242,14 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @summary List transactions by tag
          * @param {string} tagGuid The unique id for a &#x60;tag&#x60;.
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} [fromDate] Filter transactions from this date.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {string} [toDate] Filter transactions to this date.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTransactionsByTag: async (tagGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        listTransactionsByTag: async (tagGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'tagGuid' is not null or undefined
             assertParamExists('listTransactionsByTag', 'tagGuid', tagGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -6247,6 +6271,22 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             // authentication basicAuth required
             // http basic authentication required
             setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (fromDate !== undefined) {
+                localVarQueryParameter['from_date'] = fromDate;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+            if (toDate !== undefined) {
+                localVarQueryParameter['to_date'] = toDate;
+            }
 
 
     
@@ -8206,11 +8246,13 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * Use this endpoint to read the attributes of a specific user.
          * @summary List default categories
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listDefaultCategories(userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoriesResponseBody>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listDefaultCategories(userGuid, options);
+        async listDefaultCategories(userGuid: string, page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoriesResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listDefaultCategories(userGuid, page, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -8273,6 +8315,8 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * This endpoint returns a list of institutions based on the specified search term or parameter.
          * @summary List institutions
          * @param {string} [name] This will list only institutions in which the appended string appears.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
          * @param {boolean} [supportsAccountIdentification] Filter only institutions which support account identification.
          * @param {boolean} [supportsAccountStatement] Filter only institutions which support account statements.
          * @param {boolean} [supportsAccountVerification] Filter only institutions which support account verification.
@@ -8280,8 +8324,8 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listInstitutions(name?: string, supportsAccountIdentification?: boolean, supportsAccountStatement?: boolean, supportsAccountVerification?: boolean, supportsTransactionHistory?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InstitutionsResponseBody>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listInstitutions(name, supportsAccountIdentification, supportsAccountStatement, supportsAccountVerification, supportsTransactionHistory, options);
+        async listInstitutions(name?: string, page?: number, recordsPerPage?: number, supportsAccountIdentification?: boolean, supportsAccountStatement?: boolean, supportsAccountVerification?: boolean, supportsTransactionHistory?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InstitutionsResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listInstitutions(name, page, recordsPerPage, supportsAccountIdentification, supportsAccountStatement, supportsAccountVerification, supportsTransactionHistory, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -8495,11 +8539,15 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @summary List transactions by tag
          * @param {string} tagGuid The unique id for a &#x60;tag&#x60;.
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} [fromDate] Filter transactions from this date.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {string} [toDate] Filter transactions to this date.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listTransactionsByTag(tagGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionsResponseBody>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listTransactionsByTag(tagGuid, userGuid, options);
+        async listTransactionsByTag(tagGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionsResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listTransactionsByTag(tagGuid, userGuid, fromDate, page, recordsPerPage, toDate, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -9282,11 +9330,13 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          * Use this endpoint to read the attributes of a specific user.
          * @summary List default categories
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listDefaultCategories(userGuid: string, options?: any): AxiosPromise<CategoriesResponseBody> {
-            return localVarFp.listDefaultCategories(userGuid, options).then((request) => request(axios, basePath));
+        listDefaultCategories(userGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<CategoriesResponseBody> {
+            return localVarFp.listDefaultCategories(userGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
         },
         /**
          * This endpoint returns a paginated list containing institutions that have been set as the partner’s favorites, sorted by popularity. Please contact MX to set a list of favorites.
@@ -9344,6 +9394,8 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          * This endpoint returns a list of institutions based on the specified search term or parameter.
          * @summary List institutions
          * @param {string} [name] This will list only institutions in which the appended string appears.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
          * @param {boolean} [supportsAccountIdentification] Filter only institutions which support account identification.
          * @param {boolean} [supportsAccountStatement] Filter only institutions which support account statements.
          * @param {boolean} [supportsAccountVerification] Filter only institutions which support account verification.
@@ -9351,8 +9403,8 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listInstitutions(name?: string, supportsAccountIdentification?: boolean, supportsAccountStatement?: boolean, supportsAccountVerification?: boolean, supportsTransactionHistory?: boolean, options?: any): AxiosPromise<InstitutionsResponseBody> {
-            return localVarFp.listInstitutions(name, supportsAccountIdentification, supportsAccountStatement, supportsAccountVerification, supportsTransactionHistory, options).then((request) => request(axios, basePath));
+        listInstitutions(name?: string, page?: number, recordsPerPage?: number, supportsAccountIdentification?: boolean, supportsAccountStatement?: boolean, supportsAccountVerification?: boolean, supportsTransactionHistory?: boolean, options?: any): AxiosPromise<InstitutionsResponseBody> {
+            return localVarFp.listInstitutions(name, page, recordsPerPage, supportsAccountIdentification, supportsAccountStatement, supportsAccountVerification, supportsTransactionHistory, options).then((request) => request(axios, basePath));
         },
         /**
          * Use this endpoint to retrieve a list of all the partner-managed accounts associated with the given partner-manage member.
@@ -9550,11 +9602,15 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          * @summary List transactions by tag
          * @param {string} tagGuid The unique id for a &#x60;tag&#x60;.
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} [fromDate] Filter transactions from this date.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {string} [toDate] Filter transactions to this date.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTransactionsByTag(tagGuid: string, userGuid: string, options?: any): AxiosPromise<TransactionsResponseBody> {
-            return localVarFp.listTransactionsByTag(tagGuid, userGuid, options).then((request) => request(axios, basePath));
+        listTransactionsByTag(tagGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: any): AxiosPromise<TransactionsResponseBody> {
+            return localVarFp.listTransactionsByTag(tagGuid, userGuid, fromDate, page, recordsPerPage, toDate, options).then((request) => request(axios, basePath));
         },
         /**
          * This endpoint returns a list of all the accounts associated with the specified `user`.
@@ -10359,12 +10415,14 @@ export class MxPlatformApi extends BaseAPI {
      * Use this endpoint to read the attributes of a specific user.
      * @summary List default categories
      * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listDefaultCategories(userGuid: string, options?: any) {
-        return MxPlatformApiFp(this.configuration).listDefaultCategories(userGuid, options).then((request) => request(this.axios, this.basePath));
+    public listDefaultCategories(userGuid: string, page?: number, recordsPerPage?: number, options?: any) {
+        return MxPlatformApiFp(this.configuration).listDefaultCategories(userGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10431,6 +10489,8 @@ export class MxPlatformApi extends BaseAPI {
      * This endpoint returns a list of institutions based on the specified search term or parameter.
      * @summary List institutions
      * @param {string} [name] This will list only institutions in which the appended string appears.
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
      * @param {boolean} [supportsAccountIdentification] Filter only institutions which support account identification.
      * @param {boolean} [supportsAccountStatement] Filter only institutions which support account statements.
      * @param {boolean} [supportsAccountVerification] Filter only institutions which support account verification.
@@ -10439,8 +10499,8 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listInstitutions(name?: string, supportsAccountIdentification?: boolean, supportsAccountStatement?: boolean, supportsAccountVerification?: boolean, supportsTransactionHistory?: boolean, options?: any) {
-        return MxPlatformApiFp(this.configuration).listInstitutions(name, supportsAccountIdentification, supportsAccountStatement, supportsAccountVerification, supportsTransactionHistory, options).then((request) => request(this.axios, this.basePath));
+    public listInstitutions(name?: string, page?: number, recordsPerPage?: number, supportsAccountIdentification?: boolean, supportsAccountStatement?: boolean, supportsAccountVerification?: boolean, supportsTransactionHistory?: boolean, options?: any) {
+        return MxPlatformApiFp(this.configuration).listInstitutions(name, page, recordsPerPage, supportsAccountIdentification, supportsAccountStatement, supportsAccountVerification, supportsTransactionHistory, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10669,12 +10729,16 @@ export class MxPlatformApi extends BaseAPI {
      * @summary List transactions by tag
      * @param {string} tagGuid The unique id for a &#x60;tag&#x60;.
      * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {string} [fromDate] Filter transactions from this date.
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
+     * @param {string} [toDate] Filter transactions to this date.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listTransactionsByTag(tagGuid: string, userGuid: string, options?: any) {
-        return MxPlatformApiFp(this.configuration).listTransactionsByTag(tagGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
+    public listTransactionsByTag(tagGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: any) {
+        return MxPlatformApiFp(this.configuration).listTransactionsByTag(tagGuid, userGuid, fromDate, page, recordsPerPage, toDate, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
