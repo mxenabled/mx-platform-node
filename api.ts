@@ -14,7 +14,7 @@
 
 
 import { Configuration } from './configuration';
-import globalAxios, { AxiosPromise, AxiosInstance } from 'axios';
+import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from './common';
@@ -32,49 +32,49 @@ export interface AccountNumberResponse {
      * @type {string}
      * @memberof AccountNumberResponse
      */
-    account_guid?: string;
+    'account_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof AccountNumberResponse
      */
-    account_number?: string;
+    'account_number'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AccountNumberResponse
      */
-    guid?: string;
+    'guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof AccountNumberResponse
      */
-    institution_number?: string;
+    'institution_number'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AccountNumberResponse
      */
-    member_guid?: string;
+    'member_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof AccountNumberResponse
      */
-    routing_number?: string;
+    'routing_number'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AccountNumberResponse
      */
-    transit_number?: string;
+    'transit_number'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AccountNumberResponse
      */
-    user_guid?: string;
+    'user_guid'?: string;
 }
 /**
  * 
@@ -87,13 +87,13 @@ export interface AccountNumbersResponseBody {
      * @type {Array<AccountNumberResponse>}
      * @memberof AccountNumbersResponseBody
      */
-    account_numbers?: Array<AccountNumberResponse>;
+    'account_numbers'?: Array<AccountNumberResponse>;
     /**
      * 
      * @type {PaginationResponse}
      * @memberof AccountNumbersResponseBody
      */
-    pagination?: PaginationResponse;
+    'pagination'?: PaginationResponse;
 }
 /**
  * 
@@ -106,73 +106,73 @@ export interface AccountOwnerResponse {
      * @type {string}
      * @memberof AccountOwnerResponse
      */
-    account_guid?: string;
+    'account_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof AccountOwnerResponse
      */
-    address?: string;
+    'address'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AccountOwnerResponse
      */
-    city?: string;
+    'city'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AccountOwnerResponse
      */
-    country?: string;
+    'country'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AccountOwnerResponse
      */
-    email?: string;
+    'email'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AccountOwnerResponse
      */
-    guid?: string;
+    'guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof AccountOwnerResponse
      */
-    member_guid?: string;
+    'member_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof AccountOwnerResponse
      */
-    owner_name?: string;
+    'owner_name'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AccountOwnerResponse
      */
-    phone?: string;
+    'phone'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AccountOwnerResponse
      */
-    postal_code?: string;
+    'postal_code'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AccountOwnerResponse
      */
-    state?: string;
+    'state'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AccountOwnerResponse
      */
-    user_guid?: string;
+    'user_guid'?: string;
 }
 /**
  * 
@@ -185,13 +185,13 @@ export interface AccountOwnersResponseBody {
      * @type {Array<AccountOwnerResponse>}
      * @memberof AccountOwnersResponseBody
      */
-    account_owners?: Array<AccountOwnerResponse>;
+    'account_owners'?: Array<AccountOwnerResponse>;
     /**
      * 
      * @type {PaginationResponse}
      * @memberof AccountOwnersResponseBody
      */
-    pagination?: PaginationResponse;
+    'pagination'?: PaginationResponse;
 }
 /**
  * 
@@ -204,283 +204,283 @@ export interface AccountResponse {
      * @type {string}
      * @memberof AccountResponse
      */
-    account_number?: string;
+    'account_number'?: string | null;
     /**
      * 
      * @type {number}
      * @memberof AccountResponse
      */
-    apr?: number;
+    'apr'?: number | null;
     /**
      * 
      * @type {number}
      * @memberof AccountResponse
      */
-    apy?: number;
+    'apy'?: number | null;
     /**
      * 
      * @type {number}
      * @memberof AccountResponse
      */
-    available_balance?: number;
+    'available_balance'?: number | null;
     /**
      * 
      * @type {number}
      * @memberof AccountResponse
      */
-    available_credit?: number;
+    'available_credit'?: number | null;
     /**
      * 
      * @type {number}
      * @memberof AccountResponse
      */
-    balance?: number;
+    'balance'?: number | null;
     /**
      * 
      * @type {number}
      * @memberof AccountResponse
      */
-    cash_balance?: number;
+    'cash_balance'?: number | null;
     /**
      * 
      * @type {number}
      * @memberof AccountResponse
      */
-    cash_surrender_value?: number;
+    'cash_surrender_value'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
-    created_at?: string;
+    'created_at'?: string | null;
     /**
      * 
      * @type {number}
      * @memberof AccountResponse
      */
-    credit_limit?: number;
+    'credit_limit'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
-    currency_code?: string;
+    'currency_code'?: string | null;
     /**
      * 
      * @type {number}
      * @memberof AccountResponse
      */
-    day_payment_is_due?: number;
+    'day_payment_is_due'?: number | null;
     /**
      * 
      * @type {number}
      * @memberof AccountResponse
      */
-    death_benefit?: number;
+    'death_benefit'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
-    guid?: string;
+    'guid'?: string;
     /**
      * 
      * @type {number}
      * @memberof AccountResponse
      */
-    holdings_value?: number;
+    'holdings_value'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
-    id?: string;
+    'id'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
-    imported_at?: string;
+    'imported_at'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
-    institution_code?: string;
+    'institution_code'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
-    insured_name?: string;
+    'insured_name'?: string | null;
     /**
      * 
      * @type {number}
      * @memberof AccountResponse
      */
-    interest_rate?: number;
+    'interest_rate'?: number | null;
     /**
      * 
      * @type {boolean}
      * @memberof AccountResponse
      */
-    is_closed?: boolean;
+    'is_closed'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof AccountResponse
      */
-    is_hidden?: boolean;
+    'is_hidden'?: boolean | null;
     /**
      * 
      * @type {number}
      * @memberof AccountResponse
      */
-    last_payment?: number;
+    'last_payment'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
-    last_payment_at?: string;
+    'last_payment_at'?: string | null;
     /**
      * 
      * @type {number}
      * @memberof AccountResponse
      */
-    loan_amount?: number;
+    'loan_amount'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
-    matures_on?: string;
+    'matures_on'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
-    member_guid?: string;
+    'member_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
-    member_id?: string;
+    'member_id'?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof AccountResponse
      */
-    member_is_managed_by_user?: boolean;
+    'member_is_managed_by_user'?: boolean | null;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
-    metadata?: string;
+    'metadata'?: string | null;
     /**
      * 
      * @type {number}
      * @memberof AccountResponse
      */
-    minimum_balance?: number;
+    'minimum_balance'?: number | null;
     /**
      * 
      * @type {number}
      * @memberof AccountResponse
      */
-    minimum_payment?: number;
+    'minimum_payment'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
-    name?: string;
+    'name'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
-    nickname?: string;
+    'nickname'?: string | null;
     /**
      * 
      * @type {number}
      * @memberof AccountResponse
      */
-    original_balance?: number;
+    'original_balance'?: number | null;
     /**
      * 
      * @type {number}
      * @memberof AccountResponse
      */
-    pay_out_amount?: number;
+    'pay_out_amount'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
-    payment_due_at?: string;
+    'payment_due_at'?: string | null;
     /**
      * 
      * @type {number}
      * @memberof AccountResponse
      */
-    payoff_balance?: number;
+    'payoff_balance'?: number | null;
     /**
      * 
      * @type {number}
      * @memberof AccountResponse
      */
-    premium_amount?: number;
+    'premium_amount'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
-    routing_number?: string;
+    'routing_number'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
-    started_on?: string;
+    'started_on'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
-    subtype?: string;
+    'subtype'?: string | null;
     /**
      * 
      * @type {number}
      * @memberof AccountResponse
      */
-    total_account_value?: number;
+    'total_account_value'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
-    type?: string;
+    'type'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
-    updated_at?: string;
+    'updated_at'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
-    user_guid?: string;
+    'user_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
-    user_id?: string;
+    'user_id'?: string | null;
 }
 /**
  * 
@@ -493,7 +493,7 @@ export interface AccountResponseBody {
      * @type {AccountResponse}
      * @memberof AccountResponseBody
      */
-    account?: AccountResponse;
+    'account'?: AccountResponse;
 }
 /**
  * 
@@ -506,7 +506,7 @@ export interface AccountUpdateRequest {
      * @type {boolean}
      * @memberof AccountUpdateRequest
      */
-    is_hidden?: boolean;
+    'is_hidden'?: boolean;
 }
 /**
  * 
@@ -519,7 +519,7 @@ export interface AccountUpdateRequestBody {
      * @type {AccountUpdateRequest}
      * @memberof AccountUpdateRequestBody
      */
-    account?: AccountUpdateRequest;
+    'account'?: AccountUpdateRequest;
 }
 /**
  * 
@@ -532,13 +532,13 @@ export interface AccountsResponseBody {
      * @type {Array<AccountResponse>}
      * @memberof AccountsResponseBody
      */
-    accounts?: Array<AccountResponse>;
+    'accounts'?: Array<AccountResponse>;
     /**
      * 
      * @type {PaginationResponse}
      * @memberof AccountsResponseBody
      */
-    pagination?: PaginationResponse;
+    'pagination'?: PaginationResponse;
 }
 /**
  * 
@@ -551,13 +551,13 @@ export interface CategoriesResponseBody {
      * @type {Array<CategoryResponse>}
      * @memberof CategoriesResponseBody
      */
-    categories?: Array<CategoryResponse>;
+    'categories'?: Array<CategoryResponse>;
     /**
      * 
      * @type {PaginationResponse}
      * @memberof CategoriesResponseBody
      */
-    pagination?: PaginationResponse;
+    'pagination'?: PaginationResponse;
 }
 /**
  * 
@@ -570,19 +570,19 @@ export interface CategoryCreateRequest {
      * @type {string}
      * @memberof CategoryCreateRequest
      */
-    metadata?: string;
+    'metadata'?: string;
     /**
      * 
      * @type {string}
      * @memberof CategoryCreateRequest
      */
-    name: string;
+    'name': string;
     /**
      * 
      * @type {string}
      * @memberof CategoryCreateRequest
      */
-    parent_guid?: string;
+    'parent_guid'?: string;
 }
 /**
  * 
@@ -595,7 +595,7 @@ export interface CategoryCreateRequestBody {
      * @type {CategoryCreateRequest}
      * @memberof CategoryCreateRequestBody
      */
-    category?: CategoryCreateRequest;
+    'category'?: CategoryCreateRequest;
 }
 /**
  * 
@@ -608,49 +608,49 @@ export interface CategoryResponse {
      * @type {string}
      * @memberof CategoryResponse
      */
-    created_at?: string;
+    'created_at'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof CategoryResponse
      */
-    guid?: string;
+    'guid'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof CategoryResponse
      */
-    is_default?: boolean;
+    'is_default'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof CategoryResponse
      */
-    is_income?: boolean;
+    'is_income'?: boolean | null;
     /**
      * 
      * @type {string}
      * @memberof CategoryResponse
      */
-    metadata?: string;
+    'metadata'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof CategoryResponse
      */
-    name?: string;
+    'name'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof CategoryResponse
      */
-    parent_guid?: string;
+    'parent_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof CategoryResponse
      */
-    updated_at?: string;
+    'updated_at'?: string | null;
 }
 /**
  * 
@@ -663,7 +663,7 @@ export interface CategoryResponseBody {
      * @type {CategoryResponse}
      * @memberof CategoryResponseBody
      */
-    category?: CategoryResponse;
+    'category'?: CategoryResponse;
 }
 /**
  * 
@@ -676,13 +676,13 @@ export interface CategoryUpdateRequest {
      * @type {string}
      * @memberof CategoryUpdateRequest
      */
-    metadata?: string;
+    'metadata'?: string;
     /**
      * 
      * @type {string}
      * @memberof CategoryUpdateRequest
      */
-    name?: string;
+    'name'?: string;
 }
 /**
  * 
@@ -695,7 +695,7 @@ export interface CategoryUpdateRequestBody {
      * @type {CategoryUpdateRequest}
      * @memberof CategoryUpdateRequestBody
      */
-    category?: CategoryUpdateRequest;
+    'category'?: CategoryUpdateRequest;
 }
 /**
  * 
@@ -708,43 +708,43 @@ export interface ChallengeResponse {
      * @type {string}
      * @memberof ChallengeResponse
      */
-    field_name?: string;
+    'field_name'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ChallengeResponse
      */
-    guid?: string;
+    'guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof ChallengeResponse
      */
-    image_data?: string;
+    'image_data'?: string | null;
     /**
      * 
      * @type {Array<ImageOptionResponse>}
      * @memberof ChallengeResponse
      */
-    image_options?: Array<ImageOptionResponse>;
+    'image_options'?: Array<ImageOptionResponse>;
     /**
      * 
      * @type {string}
      * @memberof ChallengeResponse
      */
-    label?: string;
+    'label'?: string | null;
     /**
      * 
      * @type {Array<OptionResponse>}
      * @memberof ChallengeResponse
      */
-    options?: Array<OptionResponse>;
+    'options'?: Array<OptionResponse>;
     /**
      * 
      * @type {string}
      * @memberof ChallengeResponse
      */
-    type?: string;
+    'type'?: string | null;
 }
 /**
  * 
@@ -757,13 +757,13 @@ export interface ChallengesResponseBody {
      * @type {Array<ChallengeResponse>}
      * @memberof ChallengesResponseBody
      */
-    challenges?: Array<ChallengeResponse>;
+    'challenges'?: Array<ChallengeResponse>;
     /**
      * 
      * @type {PaginationResponse}
      * @memberof ChallengesResponseBody
      */
-    pagination?: PaginationResponse;
+    'pagination'?: PaginationResponse;
 }
 /**
  * 
@@ -776,67 +776,67 @@ export interface ConnectWidgetRequest {
      * @type {string}
      * @memberof ConnectWidgetRequest
      */
-    color_scheme?: string;
+    'color_scheme'?: string;
     /**
      * 
      * @type {string}
      * @memberof ConnectWidgetRequest
      */
-    current_institution_code?: string;
+    'current_institution_code'?: string;
     /**
      * 
      * @type {string}
      * @memberof ConnectWidgetRequest
      */
-    current_member_guid?: string;
+    'current_member_guid'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof ConnectWidgetRequest
      */
-    disable_institution_search?: boolean;
+    'disable_institution_search'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof ConnectWidgetRequest
      */
-    include_transactions?: boolean;
+    'include_transactions'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof ConnectWidgetRequest
      */
-    is_mobile_webview?: boolean;
+    'is_mobile_webview'?: boolean;
     /**
      * 
      * @type {string}
      * @memberof ConnectWidgetRequest
      */
-    mode?: string;
+    'mode'?: string;
     /**
      * 
      * @type {number}
      * @memberof ConnectWidgetRequest
      */
-    ui_message_version?: number;
+    'ui_message_version'?: number;
     /**
      * 
      * @type {string}
      * @memberof ConnectWidgetRequest
      */
-    ui_message_webview_url_scheme?: string;
+    'ui_message_webview_url_scheme'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof ConnectWidgetRequest
      */
-    update_credentials?: boolean;
+    'update_credentials'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof ConnectWidgetRequest
      */
-    wait_for_full_aggregation?: boolean;
+    'wait_for_full_aggregation'?: boolean;
 }
 /**
  * 
@@ -849,7 +849,7 @@ export interface ConnectWidgetRequestBody {
      * @type {ConnectWidgetRequest}
      * @memberof ConnectWidgetRequestBody
      */
-    config?: ConnectWidgetRequest;
+    'config'?: ConnectWidgetRequest;
 }
 /**
  * 
@@ -862,13 +862,13 @@ export interface ConnectWidgetResponse {
      * @type {string}
      * @memberof ConnectWidgetResponse
      */
-    connect_widget_url?: string;
+    'connect_widget_url'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ConnectWidgetResponse
      */
-    guid?: string;
+    'guid'?: string;
 }
 /**
  * 
@@ -881,7 +881,7 @@ export interface ConnectWidgetResponseBody {
      * @type {ConnectWidgetResponse}
      * @memberof ConnectWidgetResponseBody
      */
-    user?: ConnectWidgetResponse;
+    'user'?: ConnectWidgetResponse;
 }
 /**
  * 
@@ -894,13 +894,13 @@ export interface CredentialRequest {
      * @type {string}
      * @memberof CredentialRequest
      */
-    guid?: string;
+    'guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof CredentialRequest
      */
-    value?: string;
+    'value'?: string | null;
 }
 /**
  * 
@@ -913,31 +913,31 @@ export interface CredentialResponse {
      * @type {number}
      * @memberof CredentialResponse
      */
-    display_order?: number;
+    'display_order'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof CredentialResponse
      */
-    field_name?: string;
+    'field_name'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof CredentialResponse
      */
-    field_type?: string;
+    'field_type'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof CredentialResponse
      */
-    guid?: string;
+    'guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof CredentialResponse
      */
-    label?: string;
+    'label'?: string;
 }
 /**
  * 
@@ -950,13 +950,13 @@ export interface CredentialsResponseBody {
      * @type {Array<CredentialResponse>}
      * @memberof CredentialsResponseBody
      */
-    credentials?: Array<CredentialResponse>;
+    'credentials'?: Array<CredentialResponse>;
     /**
      * 
      * @type {PaginationResponse}
      * @memberof CredentialsResponseBody
      */
-    pagination?: PaginationResponse;
+    'pagination'?: PaginationResponse;
 }
 /**
  * 
@@ -969,97 +969,97 @@ export interface EnhanceTransactionResponse {
      * @type {number}
      * @memberof EnhanceTransactionResponse
      */
-    amount?: number;
+    'amount'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof EnhanceTransactionResponse
      */
-    category?: string;
+    'category'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof EnhanceTransactionResponse
      */
-    description?: string;
+    'description'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof EnhanceTransactionResponse
      */
-    id?: string;
+    'id'?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof EnhanceTransactionResponse
      */
-    is_bill_pay?: boolean;
+    'is_bill_pay'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof EnhanceTransactionResponse
      */
-    is_direct_deposit?: boolean;
+    'is_direct_deposit'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof EnhanceTransactionResponse
      */
-    is_expense?: boolean;
+    'is_expense'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof EnhanceTransactionResponse
      */
-    is_fee?: boolean;
+    'is_fee'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof EnhanceTransactionResponse
      */
-    is_income?: boolean;
+    'is_income'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof EnhanceTransactionResponse
      */
-    is_international?: boolean;
+    'is_international'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof EnhanceTransactionResponse
      */
-    is_overdraft_fee?: boolean;
+    'is_overdraft_fee'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof EnhanceTransactionResponse
      */
-    is_payroll_advance?: boolean;
+    'is_payroll_advance'?: boolean | null;
     /**
      * 
      * @type {number}
      * @memberof EnhanceTransactionResponse
      */
-    merchant_category_code?: number;
+    'merchant_category_code'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof EnhanceTransactionResponse
      */
-    merchant_guid?: string;
+    'merchant_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof EnhanceTransactionResponse
      */
-    original_description?: string;
+    'original_description'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof EnhanceTransactionResponse
      */
-    type?: string;
+    'type'?: string | null;
 }
 /**
  * 
@@ -1072,31 +1072,31 @@ export interface EnhanceTransactionsRequest {
      * @type {number}
      * @memberof EnhanceTransactionsRequest
      */
-    amount?: number;
+    'amount'?: number;
     /**
      * 
      * @type {string}
      * @memberof EnhanceTransactionsRequest
      */
-    description: string;
+    'description': string;
     /**
      * 
      * @type {string}
      * @memberof EnhanceTransactionsRequest
      */
-    id: string;
+    'id': string;
     /**
      * 
      * @type {number}
      * @memberof EnhanceTransactionsRequest
      */
-    merchant_category_code?: number;
+    'merchant_category_code'?: number;
     /**
      * 
      * @type {string}
      * @memberof EnhanceTransactionsRequest
      */
-    type?: string;
+    'type'?: string;
 }
 /**
  * 
@@ -1109,7 +1109,7 @@ export interface EnhanceTransactionsRequestBody {
      * @type {Array<EnhanceTransactionsRequest>}
      * @memberof EnhanceTransactionsRequestBody
      */
-    transactions?: Array<EnhanceTransactionsRequest>;
+    'transactions'?: Array<EnhanceTransactionsRequest>;
 }
 /**
  * 
@@ -1122,7 +1122,7 @@ export interface EnhanceTransactionsResponseBody {
      * @type {Array<EnhanceTransactionResponse>}
      * @memberof EnhanceTransactionsResponseBody
      */
-    transactions?: Array<EnhanceTransactionResponse>;
+    'transactions'?: Array<EnhanceTransactionResponse>;
 }
 /**
  * 
@@ -1135,109 +1135,109 @@ export interface HoldingResponse {
      * @type {string}
      * @memberof HoldingResponse
      */
-    account_guid?: string;
+    'account_guid'?: string;
     /**
      * 
      * @type {number}
      * @memberof HoldingResponse
      */
-    cost_basis?: number;
+    'cost_basis'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof HoldingResponse
      */
-    created_at?: string;
+    'created_at'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof HoldingResponse
      */
-    currency_code?: string;
+    'currency_code'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof HoldingResponse
      */
-    cusip?: string;
+    'cusip'?: string | null;
     /**
      * 
      * @type {number}
      * @memberof HoldingResponse
      */
-    daily_change?: number;
+    'daily_change'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof HoldingResponse
      */
-    description?: string;
+    'description'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof HoldingResponse
      */
-    guid?: string;
+    'guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof HoldingResponse
      */
-    holding_type?: string;
+    'holding_type'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof HoldingResponse
      */
-    id?: string;
+    'id'?: string | null;
     /**
      * 
      * @type {number}
      * @memberof HoldingResponse
      */
-    market_value?: number;
+    'market_value'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof HoldingResponse
      */
-    member_guid?: string;
+    'member_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof HoldingResponse
      */
-    metadata?: string;
+    'metadata'?: string | null;
     /**
      * 
      * @type {number}
      * @memberof HoldingResponse
      */
-    purchase_price?: number;
+    'purchase_price'?: number | null;
     /**
      * 
      * @type {number}
      * @memberof HoldingResponse
      */
-    shares?: number;
+    'shares'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof HoldingResponse
      */
-    symbol?: string;
+    'symbol'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof HoldingResponse
      */
-    updated_at?: string;
+    'updated_at'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof HoldingResponse
      */
-    user_guid?: string;
+    'user_guid'?: string;
 }
 /**
  * 
@@ -1250,7 +1250,7 @@ export interface HoldingResponseBody {
      * @type {HoldingResponse}
      * @memberof HoldingResponseBody
      */
-    holding?: HoldingResponse;
+    'holding'?: HoldingResponse;
 }
 /**
  * 
@@ -1263,13 +1263,13 @@ export interface HoldingsResponseBody {
      * @type {Array<HoldingResponse>}
      * @memberof HoldingsResponseBody
      */
-    holdings?: Array<HoldingResponse>;
+    'holdings'?: Array<HoldingResponse>;
     /**
      * 
      * @type {PaginationResponse}
      * @memberof HoldingsResponseBody
      */
-    pagination?: PaginationResponse;
+    'pagination'?: PaginationResponse;
 }
 /**
  * 
@@ -1282,19 +1282,19 @@ export interface ImageOptionResponse {
      * @type {string}
      * @memberof ImageOptionResponse
      */
-    data_uri?: string;
+    'data_uri'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ImageOptionResponse
      */
-    label?: string;
+    'label'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ImageOptionResponse
      */
-    value?: string;
+    'value'?: string | null;
 }
 /**
  * 
@@ -1307,61 +1307,61 @@ export interface InstitutionResponse {
      * @type {string}
      * @memberof InstitutionResponse
      */
-    code?: string;
+    'code'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof InstitutionResponse
      */
-    medium_logo_url?: string;
+    'medium_logo_url'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof InstitutionResponse
      */
-    name?: string;
+    'name'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof InstitutionResponse
      */
-    small_logo_url?: string;
+    'small_logo_url'?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof InstitutionResponse
      */
-    supports_account_identification?: boolean;
+    'supports_account_identification'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof InstitutionResponse
      */
-    supports_account_statement?: boolean;
+    'supports_account_statement'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof InstitutionResponse
      */
-    supports_account_verification?: boolean;
+    'supports_account_verification'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof InstitutionResponse
      */
-    supports_oauth?: boolean;
+    'supports_oauth'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof InstitutionResponse
      */
-    supports_transaction_history?: boolean;
+    'supports_transaction_history'?: boolean | null;
     /**
      * 
      * @type {string}
      * @memberof InstitutionResponse
      */
-    url?: string;
+    'url'?: string | null;
 }
 /**
  * 
@@ -1374,7 +1374,7 @@ export interface InstitutionResponseBody {
      * @type {InstitutionResponse}
      * @memberof InstitutionResponseBody
      */
-    institution?: InstitutionResponse;
+    'institution'?: InstitutionResponse;
 }
 /**
  * 
@@ -1387,13 +1387,13 @@ export interface InstitutionsResponseBody {
      * @type {Array<InstitutionResponse>}
      * @memberof InstitutionsResponseBody
      */
-    institutions?: Array<InstitutionResponse>;
+    'institutions'?: Array<InstitutionResponse>;
     /**
      * 
      * @type {PaginationResponse}
      * @memberof InstitutionsResponseBody
      */
-    pagination?: PaginationResponse;
+    'pagination'?: PaginationResponse;
 }
 /**
  * 
@@ -1406,187 +1406,187 @@ export interface ManagedAccountCreateRequest {
      * @type {string}
      * @memberof ManagedAccountCreateRequest
      */
-    account_number?: string;
+    'account_number'?: string;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountCreateRequest
      */
-    apr?: number;
+    'apr'?: number;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountCreateRequest
      */
-    apy?: number;
+    'apy'?: number;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountCreateRequest
      */
-    available_balance?: number;
+    'available_balance'?: number;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountCreateRequest
      */
-    available_credit?: number;
+    'available_credit'?: number;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountCreateRequest
      */
-    balance: number;
+    'balance': number;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountCreateRequest
      */
-    cash_surrender_value?: number;
+    'cash_surrender_value'?: number;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountCreateRequest
      */
-    credit_limit?: number;
+    'credit_limit'?: number;
     /**
      * 
      * @type {string}
      * @memberof ManagedAccountCreateRequest
      */
-    currency_code?: string;
+    'currency_code'?: string;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountCreateRequest
      */
-    day_payment_is_due?: number;
+    'day_payment_is_due'?: number;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountCreateRequest
      */
-    death_benefit?: number;
+    'death_benefit'?: number;
     /**
      * 
      * @type {string}
      * @memberof ManagedAccountCreateRequest
      */
-    id?: string;
+    'id'?: string;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountCreateRequest
      */
-    interest_rate?: number;
+    'interest_rate'?: number;
     /**
      * 
      * @type {boolean}
      * @memberof ManagedAccountCreateRequest
      */
-    is_closed?: boolean;
+    'is_closed'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof ManagedAccountCreateRequest
      */
-    is_hidden?: boolean;
+    'is_hidden'?: boolean;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountCreateRequest
      */
-    last_payment?: number;
+    'last_payment'?: number;
     /**
      * 
      * @type {string}
      * @memberof ManagedAccountCreateRequest
      */
-    last_payment_at?: string;
+    'last_payment_at'?: string;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountCreateRequest
      */
-    loan_amount?: number;
+    'loan_amount'?: number;
     /**
      * 
      * @type {string}
      * @memberof ManagedAccountCreateRequest
      */
-    matures_on?: string;
+    'matures_on'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedAccountCreateRequest
      */
-    metadata?: string;
+    'metadata'?: string;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountCreateRequest
      */
-    minimum_balance?: number;
+    'minimum_balance'?: number;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountCreateRequest
      */
-    minimum_payment?: number;
+    'minimum_payment'?: number;
     /**
      * 
      * @type {string}
      * @memberof ManagedAccountCreateRequest
      */
-    name: string;
+    'name': string;
     /**
      * 
      * @type {string}
      * @memberof ManagedAccountCreateRequest
      */
-    nickname?: string;
+    'nickname'?: string;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountCreateRequest
      */
-    original_balance?: number;
+    'original_balance'?: number;
     /**
      * 
      * @type {string}
      * @memberof ManagedAccountCreateRequest
      */
-    payment_due_at?: string;
+    'payment_due_at'?: string;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountCreateRequest
      */
-    payoff_balance?: number;
+    'payoff_balance'?: number;
     /**
      * 
      * @type {string}
      * @memberof ManagedAccountCreateRequest
      */
-    routing_number?: string;
+    'routing_number'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedAccountCreateRequest
      */
-    started_on?: string;
+    'started_on'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedAccountCreateRequest
      */
-    subtype?: string;
+    'subtype'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedAccountCreateRequest
      */
-    type: string;
+    'type': string;
 }
 /**
  * 
@@ -1599,7 +1599,7 @@ export interface ManagedAccountCreateRequestBody {
      * @type {ManagedAccountCreateRequest}
      * @memberof ManagedAccountCreateRequestBody
      */
-    account?: ManagedAccountCreateRequest;
+    'account'?: ManagedAccountCreateRequest;
 }
 /**
  * 
@@ -1612,187 +1612,187 @@ export interface ManagedAccountUpdateRequest {
      * @type {string}
      * @memberof ManagedAccountUpdateRequest
      */
-    account_number?: string;
+    'account_number'?: string;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountUpdateRequest
      */
-    apr?: number;
+    'apr'?: number;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountUpdateRequest
      */
-    apy?: number;
+    'apy'?: number;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountUpdateRequest
      */
-    available_balance?: number;
+    'available_balance'?: number;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountUpdateRequest
      */
-    available_credit?: number;
+    'available_credit'?: number;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountUpdateRequest
      */
-    balance?: number;
+    'balance'?: number;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountUpdateRequest
      */
-    cash_surrender_value?: number;
+    'cash_surrender_value'?: number;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountUpdateRequest
      */
-    credit_limit?: number;
+    'credit_limit'?: number;
     /**
      * 
      * @type {string}
      * @memberof ManagedAccountUpdateRequest
      */
-    currency_code?: string;
+    'currency_code'?: string;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountUpdateRequest
      */
-    day_payment_is_due?: number;
+    'day_payment_is_due'?: number;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountUpdateRequest
      */
-    death_benefit?: number;
+    'death_benefit'?: number;
     /**
      * 
      * @type {string}
      * @memberof ManagedAccountUpdateRequest
      */
-    id?: string;
+    'id'?: string;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountUpdateRequest
      */
-    interest_rate?: number;
+    'interest_rate'?: number;
     /**
      * 
      * @type {boolean}
      * @memberof ManagedAccountUpdateRequest
      */
-    is_closed?: boolean;
+    'is_closed'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof ManagedAccountUpdateRequest
      */
-    is_hidden?: boolean;
+    'is_hidden'?: boolean;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountUpdateRequest
      */
-    last_payment?: number;
+    'last_payment'?: number;
     /**
      * 
      * @type {string}
      * @memberof ManagedAccountUpdateRequest
      */
-    last_payment_at?: string;
+    'last_payment_at'?: string;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountUpdateRequest
      */
-    loan_amount?: number;
+    'loan_amount'?: number;
     /**
      * 
      * @type {string}
      * @memberof ManagedAccountUpdateRequest
      */
-    matures_on?: string;
+    'matures_on'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedAccountUpdateRequest
      */
-    metadata?: string;
+    'metadata'?: string;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountUpdateRequest
      */
-    minimum_balance?: number;
+    'minimum_balance'?: number;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountUpdateRequest
      */
-    minimum_payment?: number;
+    'minimum_payment'?: number;
     /**
      * 
      * @type {string}
      * @memberof ManagedAccountUpdateRequest
      */
-    name?: string;
+    'name'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedAccountUpdateRequest
      */
-    nickname?: string;
+    'nickname'?: string;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountUpdateRequest
      */
-    original_balance?: number;
+    'original_balance'?: number;
     /**
      * 
      * @type {string}
      * @memberof ManagedAccountUpdateRequest
      */
-    payment_due_at?: string;
+    'payment_due_at'?: string;
     /**
      * 
      * @type {number}
      * @memberof ManagedAccountUpdateRequest
      */
-    payoff_balance?: number;
+    'payoff_balance'?: number;
     /**
      * 
      * @type {string}
      * @memberof ManagedAccountUpdateRequest
      */
-    routing_number?: string;
+    'routing_number'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedAccountUpdateRequest
      */
-    started_on?: string;
+    'started_on'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedAccountUpdateRequest
      */
-    subtype?: string;
+    'subtype'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedAccountUpdateRequest
      */
-    type?: string;
+    'type'?: string;
 }
 /**
  * 
@@ -1805,7 +1805,7 @@ export interface ManagedAccountUpdateRequestBody {
      * @type {ManagedAccountUpdateRequest}
      * @memberof ManagedAccountUpdateRequestBody
      */
-    account?: ManagedAccountUpdateRequest;
+    'account'?: ManagedAccountUpdateRequest;
 }
 /**
  * 
@@ -1818,25 +1818,25 @@ export interface ManagedMemberCreateRequest {
      * @type {string}
      * @memberof ManagedMemberCreateRequest
      */
-    id?: string;
+    'id'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedMemberCreateRequest
      */
-    institution_code: string;
+    'institution_code': string;
     /**
      * 
      * @type {string}
      * @memberof ManagedMemberCreateRequest
      */
-    metadata?: string;
+    'metadata'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedMemberCreateRequest
      */
-    name?: string;
+    'name'?: string;
 }
 /**
  * 
@@ -1849,7 +1849,7 @@ export interface ManagedMemberCreateRequestBody {
      * @type {ManagedMemberCreateRequest}
      * @memberof ManagedMemberCreateRequestBody
      */
-    member?: ManagedMemberCreateRequest;
+    'member'?: ManagedMemberCreateRequest;
 }
 /**
  * 
@@ -1862,19 +1862,19 @@ export interface ManagedMemberUpdateRequest {
      * @type {string}
      * @memberof ManagedMemberUpdateRequest
      */
-    id?: string;
+    'id'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedMemberUpdateRequest
      */
-    metadata?: string;
+    'metadata'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedMemberUpdateRequest
      */
-    name?: string;
+    'name'?: string;
 }
 /**
  * 
@@ -1887,7 +1887,7 @@ export interface ManagedMemberUpdateRequestBody {
      * @type {ManagedMemberUpdateRequest}
      * @memberof ManagedMemberUpdateRequestBody
      */
-    member?: ManagedMemberUpdateRequest;
+    'member'?: ManagedMemberUpdateRequest;
 }
 /**
  * 
@@ -1900,121 +1900,121 @@ export interface ManagedTransactionCreateRequest {
      * @type {string}
      * @memberof ManagedTransactionCreateRequest
      */
-    amount: string;
+    'amount': string;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionCreateRequest
      */
-    category?: string;
+    'category'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionCreateRequest
      */
-    check_number_string?: string;
+    'check_number_string'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionCreateRequest
      */
-    currency_code?: string;
+    'currency_code'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionCreateRequest
      */
-    description: string;
+    'description': string;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionCreateRequest
      */
-    id?: string;
+    'id'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof ManagedTransactionCreateRequest
      */
-    is_international?: boolean;
+    'is_international'?: boolean;
     /**
      * 
      * @type {number}
      * @memberof ManagedTransactionCreateRequest
      */
-    latitude?: number;
+    'latitude'?: number;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionCreateRequest
      */
-    localized_description?: string;
+    'localized_description'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionCreateRequest
      */
-    localized_memo?: string;
+    'localized_memo'?: string;
     /**
      * 
      * @type {number}
      * @memberof ManagedTransactionCreateRequest
      */
-    longitude?: number;
+    'longitude'?: number;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionCreateRequest
      */
-    memo?: string;
+    'memo'?: string;
     /**
      * 
      * @type {number}
      * @memberof ManagedTransactionCreateRequest
      */
-    merchant_category_code?: number;
+    'merchant_category_code'?: number;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionCreateRequest
      */
-    merchant_guid?: string;
+    'merchant_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionCreateRequest
      */
-    merchant_location_guid?: string;
+    'merchant_location_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionCreateRequest
      */
-    metadata?: string;
+    'metadata'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionCreateRequest
      */
-    posted_at?: string;
+    'posted_at'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionCreateRequest
      */
-    status: string;
+    'status': string;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionCreateRequest
      */
-    transacted_at: string;
+    'transacted_at': string;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionCreateRequest
      */
-    type: string;
+    'type': string;
 }
 /**
  * 
@@ -2027,7 +2027,7 @@ export interface ManagedTransactionCreateRequestBody {
      * @type {ManagedTransactionCreateRequest}
      * @memberof ManagedTransactionCreateRequestBody
      */
-    transaction?: ManagedTransactionCreateRequest;
+    'transaction'?: ManagedTransactionCreateRequest;
 }
 /**
  * 
@@ -2040,121 +2040,121 @@ export interface ManagedTransactionUpdateRequest {
      * @type {string}
      * @memberof ManagedTransactionUpdateRequest
      */
-    amount?: string;
+    'amount'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionUpdateRequest
      */
-    category?: string;
+    'category'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionUpdateRequest
      */
-    check_number_string?: string;
+    'check_number_string'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionUpdateRequest
      */
-    currency_code?: string;
+    'currency_code'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionUpdateRequest
      */
-    description?: string;
+    'description'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionUpdateRequest
      */
-    id?: string;
+    'id'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof ManagedTransactionUpdateRequest
      */
-    is_international?: boolean;
+    'is_international'?: boolean;
     /**
      * 
      * @type {number}
      * @memberof ManagedTransactionUpdateRequest
      */
-    latitude?: number;
+    'latitude'?: number;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionUpdateRequest
      */
-    localized_description?: string;
+    'localized_description'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionUpdateRequest
      */
-    localized_memo?: string;
+    'localized_memo'?: string;
     /**
      * 
      * @type {number}
      * @memberof ManagedTransactionUpdateRequest
      */
-    longitude?: number;
+    'longitude'?: number;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionUpdateRequest
      */
-    memo?: string;
+    'memo'?: string;
     /**
      * 
      * @type {number}
      * @memberof ManagedTransactionUpdateRequest
      */
-    merchant_category_code?: number;
+    'merchant_category_code'?: number;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionUpdateRequest
      */
-    merchant_guid?: string;
+    'merchant_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionUpdateRequest
      */
-    merchant_location_guid?: string;
+    'merchant_location_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionUpdateRequest
      */
-    metadata?: string;
+    'metadata'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionUpdateRequest
      */
-    posted_at?: string;
+    'posted_at'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionUpdateRequest
      */
-    status?: string;
+    'status'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionUpdateRequest
      */
-    transacted_at?: string;
+    'transacted_at'?: string;
     /**
      * 
      * @type {string}
      * @memberof ManagedTransactionUpdateRequest
      */
-    type?: string;
+    'type'?: string;
 }
 /**
  * 
@@ -2167,7 +2167,7 @@ export interface ManagedTransactionUpdateRequestBody {
      * @type {ManagedTransactionUpdateRequest}
      * @memberof ManagedTransactionUpdateRequestBody
      */
-    transaction?: ManagedTransactionUpdateRequest;
+    'transaction'?: ManagedTransactionUpdateRequest;
 }
 /**
  * 
@@ -2180,43 +2180,43 @@ export interface MemberCreateRequest {
      * @type {boolean}
      * @memberof MemberCreateRequest
      */
-    background_aggregation_is_disabled?: boolean;
+    'background_aggregation_is_disabled'?: boolean;
     /**
      * 
      * @type {Array<CredentialRequest>}
      * @memberof MemberCreateRequest
      */
-    credentials: Array<CredentialRequest>;
+    'credentials': Array<CredentialRequest>;
     /**
      * 
      * @type {string}
      * @memberof MemberCreateRequest
      */
-    id?: string;
+    'id'?: string;
     /**
      * 
      * @type {string}
      * @memberof MemberCreateRequest
      */
-    institution_code: string;
+    'institution_code': string;
     /**
      * 
      * @type {boolean}
      * @memberof MemberCreateRequest
      */
-    is_oauth?: boolean;
+    'is_oauth'?: boolean;
     /**
      * 
      * @type {string}
      * @memberof MemberCreateRequest
      */
-    metadata?: string;
+    'metadata'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof MemberCreateRequest
      */
-    skip_aggregation?: boolean;
+    'skip_aggregation'?: boolean;
 }
 /**
  * 
@@ -2229,19 +2229,19 @@ export interface MemberCreateRequestBody {
      * @type {MemberCreateRequest}
      * @memberof MemberCreateRequestBody
      */
-    member?: MemberCreateRequest;
+    'member'?: MemberCreateRequest;
     /**
      * 
      * @type {string}
      * @memberof MemberCreateRequestBody
      */
-    referral_source?: string;
+    'referral_source'?: string;
     /**
      * 
      * @type {string}
      * @memberof MemberCreateRequestBody
      */
-    ui_message_webview_url_scheme?: string;
+    'ui_message_webview_url_scheme'?: string;
 }
 /**
  * 
@@ -2254,85 +2254,85 @@ export interface MemberResponse {
      * @type {string}
      * @memberof MemberResponse
      */
-    aggregated_at?: string;
+    'aggregated_at'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MemberResponse
      */
-    connection_status?: string;
+    'connection_status'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MemberResponse
      */
-    guid?: string;
+    'guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof MemberResponse
      */
-    id?: string;
+    'id'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MemberResponse
      */
-    institution_code?: string;
+    'institution_code'?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof MemberResponse
      */
-    is_being_aggregated?: boolean;
+    'is_being_aggregated'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof MemberResponse
      */
-    is_managed_by_user?: boolean;
+    'is_managed_by_user'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof MemberResponse
      */
-    is_oauth?: boolean;
+    'is_oauth'?: boolean | null;
     /**
      * 
      * @type {string}
      * @memberof MemberResponse
      */
-    metadata?: string;
+    'metadata'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MemberResponse
      */
-    name?: string;
+    'name'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MemberResponse
      */
-    oauth_window_uri?: string;
+    'oauth_window_uri'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MemberResponse
      */
-    successfully_aggregated_at?: string;
+    'successfully_aggregated_at'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MemberResponse
      */
-    user_guid?: string;
+    'user_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof MemberResponse
      */
-    user_id?: string;
+    'user_id'?: string | null;
 }
 /**
  * 
@@ -2345,7 +2345,7 @@ export interface MemberResponseBody {
      * @type {MemberResponse}
      * @memberof MemberResponseBody
      */
-    member?: MemberResponse;
+    'member'?: MemberResponse;
 }
 /**
  * 
@@ -2358,7 +2358,7 @@ export interface MemberResumeRequest {
      * @type {Array<CredentialRequest>}
      * @memberof MemberResumeRequest
      */
-    challenges?: Array<CredentialRequest>;
+    'challenges'?: Array<CredentialRequest>;
 }
 /**
  * 
@@ -2371,7 +2371,7 @@ export interface MemberResumeRequestBody {
      * @type {MemberResumeRequest}
      * @memberof MemberResumeRequestBody
      */
-    member?: MemberResumeRequest;
+    'member'?: MemberResumeRequest;
 }
 /**
  * 
@@ -2384,55 +2384,55 @@ export interface MemberStatusResponse {
      * @type {string}
      * @memberof MemberStatusResponse
      */
-    aggregated_at?: string;
+    'aggregated_at'?: string | null;
     /**
      * 
      * @type {Array<ChallengeResponse>}
      * @memberof MemberStatusResponse
      */
-    challenges?: Array<ChallengeResponse>;
+    'challenges'?: Array<ChallengeResponse>;
     /**
      * 
      * @type {string}
      * @memberof MemberStatusResponse
      */
-    connection_status?: string;
+    'connection_status'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MemberStatusResponse
      */
-    guid?: string;
+    'guid'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof MemberStatusResponse
      */
-    has_processed_accounts?: boolean;
+    'has_processed_accounts'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof MemberStatusResponse
      */
-    has_processed_transactions?: boolean;
+    'has_processed_transactions'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof MemberStatusResponse
      */
-    is_authenticated?: boolean;
+    'is_authenticated'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof MemberStatusResponse
      */
-    is_being_aggregated?: boolean;
+    'is_being_aggregated'?: boolean | null;
     /**
      * 
      * @type {string}
      * @memberof MemberStatusResponse
      */
-    successfully_aggregated_at?: string;
+    'successfully_aggregated_at'?: string | null;
 }
 /**
  * 
@@ -2445,7 +2445,7 @@ export interface MemberStatusResponseBody {
      * @type {MemberStatusResponse}
      * @memberof MemberStatusResponseBody
      */
-    member?: MemberStatusResponse;
+    'member'?: MemberStatusResponse;
 }
 /**
  * 
@@ -2458,31 +2458,31 @@ export interface MemberUpdateRequest {
      * @type {boolean}
      * @memberof MemberUpdateRequest
      */
-    background_aggregation_is_disabled?: boolean;
+    'background_aggregation_is_disabled'?: boolean;
     /**
      * 
      * @type {Array<CredentialRequest>}
      * @memberof MemberUpdateRequest
      */
-    credentials?: Array<CredentialRequest>;
+    'credentials'?: Array<CredentialRequest>;
     /**
      * 
      * @type {string}
      * @memberof MemberUpdateRequest
      */
-    id?: string;
+    'id'?: string;
     /**
      * 
      * @type {string}
      * @memberof MemberUpdateRequest
      */
-    metadata?: string;
+    'metadata'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof MemberUpdateRequest
      */
-    skip_aggregation?: boolean;
+    'skip_aggregation'?: boolean;
 }
 /**
  * 
@@ -2495,7 +2495,7 @@ export interface MemberUpdateRequestBody {
      * @type {MemberUpdateRequest}
      * @memberof MemberUpdateRequestBody
      */
-    member?: MemberUpdateRequest;
+    'member'?: MemberUpdateRequest;
 }
 /**
  * 
@@ -2508,13 +2508,13 @@ export interface MembersResponseBody {
      * @type {Array<MemberResponse>}
      * @memberof MembersResponseBody
      */
-    members?: Array<MemberResponse>;
+    'members'?: Array<MemberResponse>;
     /**
      * 
      * @type {PaginationResponse}
      * @memberof MembersResponseBody
      */
-    pagination?: PaginationResponse;
+    'pagination'?: PaginationResponse;
 }
 /**
  * 
@@ -2527,73 +2527,73 @@ export interface MerchantLocationResponse {
      * @type {string}
      * @memberof MerchantLocationResponse
      */
-    city?: string;
+    'city'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MerchantLocationResponse
      */
-    country?: string;
+    'country'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MerchantLocationResponse
      */
-    created_at?: string;
+    'created_at'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MerchantLocationResponse
      */
-    guid?: string;
+    'guid'?: string;
     /**
      * 
      * @type {number}
      * @memberof MerchantLocationResponse
      */
-    latitude?: number;
+    'latitude'?: number | null;
     /**
      * 
      * @type {number}
      * @memberof MerchantLocationResponse
      */
-    longitude?: number;
+    'longitude'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof MerchantLocationResponse
      */
-    merchant_guid?: string;
+    'merchant_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof MerchantLocationResponse
      */
-    phone_number?: string;
+    'phone_number'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MerchantLocationResponse
      */
-    postal_code?: string;
+    'postal_code'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MerchantLocationResponse
      */
-    state?: string;
+    'state'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MerchantLocationResponse
      */
-    street_address?: string;
+    'street_address'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MerchantLocationResponse
      */
-    updated_at?: string;
+    'updated_at'?: string | null;
 }
 /**
  * 
@@ -2606,7 +2606,7 @@ export interface MerchantLocationResponseBody {
      * @type {MerchantLocationResponse}
      * @memberof MerchantLocationResponseBody
      */
-    merchant_location?: MerchantLocationResponse;
+    'merchant_location'?: MerchantLocationResponse;
 }
 /**
  * 
@@ -2619,37 +2619,37 @@ export interface MerchantResponse {
      * @type {string}
      * @memberof MerchantResponse
      */
-    created_at?: string;
+    'created_at'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MerchantResponse
      */
-    guid?: string;
+    'guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof MerchantResponse
      */
-    logo_url?: string;
+    'logo_url'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MerchantResponse
      */
-    name?: string;
+    'name'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MerchantResponse
      */
-    updated_at?: string;
+    'updated_at'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MerchantResponse
      */
-    website_url?: string;
+    'website_url'?: string | null;
 }
 /**
  * 
@@ -2662,7 +2662,7 @@ export interface MerchantResponseBody {
      * @type {MerchantResponse}
      * @memberof MerchantResponseBody
      */
-    merchant?: MerchantResponse;
+    'merchant'?: MerchantResponse;
 }
 /**
  * 
@@ -2675,13 +2675,13 @@ export interface MerchantsResponseBody {
      * @type {Array<MerchantResponse>}
      * @memberof MerchantsResponseBody
      */
-    merchants?: Array<MerchantResponse>;
+    'merchants'?: Array<MerchantResponse>;
     /**
      * 
      * @type {PaginationResponse}
      * @memberof MerchantsResponseBody
      */
-    pagination?: PaginationResponse;
+    'pagination'?: PaginationResponse;
 }
 /**
  * 
@@ -2694,13 +2694,13 @@ export interface OAuthWindowResponse {
      * @type {string}
      * @memberof OAuthWindowResponse
      */
-    guid?: string;
+    'guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof OAuthWindowResponse
      */
-    oauth_window_uri?: string;
+    'oauth_window_uri'?: string | null;
 }
 /**
  * 
@@ -2713,7 +2713,7 @@ export interface OAuthWindowResponseBody {
      * @type {OAuthWindowResponse}
      * @memberof OAuthWindowResponseBody
      */
-    member?: OAuthWindowResponse;
+    'member'?: OAuthWindowResponse;
 }
 /**
  * 
@@ -2726,13 +2726,13 @@ export interface OptionResponse {
      * @type {string}
      * @memberof OptionResponse
      */
-    label?: string;
+    'label'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof OptionResponse
      */
-    value?: string;
+    'value'?: string | null;
 }
 /**
  * 
@@ -2745,25 +2745,25 @@ export interface PaginationResponse {
      * @type {number}
      * @memberof PaginationResponse
      */
-    current_page?: number;
+    'current_page'?: number;
     /**
      * 
      * @type {number}
      * @memberof PaginationResponse
      */
-    per_page?: number;
+    'per_page'?: number;
     /**
      * 
      * @type {number}
      * @memberof PaginationResponse
      */
-    total_entries?: number;
+    'total_entries'?: number;
     /**
      * 
      * @type {number}
      * @memberof PaginationResponse
      */
-    total_pages?: number;
+    'total_pages'?: number;
 }
 /**
  * 
@@ -2776,49 +2776,49 @@ export interface StatementResponse {
      * @type {string}
      * @memberof StatementResponse
      */
-    account_guid?: string;
+    'account_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof StatementResponse
      */
-    content_hash?: string;
+    'content_hash'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof StatementResponse
      */
-    created_at?: string;
+    'created_at'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof StatementResponse
      */
-    guid?: string;
+    'guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof StatementResponse
      */
-    member_guid?: string;
+    'member_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof StatementResponse
      */
-    updated_at?: string;
+    'updated_at'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof StatementResponse
      */
-    uri?: string;
+    'uri'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof StatementResponse
      */
-    user_guid?: string;
+    'user_guid'?: string;
 }
 /**
  * 
@@ -2831,7 +2831,7 @@ export interface StatementResponseBody {
      * @type {StatementResponse}
      * @memberof StatementResponseBody
      */
-    statement?: StatementResponse;
+    'statement'?: StatementResponse;
 }
 /**
  * 
@@ -2844,13 +2844,13 @@ export interface StatementsResponseBody {
      * @type {PaginationResponse}
      * @memberof StatementsResponseBody
      */
-    pagination?: PaginationResponse;
+    'pagination'?: PaginationResponse;
     /**
      * 
      * @type {Array<StatementResponse>}
      * @memberof StatementsResponseBody
      */
-    statements?: Array<StatementResponse>;
+    'statements'?: Array<StatementResponse>;
 }
 /**
  * 
@@ -2863,7 +2863,7 @@ export interface TagCreateRequest {
      * @type {string}
      * @memberof TagCreateRequest
      */
-    name: string;
+    'name': string;
 }
 /**
  * 
@@ -2876,7 +2876,7 @@ export interface TagCreateRequestBody {
      * @type {TagCreateRequest}
      * @memberof TagCreateRequestBody
      */
-    tag?: TagCreateRequest;
+    'tag'?: TagCreateRequest;
 }
 /**
  * 
@@ -2889,19 +2889,19 @@ export interface TagResponse {
      * @type {string}
      * @memberof TagResponse
      */
-    guid?: string;
+    'guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof TagResponse
      */
-    name?: string;
+    'name'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TagResponse
      */
-    user_guid?: string;
+    'user_guid'?: string;
 }
 /**
  * 
@@ -2914,7 +2914,7 @@ export interface TagResponseBody {
      * @type {TagResponse}
      * @memberof TagResponseBody
      */
-    tag?: TagResponse;
+    'tag'?: TagResponse;
 }
 /**
  * 
@@ -2927,7 +2927,7 @@ export interface TagUpdateRequest {
      * @type {string}
      * @memberof TagUpdateRequest
      */
-    name: string;
+    'name': string;
 }
 /**
  * 
@@ -2940,7 +2940,7 @@ export interface TagUpdateRequestBody {
      * @type {TagUpdateRequest}
      * @memberof TagUpdateRequestBody
      */
-    tag?: TagUpdateRequest;
+    'tag'?: TagUpdateRequest;
 }
 /**
  * 
@@ -2953,13 +2953,13 @@ export interface TaggingCreateRequest {
      * @type {string}
      * @memberof TaggingCreateRequest
      */
-    tag_guid: string;
+    'tag_guid': string;
     /**
      * 
      * @type {string}
      * @memberof TaggingCreateRequest
      */
-    transaction_guid: string;
+    'transaction_guid': string;
 }
 /**
  * 
@@ -2972,7 +2972,7 @@ export interface TaggingCreateRequestBody {
      * @type {TaggingCreateRequest}
      * @memberof TaggingCreateRequestBody
      */
-    tagging?: TaggingCreateRequest;
+    'tagging'?: TaggingCreateRequest;
 }
 /**
  * 
@@ -2985,31 +2985,31 @@ export interface TaggingResponse {
      * @type {string}
      * @memberof TaggingResponse
      */
-    guid?: string;
+    'guid'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof TaggingResponse
      */
-    member_is_managed_by_user?: boolean;
+    'member_is_managed_by_user'?: boolean | null;
     /**
      * 
      * @type {string}
      * @memberof TaggingResponse
      */
-    tag_guid?: string;
+    'tag_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof TaggingResponse
      */
-    transaction_guid?: string;
+    'transaction_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof TaggingResponse
      */
-    user_guid?: string;
+    'user_guid'?: string;
 }
 /**
  * 
@@ -3022,7 +3022,7 @@ export interface TaggingResponseBody {
      * @type {TaggingResponse}
      * @memberof TaggingResponseBody
      */
-    tagging?: TaggingResponse;
+    'tagging'?: TaggingResponse;
 }
 /**
  * 
@@ -3035,7 +3035,7 @@ export interface TaggingUpdateRequest {
      * @type {string}
      * @memberof TaggingUpdateRequest
      */
-    tag_guid: string;
+    'tag_guid': string;
 }
 /**
  * 
@@ -3048,7 +3048,7 @@ export interface TaggingUpdateRequestBody {
      * @type {TaggingUpdateRequest}
      * @memberof TaggingUpdateRequestBody
      */
-    tagging?: TaggingUpdateRequest;
+    'tagging'?: TaggingUpdateRequest;
 }
 /**
  * 
@@ -3061,13 +3061,13 @@ export interface TaggingsResponseBody {
      * @type {PaginationResponse}
      * @memberof TaggingsResponseBody
      */
-    pagination?: PaginationResponse;
+    'pagination'?: PaginationResponse;
     /**
      * 
      * @type {Array<TaggingResponse>}
      * @memberof TaggingsResponseBody
      */
-    taggings?: Array<TaggingResponse>;
+    'taggings'?: Array<TaggingResponse>;
 }
 /**
  * 
@@ -3080,13 +3080,13 @@ export interface TagsResponseBody {
      * @type {PaginationResponse}
      * @memberof TagsResponseBody
      */
-    pagination?: PaginationResponse;
+    'pagination'?: PaginationResponse;
     /**
      * 
      * @type {Array<TagResponse>}
      * @memberof TagsResponseBody
      */
-    tags?: Array<TagResponse>;
+    'tags'?: Array<TagResponse>;
 }
 /**
  * 
@@ -3099,247 +3099,247 @@ export interface TransactionResponse {
      * @type {string}
      * @memberof TransactionResponse
      */
-    account_guid?: string;
+    'account_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    account_id?: string;
+    'account_id'?: string | null;
     /**
      * 
      * @type {number}
      * @memberof TransactionResponse
      */
-    amount?: number;
+    'amount'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    category?: string;
+    'category'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    check_number_string?: string;
+    'check_number_string'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    created_at?: string;
+    'created_at'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    currency_code?: string;
+    'currency_code'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    date?: string;
+    'date'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    description?: string;
+    'description'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    guid?: string;
+    'guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    id?: string;
+    'id'?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof TransactionResponse
      */
-    is_bill_pay?: boolean;
+    'is_bill_pay'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof TransactionResponse
      */
-    is_direct_deposit?: boolean;
+    'is_direct_deposit'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof TransactionResponse
      */
-    is_expense?: boolean;
+    'is_expense'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof TransactionResponse
      */
-    is_fee?: boolean;
+    'is_fee'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof TransactionResponse
      */
-    is_income?: boolean;
+    'is_income'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof TransactionResponse
      */
-    is_international?: boolean;
+    'is_international'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof TransactionResponse
      */
-    is_overdraft_fee?: boolean;
+    'is_overdraft_fee'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof TransactionResponse
      */
-    is_payroll_advance?: boolean;
+    'is_payroll_advance'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof TransactionResponse
      */
-    is_recurring?: boolean;
+    'is_recurring'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof TransactionResponse
      */
-    is_subscription?: boolean;
+    'is_subscription'?: boolean | null;
     /**
      * 
      * @type {number}
      * @memberof TransactionResponse
      */
-    latitude?: number;
+    'latitude'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    localized_description?: string;
+    'localized_description'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    localized_memo?: string;
+    'localized_memo'?: string | null;
     /**
      * 
      * @type {number}
      * @memberof TransactionResponse
      */
-    longitude?: number;
+    'longitude'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    member_guid?: string;
+    'member_guid'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof TransactionResponse
      */
-    member_is_managed_by_user?: boolean;
+    'member_is_managed_by_user'?: boolean | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    memo?: string;
+    'memo'?: string | null;
     /**
      * 
      * @type {number}
      * @memberof TransactionResponse
      */
-    merchant_category_code?: number;
+    'merchant_category_code'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    merchant_guid?: string;
+    'merchant_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    merchant_location_guid?: string;
+    'merchant_location_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    metadata?: string;
+    'metadata'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    original_description?: string;
+    'original_description'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    posted_at?: string;
+    'posted_at'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    status?: string;
+    'status'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    top_level_category?: string;
+    'top_level_category'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    transacted_at?: string;
+    'transacted_at'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    type?: string;
+    'type'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    updated_at?: string;
+    'updated_at'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    user_guid?: string;
+    'user_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    user_id?: string;
+    'user_id'?: string | null;
 }
 /**
  * 
@@ -3352,7 +3352,7 @@ export interface TransactionResponseBody {
      * @type {TransactionResponse}
      * @memberof TransactionResponseBody
      */
-    transaction?: TransactionResponse;
+    'transaction'?: TransactionResponse;
 }
 /**
  * 
@@ -3365,19 +3365,19 @@ export interface TransactionRuleCreateRequest {
      * @type {string}
      * @memberof TransactionRuleCreateRequest
      */
-    category_guid: string;
+    'category_guid': string;
     /**
      * 
      * @type {string}
      * @memberof TransactionRuleCreateRequest
      */
-    description?: string;
+    'description'?: string;
     /**
      * 
      * @type {string}
      * @memberof TransactionRuleCreateRequest
      */
-    match_description: string;
+    'match_description': string;
 }
 /**
  * 
@@ -3390,7 +3390,7 @@ export interface TransactionRuleCreateRequestBody {
      * @type {TransactionRuleCreateRequest}
      * @memberof TransactionRuleCreateRequestBody
      */
-    transaction_rule?: TransactionRuleCreateRequest;
+    'transaction_rule'?: TransactionRuleCreateRequest;
 }
 /**
  * 
@@ -3403,43 +3403,43 @@ export interface TransactionRuleResponse {
      * @type {string}
      * @memberof TransactionRuleResponse
      */
-    category_guid?: string;
+    'category_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof TransactionRuleResponse
      */
-    created_at?: string;
+    'created_at'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionRuleResponse
      */
-    description?: string;
+    'description'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionRuleResponse
      */
-    guid?: string;
+    'guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof TransactionRuleResponse
      */
-    match_description?: string;
+    'match_description'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionRuleResponse
      */
-    updated_at?: string;
+    'updated_at'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionRuleResponse
      */
-    user_guid?: string;
+    'user_guid'?: string;
 }
 /**
  * 
@@ -3452,7 +3452,7 @@ export interface TransactionRuleResponseBody {
      * @type {TransactionRuleResponse}
      * @memberof TransactionRuleResponseBody
      */
-    transaction_rule?: TransactionRuleResponse;
+    'transaction_rule'?: TransactionRuleResponse;
 }
 /**
  * 
@@ -3465,19 +3465,19 @@ export interface TransactionRuleUpdateRequest {
      * @type {string}
      * @memberof TransactionRuleUpdateRequest
      */
-    category_guid?: string;
+    'category_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof TransactionRuleUpdateRequest
      */
-    description?: string;
+    'description'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionRuleUpdateRequest
      */
-    match_description?: string;
+    'match_description'?: string | null;
 }
 /**
  * 
@@ -3490,7 +3490,7 @@ export interface TransactionRuleUpdateRequestBody {
      * @type {TransactionRuleUpdateRequest}
      * @memberof TransactionRuleUpdateRequestBody
      */
-    transaction_rule?: TransactionRuleUpdateRequest;
+    'transaction_rule'?: TransactionRuleUpdateRequest;
 }
 /**
  * 
@@ -3503,13 +3503,13 @@ export interface TransactionRulesResponseBody {
      * @type {PaginationResponse}
      * @memberof TransactionRulesResponseBody
      */
-    pagination?: PaginationResponse;
+    'pagination'?: PaginationResponse;
     /**
      * 
      * @type {Array<TransactionRuleResponse>}
      * @memberof TransactionRulesResponseBody
      */
-    transaction_rules?: Array<TransactionRuleResponse>;
+    'transaction_rules'?: Array<TransactionRuleResponse>;
 }
 /**
  * 
@@ -3522,7 +3522,7 @@ export interface TransactionUpdateRequest {
      * @type {string}
      * @memberof TransactionUpdateRequest
      */
-    description: string;
+    'description': string;
 }
 /**
  * 
@@ -3535,7 +3535,7 @@ export interface TransactionUpdateRequestBody {
      * @type {TransactionUpdateRequest}
      * @memberof TransactionUpdateRequestBody
      */
-    transaction?: TransactionUpdateRequest;
+    'transaction'?: TransactionUpdateRequest;
 }
 /**
  * 
@@ -3548,13 +3548,13 @@ export interface TransactionsResponseBody {
      * @type {PaginationResponse}
      * @memberof TransactionsResponseBody
      */
-    pagination?: PaginationResponse;
+    'pagination'?: PaginationResponse;
     /**
      * 
      * @type {Array<TransactionResponse>}
      * @memberof TransactionsResponseBody
      */
-    transactions?: Array<TransactionResponse>;
+    'transactions'?: Array<TransactionResponse>;
 }
 /**
  * 
@@ -3567,25 +3567,25 @@ export interface UserCreateRequest {
      * @type {string}
      * @memberof UserCreateRequest
      */
-    email?: string;
+    'email'?: string;
     /**
      * 
      * @type {string}
      * @memberof UserCreateRequest
      */
-    id?: string;
+    'id'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof UserCreateRequest
      */
-    is_disabled?: boolean;
+    'is_disabled'?: boolean;
     /**
      * 
      * @type {string}
      * @memberof UserCreateRequest
      */
-    metadata?: string;
+    'metadata'?: string;
 }
 /**
  * 
@@ -3598,7 +3598,7 @@ export interface UserCreateRequestBody {
      * @type {UserCreateRequest}
      * @memberof UserCreateRequestBody
      */
-    user?: UserCreateRequest;
+    'user'?: UserCreateRequest;
 }
 /**
  * 
@@ -3611,31 +3611,31 @@ export interface UserResponse {
      * @type {string}
      * @memberof UserResponse
      */
-    email?: string;
+    'email'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof UserResponse
      */
-    guid?: string;
+    'guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof UserResponse
      */
-    id?: string;
+    'id'?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof UserResponse
      */
-    is_disabled?: boolean;
+    'is_disabled'?: boolean | null;
     /**
      * 
      * @type {string}
      * @memberof UserResponse
      */
-    metadata?: string;
+    'metadata'?: string | null;
 }
 /**
  * 
@@ -3648,7 +3648,7 @@ export interface UserResponseBody {
      * @type {UserResponse}
      * @memberof UserResponseBody
      */
-    user?: UserResponse;
+    'user'?: UserResponse;
 }
 /**
  * 
@@ -3661,25 +3661,25 @@ export interface UserUpdateRequest {
      * @type {string}
      * @memberof UserUpdateRequest
      */
-    email?: string;
+    'email'?: string;
     /**
      * 
      * @type {string}
      * @memberof UserUpdateRequest
      */
-    id?: string;
+    'id'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof UserUpdateRequest
      */
-    is_disabled?: boolean;
+    'is_disabled'?: boolean;
     /**
      * 
      * @type {string}
      * @memberof UserUpdateRequest
      */
-    metadata?: string;
+    'metadata'?: string;
 }
 /**
  * 
@@ -3692,7 +3692,7 @@ export interface UserUpdateRequestBody {
      * @type {UserUpdateRequest}
      * @memberof UserUpdateRequestBody
      */
-    user?: UserUpdateRequest;
+    'user'?: UserUpdateRequest;
 }
 /**
  * 
@@ -3705,13 +3705,13 @@ export interface UsersResponseBody {
      * @type {PaginationResponse}
      * @memberof UsersResponseBody
      */
-    pagination?: PaginationResponse;
+    'pagination'?: PaginationResponse;
     /**
      * 
      * @type {Array<UserResponse>}
      * @memberof UsersResponseBody
      */
-    users?: Array<UserResponse>;
+    'users'?: Array<UserResponse>;
 }
 /**
  * 
@@ -3724,79 +3724,79 @@ export interface WidgetRequest {
      * @type {string}
      * @memberof WidgetRequest
      */
-    color_scheme?: string;
+    'color_scheme'?: string;
     /**
      * 
      * @type {string}
      * @memberof WidgetRequest
      */
-    current_institution_code?: string;
+    'current_institution_code'?: string;
     /**
      * 
      * @type {string}
      * @memberof WidgetRequest
      */
-    current_institution_guid?: string;
+    'current_institution_guid'?: string;
     /**
      * 
      * @type {string}
      * @memberof WidgetRequest
      */
-    current_member_guid?: string;
+    'current_member_guid'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof WidgetRequest
      */
-    disable_institution_search?: boolean;
+    'disable_institution_search'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof WidgetRequest
      */
-    include_transactions?: boolean;
+    'include_transactions'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof WidgetRequest
      */
-    is_mobile_webview?: boolean;
+    'is_mobile_webview'?: boolean;
     /**
      * 
      * @type {string}
      * @memberof WidgetRequest
      */
-    mode?: string;
+    'mode'?: string;
     /**
      * 
      * @type {number}
      * @memberof WidgetRequest
      */
-    ui_message_version?: number;
+    'ui_message_version'?: number;
     /**
      * 
      * @type {string}
      * @memberof WidgetRequest
      */
-    ui_message_webview_url_scheme?: string;
+    'ui_message_webview_url_scheme'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof WidgetRequest
      */
-    update_credentials?: boolean;
+    'update_credentials'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof WidgetRequest
      */
-    wait_for_full_aggregation?: boolean;
+    'wait_for_full_aggregation'?: boolean;
     /**
      * 
      * @type {string}
      * @memberof WidgetRequest
      */
-    widget_type: string;
+    'widget_type': string;
 }
 /**
  * 
@@ -3809,7 +3809,7 @@ export interface WidgetRequestBody {
      * @type {WidgetRequest}
      * @memberof WidgetRequestBody
      */
-    widget_url?: WidgetRequest;
+    'widget_url'?: WidgetRequest;
 }
 /**
  * 
@@ -3822,19 +3822,19 @@ export interface WidgetResponse {
      * @type {string}
      * @memberof WidgetResponse
      */
-    type?: string;
+    'type'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof WidgetResponse
      */
-    url?: string;
+    'url'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof WidgetResponse
      */
-    user_id?: string;
+    'user_id'?: string | null;
 }
 /**
  * 
@@ -3847,7 +3847,7 @@ export interface WidgetResponseBody {
      * @type {WidgetResponse}
      * @memberof WidgetResponseBody
      */
-    widget_url?: WidgetResponse;
+    'widget_url'?: WidgetResponse;
 }
 
 /**
@@ -3864,7 +3864,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        aggregateMember: async (memberGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        aggregateMember: async (memberGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('aggregateMember', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -3889,7 +3889,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -3906,7 +3906,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        checkBalances: async (memberGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        checkBalances: async (memberGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('checkBalances', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -3931,7 +3931,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -3948,7 +3948,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createCategory: async (userGuid: string, categoryCreateRequestBody: CategoryCreateRequestBody, options: any = {}): Promise<RequestArgs> => {
+        createCategory: async (userGuid: string, categoryCreateRequestBody: CategoryCreateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('createCategory', 'userGuid', userGuid)
             // verify required parameter 'categoryCreateRequestBody' is not null or undefined
@@ -3974,7 +3974,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(categoryCreateRequestBody, localVarRequestOptions, configuration)
@@ -3993,7 +3993,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createManagedAccount: async (userGuid: string, memberGuid: string, managedAccountCreateRequestBody: ManagedAccountCreateRequestBody, options: any = {}): Promise<RequestArgs> => {
+        createManagedAccount: async (userGuid: string, memberGuid: string, managedAccountCreateRequestBody: ManagedAccountCreateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('createManagedAccount', 'userGuid', userGuid)
             // verify required parameter 'memberGuid' is not null or undefined
@@ -4022,7 +4022,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(managedAccountCreateRequestBody, localVarRequestOptions, configuration)
@@ -4040,7 +4040,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createManagedMember: async (userGuid: string, managedMemberCreateRequestBody: ManagedMemberCreateRequestBody, options: any = {}): Promise<RequestArgs> => {
+        createManagedMember: async (userGuid: string, managedMemberCreateRequestBody: ManagedMemberCreateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('createManagedMember', 'userGuid', userGuid)
             // verify required parameter 'managedMemberCreateRequestBody' is not null or undefined
@@ -4066,7 +4066,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(managedMemberCreateRequestBody, localVarRequestOptions, configuration)
@@ -4085,7 +4085,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createManagedTransaction: async (userGuid: string, memberGuid: string, managedTransactionCreateRequestBody: ManagedTransactionCreateRequestBody, options: any = {}): Promise<RequestArgs> => {
+        createManagedTransaction: async (userGuid: string, memberGuid: string, managedTransactionCreateRequestBody: ManagedTransactionCreateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('createManagedTransaction', 'userGuid', userGuid)
             // verify required parameter 'memberGuid' is not null or undefined
@@ -4114,7 +4114,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(managedTransactionCreateRequestBody, localVarRequestOptions, configuration)
@@ -4132,7 +4132,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createMember: async (userGuid: string, memberCreateRequestBody: MemberCreateRequestBody, options: any = {}): Promise<RequestArgs> => {
+        createMember: async (userGuid: string, memberCreateRequestBody: MemberCreateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('createMember', 'userGuid', userGuid)
             // verify required parameter 'memberCreateRequestBody' is not null or undefined
@@ -4158,7 +4158,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(memberCreateRequestBody, localVarRequestOptions, configuration)
@@ -4176,7 +4176,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createTag: async (userGuid: string, tagCreateRequestBody: TagCreateRequestBody, options: any = {}): Promise<RequestArgs> => {
+        createTag: async (userGuid: string, tagCreateRequestBody: TagCreateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('createTag', 'userGuid', userGuid)
             // verify required parameter 'tagCreateRequestBody' is not null or undefined
@@ -4202,7 +4202,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(tagCreateRequestBody, localVarRequestOptions, configuration)
@@ -4220,7 +4220,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createTagging: async (userGuid: string, taggingCreateRequestBody: TaggingCreateRequestBody, options: any = {}): Promise<RequestArgs> => {
+        createTagging: async (userGuid: string, taggingCreateRequestBody: TaggingCreateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('createTagging', 'userGuid', userGuid)
             // verify required parameter 'taggingCreateRequestBody' is not null or undefined
@@ -4246,7 +4246,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(taggingCreateRequestBody, localVarRequestOptions, configuration)
@@ -4264,7 +4264,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createTransactionRule: async (userGuid: string, transactionRuleCreateRequestBody: TransactionRuleCreateRequestBody, options: any = {}): Promise<RequestArgs> => {
+        createTransactionRule: async (userGuid: string, transactionRuleCreateRequestBody: TransactionRuleCreateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('createTransactionRule', 'userGuid', userGuid)
             // verify required parameter 'transactionRuleCreateRequestBody' is not null or undefined
@@ -4290,7 +4290,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(transactionRuleCreateRequestBody, localVarRequestOptions, configuration)
@@ -4307,7 +4307,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createUser: async (userCreateRequestBody: UserCreateRequestBody, options: any = {}): Promise<RequestArgs> => {
+        createUser: async (userCreateRequestBody: UserCreateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userCreateRequestBody' is not null or undefined
             assertParamExists('createUser', 'userCreateRequestBody', userCreateRequestBody)
             const localVarPath = `/users`;
@@ -4330,7 +4330,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(userCreateRequestBody, localVarRequestOptions, configuration)
@@ -4348,7 +4348,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteCategory: async (categoryGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        deleteCategory: async (categoryGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'categoryGuid' is not null or undefined
             assertParamExists('deleteCategory', 'categoryGuid', categoryGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -4373,7 +4373,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4391,7 +4391,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteManagedAccount: async (memberGuid: string, userGuid: string, accountGuid: string, options: any = {}): Promise<RequestArgs> => {
+        deleteManagedAccount: async (memberGuid: string, userGuid: string, accountGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('deleteManagedAccount', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -4419,7 +4419,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4436,7 +4436,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteManagedMember: async (memberGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        deleteManagedMember: async (memberGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('deleteManagedMember', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -4461,7 +4461,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4479,7 +4479,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteManagedTransaction: async (memberGuid: string, userGuid: string, transactionGuid: string, options: any = {}): Promise<RequestArgs> => {
+        deleteManagedTransaction: async (memberGuid: string, userGuid: string, transactionGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('deleteManagedTransaction', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -4507,7 +4507,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4524,7 +4524,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteMember: async (memberGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        deleteMember: async (memberGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('deleteMember', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -4549,7 +4549,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4566,7 +4566,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteTag: async (tagGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        deleteTag: async (tagGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tagGuid' is not null or undefined
             assertParamExists('deleteTag', 'tagGuid', tagGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -4591,7 +4591,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4608,7 +4608,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteTagging: async (taggingGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        deleteTagging: async (taggingGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'taggingGuid' is not null or undefined
             assertParamExists('deleteTagging', 'taggingGuid', taggingGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -4633,7 +4633,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4650,7 +4650,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteTransactionRule: async (transactionRuleGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        deleteTransactionRule: async (transactionRuleGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'transactionRuleGuid' is not null or undefined
             assertParamExists('deleteTransactionRule', 'transactionRuleGuid', transactionRuleGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -4675,7 +4675,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4691,7 +4691,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteUser: async (userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        deleteUser: async (userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('deleteUser', 'userGuid', userGuid)
             const localVarPath = `/users/{user_guid}`
@@ -4713,7 +4713,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4731,7 +4731,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        downloadStatementPDF: async (memberGuid: string, statementGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        downloadStatementPDF: async (memberGuid: string, statementGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('downloadStatementPDF', 'memberGuid', memberGuid)
             // verify required parameter 'statementGuid' is not null or undefined
@@ -4759,7 +4759,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4775,7 +4775,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        enhanceTransactions: async (enhanceTransactionsRequestBody: EnhanceTransactionsRequestBody, options: any = {}): Promise<RequestArgs> => {
+        enhanceTransactions: async (enhanceTransactionsRequestBody: EnhanceTransactionsRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'enhanceTransactionsRequestBody' is not null or undefined
             assertParamExists('enhanceTransactions', 'enhanceTransactionsRequestBody', enhanceTransactionsRequestBody)
             const localVarPath = `/transactions/enhance`;
@@ -4798,7 +4798,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(enhanceTransactionsRequestBody, localVarRequestOptions, configuration)
@@ -4816,7 +4816,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        extendHistory: async (memberGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        extendHistory: async (memberGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('extendHistory', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -4841,7 +4841,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4858,7 +4858,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        fetchStatements: async (memberGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        fetchStatements: async (memberGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('fetchStatements', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -4883,7 +4883,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4900,7 +4900,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        identifyMember: async (memberGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        identifyMember: async (memberGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('identifyMember', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -4925,7 +4925,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4944,7 +4944,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listAccountNumbersByAccount: async (accountGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+        listAccountNumbersByAccount: async (accountGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'accountGuid' is not null or undefined
             assertParamExists('listAccountNumbersByAccount', 'accountGuid', accountGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -4977,7 +4977,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4996,7 +4996,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listAccountNumbersByMember: async (memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+        listAccountNumbersByMember: async (memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('listAccountNumbersByMember', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -5029,7 +5029,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5048,7 +5048,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listAccountOwnersByMember: async (memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+        listAccountOwnersByMember: async (memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('listAccountOwnersByMember', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -5081,7 +5081,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5099,7 +5099,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listCategories: async (userGuid: string, page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+        listCategories: async (userGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('listCategories', 'userGuid', userGuid)
             const localVarPath = `/users/{user_guid}/categories`
@@ -5129,7 +5129,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5147,7 +5147,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listDefaultCategories: async (userGuid: string, page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+        listDefaultCategories: async (userGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('listDefaultCategories', 'userGuid', userGuid)
             const localVarPath = `/users/{user_guid}/categories/default`
@@ -5177,7 +5177,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5194,7 +5194,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listFavoriteInstitutions: async (page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+        listFavoriteInstitutions: async (page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/institutions/favorites`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5221,7 +5221,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5241,7 +5241,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listHoldings: async (userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options: any = {}): Promise<RequestArgs> => {
+        listHoldings: async (userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('listHoldings', 'userGuid', userGuid)
             const localVarPath = `/users/{user_guid}/holdings`
@@ -5279,7 +5279,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5300,7 +5300,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listHoldingsByMember: async (memberGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options: any = {}): Promise<RequestArgs> => {
+        listHoldingsByMember: async (memberGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('listHoldingsByMember', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -5341,7 +5341,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5359,7 +5359,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listInstitutionCredentials: async (institutionCode: string, page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+        listInstitutionCredentials: async (institutionCode: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'institutionCode' is not null or undefined
             assertParamExists('listInstitutionCredentials', 'institutionCode', institutionCode)
             const localVarPath = `/institutions/{institution_code}/credentials`
@@ -5389,7 +5389,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5411,7 +5411,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listInstitutions: async (name?: string, page?: number, recordsPerPage?: number, supportsAccountIdentification?: boolean, supportsAccountStatement?: boolean, supportsAccountVerification?: boolean, supportsTransactionHistory?: boolean, options: any = {}): Promise<RequestArgs> => {
+        listInstitutions: async (name?: string, page?: number, recordsPerPage?: number, supportsAccountIdentification?: boolean, supportsAccountStatement?: boolean, supportsAccountVerification?: boolean, supportsTransactionHistory?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/institutions`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5458,7 +5458,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5477,7 +5477,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listManagedAccounts: async (userGuid: string, memberGuid: string, page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+        listManagedAccounts: async (userGuid: string, memberGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('listManagedAccounts', 'userGuid', userGuid)
             // verify required parameter 'memberGuid' is not null or undefined
@@ -5510,7 +5510,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5527,7 +5527,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listManagedInstitutions: async (page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+        listManagedInstitutions: async (page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/managed_institutions`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5554,7 +5554,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5572,7 +5572,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listManagedMembers: async (userGuid: string, page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+        listManagedMembers: async (userGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('listManagedMembers', 'userGuid', userGuid)
             const localVarPath = `/users/{user_guid}/managed_members`
@@ -5602,7 +5602,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5621,7 +5621,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listManagedTransactions: async (userGuid: string, memberGuid: string, page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+        listManagedTransactions: async (userGuid: string, memberGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('listManagedTransactions', 'userGuid', userGuid)
             // verify required parameter 'memberGuid' is not null or undefined
@@ -5654,7 +5654,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5673,7 +5673,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listMemberChallenges: async (memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+        listMemberChallenges: async (memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('listMemberChallenges', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -5706,7 +5706,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5725,7 +5725,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listMemberCredentials: async (memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+        listMemberCredentials: async (memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('listMemberCredentials', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -5758,7 +5758,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5776,7 +5776,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listMembers: async (userGuid: string, page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+        listMembers: async (userGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('listMembers', 'userGuid', userGuid)
             const localVarPath = `/users/{user_guid}/members`
@@ -5806,7 +5806,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5823,7 +5823,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listMerchants: async (page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+        listMerchants: async (page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/merchants`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5850,7 +5850,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5869,7 +5869,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listStatementsByMember: async (memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+        listStatementsByMember: async (memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('listStatementsByMember', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -5902,7 +5902,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5920,7 +5920,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTaggings: async (userGuid: string, page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+        listTaggings: async (userGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('listTaggings', 'userGuid', userGuid)
             const localVarPath = `/users/{user_guid}/taggings`
@@ -5950,7 +5950,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5968,7 +5968,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTags: async (userGuid: string, page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+        listTags: async (userGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('listTags', 'userGuid', userGuid)
             const localVarPath = `/users/{user_guid}/tags`
@@ -5998,7 +5998,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6016,7 +6016,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTransactionRules: async (userGuid: string, page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+        listTransactionRules: async (userGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('listTransactionRules', 'userGuid', userGuid)
             const localVarPath = `/users/{user_guid}/transaction_rules`
@@ -6046,7 +6046,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6066,7 +6066,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTransactions: async (userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options: any = {}): Promise<RequestArgs> => {
+        listTransactions: async (userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('listTransactions', 'userGuid', userGuid)
             const localVarPath = `/users/{user_guid}/transactions`
@@ -6104,7 +6104,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6125,7 +6125,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTransactionsByAccount: async (accountGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options: any = {}): Promise<RequestArgs> => {
+        listTransactionsByAccount: async (accountGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'accountGuid' is not null or undefined
             assertParamExists('listTransactionsByAccount', 'accountGuid', accountGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -6166,7 +6166,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6187,7 +6187,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTransactionsByMember: async (memberGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options: any = {}): Promise<RequestArgs> => {
+        listTransactionsByMember: async (memberGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('listTransactionsByMember', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -6228,7 +6228,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6249,7 +6249,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTransactionsByTag: async (tagGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options: any = {}): Promise<RequestArgs> => {
+        listTransactionsByTag: async (tagGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tagGuid' is not null or undefined
             assertParamExists('listTransactionsByTag', 'tagGuid', tagGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -6290,7 +6290,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6308,7 +6308,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listUserAccounts: async (userGuid: string, page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+        listUserAccounts: async (userGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('listUserAccounts', 'userGuid', userGuid)
             const localVarPath = `/users/{user_guid}/accounts`
@@ -6338,7 +6338,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6355,7 +6355,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listUsers: async (page?: number, recordsPerPage?: number, options: any = {}): Promise<RequestArgs> => {
+        listUsers: async (page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/users`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -6382,7 +6382,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6399,7 +6399,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        readAccount: async (accountGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        readAccount: async (accountGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'accountGuid' is not null or undefined
             assertParamExists('readAccount', 'accountGuid', accountGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -6424,7 +6424,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6441,7 +6441,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        readCategory: async (categoryGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        readCategory: async (categoryGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'categoryGuid' is not null or undefined
             assertParamExists('readCategory', 'categoryGuid', categoryGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -6466,7 +6466,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6483,7 +6483,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        readHolding: async (holdingGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        readHolding: async (holdingGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'holdingGuid' is not null or undefined
             assertParamExists('readHolding', 'holdingGuid', holdingGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -6508,7 +6508,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6524,7 +6524,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        readInstitution: async (institutionCode: string, options: any = {}): Promise<RequestArgs> => {
+        readInstitution: async (institutionCode: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'institutionCode' is not null or undefined
             assertParamExists('readInstitution', 'institutionCode', institutionCode)
             const localVarPath = `/institutions/{institution_code}`
@@ -6546,7 +6546,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6564,7 +6564,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        readManagedAccount: async (memberGuid: string, userGuid: string, accountGuid: string, options: any = {}): Promise<RequestArgs> => {
+        readManagedAccount: async (memberGuid: string, userGuid: string, accountGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('readManagedAccount', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -6592,7 +6592,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6609,7 +6609,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        readManagedMember: async (memberGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        readManagedMember: async (memberGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('readManagedMember', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -6634,7 +6634,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6652,7 +6652,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        readManagedTransaction: async (memberGuid: string, userGuid: string, transactionGuid: string, options: any = {}): Promise<RequestArgs> => {
+        readManagedTransaction: async (memberGuid: string, userGuid: string, transactionGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('readManagedTransaction', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -6680,7 +6680,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6697,7 +6697,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        readMember: async (memberGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        readMember: async (memberGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('readMember', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -6722,7 +6722,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6739,7 +6739,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        readMemberStatus: async (memberGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        readMemberStatus: async (memberGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('readMemberStatus', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -6764,7 +6764,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6780,7 +6780,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        readMerchant: async (merchantGuid: string, options: any = {}): Promise<RequestArgs> => {
+        readMerchant: async (merchantGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'merchantGuid' is not null or undefined
             assertParamExists('readMerchant', 'merchantGuid', merchantGuid)
             const localVarPath = `/merchants/{merchant_guid}`
@@ -6802,7 +6802,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6818,7 +6818,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        readMerchantLocation: async (merchantLocationGuid: string, options: any = {}): Promise<RequestArgs> => {
+        readMerchantLocation: async (merchantLocationGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'merchantLocationGuid' is not null or undefined
             assertParamExists('readMerchantLocation', 'merchantLocationGuid', merchantLocationGuid)
             const localVarPath = `/merchant_locations/{merchant_location_guid}`
@@ -6840,7 +6840,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6858,7 +6858,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        readStatementByMember: async (memberGuid: string, statementGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        readStatementByMember: async (memberGuid: string, statementGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('readStatementByMember', 'memberGuid', memberGuid)
             // verify required parameter 'statementGuid' is not null or undefined
@@ -6886,7 +6886,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6903,7 +6903,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        readTag: async (tagGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        readTag: async (tagGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tagGuid' is not null or undefined
             assertParamExists('readTag', 'tagGuid', tagGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -6928,7 +6928,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6945,7 +6945,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        readTagging: async (taggingGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        readTagging: async (taggingGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'taggingGuid' is not null or undefined
             assertParamExists('readTagging', 'taggingGuid', taggingGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -6970,7 +6970,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6987,7 +6987,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        readTransaction: async (transactionGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        readTransaction: async (transactionGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'transactionGuid' is not null or undefined
             assertParamExists('readTransaction', 'transactionGuid', transactionGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -7012,7 +7012,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -7029,7 +7029,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        readTransactionRule: async (transactionRuleGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        readTransactionRule: async (transactionRuleGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'transactionRuleGuid' is not null or undefined
             assertParamExists('readTransactionRule', 'transactionRuleGuid', transactionRuleGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -7054,7 +7054,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -7070,7 +7070,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        readUser: async (userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        readUser: async (userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('readUser', 'userGuid', userGuid)
             const localVarPath = `/users/{user_guid}`
@@ -7092,7 +7092,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -7109,7 +7109,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        requestConnectWidgetURL: async (userGuid: string, connectWidgetRequestBody?: ConnectWidgetRequestBody, options: any = {}): Promise<RequestArgs> => {
+        requestConnectWidgetURL: async (userGuid: string, connectWidgetRequestBody?: ConnectWidgetRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('requestConnectWidgetURL', 'userGuid', userGuid)
             const localVarPath = `/users/{user_guid}/connect_widget_url`
@@ -7133,7 +7133,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(connectWidgetRequestBody, localVarRequestOptions, configuration)
@@ -7154,7 +7154,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        requestOAuthWindowURI: async (memberGuid: string, userGuid: string, referralSource?: string, uiMessageWebviewUrlScheme?: string, skipAggregation?: boolean, options: any = {}): Promise<RequestArgs> => {
+        requestOAuthWindowURI: async (memberGuid: string, userGuid: string, referralSource?: string, uiMessageWebviewUrlScheme?: string, skipAggregation?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('requestOAuthWindowURI', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -7191,7 +7191,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -7209,7 +7209,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        requestWidgetURL: async (userGuid: string, widgetRequestBody: WidgetRequestBody, acceptLanguage?: string, options: any = {}): Promise<RequestArgs> => {
+        requestWidgetURL: async (userGuid: string, widgetRequestBody: WidgetRequestBody, acceptLanguage?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('requestWidgetURL', 'userGuid', userGuid)
             // verify required parameter 'widgetRequestBody' is not null or undefined
@@ -7239,7 +7239,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(widgetRequestBody, localVarRequestOptions, configuration)
@@ -7258,7 +7258,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        resumeAggregation: async (memberGuid: string, userGuid: string, memberResumeRequestBody: MemberResumeRequestBody, options: any = {}): Promise<RequestArgs> => {
+        resumeAggregation: async (memberGuid: string, userGuid: string, memberResumeRequestBody: MemberResumeRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('resumeAggregation', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -7287,7 +7287,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(memberResumeRequestBody, localVarRequestOptions, configuration)
@@ -7307,7 +7307,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateAccountByMember: async (userGuid: string, memberGuid: string, accountGuid: string, accountUpdateRequestBody: AccountUpdateRequestBody, options: any = {}): Promise<RequestArgs> => {
+        updateAccountByMember: async (userGuid: string, memberGuid: string, accountGuid: string, accountUpdateRequestBody: AccountUpdateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('updateAccountByMember', 'userGuid', userGuid)
             // verify required parameter 'memberGuid' is not null or undefined
@@ -7339,7 +7339,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(accountUpdateRequestBody, localVarRequestOptions, configuration)
@@ -7358,7 +7358,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateCategory: async (categoryGuid: string, userGuid: string, categoryUpdateRequestBody: CategoryUpdateRequestBody, options: any = {}): Promise<RequestArgs> => {
+        updateCategory: async (categoryGuid: string, userGuid: string, categoryUpdateRequestBody: CategoryUpdateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'categoryGuid' is not null or undefined
             assertParamExists('updateCategory', 'categoryGuid', categoryGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -7387,7 +7387,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(categoryUpdateRequestBody, localVarRequestOptions, configuration)
@@ -7407,7 +7407,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateManagedAccount: async (memberGuid: string, userGuid: string, accountGuid: string, managedAccountUpdateRequestBody: ManagedAccountUpdateRequestBody, options: any = {}): Promise<RequestArgs> => {
+        updateManagedAccount: async (memberGuid: string, userGuid: string, accountGuid: string, managedAccountUpdateRequestBody: ManagedAccountUpdateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('updateManagedAccount', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -7439,7 +7439,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(managedAccountUpdateRequestBody, localVarRequestOptions, configuration)
@@ -7458,7 +7458,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateManagedMember: async (memberGuid: string, userGuid: string, managedMemberUpdateRequestBody: ManagedMemberUpdateRequestBody, options: any = {}): Promise<RequestArgs> => {
+        updateManagedMember: async (memberGuid: string, userGuid: string, managedMemberUpdateRequestBody: ManagedMemberUpdateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('updateManagedMember', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -7487,7 +7487,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(managedMemberUpdateRequestBody, localVarRequestOptions, configuration)
@@ -7507,7 +7507,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateManagedTransaction: async (memberGuid: string, userGuid: string, transactionGuid: string, managedTransactionUpdateRequestBody: ManagedTransactionUpdateRequestBody, options: any = {}): Promise<RequestArgs> => {
+        updateManagedTransaction: async (memberGuid: string, userGuid: string, transactionGuid: string, managedTransactionUpdateRequestBody: ManagedTransactionUpdateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('updateManagedTransaction', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -7539,7 +7539,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(managedTransactionUpdateRequestBody, localVarRequestOptions, configuration)
@@ -7558,7 +7558,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateMember: async (memberGuid: string, userGuid: string, memberUpdateRequestBody: MemberUpdateRequestBody, options: any = {}): Promise<RequestArgs> => {
+        updateMember: async (memberGuid: string, userGuid: string, memberUpdateRequestBody: MemberUpdateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('updateMember', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -7587,7 +7587,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(memberUpdateRequestBody, localVarRequestOptions, configuration)
@@ -7606,7 +7606,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateTag: async (tagGuid: string, userGuid: string, tagUpdateRequestBody: TagUpdateRequestBody, options: any = {}): Promise<RequestArgs> => {
+        updateTag: async (tagGuid: string, userGuid: string, tagUpdateRequestBody: TagUpdateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tagGuid' is not null or undefined
             assertParamExists('updateTag', 'tagGuid', tagGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -7635,7 +7635,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(tagUpdateRequestBody, localVarRequestOptions, configuration)
@@ -7654,7 +7654,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateTagging: async (taggingGuid: string, userGuid: string, taggingUpdateRequestBody: TaggingUpdateRequestBody, options: any = {}): Promise<RequestArgs> => {
+        updateTagging: async (taggingGuid: string, userGuid: string, taggingUpdateRequestBody: TaggingUpdateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'taggingGuid' is not null or undefined
             assertParamExists('updateTagging', 'taggingGuid', taggingGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -7683,7 +7683,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(taggingUpdateRequestBody, localVarRequestOptions, configuration)
@@ -7702,7 +7702,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateTransaction: async (transactionGuid: string, userGuid: string, transactionUpdateRequestBody: TransactionUpdateRequestBody, options: any = {}): Promise<RequestArgs> => {
+        updateTransaction: async (transactionGuid: string, userGuid: string, transactionUpdateRequestBody: TransactionUpdateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'transactionGuid' is not null or undefined
             assertParamExists('updateTransaction', 'transactionGuid', transactionGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -7731,7 +7731,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(transactionUpdateRequestBody, localVarRequestOptions, configuration)
@@ -7750,7 +7750,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateTransactionRule: async (transactionRuleGuid: string, userGuid: string, transactionRuleUpdateRequestBody: TransactionRuleUpdateRequestBody, options: any = {}): Promise<RequestArgs> => {
+        updateTransactionRule: async (transactionRuleGuid: string, userGuid: string, transactionRuleUpdateRequestBody: TransactionRuleUpdateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'transactionRuleGuid' is not null or undefined
             assertParamExists('updateTransactionRule', 'transactionRuleGuid', transactionRuleGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -7779,7 +7779,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(transactionRuleUpdateRequestBody, localVarRequestOptions, configuration)
@@ -7797,7 +7797,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateUser: async (userGuid: string, userUpdateRequestBody: UserUpdateRequestBody, options: any = {}): Promise<RequestArgs> => {
+        updateUser: async (userGuid: string, userUpdateRequestBody: UserUpdateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('updateUser', 'userGuid', userGuid)
             // verify required parameter 'userUpdateRequestBody' is not null or undefined
@@ -7823,7 +7823,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(userUpdateRequestBody, localVarRequestOptions, configuration)
@@ -7841,7 +7841,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        verifyMember: async (memberGuid: string, userGuid: string, options: any = {}): Promise<RequestArgs> => {
+        verifyMember: async (memberGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('verifyMember', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -7866,7 +7866,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -7893,7 +7893,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async aggregateMember(memberGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
+        async aggregateMember(memberGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.aggregateMember(memberGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -7905,7 +7905,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async checkBalances(memberGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
+        async checkBalances(memberGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.checkBalances(memberGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -7917,7 +7917,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createCategory(userGuid: string, categoryCreateRequestBody: CategoryCreateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoryResponseBody>> {
+        async createCategory(userGuid: string, categoryCreateRequestBody: CategoryCreateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoryResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createCategory(userGuid, categoryCreateRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -7930,7 +7930,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createManagedAccount(userGuid: string, memberGuid: string, managedAccountCreateRequestBody: ManagedAccountCreateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountResponseBody>> {
+        async createManagedAccount(userGuid: string, memberGuid: string, managedAccountCreateRequestBody: ManagedAccountCreateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createManagedAccount(userGuid, memberGuid, managedAccountCreateRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -7942,7 +7942,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createManagedMember(userGuid: string, managedMemberCreateRequestBody: ManagedMemberCreateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
+        async createManagedMember(userGuid: string, managedMemberCreateRequestBody: ManagedMemberCreateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createManagedMember(userGuid, managedMemberCreateRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -7955,7 +7955,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createManagedTransaction(userGuid: string, memberGuid: string, managedTransactionCreateRequestBody: ManagedTransactionCreateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionResponseBody>> {
+        async createManagedTransaction(userGuid: string, memberGuid: string, managedTransactionCreateRequestBody: ManagedTransactionCreateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createManagedTransaction(userGuid, memberGuid, managedTransactionCreateRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -7967,7 +7967,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createMember(userGuid: string, memberCreateRequestBody: MemberCreateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
+        async createMember(userGuid: string, memberCreateRequestBody: MemberCreateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createMember(userGuid, memberCreateRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -7979,7 +7979,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createTag(userGuid: string, tagCreateRequestBody: TagCreateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagResponseBody>> {
+        async createTag(userGuid: string, tagCreateRequestBody: TagCreateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createTag(userGuid, tagCreateRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -7991,7 +7991,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createTagging(userGuid: string, taggingCreateRequestBody: TaggingCreateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaggingResponseBody>> {
+        async createTagging(userGuid: string, taggingCreateRequestBody: TaggingCreateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaggingResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createTagging(userGuid, taggingCreateRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8003,7 +8003,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createTransactionRule(userGuid: string, transactionRuleCreateRequestBody: TransactionRuleCreateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionRuleResponseBody>> {
+        async createTransactionRule(userGuid: string, transactionRuleCreateRequestBody: TransactionRuleCreateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionRuleResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createTransactionRule(userGuid, transactionRuleCreateRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8014,7 +8014,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createUser(userCreateRequestBody: UserCreateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponseBody>> {
+        async createUser(userCreateRequestBody: UserCreateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createUser(userCreateRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8026,7 +8026,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteCategory(categoryGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteCategory(categoryGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCategory(categoryGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8039,7 +8039,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteManagedAccount(memberGuid: string, userGuid: string, accountGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteManagedAccount(memberGuid: string, userGuid: string, accountGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteManagedAccount(memberGuid, userGuid, accountGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8051,7 +8051,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteManagedMember(memberGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteManagedMember(memberGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteManagedMember(memberGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8064,7 +8064,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteManagedTransaction(memberGuid: string, userGuid: string, transactionGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteManagedTransaction(memberGuid: string, userGuid: string, transactionGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteManagedTransaction(memberGuid, userGuid, transactionGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8076,7 +8076,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteMember(memberGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteMember(memberGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteMember(memberGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8088,7 +8088,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteTag(tagGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteTag(tagGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteTag(tagGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8100,7 +8100,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteTagging(taggingGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteTagging(taggingGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteTagging(taggingGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8112,7 +8112,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteTransactionRule(transactionRuleGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteTransactionRule(transactionRuleGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteTransactionRule(transactionRuleGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8123,7 +8123,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteUser(userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteUser(userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteUser(userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8136,7 +8136,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async downloadStatementPDF(memberGuid: string, statementGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+        async downloadStatementPDF(memberGuid: string, statementGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.downloadStatementPDF(memberGuid, statementGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8147,7 +8147,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async enhanceTransactions(enhanceTransactionsRequestBody: EnhanceTransactionsRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnhanceTransactionsResponseBody>> {
+        async enhanceTransactions(enhanceTransactionsRequestBody: EnhanceTransactionsRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnhanceTransactionsResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.enhanceTransactions(enhanceTransactionsRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8159,7 +8159,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async extendHistory(memberGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
+        async extendHistory(memberGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.extendHistory(memberGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8171,7 +8171,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async fetchStatements(memberGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
+        async fetchStatements(memberGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.fetchStatements(memberGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8183,7 +8183,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async identifyMember(memberGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
+        async identifyMember(memberGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.identifyMember(memberGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8197,7 +8197,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listAccountNumbersByAccount(accountGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountNumbersResponseBody>> {
+        async listAccountNumbersByAccount(accountGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountNumbersResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listAccountNumbersByAccount(accountGuid, userGuid, page, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8211,7 +8211,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listAccountNumbersByMember(memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountNumbersResponseBody>> {
+        async listAccountNumbersByMember(memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountNumbersResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listAccountNumbersByMember(memberGuid, userGuid, page, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8225,7 +8225,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listAccountOwnersByMember(memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOwnersResponseBody>> {
+        async listAccountOwnersByMember(memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOwnersResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listAccountOwnersByMember(memberGuid, userGuid, page, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8238,7 +8238,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listCategories(userGuid: string, page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoriesResponseBody>> {
+        async listCategories(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoriesResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listCategories(userGuid, page, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8251,7 +8251,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listDefaultCategories(userGuid: string, page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoriesResponseBody>> {
+        async listDefaultCategories(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoriesResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listDefaultCategories(userGuid, page, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8263,7 +8263,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listFavoriteInstitutions(page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InstitutionsResponseBody>> {
+        async listFavoriteInstitutions(page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InstitutionsResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listFavoriteInstitutions(page, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8278,7 +8278,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listHoldings(userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<HoldingsResponseBody>> {
+        async listHoldings(userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<HoldingsResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listHoldings(userGuid, fromDate, page, recordsPerPage, toDate, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8294,7 +8294,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listHoldingsByMember(memberGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<HoldingsResponseBody>> {
+        async listHoldingsByMember(memberGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<HoldingsResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listHoldingsByMember(memberGuid, userGuid, fromDate, page, recordsPerPage, toDate, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8307,7 +8307,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listInstitutionCredentials(institutionCode: string, page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CredentialsResponseBody>> {
+        async listInstitutionCredentials(institutionCode: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CredentialsResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listInstitutionCredentials(institutionCode, page, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8324,7 +8324,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listInstitutions(name?: string, page?: number, recordsPerPage?: number, supportsAccountIdentification?: boolean, supportsAccountStatement?: boolean, supportsAccountVerification?: boolean, supportsTransactionHistory?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InstitutionsResponseBody>> {
+        async listInstitutions(name?: string, page?: number, recordsPerPage?: number, supportsAccountIdentification?: boolean, supportsAccountStatement?: boolean, supportsAccountVerification?: boolean, supportsTransactionHistory?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InstitutionsResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listInstitutions(name, page, recordsPerPage, supportsAccountIdentification, supportsAccountStatement, supportsAccountVerification, supportsTransactionHistory, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8338,7 +8338,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listManagedAccounts(userGuid: string, memberGuid: string, page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountsResponseBody>> {
+        async listManagedAccounts(userGuid: string, memberGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountsResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listManagedAccounts(userGuid, memberGuid, page, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8350,7 +8350,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listManagedInstitutions(page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InstitutionsResponseBody>> {
+        async listManagedInstitutions(page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InstitutionsResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listManagedInstitutions(page, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8363,7 +8363,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listManagedMembers(userGuid: string, page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MembersResponseBody>> {
+        async listManagedMembers(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MembersResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listManagedMembers(userGuid, page, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8377,7 +8377,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listManagedTransactions(userGuid: string, memberGuid: string, page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionsResponseBody>> {
+        async listManagedTransactions(userGuid: string, memberGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionsResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listManagedTransactions(userGuid, memberGuid, page, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8391,7 +8391,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listMemberChallenges(memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChallengesResponseBody>> {
+        async listMemberChallenges(memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChallengesResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listMemberChallenges(memberGuid, userGuid, page, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8405,7 +8405,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listMemberCredentials(memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CredentialsResponseBody>> {
+        async listMemberCredentials(memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CredentialsResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listMemberCredentials(memberGuid, userGuid, page, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8418,7 +8418,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listMembers(userGuid: string, page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MembersResponseBody>> {
+        async listMembers(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MembersResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listMembers(userGuid, page, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8430,7 +8430,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listMerchants(page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MerchantsResponseBody>> {
+        async listMerchants(page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MerchantsResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listMerchants(page, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8444,7 +8444,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listStatementsByMember(memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StatementsResponseBody>> {
+        async listStatementsByMember(memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StatementsResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listStatementsByMember(memberGuid, userGuid, page, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8457,7 +8457,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listTaggings(userGuid: string, page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaggingsResponseBody>> {
+        async listTaggings(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaggingsResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listTaggings(userGuid, page, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8470,7 +8470,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listTags(userGuid: string, page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsResponseBody>> {
+        async listTags(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listTags(userGuid, page, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8483,7 +8483,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listTransactionRules(userGuid: string, page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionRulesResponseBody>> {
+        async listTransactionRules(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionRulesResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listTransactionRules(userGuid, page, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8498,7 +8498,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listTransactions(userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionsResponseBody>> {
+        async listTransactions(userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionsResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listTransactions(userGuid, fromDate, page, recordsPerPage, toDate, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8514,7 +8514,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listTransactionsByAccount(accountGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionsResponseBody>> {
+        async listTransactionsByAccount(accountGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionsResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listTransactionsByAccount(accountGuid, userGuid, fromDate, page, recordsPerPage, toDate, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8530,7 +8530,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listTransactionsByMember(memberGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionsResponseBody>> {
+        async listTransactionsByMember(memberGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionsResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listTransactionsByMember(memberGuid, userGuid, fromDate, page, recordsPerPage, toDate, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8546,7 +8546,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listTransactionsByTag(tagGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionsResponseBody>> {
+        async listTransactionsByTag(tagGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionsResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listTransactionsByTag(tagGuid, userGuid, fromDate, page, recordsPerPage, toDate, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8559,7 +8559,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listUserAccounts(userGuid: string, page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountsResponseBody>> {
+        async listUserAccounts(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountsResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listUserAccounts(userGuid, page, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8571,7 +8571,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listUsers(page?: number, recordsPerPage?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UsersResponseBody>> {
+        async listUsers(page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UsersResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listUsers(page, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8583,7 +8583,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async readAccount(accountGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountResponseBody>> {
+        async readAccount(accountGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.readAccount(accountGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8595,7 +8595,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async readCategory(categoryGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoryResponseBody>> {
+        async readCategory(categoryGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoryResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.readCategory(categoryGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8607,7 +8607,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async readHolding(holdingGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<HoldingResponseBody>> {
+        async readHolding(holdingGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<HoldingResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.readHolding(holdingGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8618,7 +8618,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async readInstitution(institutionCode: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InstitutionResponseBody>> {
+        async readInstitution(institutionCode: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InstitutionResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.readInstitution(institutionCode, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8631,7 +8631,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async readManagedAccount(memberGuid: string, userGuid: string, accountGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountResponseBody>> {
+        async readManagedAccount(memberGuid: string, userGuid: string, accountGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.readManagedAccount(memberGuid, userGuid, accountGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8643,7 +8643,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async readManagedMember(memberGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
+        async readManagedMember(memberGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.readManagedMember(memberGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8656,7 +8656,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async readManagedTransaction(memberGuid: string, userGuid: string, transactionGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionResponseBody>> {
+        async readManagedTransaction(memberGuid: string, userGuid: string, transactionGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.readManagedTransaction(memberGuid, userGuid, transactionGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8668,7 +8668,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async readMember(memberGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
+        async readMember(memberGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.readMember(memberGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8680,7 +8680,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async readMemberStatus(memberGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberStatusResponseBody>> {
+        async readMemberStatus(memberGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberStatusResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.readMemberStatus(memberGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8691,7 +8691,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async readMerchant(merchantGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MerchantResponseBody>> {
+        async readMerchant(merchantGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MerchantResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.readMerchant(merchantGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8702,7 +8702,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async readMerchantLocation(merchantLocationGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MerchantLocationResponseBody>> {
+        async readMerchantLocation(merchantLocationGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MerchantLocationResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.readMerchantLocation(merchantLocationGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8715,7 +8715,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async readStatementByMember(memberGuid: string, statementGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StatementResponseBody>> {
+        async readStatementByMember(memberGuid: string, statementGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StatementResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.readStatementByMember(memberGuid, statementGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8727,7 +8727,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async readTag(tagGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagResponseBody>> {
+        async readTag(tagGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.readTag(tagGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8739,7 +8739,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async readTagging(taggingGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaggingResponseBody>> {
+        async readTagging(taggingGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaggingResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.readTagging(taggingGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8751,7 +8751,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async readTransaction(transactionGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionResponseBody>> {
+        async readTransaction(transactionGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.readTransaction(transactionGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8763,7 +8763,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async readTransactionRule(transactionRuleGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionRuleResponseBody>> {
+        async readTransactionRule(transactionRuleGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionRuleResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.readTransactionRule(transactionRuleGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8774,7 +8774,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async readUser(userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponseBody>> {
+        async readUser(userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.readUser(userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8786,7 +8786,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async requestConnectWidgetURL(userGuid: string, connectWidgetRequestBody?: ConnectWidgetRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConnectWidgetResponseBody>> {
+        async requestConnectWidgetURL(userGuid: string, connectWidgetRequestBody?: ConnectWidgetRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConnectWidgetResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.requestConnectWidgetURL(userGuid, connectWidgetRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8801,7 +8801,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async requestOAuthWindowURI(memberGuid: string, userGuid: string, referralSource?: string, uiMessageWebviewUrlScheme?: string, skipAggregation?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OAuthWindowResponseBody>> {
+        async requestOAuthWindowURI(memberGuid: string, userGuid: string, referralSource?: string, uiMessageWebviewUrlScheme?: string, skipAggregation?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OAuthWindowResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.requestOAuthWindowURI(memberGuid, userGuid, referralSource, uiMessageWebviewUrlScheme, skipAggregation, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8814,7 +8814,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async requestWidgetURL(userGuid: string, widgetRequestBody: WidgetRequestBody, acceptLanguage?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WidgetResponseBody>> {
+        async requestWidgetURL(userGuid: string, widgetRequestBody: WidgetRequestBody, acceptLanguage?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WidgetResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.requestWidgetURL(userGuid, widgetRequestBody, acceptLanguage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8827,7 +8827,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async resumeAggregation(memberGuid: string, userGuid: string, memberResumeRequestBody: MemberResumeRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
+        async resumeAggregation(memberGuid: string, userGuid: string, memberResumeRequestBody: MemberResumeRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.resumeAggregation(memberGuid, userGuid, memberResumeRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8841,7 +8841,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateAccountByMember(userGuid: string, memberGuid: string, accountGuid: string, accountUpdateRequestBody: AccountUpdateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountResponseBody>> {
+        async updateAccountByMember(userGuid: string, memberGuid: string, accountGuid: string, accountUpdateRequestBody: AccountUpdateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateAccountByMember(userGuid, memberGuid, accountGuid, accountUpdateRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8854,7 +8854,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateCategory(categoryGuid: string, userGuid: string, categoryUpdateRequestBody: CategoryUpdateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoryResponseBody>> {
+        async updateCategory(categoryGuid: string, userGuid: string, categoryUpdateRequestBody: CategoryUpdateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoryResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateCategory(categoryGuid, userGuid, categoryUpdateRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8868,7 +8868,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateManagedAccount(memberGuid: string, userGuid: string, accountGuid: string, managedAccountUpdateRequestBody: ManagedAccountUpdateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountResponseBody>> {
+        async updateManagedAccount(memberGuid: string, userGuid: string, accountGuid: string, managedAccountUpdateRequestBody: ManagedAccountUpdateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateManagedAccount(memberGuid, userGuid, accountGuid, managedAccountUpdateRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8881,7 +8881,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateManagedMember(memberGuid: string, userGuid: string, managedMemberUpdateRequestBody: ManagedMemberUpdateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
+        async updateManagedMember(memberGuid: string, userGuid: string, managedMemberUpdateRequestBody: ManagedMemberUpdateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateManagedMember(memberGuid, userGuid, managedMemberUpdateRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8895,7 +8895,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateManagedTransaction(memberGuid: string, userGuid: string, transactionGuid: string, managedTransactionUpdateRequestBody: ManagedTransactionUpdateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionResponseBody>> {
+        async updateManagedTransaction(memberGuid: string, userGuid: string, transactionGuid: string, managedTransactionUpdateRequestBody: ManagedTransactionUpdateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateManagedTransaction(memberGuid, userGuid, transactionGuid, managedTransactionUpdateRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8908,7 +8908,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateMember(memberGuid: string, userGuid: string, memberUpdateRequestBody: MemberUpdateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
+        async updateMember(memberGuid: string, userGuid: string, memberUpdateRequestBody: MemberUpdateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateMember(memberGuid, userGuid, memberUpdateRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8921,7 +8921,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateTag(tagGuid: string, userGuid: string, tagUpdateRequestBody: TagUpdateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagResponseBody>> {
+        async updateTag(tagGuid: string, userGuid: string, tagUpdateRequestBody: TagUpdateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateTag(tagGuid, userGuid, tagUpdateRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8934,7 +8934,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateTagging(taggingGuid: string, userGuid: string, taggingUpdateRequestBody: TaggingUpdateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaggingResponseBody>> {
+        async updateTagging(taggingGuid: string, userGuid: string, taggingUpdateRequestBody: TaggingUpdateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaggingResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateTagging(taggingGuid, userGuid, taggingUpdateRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8947,7 +8947,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateTransaction(transactionGuid: string, userGuid: string, transactionUpdateRequestBody: TransactionUpdateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionResponseBody>> {
+        async updateTransaction(transactionGuid: string, userGuid: string, transactionUpdateRequestBody: TransactionUpdateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateTransaction(transactionGuid, userGuid, transactionUpdateRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8960,7 +8960,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateTransactionRule(transactionRuleGuid: string, userGuid: string, transactionRuleUpdateRequestBody: TransactionRuleUpdateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionRuleResponseBody>> {
+        async updateTransactionRule(transactionRuleGuid: string, userGuid: string, transactionRuleUpdateRequestBody: TransactionRuleUpdateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionRuleResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateTransactionRule(transactionRuleGuid, userGuid, transactionRuleUpdateRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8972,7 +8972,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateUser(userGuid: string, userUpdateRequestBody: UserUpdateRequestBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponseBody>> {
+        async updateUser(userGuid: string, userUpdateRequestBody: UserUpdateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateUser(userGuid, userUpdateRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8984,7 +8984,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async verifyMember(memberGuid: string, userGuid: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
+        async verifyMember(memberGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.verifyMember(memberGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10034,7 +10034,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public aggregateMember(memberGuid: string, userGuid: string, options?: any) {
+    public aggregateMember(memberGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).aggregateMember(memberGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10047,7 +10047,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public checkBalances(memberGuid: string, userGuid: string, options?: any) {
+    public checkBalances(memberGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).checkBalances(memberGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10060,7 +10060,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public createCategory(userGuid: string, categoryCreateRequestBody: CategoryCreateRequestBody, options?: any) {
+    public createCategory(userGuid: string, categoryCreateRequestBody: CategoryCreateRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).createCategory(userGuid, categoryCreateRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10074,7 +10074,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public createManagedAccount(userGuid: string, memberGuid: string, managedAccountCreateRequestBody: ManagedAccountCreateRequestBody, options?: any) {
+    public createManagedAccount(userGuid: string, memberGuid: string, managedAccountCreateRequestBody: ManagedAccountCreateRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).createManagedAccount(userGuid, memberGuid, managedAccountCreateRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10087,7 +10087,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public createManagedMember(userGuid: string, managedMemberCreateRequestBody: ManagedMemberCreateRequestBody, options?: any) {
+    public createManagedMember(userGuid: string, managedMemberCreateRequestBody: ManagedMemberCreateRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).createManagedMember(userGuid, managedMemberCreateRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10101,7 +10101,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public createManagedTransaction(userGuid: string, memberGuid: string, managedTransactionCreateRequestBody: ManagedTransactionCreateRequestBody, options?: any) {
+    public createManagedTransaction(userGuid: string, memberGuid: string, managedTransactionCreateRequestBody: ManagedTransactionCreateRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).createManagedTransaction(userGuid, memberGuid, managedTransactionCreateRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10114,7 +10114,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public createMember(userGuid: string, memberCreateRequestBody: MemberCreateRequestBody, options?: any) {
+    public createMember(userGuid: string, memberCreateRequestBody: MemberCreateRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).createMember(userGuid, memberCreateRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10127,7 +10127,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public createTag(userGuid: string, tagCreateRequestBody: TagCreateRequestBody, options?: any) {
+    public createTag(userGuid: string, tagCreateRequestBody: TagCreateRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).createTag(userGuid, tagCreateRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10140,7 +10140,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public createTagging(userGuid: string, taggingCreateRequestBody: TaggingCreateRequestBody, options?: any) {
+    public createTagging(userGuid: string, taggingCreateRequestBody: TaggingCreateRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).createTagging(userGuid, taggingCreateRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10153,7 +10153,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public createTransactionRule(userGuid: string, transactionRuleCreateRequestBody: TransactionRuleCreateRequestBody, options?: any) {
+    public createTransactionRule(userGuid: string, transactionRuleCreateRequestBody: TransactionRuleCreateRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).createTransactionRule(userGuid, transactionRuleCreateRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10165,7 +10165,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public createUser(userCreateRequestBody: UserCreateRequestBody, options?: any) {
+    public createUser(userCreateRequestBody: UserCreateRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).createUser(userCreateRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10178,7 +10178,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public deleteCategory(categoryGuid: string, userGuid: string, options?: any) {
+    public deleteCategory(categoryGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).deleteCategory(categoryGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10192,7 +10192,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public deleteManagedAccount(memberGuid: string, userGuid: string, accountGuid: string, options?: any) {
+    public deleteManagedAccount(memberGuid: string, userGuid: string, accountGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).deleteManagedAccount(memberGuid, userGuid, accountGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10205,7 +10205,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public deleteManagedMember(memberGuid: string, userGuid: string, options?: any) {
+    public deleteManagedMember(memberGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).deleteManagedMember(memberGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10219,7 +10219,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public deleteManagedTransaction(memberGuid: string, userGuid: string, transactionGuid: string, options?: any) {
+    public deleteManagedTransaction(memberGuid: string, userGuid: string, transactionGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).deleteManagedTransaction(memberGuid, userGuid, transactionGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10232,7 +10232,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public deleteMember(memberGuid: string, userGuid: string, options?: any) {
+    public deleteMember(memberGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).deleteMember(memberGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10245,7 +10245,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public deleteTag(tagGuid: string, userGuid: string, options?: any) {
+    public deleteTag(tagGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).deleteTag(tagGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10258,7 +10258,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public deleteTagging(taggingGuid: string, userGuid: string, options?: any) {
+    public deleteTagging(taggingGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).deleteTagging(taggingGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10271,7 +10271,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public deleteTransactionRule(transactionRuleGuid: string, userGuid: string, options?: any) {
+    public deleteTransactionRule(transactionRuleGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).deleteTransactionRule(transactionRuleGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10283,7 +10283,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public deleteUser(userGuid: string, options?: any) {
+    public deleteUser(userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).deleteUser(userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10297,7 +10297,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public downloadStatementPDF(memberGuid: string, statementGuid: string, userGuid: string, options?: any) {
+    public downloadStatementPDF(memberGuid: string, statementGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).downloadStatementPDF(memberGuid, statementGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10309,7 +10309,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public enhanceTransactions(enhanceTransactionsRequestBody: EnhanceTransactionsRequestBody, options?: any) {
+    public enhanceTransactions(enhanceTransactionsRequestBody: EnhanceTransactionsRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).enhanceTransactions(enhanceTransactionsRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10322,7 +10322,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public extendHistory(memberGuid: string, userGuid: string, options?: any) {
+    public extendHistory(memberGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).extendHistory(memberGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10335,7 +10335,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public fetchStatements(memberGuid: string, userGuid: string, options?: any) {
+    public fetchStatements(memberGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).fetchStatements(memberGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10348,7 +10348,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public identifyMember(memberGuid: string, userGuid: string, options?: any) {
+    public identifyMember(memberGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).identifyMember(memberGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10363,7 +10363,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listAccountNumbersByAccount(accountGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: any) {
+    public listAccountNumbersByAccount(accountGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listAccountNumbersByAccount(accountGuid, userGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10378,7 +10378,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listAccountNumbersByMember(memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: any) {
+    public listAccountNumbersByMember(memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listAccountNumbersByMember(memberGuid, userGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10393,7 +10393,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listAccountOwnersByMember(memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: any) {
+    public listAccountOwnersByMember(memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listAccountOwnersByMember(memberGuid, userGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10407,7 +10407,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listCategories(userGuid: string, page?: number, recordsPerPage?: number, options?: any) {
+    public listCategories(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listCategories(userGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10421,7 +10421,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listDefaultCategories(userGuid: string, page?: number, recordsPerPage?: number, options?: any) {
+    public listDefaultCategories(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listDefaultCategories(userGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10434,7 +10434,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listFavoriteInstitutions(page?: number, recordsPerPage?: number, options?: any) {
+    public listFavoriteInstitutions(page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listFavoriteInstitutions(page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10450,7 +10450,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listHoldings(userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: any) {
+    public listHoldings(userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listHoldings(userGuid, fromDate, page, recordsPerPage, toDate, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10467,7 +10467,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listHoldingsByMember(memberGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: any) {
+    public listHoldingsByMember(memberGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listHoldingsByMember(memberGuid, userGuid, fromDate, page, recordsPerPage, toDate, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10481,7 +10481,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listInstitutionCredentials(institutionCode: string, page?: number, recordsPerPage?: number, options?: any) {
+    public listInstitutionCredentials(institutionCode: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listInstitutionCredentials(institutionCode, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10499,7 +10499,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listInstitutions(name?: string, page?: number, recordsPerPage?: number, supportsAccountIdentification?: boolean, supportsAccountStatement?: boolean, supportsAccountVerification?: boolean, supportsTransactionHistory?: boolean, options?: any) {
+    public listInstitutions(name?: string, page?: number, recordsPerPage?: number, supportsAccountIdentification?: boolean, supportsAccountStatement?: boolean, supportsAccountVerification?: boolean, supportsTransactionHistory?: boolean, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listInstitutions(name, page, recordsPerPage, supportsAccountIdentification, supportsAccountStatement, supportsAccountVerification, supportsTransactionHistory, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10514,7 +10514,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listManagedAccounts(userGuid: string, memberGuid: string, page?: number, recordsPerPage?: number, options?: any) {
+    public listManagedAccounts(userGuid: string, memberGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listManagedAccounts(userGuid, memberGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10527,7 +10527,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listManagedInstitutions(page?: number, recordsPerPage?: number, options?: any) {
+    public listManagedInstitutions(page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listManagedInstitutions(page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10541,7 +10541,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listManagedMembers(userGuid: string, page?: number, recordsPerPage?: number, options?: any) {
+    public listManagedMembers(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listManagedMembers(userGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10556,7 +10556,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listManagedTransactions(userGuid: string, memberGuid: string, page?: number, recordsPerPage?: number, options?: any) {
+    public listManagedTransactions(userGuid: string, memberGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listManagedTransactions(userGuid, memberGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10571,7 +10571,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listMemberChallenges(memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: any) {
+    public listMemberChallenges(memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listMemberChallenges(memberGuid, userGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10586,7 +10586,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listMemberCredentials(memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: any) {
+    public listMemberCredentials(memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listMemberCredentials(memberGuid, userGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10600,7 +10600,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listMembers(userGuid: string, page?: number, recordsPerPage?: number, options?: any) {
+    public listMembers(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listMembers(userGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10613,7 +10613,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listMerchants(page?: number, recordsPerPage?: number, options?: any) {
+    public listMerchants(page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listMerchants(page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10628,7 +10628,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listStatementsByMember(memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: any) {
+    public listStatementsByMember(memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listStatementsByMember(memberGuid, userGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10642,7 +10642,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listTaggings(userGuid: string, page?: number, recordsPerPage?: number, options?: any) {
+    public listTaggings(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listTaggings(userGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10656,7 +10656,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listTags(userGuid: string, page?: number, recordsPerPage?: number, options?: any) {
+    public listTags(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listTags(userGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10670,7 +10670,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listTransactionRules(userGuid: string, page?: number, recordsPerPage?: number, options?: any) {
+    public listTransactionRules(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listTransactionRules(userGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10686,7 +10686,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listTransactions(userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: any) {
+    public listTransactions(userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listTransactions(userGuid, fromDate, page, recordsPerPage, toDate, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10703,7 +10703,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listTransactionsByAccount(accountGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: any) {
+    public listTransactionsByAccount(accountGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listTransactionsByAccount(accountGuid, userGuid, fromDate, page, recordsPerPage, toDate, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10720,7 +10720,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listTransactionsByMember(memberGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: any) {
+    public listTransactionsByMember(memberGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listTransactionsByMember(memberGuid, userGuid, fromDate, page, recordsPerPage, toDate, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10737,7 +10737,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listTransactionsByTag(tagGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: any) {
+    public listTransactionsByTag(tagGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listTransactionsByTag(tagGuid, userGuid, fromDate, page, recordsPerPage, toDate, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10751,7 +10751,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listUserAccounts(userGuid: string, page?: number, recordsPerPage?: number, options?: any) {
+    public listUserAccounts(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listUserAccounts(userGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10764,7 +10764,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listUsers(page?: number, recordsPerPage?: number, options?: any) {
+    public listUsers(page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listUsers(page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10777,7 +10777,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public readAccount(accountGuid: string, userGuid: string, options?: any) {
+    public readAccount(accountGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).readAccount(accountGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10790,7 +10790,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public readCategory(categoryGuid: string, userGuid: string, options?: any) {
+    public readCategory(categoryGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).readCategory(categoryGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10803,7 +10803,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public readHolding(holdingGuid: string, userGuid: string, options?: any) {
+    public readHolding(holdingGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).readHolding(holdingGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10815,7 +10815,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public readInstitution(institutionCode: string, options?: any) {
+    public readInstitution(institutionCode: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).readInstitution(institutionCode, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10829,7 +10829,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public readManagedAccount(memberGuid: string, userGuid: string, accountGuid: string, options?: any) {
+    public readManagedAccount(memberGuid: string, userGuid: string, accountGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).readManagedAccount(memberGuid, userGuid, accountGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10842,7 +10842,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public readManagedMember(memberGuid: string, userGuid: string, options?: any) {
+    public readManagedMember(memberGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).readManagedMember(memberGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10856,7 +10856,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public readManagedTransaction(memberGuid: string, userGuid: string, transactionGuid: string, options?: any) {
+    public readManagedTransaction(memberGuid: string, userGuid: string, transactionGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).readManagedTransaction(memberGuid, userGuid, transactionGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10869,7 +10869,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public readMember(memberGuid: string, userGuid: string, options?: any) {
+    public readMember(memberGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).readMember(memberGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10882,7 +10882,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public readMemberStatus(memberGuid: string, userGuid: string, options?: any) {
+    public readMemberStatus(memberGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).readMemberStatus(memberGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10894,7 +10894,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public readMerchant(merchantGuid: string, options?: any) {
+    public readMerchant(merchantGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).readMerchant(merchantGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10906,7 +10906,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public readMerchantLocation(merchantLocationGuid: string, options?: any) {
+    public readMerchantLocation(merchantLocationGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).readMerchantLocation(merchantLocationGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10920,7 +10920,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public readStatementByMember(memberGuid: string, statementGuid: string, userGuid: string, options?: any) {
+    public readStatementByMember(memberGuid: string, statementGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).readStatementByMember(memberGuid, statementGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10933,7 +10933,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public readTag(tagGuid: string, userGuid: string, options?: any) {
+    public readTag(tagGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).readTag(tagGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10946,7 +10946,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public readTagging(taggingGuid: string, userGuid: string, options?: any) {
+    public readTagging(taggingGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).readTagging(taggingGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10959,7 +10959,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public readTransaction(transactionGuid: string, userGuid: string, options?: any) {
+    public readTransaction(transactionGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).readTransaction(transactionGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10972,7 +10972,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public readTransactionRule(transactionRuleGuid: string, userGuid: string, options?: any) {
+    public readTransactionRule(transactionRuleGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).readTransactionRule(transactionRuleGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10984,7 +10984,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public readUser(userGuid: string, options?: any) {
+    public readUser(userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).readUser(userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -10997,7 +10997,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public requestConnectWidgetURL(userGuid: string, connectWidgetRequestBody?: ConnectWidgetRequestBody, options?: any) {
+    public requestConnectWidgetURL(userGuid: string, connectWidgetRequestBody?: ConnectWidgetRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).requestConnectWidgetURL(userGuid, connectWidgetRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -11013,7 +11013,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public requestOAuthWindowURI(memberGuid: string, userGuid: string, referralSource?: string, uiMessageWebviewUrlScheme?: string, skipAggregation?: boolean, options?: any) {
+    public requestOAuthWindowURI(memberGuid: string, userGuid: string, referralSource?: string, uiMessageWebviewUrlScheme?: string, skipAggregation?: boolean, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).requestOAuthWindowURI(memberGuid, userGuid, referralSource, uiMessageWebviewUrlScheme, skipAggregation, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -11027,7 +11027,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public requestWidgetURL(userGuid: string, widgetRequestBody: WidgetRequestBody, acceptLanguage?: string, options?: any) {
+    public requestWidgetURL(userGuid: string, widgetRequestBody: WidgetRequestBody, acceptLanguage?: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).requestWidgetURL(userGuid, widgetRequestBody, acceptLanguage, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -11041,7 +11041,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public resumeAggregation(memberGuid: string, userGuid: string, memberResumeRequestBody: MemberResumeRequestBody, options?: any) {
+    public resumeAggregation(memberGuid: string, userGuid: string, memberResumeRequestBody: MemberResumeRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).resumeAggregation(memberGuid, userGuid, memberResumeRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -11056,7 +11056,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public updateAccountByMember(userGuid: string, memberGuid: string, accountGuid: string, accountUpdateRequestBody: AccountUpdateRequestBody, options?: any) {
+    public updateAccountByMember(userGuid: string, memberGuid: string, accountGuid: string, accountUpdateRequestBody: AccountUpdateRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).updateAccountByMember(userGuid, memberGuid, accountGuid, accountUpdateRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -11070,7 +11070,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public updateCategory(categoryGuid: string, userGuid: string, categoryUpdateRequestBody: CategoryUpdateRequestBody, options?: any) {
+    public updateCategory(categoryGuid: string, userGuid: string, categoryUpdateRequestBody: CategoryUpdateRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).updateCategory(categoryGuid, userGuid, categoryUpdateRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -11085,7 +11085,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public updateManagedAccount(memberGuid: string, userGuid: string, accountGuid: string, managedAccountUpdateRequestBody: ManagedAccountUpdateRequestBody, options?: any) {
+    public updateManagedAccount(memberGuid: string, userGuid: string, accountGuid: string, managedAccountUpdateRequestBody: ManagedAccountUpdateRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).updateManagedAccount(memberGuid, userGuid, accountGuid, managedAccountUpdateRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -11099,7 +11099,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public updateManagedMember(memberGuid: string, userGuid: string, managedMemberUpdateRequestBody: ManagedMemberUpdateRequestBody, options?: any) {
+    public updateManagedMember(memberGuid: string, userGuid: string, managedMemberUpdateRequestBody: ManagedMemberUpdateRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).updateManagedMember(memberGuid, userGuid, managedMemberUpdateRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -11114,7 +11114,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public updateManagedTransaction(memberGuid: string, userGuid: string, transactionGuid: string, managedTransactionUpdateRequestBody: ManagedTransactionUpdateRequestBody, options?: any) {
+    public updateManagedTransaction(memberGuid: string, userGuid: string, transactionGuid: string, managedTransactionUpdateRequestBody: ManagedTransactionUpdateRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).updateManagedTransaction(memberGuid, userGuid, transactionGuid, managedTransactionUpdateRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -11128,7 +11128,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public updateMember(memberGuid: string, userGuid: string, memberUpdateRequestBody: MemberUpdateRequestBody, options?: any) {
+    public updateMember(memberGuid: string, userGuid: string, memberUpdateRequestBody: MemberUpdateRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).updateMember(memberGuid, userGuid, memberUpdateRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -11142,7 +11142,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public updateTag(tagGuid: string, userGuid: string, tagUpdateRequestBody: TagUpdateRequestBody, options?: any) {
+    public updateTag(tagGuid: string, userGuid: string, tagUpdateRequestBody: TagUpdateRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).updateTag(tagGuid, userGuid, tagUpdateRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -11156,7 +11156,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public updateTagging(taggingGuid: string, userGuid: string, taggingUpdateRequestBody: TaggingUpdateRequestBody, options?: any) {
+    public updateTagging(taggingGuid: string, userGuid: string, taggingUpdateRequestBody: TaggingUpdateRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).updateTagging(taggingGuid, userGuid, taggingUpdateRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -11170,7 +11170,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public updateTransaction(transactionGuid: string, userGuid: string, transactionUpdateRequestBody: TransactionUpdateRequestBody, options?: any) {
+    public updateTransaction(transactionGuid: string, userGuid: string, transactionUpdateRequestBody: TransactionUpdateRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).updateTransaction(transactionGuid, userGuid, transactionUpdateRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -11184,7 +11184,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public updateTransactionRule(transactionRuleGuid: string, userGuid: string, transactionRuleUpdateRequestBody: TransactionRuleUpdateRequestBody, options?: any) {
+    public updateTransactionRule(transactionRuleGuid: string, userGuid: string, transactionRuleUpdateRequestBody: TransactionRuleUpdateRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).updateTransactionRule(transactionRuleGuid, userGuid, transactionRuleUpdateRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -11197,7 +11197,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public updateUser(userGuid: string, userUpdateRequestBody: UserUpdateRequestBody, options?: any) {
+    public updateUser(userGuid: string, userUpdateRequestBody: UserUpdateRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).updateUser(userGuid, userUpdateRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -11210,7 +11210,7 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public verifyMember(memberGuid: string, userGuid: string, options?: any) {
+    public verifyMember(memberGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).verifyMember(memberGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 }
