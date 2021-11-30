@@ -972,6 +972,12 @@ export interface EnhanceTransactionResponse {
     'amount'?: number | null;
     /**
      * 
+     * @type {number}
+     * @memberof EnhanceTransactionResponse
+     */
+    'categorized_by'?: number | null;
+    /**
+     * 
      * @type {string}
      * @memberof EnhanceTransactionResponse
      */
@@ -981,7 +987,25 @@ export interface EnhanceTransactionResponse {
      * @type {string}
      * @memberof EnhanceTransactionResponse
      */
+    'category_guid'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnhanceTransactionResponse
+     */
+    'described_by'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnhanceTransactionResponse
+     */
     'description'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnhanceTransactionResponse
+     */
+    'extended_transaction_type'?: string | null;
     /**
      * 
      * @type {string}
@@ -1038,6 +1062,18 @@ export interface EnhanceTransactionResponse {
     'is_payroll_advance'?: boolean | null;
     /**
      * 
+     * @type {boolean}
+     * @memberof EnhanceTransactionResponse
+     */
+    'is_subscription'?: boolean | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnhanceTransactionResponse
+     */
+    'memo'?: string | null;
+    /**
+     * 
      * @type {number}
      * @memberof EnhanceTransactionResponse
      */
@@ -1048,6 +1084,12 @@ export interface EnhanceTransactionResponse {
      * @memberof EnhanceTransactionResponse
      */
     'merchant_guid'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnhanceTransactionResponse
+     */
+    'merchant_location_guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -1084,7 +1126,19 @@ export interface EnhanceTransactionsRequest {
      * @type {string}
      * @memberof EnhanceTransactionsRequest
      */
+    'extended_transaction_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnhanceTransactionsRequest
+     */
     'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnhanceTransactionsRequest
+     */
+    'memo'?: string;
     /**
      * 
      * @type {number}
@@ -3123,6 +3177,12 @@ export interface TransactionResponse {
      * @type {string}
      * @memberof TransactionResponse
      */
+    'category_guid'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionResponse
+     */
     'check_number_string'?: string | null;
     /**
      * 
@@ -3148,6 +3208,12 @@ export interface TransactionResponse {
      * @memberof TransactionResponse
      */
     'description'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionResponse
+     */
+    'extended_transaction_type'?: string | null;
     /**
      * 
      * @type {string}
