@@ -5205,17 +5205,61 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Use this endpoint to read the attributes of a specific user.
+         * Use this endpoint to retrieve a list of all the default categories and subcategories offered within the MX Platform API. In other words, each item in the returned list will have its `is_default` field set to `true`. There are currently 119 default categories and subcategories. Both the _list default categories_ and _list default categories by user_ endpoints return the same results. The different routes are provided for convenience.
          * @summary List default categories
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listDefaultCategories: async (page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/categories/default`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to retrieve a list of all the default categories and subcategories, scoped by user, offered within the MX Platform API. In other words, each item in the returned list will have its `is_default` field set to `true`. There are currently 119 default categories and subcategories. Both the _list default categories_ and _list default categories by user_ endpoints return the same results. The different routes are provided for convenience.
+         * @summary List default categories by user
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
          * @param {number} [page] Specify current page.
          * @param {number} [recordsPerPage] Specify records per page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listDefaultCategories: async (userGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listDefaultCategoriesByUser: async (userGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
-            assertParamExists('listDefaultCategories', 'userGuid', userGuid)
+            assertParamExists('listDefaultCategoriesByUser', 'userGuid', userGuid)
             const localVarPath = `/users/{user_guid}/categories/default`
                 .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -6501,7 +6545,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * Use this endpoint to read the attributes of either a default category or a custom category.
-         * @summary Read category
+         * @summary Read a custom category
          * @param {string} categoryGuid The unique id for a &#x60;category&#x60;.
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
          * @param {*} [options] Override http request option.
@@ -6513,6 +6557,48 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('readCategory', 'userGuid', userGuid)
             const localVarPath = `/users/{user_guid}/categories/{category_guid}`
+                .replace(`{${"category_guid"}}`, encodeURIComponent(String(categoryGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to read the attributes of a default category.
+         * @summary Read a default category
+         * @param {string} categoryGuid The unique id for a &#x60;category&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readDefaultCategory: async (categoryGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'categoryGuid' is not null or undefined
+            assertParamExists('readDefaultCategory', 'categoryGuid', categoryGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('readDefaultCategory', 'userGuid', userGuid)
+            const localVarPath = `/categories/{category_guid}`
                 .replace(`{${"category_guid"}}`, encodeURIComponent(String(categoryGuid)))
                 .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -8309,16 +8395,28 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Use this endpoint to read the attributes of a specific user.
+         * Use this endpoint to retrieve a list of all the default categories and subcategories offered within the MX Platform API. In other words, each item in the returned list will have its `is_default` field set to `true`. There are currently 119 default categories and subcategories. Both the _list default categories_ and _list default categories by user_ endpoints return the same results. The different routes are provided for convenience.
          * @summary List default categories
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listDefaultCategories(page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoriesResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listDefaultCategories(page, recordsPerPage, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to retrieve a list of all the default categories and subcategories, scoped by user, offered within the MX Platform API. In other words, each item in the returned list will have its `is_default` field set to `true`. There are currently 119 default categories and subcategories. Both the _list default categories_ and _list default categories by user_ endpoints return the same results. The different routes are provided for convenience.
+         * @summary List default categories by user
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
          * @param {number} [page] Specify current page.
          * @param {number} [recordsPerPage] Specify records per page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listDefaultCategories(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoriesResponseBody>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listDefaultCategories(userGuid, page, recordsPerPage, options);
+        async listDefaultCategoriesByUser(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoriesResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listDefaultCategoriesByUser(userGuid, page, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -8655,7 +8753,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
         },
         /**
          * Use this endpoint to read the attributes of either a default category or a custom category.
-         * @summary Read category
+         * @summary Read a custom category
          * @param {string} categoryGuid The unique id for a &#x60;category&#x60;.
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
          * @param {*} [options] Override http request option.
@@ -8663,6 +8761,18 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          */
         async readCategory(categoryGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoryResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.readCategory(categoryGuid, userGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to read the attributes of a default category.
+         * @summary Read a default category
+         * @param {string} categoryGuid The unique id for a &#x60;category&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async readDefaultCategory(categoryGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoryResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.readDefaultCategory(categoryGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -9393,16 +9503,27 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
             return localVarFp.listCategories(userGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
         },
         /**
-         * Use this endpoint to read the attributes of a specific user.
+         * Use this endpoint to retrieve a list of all the default categories and subcategories offered within the MX Platform API. In other words, each item in the returned list will have its `is_default` field set to `true`. There are currently 119 default categories and subcategories. Both the _list default categories_ and _list default categories by user_ endpoints return the same results. The different routes are provided for convenience.
          * @summary List default categories
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listDefaultCategories(page?: number, recordsPerPage?: number, options?: any): AxiosPromise<CategoriesResponseBody> {
+            return localVarFp.listDefaultCategories(page, recordsPerPage, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to retrieve a list of all the default categories and subcategories, scoped by user, offered within the MX Platform API. In other words, each item in the returned list will have its `is_default` field set to `true`. There are currently 119 default categories and subcategories. Both the _list default categories_ and _list default categories by user_ endpoints return the same results. The different routes are provided for convenience.
+         * @summary List default categories by user
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
          * @param {number} [page] Specify current page.
          * @param {number} [recordsPerPage] Specify records per page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listDefaultCategories(userGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<CategoriesResponseBody> {
-            return localVarFp.listDefaultCategories(userGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
+        listDefaultCategoriesByUser(userGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<CategoriesResponseBody> {
+            return localVarFp.listDefaultCategoriesByUser(userGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
         },
         /**
          * This endpoint returns a paginated list containing institutions that have been set as the partner’s favorites, sorted by popularity. Please contact MX to set a list of favorites.
@@ -9714,7 +9835,7 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * Use this endpoint to read the attributes of either a default category or a custom category.
-         * @summary Read category
+         * @summary Read a custom category
          * @param {string} categoryGuid The unique id for a &#x60;category&#x60;.
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
          * @param {*} [options] Override http request option.
@@ -9722,6 +9843,17 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          */
         readCategory(categoryGuid: string, userGuid: string, options?: any): AxiosPromise<CategoryResponseBody> {
             return localVarFp.readCategory(categoryGuid, userGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to read the attributes of a default category.
+         * @summary Read a default category
+         * @param {string} categoryGuid The unique id for a &#x60;category&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readDefaultCategory(categoryGuid: string, userGuid: string, options?: any): AxiosPromise<CategoryResponseBody> {
+            return localVarFp.readDefaultCategory(categoryGuid, userGuid, options).then((request) => request(axios, basePath));
         },
         /**
          * Use this endpoint to read the attributes of a specific `holding`.
@@ -10478,8 +10610,21 @@ export class MxPlatformApi extends BaseAPI {
     }
 
     /**
-     * Use this endpoint to read the attributes of a specific user.
+     * Use this endpoint to retrieve a list of all the default categories and subcategories offered within the MX Platform API. In other words, each item in the returned list will have its `is_default` field set to `true`. There are currently 119 default categories and subcategories. Both the _list default categories_ and _list default categories by user_ endpoints return the same results. The different routes are provided for convenience.
      * @summary List default categories
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public listDefaultCategories(page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).listDefaultCategories(page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to retrieve a list of all the default categories and subcategories, scoped by user, offered within the MX Platform API. In other words, each item in the returned list will have its `is_default` field set to `true`. There are currently 119 default categories and subcategories. Both the _list default categories_ and _list default categories by user_ endpoints return the same results. The different routes are provided for convenience.
+     * @summary List default categories by user
      * @param {string} userGuid The unique id for a &#x60;user&#x60;.
      * @param {number} [page] Specify current page.
      * @param {number} [recordsPerPage] Specify records per page.
@@ -10487,8 +10632,8 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listDefaultCategories(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
-        return MxPlatformApiFp(this.configuration).listDefaultCategories(userGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    public listDefaultCategoriesByUser(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).listDefaultCategoriesByUser(userGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10849,7 +10994,7 @@ export class MxPlatformApi extends BaseAPI {
 
     /**
      * Use this endpoint to read the attributes of either a default category or a custom category.
-     * @summary Read category
+     * @summary Read a custom category
      * @param {string} categoryGuid The unique id for a &#x60;category&#x60;.
      * @param {string} userGuid The unique id for a &#x60;user&#x60;.
      * @param {*} [options] Override http request option.
@@ -10858,6 +11003,19 @@ export class MxPlatformApi extends BaseAPI {
      */
     public readCategory(categoryGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).readCategory(categoryGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to read the attributes of a default category.
+     * @summary Read a default category
+     * @param {string} categoryGuid The unique id for a &#x60;category&#x60;.
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public readDefaultCategory(categoryGuid: string, userGuid: string, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).readDefaultCategory(categoryGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
