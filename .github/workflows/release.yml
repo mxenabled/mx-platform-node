@@ -1,0 +1,24 @@
+name: Release
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  Release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+        ruby-version: 3.1
+    - name: Read version
+      id: read_version
+      run: echo "::set-output name=version::$(ruby .github/read_version.rb)"
+    - name: Create tag and release
+      run: |
+        gh release create "v${{ steps.read_version.outputs.version }}"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
