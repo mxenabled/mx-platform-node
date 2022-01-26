@@ -16,7 +16,7 @@ jobs:
         ruby-version: 3.1
     - name: Read version
       id: read_version
-      run: echo "::set-output name=version::$(ruby .github/read_version.rb)"
+      run: echo "::set-output name=version::$(ruby .github/version.rb)"
     - name: Create tag and release
       run: |
         gh release create "v${{ steps.read_version.outputs.version }}"
