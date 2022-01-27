@@ -5,7 +5,8 @@ ALLOW_LIST = [
   ".github",
   ".openapi-generator-ignore",
   "LICENSE",
-  "openapi"
+  "openapi",
+  "openapitools.json"
 ].freeze
 
 ::Dir.each_child(::Dir.pwd) do |source|
