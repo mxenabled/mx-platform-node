@@ -5399,6 +5399,68 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
+         * This endpoint returns all holdings associated with the specified `account`.
+         * @summary List holdings by account
+         * @param {string} accountGuid The unique id for the &#x60;account&#x60;.
+         * @param {string} userGuid The unique id for the &#x60;user&#x60;.
+         * @param {string} [fromDate] Filter holdings from this date.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {string} [toDate] Filter holdings to this date.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listHoldingsByAccount: async (accountGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'accountGuid' is not null or undefined
+            assertParamExists('listHoldingsByAccount', 'accountGuid', accountGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('listHoldingsByAccount', 'userGuid', userGuid)
+            const localVarPath = `/users/{user_guid}/accounts/{account_guid}/holdings`
+                .replace(`{${"account_guid"}}`, encodeURIComponent(String(accountGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (fromDate !== undefined) {
+                localVarQueryParameter['from_date'] = fromDate;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+            if (toDate !== undefined) {
+                localVarQueryParameter['to_date'] = toDate;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * This endpoint returns all holdings associated with the specified `member` across all accounts.
          * @summary List holdings by member
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -8447,6 +8509,22 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * This endpoint returns all holdings associated with the specified `account`.
+         * @summary List holdings by account
+         * @param {string} accountGuid The unique id for the &#x60;account&#x60;.
+         * @param {string} userGuid The unique id for the &#x60;user&#x60;.
+         * @param {string} [fromDate] Filter holdings from this date.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {string} [toDate] Filter holdings to this date.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listHoldingsByAccount(accountGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<HoldingsResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listHoldingsByAccount(accountGuid, userGuid, fromDate, page, recordsPerPage, toDate, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * This endpoint returns all holdings associated with the specified `member` across all accounts.
          * @summary List holdings by member
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -9549,6 +9627,21 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          */
         listHoldings(userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: any): AxiosPromise<HoldingsResponseBody> {
             return localVarFp.listHoldings(userGuid, fromDate, page, recordsPerPage, toDate, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This endpoint returns all holdings associated with the specified `account`.
+         * @summary List holdings by account
+         * @param {string} accountGuid The unique id for the &#x60;account&#x60;.
+         * @param {string} userGuid The unique id for the &#x60;user&#x60;.
+         * @param {string} [fromDate] Filter holdings from this date.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {string} [toDate] Filter holdings to this date.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listHoldingsByAccount(accountGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: any): AxiosPromise<HoldingsResponseBody> {
+            return localVarFp.listHoldingsByAccount(accountGuid, userGuid, fromDate, page, recordsPerPage, toDate, options).then((request) => request(axios, basePath));
         },
         /**
          * This endpoint returns all holdings associated with the specified `member` across all accounts.
@@ -10663,6 +10756,23 @@ export class MxPlatformApi extends BaseAPI {
      */
     public listHoldings(userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).listHoldings(userGuid, fromDate, page, recordsPerPage, toDate, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This endpoint returns all holdings associated with the specified `account`.
+     * @summary List holdings by account
+     * @param {string} accountGuid The unique id for the &#x60;account&#x60;.
+     * @param {string} userGuid The unique id for the &#x60;user&#x60;.
+     * @param {string} [fromDate] Filter holdings from this date.
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
+     * @param {string} [toDate] Filter holdings to this date.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public listHoldingsByAccount(accountGuid: string, userGuid: string, fromDate?: string, page?: number, recordsPerPage?: number, toDate?: string, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).listHoldingsByAccount(accountGuid, userGuid, fromDate, page, recordsPerPage, toDate, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
