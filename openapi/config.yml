@@ -1,3 +1,4 @@
-npmName: "mx-platform-node"
-npmVersion: 0.6.1
+---
+npmName: mx-platform-node
+npmVersion: 0.6.2
 supportsES6: true
