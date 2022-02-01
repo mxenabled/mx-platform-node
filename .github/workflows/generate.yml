@@ -33,7 +33,7 @@ jobs:
         openapi-generator-cli version-manager set 5.3.1
     - run: |
         openapi-generator-cli generate \
-          -i https://raw.githubusercontent.com/mxenabled/openapi/master/openapi/mx_platform_api_beta.yml \
+          -i https://raw.githubusercontent.com/mxenabled/openapi/master/openapi/mx_platform_api.yml \
           -g typescript-axios \
           -c ./openapi/config.yml \
           -t ./openapi/templates
