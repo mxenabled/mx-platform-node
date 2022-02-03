@@ -30,7 +30,7 @@ jobs:
     - name: Install openapi-generator-cli
       run: |
         npm install @openapitools/openapi-generator-cli -g
-        openapi-generator-cli version-manager set 5.3.1
+        openapi-generator-cli version-manager set 5.4.0
     - run: |
         openapi-generator-cli generate \
           -i https://raw.githubusercontent.com/mxenabled/openapi/master/openapi/mx_platform_api.yml \
