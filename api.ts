@@ -32,7 +32,7 @@ export interface AccountNumberResponse {
      * @type {string}
      * @memberof AccountNumberResponse
      */
-    'account_guid'?: string;
+    'account_guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -44,7 +44,7 @@ export interface AccountNumberResponse {
      * @type {string}
      * @memberof AccountNumberResponse
      */
-    'guid'?: string;
+    'guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -56,7 +56,7 @@ export interface AccountNumberResponse {
      * @type {string}
      * @memberof AccountNumberResponse
      */
-    'member_guid'?: string;
+    'member_guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -74,7 +74,7 @@ export interface AccountNumberResponse {
      * @type {string}
      * @memberof AccountNumberResponse
      */
-    'user_guid'?: string;
+    'user_guid'?: string | null;
 }
 /**
  * 
@@ -106,7 +106,7 @@ export interface AccountOwnerResponse {
      * @type {string}
      * @memberof AccountOwnerResponse
      */
-    'account_guid'?: string;
+    'account_guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -136,13 +136,13 @@ export interface AccountOwnerResponse {
      * @type {string}
      * @memberof AccountOwnerResponse
      */
-    'guid'?: string;
+    'guid'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AccountOwnerResponse
      */
-    'member_guid'?: string;
+    'member_guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -172,7 +172,7 @@ export interface AccountOwnerResponse {
      * @type {string}
      * @memberof AccountOwnerResponse
      */
-    'user_guid'?: string;
+    'user_guid'?: string | null;
 }
 /**
  * 
@@ -282,7 +282,7 @@ export interface AccountResponse {
      * @type {string}
      * @memberof AccountResponse
      */
-    'guid'?: string;
+    'guid'?: string | null;
     /**
      * 
      * @type {number}
@@ -360,7 +360,7 @@ export interface AccountResponse {
      * @type {string}
      * @memberof AccountResponse
      */
-    'member_guid'?: string;
+    'member_guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -474,7 +474,7 @@ export interface AccountResponse {
      * @type {string}
      * @memberof AccountResponse
      */
-    'user_guid'?: string;
+    'user_guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -614,7 +614,7 @@ export interface CategoryResponse {
      * @type {string}
      * @memberof CategoryResponse
      */
-    'guid'?: string;
+    'guid'?: string | null;
     /**
      * 
      * @type {boolean}
@@ -644,7 +644,7 @@ export interface CategoryResponse {
      * @type {string}
      * @memberof CategoryResponse
      */
-    'parent_guid'?: string;
+    'parent_guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -714,7 +714,7 @@ export interface ChallengeResponse {
      * @type {string}
      * @memberof ChallengeResponse
      */
-    'guid'?: string;
+    'guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -868,7 +868,7 @@ export interface ConnectWidgetResponse {
      * @type {string}
      * @memberof ConnectWidgetResponse
      */
-    'guid'?: string;
+    'guid'?: string | null;
 }
 /**
  * 
@@ -900,7 +900,7 @@ export interface CredentialRequest {
      * @type {string}
      * @memberof CredentialRequest
      */
-    'value'?: string | null;
+    'value'?: string;
 }
 /**
  * 
@@ -931,13 +931,13 @@ export interface CredentialResponse {
      * @type {string}
      * @memberof CredentialResponse
      */
-    'guid'?: string;
+    'guid'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof CredentialResponse
      */
-    'label'?: string;
+    'label'?: string | null;
 }
 /**
  * 
@@ -1083,7 +1083,7 @@ export interface EnhanceTransactionResponse {
      * @type {string}
      * @memberof EnhanceTransactionResponse
      */
-    'merchant_guid'?: string;
+    'merchant_guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -1189,7 +1189,7 @@ export interface HoldingResponse {
      * @type {string}
      * @memberof HoldingResponse
      */
-    'account_guid'?: string;
+    'account_guid'?: string | null;
     /**
      * 
      * @type {number}
@@ -1231,7 +1231,7 @@ export interface HoldingResponse {
      * @type {string}
      * @memberof HoldingResponse
      */
-    'guid'?: string;
+    'guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -1255,7 +1255,7 @@ export interface HoldingResponse {
      * @type {string}
      * @memberof HoldingResponse
      */
-    'member_guid'?: string;
+    'member_guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -1291,7 +1291,7 @@ export interface HoldingResponse {
      * @type {string}
      * @memberof HoldingResponse
      */
-    'user_guid'?: string;
+    'user_guid'?: string | null;
 }
 /**
  * 
@@ -2320,7 +2320,7 @@ export interface MemberResponse {
      * @type {string}
      * @memberof MemberResponse
      */
-    'guid'?: string;
+    'guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -2380,7 +2380,7 @@ export interface MemberResponse {
      * @type {string}
      * @memberof MemberResponse
      */
-    'user_guid'?: string;
+    'user_guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -2456,7 +2456,7 @@ export interface MemberStatusResponse {
      * @type {string}
      * @memberof MemberStatusResponse
      */
-    'guid'?: string;
+    'guid'?: string | null;
     /**
      * 
      * @type {boolean}
@@ -2599,7 +2599,7 @@ export interface MerchantLocationResponse {
      * @type {string}
      * @memberof MerchantLocationResponse
      */
-    'guid'?: string;
+    'guid'?: string | null;
     /**
      * 
      * @type {number}
@@ -2617,7 +2617,7 @@ export interface MerchantLocationResponse {
      * @type {string}
      * @memberof MerchantLocationResponse
      */
-    'merchant_guid'?: string;
+    'merchant_guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -2679,7 +2679,7 @@ export interface MerchantResponse {
      * @type {string}
      * @memberof MerchantResponse
      */
-    'guid'?: string;
+    'guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -2748,7 +2748,7 @@ export interface OAuthWindowResponse {
      * @type {string}
      * @memberof OAuthWindowResponse
      */
-    'guid'?: string;
+    'guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -2830,7 +2830,7 @@ export interface StatementResponse {
      * @type {string}
      * @memberof StatementResponse
      */
-    'account_guid'?: string;
+    'account_guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -2848,13 +2848,13 @@ export interface StatementResponse {
      * @type {string}
      * @memberof StatementResponse
      */
-    'guid'?: string;
+    'guid'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof StatementResponse
      */
-    'member_guid'?: string;
+    'member_guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -2872,7 +2872,7 @@ export interface StatementResponse {
      * @type {string}
      * @memberof StatementResponse
      */
-    'user_guid'?: string;
+    'user_guid'?: string | null;
 }
 /**
  * 
@@ -2943,7 +2943,7 @@ export interface TagResponse {
      * @type {string}
      * @memberof TagResponse
      */
-    'guid'?: string;
+    'guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -2955,7 +2955,7 @@ export interface TagResponse {
      * @type {string}
      * @memberof TagResponse
      */
-    'user_guid'?: string;
+    'user_guid'?: string | null;
 }
 /**
  * 
@@ -3039,7 +3039,7 @@ export interface TaggingResponse {
      * @type {string}
      * @memberof TaggingResponse
      */
-    'guid'?: string;
+    'guid'?: string | null;
     /**
      * 
      * @type {boolean}
@@ -3051,19 +3051,19 @@ export interface TaggingResponse {
      * @type {string}
      * @memberof TaggingResponse
      */
-    'tag_guid'?: string;
+    'tag_guid'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TaggingResponse
      */
-    'transaction_guid'?: string;
+    'transaction_guid'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TaggingResponse
      */
-    'user_guid'?: string;
+    'user_guid'?: string | null;
 }
 /**
  * 
@@ -3153,7 +3153,7 @@ export interface TransactionResponse {
      * @type {string}
      * @memberof TransactionResponse
      */
-    'account_guid'?: string;
+    'account_guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -3219,7 +3219,7 @@ export interface TransactionResponse {
      * @type {string}
      * @memberof TransactionResponse
      */
-    'guid'?: string;
+    'guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -3315,7 +3315,7 @@ export interface TransactionResponse {
      * @type {string}
      * @memberof TransactionResponse
      */
-    'member_guid'?: string;
+    'member_guid'?: string | null;
     /**
      * 
      * @type {boolean}
@@ -3339,13 +3339,13 @@ export interface TransactionResponse {
      * @type {string}
      * @memberof TransactionResponse
      */
-    'merchant_guid'?: string;
+    'merchant_guid'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TransactionResponse
      */
-    'merchant_location_guid'?: string;
+    'merchant_location_guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -3399,7 +3399,7 @@ export interface TransactionResponse {
      * @type {string}
      * @memberof TransactionResponse
      */
-    'user_guid'?: string;
+    'user_guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -3469,7 +3469,7 @@ export interface TransactionRuleResponse {
      * @type {string}
      * @memberof TransactionRuleResponse
      */
-    'category_guid'?: string;
+    'category_guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -3487,7 +3487,7 @@ export interface TransactionRuleResponse {
      * @type {string}
      * @memberof TransactionRuleResponse
      */
-    'guid'?: string;
+    'guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -3505,7 +3505,7 @@ export interface TransactionRuleResponse {
      * @type {string}
      * @memberof TransactionRuleResponse
      */
-    'user_guid'?: string;
+    'user_guid'?: string | null;
 }
 /**
  * 
@@ -3537,13 +3537,13 @@ export interface TransactionRuleUpdateRequest {
      * @type {string}
      * @memberof TransactionRuleUpdateRequest
      */
-    'description'?: string | null;
+    'description'?: string;
     /**
      * 
      * @type {string}
      * @memberof TransactionRuleUpdateRequest
      */
-    'match_description'?: string | null;
+    'match_description'?: string;
 }
 /**
  * 
@@ -3683,7 +3683,7 @@ export interface UserResponse {
      * @type {string}
      * @memberof UserResponse
      */
-    'guid'?: string;
+    'guid'?: string | null;
     /**
      * 
      * @type {string}
