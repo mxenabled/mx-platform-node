@@ -6651,18 +6651,14 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * Use this endpoint to read the attributes of a default category.
          * @summary Read a default category
          * @param {string} categoryGuid The unique id for a &#x60;category&#x60;.
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        readDefaultCategory: async (categoryGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        readDefaultCategory: async (categoryGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'categoryGuid' is not null or undefined
             assertParamExists('readDefaultCategory', 'categoryGuid', categoryGuid)
-            // verify required parameter 'userGuid' is not null or undefined
-            assertParamExists('readDefaultCategory', 'userGuid', userGuid)
             const localVarPath = `/categories/{category_guid}`
-                .replace(`{${"category_guid"}}`, encodeURIComponent(String(categoryGuid)))
-                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+                .replace(`{${"category_guid"}}`, encodeURIComponent(String(categoryGuid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7319,13 +7315,15 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * This endpoint will return a URL for an embeddable version of MX Connect.
          * @summary Request connect widget url
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {ConnectWidgetRequestBody} [connectWidgetRequestBody] Optional config options for WebView (is_mobile_webview, current_institution_code, current_member_guid, update_credentials)
+         * @param {ConnectWidgetRequestBody} connectWidgetRequestBody Optional config options for WebView (is_mobile_webview, current_institution_code, current_member_guid, update_credentials)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        requestConnectWidgetURL: async (userGuid: string, connectWidgetRequestBody?: ConnectWidgetRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        requestConnectWidgetURL: async (userGuid: string, connectWidgetRequestBody: ConnectWidgetRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('requestConnectWidgetURL', 'userGuid', userGuid)
+            // verify required parameter 'connectWidgetRequestBody' is not null or undefined
+            assertParamExists('requestConnectWidgetURL', 'connectWidgetRequestBody', connectWidgetRequestBody)
             const localVarPath = `/users/{user_guid}/connect_widget_url`
                 .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -8845,12 +8843,11 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * Use this endpoint to read the attributes of a default category.
          * @summary Read a default category
          * @param {string} categoryGuid The unique id for a &#x60;category&#x60;.
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async readDefaultCategory(categoryGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoryResponseBody>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.readDefaultCategory(categoryGuid, userGuid, options);
+        async readDefaultCategory(categoryGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoryResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.readDefaultCategory(categoryGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -9036,11 +9033,11 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * This endpoint will return a URL for an embeddable version of MX Connect.
          * @summary Request connect widget url
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {ConnectWidgetRequestBody} [connectWidgetRequestBody] Optional config options for WebView (is_mobile_webview, current_institution_code, current_member_guid, update_credentials)
+         * @param {ConnectWidgetRequestBody} connectWidgetRequestBody Optional config options for WebView (is_mobile_webview, current_institution_code, current_member_guid, update_credentials)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async requestConnectWidgetURL(userGuid: string, connectWidgetRequestBody?: ConnectWidgetRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConnectWidgetResponseBody>> {
+        async requestConnectWidgetURL(userGuid: string, connectWidgetRequestBody: ConnectWidgetRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConnectWidgetResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.requestConnectWidgetURL(userGuid, connectWidgetRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -9941,12 +9938,11 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          * Use this endpoint to read the attributes of a default category.
          * @summary Read a default category
          * @param {string} categoryGuid The unique id for a &#x60;category&#x60;.
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        readDefaultCategory(categoryGuid: string, userGuid: string, options?: any): AxiosPromise<CategoryResponseBody> {
-            return localVarFp.readDefaultCategory(categoryGuid, userGuid, options).then((request) => request(axios, basePath));
+        readDefaultCategory(categoryGuid: string, options?: any): AxiosPromise<CategoryResponseBody> {
+            return localVarFp.readDefaultCategory(categoryGuid, options).then((request) => request(axios, basePath));
         },
         /**
          * Use this endpoint to read the attributes of a specific `holding`.
@@ -10116,11 +10112,11 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          * This endpoint will return a URL for an embeddable version of MX Connect.
          * @summary Request connect widget url
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {ConnectWidgetRequestBody} [connectWidgetRequestBody] Optional config options for WebView (is_mobile_webview, current_institution_code, current_member_guid, update_credentials)
+         * @param {ConnectWidgetRequestBody} connectWidgetRequestBody Optional config options for WebView (is_mobile_webview, current_institution_code, current_member_guid, update_credentials)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        requestConnectWidgetURL(userGuid: string, connectWidgetRequestBody?: ConnectWidgetRequestBody, options?: any): AxiosPromise<ConnectWidgetResponseBody> {
+        requestConnectWidgetURL(userGuid: string, connectWidgetRequestBody: ConnectWidgetRequestBody, options?: any): AxiosPromise<ConnectWidgetResponseBody> {
             return localVarFp.requestConnectWidgetURL(userGuid, connectWidgetRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11119,13 +11115,12 @@ export class MxPlatformApi extends BaseAPI {
      * Use this endpoint to read the attributes of a default category.
      * @summary Read a default category
      * @param {string} categoryGuid The unique id for a &#x60;category&#x60;.
-     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public readDefaultCategory(categoryGuid: string, userGuid: string, options?: AxiosRequestConfig) {
-        return MxPlatformApiFp(this.configuration).readDefaultCategory(categoryGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
+    public readDefaultCategory(categoryGuid: string, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).readDefaultCategory(categoryGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -11326,12 +11321,12 @@ export class MxPlatformApi extends BaseAPI {
      * This endpoint will return a URL for an embeddable version of MX Connect.
      * @summary Request connect widget url
      * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-     * @param {ConnectWidgetRequestBody} [connectWidgetRequestBody] Optional config options for WebView (is_mobile_webview, current_institution_code, current_member_guid, update_credentials)
+     * @param {ConnectWidgetRequestBody} connectWidgetRequestBody Optional config options for WebView (is_mobile_webview, current_institution_code, current_member_guid, update_credentials)
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public requestConnectWidgetURL(userGuid: string, connectWidgetRequestBody?: ConnectWidgetRequestBody, options?: AxiosRequestConfig) {
+    public requestConnectWidgetURL(userGuid: string, connectWidgetRequestBody: ConnectWidgetRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).requestConnectWidgetURL(userGuid, connectWidgetRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
