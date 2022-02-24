@@ -2822,6 +2822,157 @@ export interface PaginationResponse {
 /**
  * 
  * @export
+ * @interface PaymentAccountResponse
+ */
+export interface PaymentAccountResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentAccountResponse
+     */
+    'account_name'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentAccountResponse
+     */
+    'account_number'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentAccountResponse
+     */
+    'account_type'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaymentAccountResponse
+     */
+    'available_balance'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaymentAccountResponse
+     */
+    'balance'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentAccountResponse
+     */
+    'routing_number'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentAccountResponse
+     */
+    'transit_number'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface PaymentAccountResponseBody
+ */
+export interface PaymentAccountResponseBody {
+    /**
+     * 
+     * @type {PaymentAccountResponse}
+     * @memberof PaymentAccountResponseBody
+     */
+    'payment_account'?: PaymentAccountResponse;
+}
+/**
+ * 
+ * @export
+ * @interface PaymentProcessorAuthorizationCodeRequest
+ */
+export interface PaymentProcessorAuthorizationCodeRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentProcessorAuthorizationCodeRequest
+     */
+    'account_guid'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentProcessorAuthorizationCodeRequest
+     */
+    'member_guid'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentProcessorAuthorizationCodeRequest
+     */
+    'user_guid'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface PaymentProcessorAuthorizationCodeRequestBody
+ */
+export interface PaymentProcessorAuthorizationCodeRequestBody {
+    /**
+     * 
+     * @type {PaymentProcessorAuthorizationCodeRequest}
+     * @memberof PaymentProcessorAuthorizationCodeRequestBody
+     */
+    'payment_processor_authorization_code'?: PaymentProcessorAuthorizationCodeRequest;
+}
+/**
+ * 
+ * @export
+ * @interface PaymentProcessorAuthorizationCodeResponse
+ */
+export interface PaymentProcessorAuthorizationCodeResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentProcessorAuthorizationCodeResponse
+     */
+    'authorization_code'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface PaymentProcessorAuthorizationCodeResponseBody
+ */
+export interface PaymentProcessorAuthorizationCodeResponseBody {
+    /**
+     * 
+     * @type {PaymentProcessorAuthorizationCodeResponse}
+     * @memberof PaymentProcessorAuthorizationCodeResponseBody
+     */
+    'payment_processor_authorization_code'?: PaymentProcessorAuthorizationCodeResponse;
+}
+/**
+ * 
+ * @export
+ * @interface PaymentProcessorTokenResponseBody
+ */
+export interface PaymentProcessorTokenResponseBody {
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentProcessorTokenResponseBody
+     */
+    'access_token'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentProcessorTokenResponseBody
+     */
+    'scope'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentProcessorTokenResponseBody
+     */
+    'token_type'?: string | null;
+}
+/**
+ * 
+ * @export
  * @interface StatementResponse
  */
 export interface StatementResponse {
@@ -7429,6 +7580,124 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
+         * Use this endpoint to request a payment account.
+         * @summary Request payment account
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        requestPaymentAccount: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/payment_account`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to request a payment processor authorization code.
+         * @summary Request payment processor authorization code
+         * @param {PaymentProcessorAuthorizationCodeRequestBody} paymentProcessorAuthorizationCodeRequestBody Payment processor authorization code object containing account_guid, member_guid, and user_guid.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        requestPaymentProcessorAuthorizationCode: async (paymentProcessorAuthorizationCodeRequestBody: PaymentProcessorAuthorizationCodeRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'paymentProcessorAuthorizationCodeRequestBody' is not null or undefined
+            assertParamExists('requestPaymentProcessorAuthorizationCode', 'paymentProcessorAuthorizationCodeRequestBody', paymentProcessorAuthorizationCodeRequestBody)
+            const localVarPath = `/payment_processor_authorization_code`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(paymentProcessorAuthorizationCodeRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to request a payment processor token.
+         * @summary Request payment processor token
+         * @param {string} [code] Code to request processor token.
+         * @param {string} [grantType] Specify grant type.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        requestPaymentProcessorToken: async (code?: string, grantType?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/payment_processor_token`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (code !== undefined) {
+                localVarQueryParameter['code'] = code;
+            }
+
+            if (grantType !== undefined) {
+                localVarQueryParameter['grant_type'] = grantType;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * This endpoint allows partners to get a URL by passing the `widget_type` in the request body, as well as configuring it in several different ways. In the case of Connect, that means setting the `widget_type` to `connect_widget`. Partners may also pass an optional `Accept-Language` header as well as a number of configuration options. Note that this is a `POST` request.
          * @summary Request widget url
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
@@ -9081,6 +9350,39 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Use this endpoint to request a payment account.
+         * @summary Request payment account
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async requestPaymentAccount(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentAccountResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.requestPaymentAccount(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to request a payment processor authorization code.
+         * @summary Request payment processor authorization code
+         * @param {PaymentProcessorAuthorizationCodeRequestBody} paymentProcessorAuthorizationCodeRequestBody Payment processor authorization code object containing account_guid, member_guid, and user_guid.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async requestPaymentProcessorAuthorizationCode(paymentProcessorAuthorizationCodeRequestBody: PaymentProcessorAuthorizationCodeRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentProcessorAuthorizationCodeResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.requestPaymentProcessorAuthorizationCode(paymentProcessorAuthorizationCodeRequestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to request a payment processor token.
+         * @summary Request payment processor token
+         * @param {string} [code] Code to request processor token.
+         * @param {string} [grantType] Specify grant type.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async requestPaymentProcessorToken(code?: string, grantType?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentProcessorTokenResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.requestPaymentProcessorToken(code, grantType, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * This endpoint allows partners to get a URL by passing the `widget_type` in the request body, as well as configuring it in several different ways. In the case of Connect, that means setting the `widget_type` to `connect_widget`. Partners may also pass an optional `Accept-Language` header as well as a number of configuration options. Note that this is a `POST` request.
          * @summary Request widget url
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
@@ -10161,6 +10463,36 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          */
         requestOAuthWindowURI(memberGuid: string, userGuid: string, referralSource?: string, skipAggregation?: boolean, uiMessageWebviewUrlScheme?: string, options?: any): AxiosPromise<OAuthWindowResponseBody> {
             return localVarFp.requestOAuthWindowURI(memberGuid, userGuid, referralSource, skipAggregation, uiMessageWebviewUrlScheme, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to request a payment account.
+         * @summary Request payment account
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        requestPaymentAccount(options?: any): AxiosPromise<PaymentAccountResponseBody> {
+            return localVarFp.requestPaymentAccount(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to request a payment processor authorization code.
+         * @summary Request payment processor authorization code
+         * @param {PaymentProcessorAuthorizationCodeRequestBody} paymentProcessorAuthorizationCodeRequestBody Payment processor authorization code object containing account_guid, member_guid, and user_guid.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        requestPaymentProcessorAuthorizationCode(paymentProcessorAuthorizationCodeRequestBody: PaymentProcessorAuthorizationCodeRequestBody, options?: any): AxiosPromise<PaymentProcessorAuthorizationCodeResponseBody> {
+            return localVarFp.requestPaymentProcessorAuthorizationCode(paymentProcessorAuthorizationCodeRequestBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to request a payment processor token.
+         * @summary Request payment processor token
+         * @param {string} [code] Code to request processor token.
+         * @param {string} [grantType] Specify grant type.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        requestPaymentProcessorToken(code?: string, grantType?: string, options?: any): AxiosPromise<PaymentProcessorTokenResponseBody> {
+            return localVarFp.requestPaymentProcessorToken(code, grantType, options).then((request) => request(axios, basePath));
         },
         /**
          * This endpoint allows partners to get a URL by passing the `widget_type` in the request body, as well as configuring it in several different ways. In the case of Connect, that means setting the `widget_type` to `connect_widget`. Partners may also pass an optional `Accept-Language` header as well as a number of configuration options. Note that this is a `POST` request.
@@ -11378,6 +11710,42 @@ export class MxPlatformApi extends BaseAPI {
      */
     public requestOAuthWindowURI(memberGuid: string, userGuid: string, referralSource?: string, skipAggregation?: boolean, uiMessageWebviewUrlScheme?: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).requestOAuthWindowURI(memberGuid, userGuid, referralSource, skipAggregation, uiMessageWebviewUrlScheme, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to request a payment account.
+     * @summary Request payment account
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public requestPaymentAccount(options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).requestPaymentAccount(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to request a payment processor authorization code.
+     * @summary Request payment processor authorization code
+     * @param {PaymentProcessorAuthorizationCodeRequestBody} paymentProcessorAuthorizationCodeRequestBody Payment processor authorization code object containing account_guid, member_guid, and user_guid.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public requestPaymentProcessorAuthorizationCode(paymentProcessorAuthorizationCodeRequestBody: PaymentProcessorAuthorizationCodeRequestBody, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).requestPaymentProcessorAuthorizationCode(paymentProcessorAuthorizationCodeRequestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to request a payment processor token.
+     * @summary Request payment processor token
+     * @param {string} [code] Code to request processor token.
+     * @param {string} [grantType] Specify grant type.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public requestPaymentProcessorToken(code?: string, grantType?: string, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).requestPaymentProcessorToken(code, grantType, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
