@@ -938,6 +938,12 @@ export interface CredentialResponse {
      * @memberof CredentialResponse
      */
     'label'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CredentialResponse
+     */
+    'type'?: string | null;
 }
 /**
  * 
