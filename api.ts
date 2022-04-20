@@ -1373,6 +1373,12 @@ export interface InstitutionResponse {
      * @type {string}
      * @memberof InstitutionResponse
      */
+    'instructional_text'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof InstitutionResponse
+     */
     'medium_logo_url'?: string | null;
     /**
      * 
