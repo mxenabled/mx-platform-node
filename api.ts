@@ -59,6 +59,12 @@ export interface AccountNumberResponse {
     'member_guid'?: string | null;
     /**
      * 
+     * @type {boolean}
+     * @memberof AccountNumberResponse
+     */
+    'passed_validation'?: boolean | null;
+    /**
+     * 
      * @type {string}
      * @memberof AccountNumberResponse
      */
@@ -136,7 +142,19 @@ export interface AccountOwnerResponse {
      * @type {string}
      * @memberof AccountOwnerResponse
      */
+    'first_name'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountOwnerResponse
+     */
     'guid'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountOwnerResponse
+     */
+    'last_name'?: string | null;
     /**
      * 
      * @type {string}
@@ -800,7 +818,19 @@ export interface ConnectWidgetRequest {
      * @type {boolean}
      * @memberof ConnectWidgetRequest
      */
+    'disable_background_agg'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ConnectWidgetRequest
+     */
     'disable_institution_search'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ConnectWidgetRequest
+     */
+    'include_identity'?: boolean;
     /**
      * 
      * @type {boolean}
@@ -819,6 +849,12 @@ export interface ConnectWidgetRequest {
      * @memberof ConnectWidgetRequest
      */
     'mode'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectWidgetRequest
+     */
+    'oauth_referral_source'?: string;
     /**
      * 
      * @type {number}
@@ -2255,12 +2291,6 @@ export interface MemberCreateRequest {
     'background_aggregation_is_disabled'?: boolean;
     /**
      * 
-     * @type {string}
-     * @memberof MemberCreateRequest
-     */
-    'client_redirect_url'?: string;
-    /**
-     * 
      * @type {Array<CredentialRequest>}
      * @memberof MemberCreateRequest
      */
@@ -2304,6 +2334,12 @@ export interface MemberCreateRequest {
 export interface MemberCreateRequestBody {
     /**
      * 
+     * @type {string}
+     * @memberof MemberCreateRequestBody
+     */
+    'client_redirect_url'?: string;
+    /**
+     * 
      * @type {MemberCreateRequest}
      * @memberof MemberCreateRequestBody
      */
@@ -2333,6 +2369,12 @@ export interface MemberResponse {
      * @memberof MemberResponse
      */
     'aggregated_at'?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof MemberResponse
+     */
+    'background_aggregation_is_disabled'?: boolean;
     /**
      * 
      * @type {string}
@@ -3850,6 +3892,12 @@ export interface WidgetRequest {
      * @type {boolean}
      * @memberof WidgetRequest
      */
+    'include_identity'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof WidgetRequest
+     */
     'include_transactions'?: boolean;
     /**
      * 
@@ -3863,6 +3911,12 @@ export interface WidgetRequest {
      * @memberof WidgetRequest
      */
     'mode'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof WidgetRequest
+     */
+    'oauth_referral_source'?: string;
     /**
      * 
      * @type {number}
@@ -5872,6 +5926,63 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
+         * This endpoint returns a list of all the accounts associated with the specified `member`.
+         * @summary List accounts by member
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {boolean} [memberIsManagedByUser] List only accounts whose member is managed by the user.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listMemberAccounts: async (userGuid: string, memberGuid: string, memberIsManagedByUser?: boolean, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('listMemberAccounts', 'userGuid', userGuid)
+            // verify required parameter 'memberGuid' is not null or undefined
+            assertParamExists('listMemberAccounts', 'memberGuid', memberGuid)
+            const localVarPath = `/users/{user_guid}/members/{member_guid}/accounts`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (memberIsManagedByUser !== undefined) {
+                localVarQueryParameter['member_is_managed_by_user'] = memberIsManagedByUser;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Use this endpoint for information on what multi-factor authentication challenges need to be answered in order to aggregate a member. If the aggregation is not challenged, i.e., the member does not have a connection status of `CHALLENGED`, then code `204 No Content` will be returned. If the aggregation has been challenged, i.e., the member does have a connection status of `CHALLENGED`, then code `200 OK` will be returned - along with the corresponding credentials.
          * @summary List member challenges
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -6511,12 +6622,13 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * This endpoint returns a list of all the accounts associated with the specified `user`.
          * @summary List accounts
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {boolean} [memberIsManagedByUser] List only accounts whose member is managed by the user.
          * @param {number} [page] Specify current page.
          * @param {number} [recordsPerPage] Specify records per page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listUserAccounts: async (userGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listUserAccounts: async (userGuid: string, memberIsManagedByUser?: boolean, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('listUserAccounts', 'userGuid', userGuid)
             const localVarPath = `/users/{user_guid}/accounts`
@@ -6535,6 +6647,10 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             // authentication basicAuth required
             // http basic authentication required
             setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (memberIsManagedByUser !== undefined) {
+                localVarQueryParameter['member_is_managed_by_user'] = memberIsManagedByUser;
+            }
 
             if (page !== undefined) {
                 localVarQueryParameter['page'] = page;
@@ -6560,10 +6676,13 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @summary List users
          * @param {number} [page] Specify current page.
          * @param {number} [recordsPerPage] Specify records per page.
+         * @param {string} [id] The user &#x60;id&#x60; to search for.
+         * @param {string} [email] The user &#x60;email&#x60; to search for.
+         * @param {boolean} [isDisabled] Search for users that are diabled.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listUsers: async (page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listUsers: async (page?: number, recordsPerPage?: number, id?: string, email?: string, isDisabled?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/users`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -6586,6 +6705,18 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
             if (recordsPerPage !== undefined) {
                 localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+            if (id !== undefined) {
+                localVarQueryParameter['id'] = id;
+            }
+
+            if (email !== undefined) {
+                localVarQueryParameter['email'] = email;
+            }
+
+            if (isDisabled !== undefined) {
+                localVarQueryParameter['is_disabled'] = isDisabled;
             }
 
 
@@ -6614,6 +6745,52 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             assertParamExists('readAccount', 'userGuid', userGuid)
             const localVarPath = `/users/{user_guid}/accounts/{account_guid}`
                 .replace(`{${"account_guid"}}`, encodeURIComponent(String(accountGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This endpoint allows you to read the attributes of an `account` resource.
+         * @summary Read account by member
+         * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readAccountByMember: async (accountGuid: string, memberGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'accountGuid' is not null or undefined
+            assertParamExists('readAccountByMember', 'accountGuid', accountGuid)
+            // verify required parameter 'memberGuid' is not null or undefined
+            assertParamExists('readAccountByMember', 'memberGuid', memberGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('readAccountByMember', 'userGuid', userGuid)
+            const localVarPath = `/users/{user_guid}/members/{member_guid}/accounts/{account_guid}`
+                .replace(`{${"account_guid"}}`, encodeURIComponent(String(accountGuid)))
+                .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)))
                 .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -8674,6 +8851,21 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * This endpoint returns a list of all the accounts associated with the specified `member`.
+         * @summary List accounts by member
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {boolean} [memberIsManagedByUser] List only accounts whose member is managed by the user.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listMemberAccounts(userGuid: string, memberGuid: string, memberIsManagedByUser?: boolean, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountsResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listMemberAccounts(userGuid, memberGuid, memberIsManagedByUser, page, recordsPerPage, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Use this endpoint for information on what multi-factor authentication challenges need to be answered in order to aggregate a member. If the aggregation is not challenged, i.e., the member does not have a connection status of `CHALLENGED`, then code `204 No Content` will be returned. If the aggregation has been challenged, i.e., the member does have a connection status of `CHALLENGED`, then code `200 OK` will be returned - along with the corresponding credentials.
          * @summary List member challenges
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -8846,13 +9038,14 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * This endpoint returns a list of all the accounts associated with the specified `user`.
          * @summary List accounts
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {boolean} [memberIsManagedByUser] List only accounts whose member is managed by the user.
          * @param {number} [page] Specify current page.
          * @param {number} [recordsPerPage] Specify records per page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listUserAccounts(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountsResponseBody>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listUserAccounts(userGuid, page, recordsPerPage, options);
+        async listUserAccounts(userGuid: string, memberIsManagedByUser?: boolean, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountsResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listUserAccounts(userGuid, memberIsManagedByUser, page, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -8860,11 +9053,14 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @summary List users
          * @param {number} [page] Specify current page.
          * @param {number} [recordsPerPage] Specify records per page.
+         * @param {string} [id] The user &#x60;id&#x60; to search for.
+         * @param {string} [email] The user &#x60;email&#x60; to search for.
+         * @param {boolean} [isDisabled] Search for users that are diabled.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listUsers(page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UsersResponseBody>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listUsers(page, recordsPerPage, options);
+        async listUsers(page?: number, recordsPerPage?: number, id?: string, email?: string, isDisabled?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UsersResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listUsers(page, recordsPerPage, id, email, isDisabled, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -8877,6 +9073,19 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          */
         async readAccount(accountGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.readAccount(accountGuid, userGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * This endpoint allows you to read the attributes of an `account` resource.
+         * @summary Read account by member
+         * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async readAccountByMember(accountGuid: string, memberGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.readAccountByMember(accountGuid, memberGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -9791,6 +10000,20 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
             return localVarFp.listManagedTransactions(accountGuid, memberGuid, userGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
         },
         /**
+         * This endpoint returns a list of all the accounts associated with the specified `member`.
+         * @summary List accounts by member
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {boolean} [memberIsManagedByUser] List only accounts whose member is managed by the user.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listMemberAccounts(userGuid: string, memberGuid: string, memberIsManagedByUser?: boolean, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<AccountsResponseBody> {
+            return localVarFp.listMemberAccounts(userGuid, memberGuid, memberIsManagedByUser, page, recordsPerPage, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Use this endpoint for information on what multi-factor authentication challenges need to be answered in order to aggregate a member. If the aggregation is not challenged, i.e., the member does not have a connection status of `CHALLENGED`, then code `204 No Content` will be returned. If the aggregation has been challenged, i.e., the member does have a connection status of `CHALLENGED`, then code `200 OK` will be returned - along with the corresponding credentials.
          * @summary List member challenges
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -9951,24 +10174,28 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          * This endpoint returns a list of all the accounts associated with the specified `user`.
          * @summary List accounts
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {boolean} [memberIsManagedByUser] List only accounts whose member is managed by the user.
          * @param {number} [page] Specify current page.
          * @param {number} [recordsPerPage] Specify records per page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listUserAccounts(userGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<AccountsResponseBody> {
-            return localVarFp.listUserAccounts(userGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
+        listUserAccounts(userGuid: string, memberIsManagedByUser?: boolean, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<AccountsResponseBody> {
+            return localVarFp.listUserAccounts(userGuid, memberIsManagedByUser, page, recordsPerPage, options).then((request) => request(axios, basePath));
         },
         /**
          * Use this endpoint to list every user you\'ve created in the MX Platform API.
          * @summary List users
          * @param {number} [page] Specify current page.
          * @param {number} [recordsPerPage] Specify records per page.
+         * @param {string} [id] The user &#x60;id&#x60; to search for.
+         * @param {string} [email] The user &#x60;email&#x60; to search for.
+         * @param {boolean} [isDisabled] Search for users that are diabled.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listUsers(page?: number, recordsPerPage?: number, options?: any): AxiosPromise<UsersResponseBody> {
-            return localVarFp.listUsers(page, recordsPerPage, options).then((request) => request(axios, basePath));
+        listUsers(page?: number, recordsPerPage?: number, id?: string, email?: string, isDisabled?: boolean, options?: any): AxiosPromise<UsersResponseBody> {
+            return localVarFp.listUsers(page, recordsPerPage, id, email, isDisabled, options).then((request) => request(axios, basePath));
         },
         /**
          * This endpoint returns the specified `account` resource.
@@ -9980,6 +10207,18 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          */
         readAccount(accountGuid: string, userGuid: string, options?: any): AxiosPromise<AccountResponseBody> {
             return localVarFp.readAccount(accountGuid, userGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This endpoint allows you to read the attributes of an `account` resource.
+         * @summary Read account by member
+         * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readAccountByMember(accountGuid: string, memberGuid: string, userGuid: string, options?: any): AxiosPromise<AccountResponseBody> {
+            return localVarFp.readAccountByMember(accountGuid, memberGuid, userGuid, options).then((request) => request(axios, basePath));
         },
         /**
          * Use this endpoint to read the attributes of either a default category or a custom category.
@@ -10942,6 +11181,22 @@ export class MxPlatformApi extends BaseAPI {
     }
 
     /**
+     * This endpoint returns a list of all the accounts associated with the specified `member`.
+     * @summary List accounts by member
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+     * @param {boolean} [memberIsManagedByUser] List only accounts whose member is managed by the user.
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public listMemberAccounts(userGuid: string, memberGuid: string, memberIsManagedByUser?: boolean, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).listMemberAccounts(userGuid, memberGuid, memberIsManagedByUser, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Use this endpoint for information on what multi-factor authentication challenges need to be answered in order to aggregate a member. If the aggregation is not challenged, i.e., the member does not have a connection status of `CHALLENGED`, then code `204 No Content` will be returned. If the aggregation has been challenged, i.e., the member does have a connection status of `CHALLENGED`, then code `200 OK` will be returned - along with the corresponding credentials.
      * @summary List member challenges
      * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -11126,14 +11381,15 @@ export class MxPlatformApi extends BaseAPI {
      * This endpoint returns a list of all the accounts associated with the specified `user`.
      * @summary List accounts
      * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {boolean} [memberIsManagedByUser] List only accounts whose member is managed by the user.
      * @param {number} [page] Specify current page.
      * @param {number} [recordsPerPage] Specify records per page.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listUserAccounts(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
-        return MxPlatformApiFp(this.configuration).listUserAccounts(userGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    public listUserAccounts(userGuid: string, memberIsManagedByUser?: boolean, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).listUserAccounts(userGuid, memberIsManagedByUser, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -11141,12 +11397,15 @@ export class MxPlatformApi extends BaseAPI {
      * @summary List users
      * @param {number} [page] Specify current page.
      * @param {number} [recordsPerPage] Specify records per page.
+     * @param {string} [id] The user &#x60;id&#x60; to search for.
+     * @param {string} [email] The user &#x60;email&#x60; to search for.
+     * @param {boolean} [isDisabled] Search for users that are diabled.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listUsers(page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
-        return MxPlatformApiFp(this.configuration).listUsers(page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    public listUsers(page?: number, recordsPerPage?: number, id?: string, email?: string, isDisabled?: boolean, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).listUsers(page, recordsPerPage, id, email, isDisabled, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -11160,6 +11419,20 @@ export class MxPlatformApi extends BaseAPI {
      */
     public readAccount(accountGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).readAccount(accountGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This endpoint allows you to read the attributes of an `account` resource.
+     * @summary Read account by member
+     * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
+     * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public readAccountByMember(accountGuid: string, memberGuid: string, userGuid: string, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).readAccountByMember(accountGuid, memberGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
