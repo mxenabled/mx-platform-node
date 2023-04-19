@@ -561,6 +561,58 @@ export interface AccountsResponseBody {
 /**
  * 
  * @export
+ * @interface AuthorizationCodeRequest
+ */
+export interface AuthorizationCodeRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthorizationCodeRequest
+     */
+    'scope'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface AuthorizationCodeRequestBody
+ */
+export interface AuthorizationCodeRequestBody {
+    /**
+     * 
+     * @type {AuthorizationCodeRequest}
+     * @memberof AuthorizationCodeRequestBody
+     */
+    'authorization_code'?: AuthorizationCodeRequest;
+}
+/**
+ * 
+ * @export
+ * @interface AuthorizationCodeResponse
+ */
+export interface AuthorizationCodeResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthorizationCodeResponse
+     */
+    'code'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface AuthorizationCodeResponseBody
+ */
+export interface AuthorizationCodeResponseBody {
+    /**
+     * 
+     * @type {Array<AuthorizationCodeResponse>}
+     * @memberof AuthorizationCodeResponseBody
+     */
+    'authorization_code'?: Array<AuthorizationCodeResponse>;
+}
+/**
+ * 
+ * @export
  * @interface CategoriesResponseBody
  */
 export interface CategoriesResponseBody {
@@ -2888,6 +2940,70 @@ export interface PaginationResponse {
 /**
  * 
  * @export
+ * @interface PaymentProcessorAuthorizationCodeRequest
+ */
+export interface PaymentProcessorAuthorizationCodeRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentProcessorAuthorizationCodeRequest
+     */
+    'account_guid'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentProcessorAuthorizationCodeRequest
+     */
+    'member_guid'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentProcessorAuthorizationCodeRequest
+     */
+    'user_guid'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface PaymentProcessorAuthorizationCodeRequestBody
+ */
+export interface PaymentProcessorAuthorizationCodeRequestBody {
+    /**
+     * 
+     * @type {PaymentProcessorAuthorizationCodeRequest}
+     * @memberof PaymentProcessorAuthorizationCodeRequestBody
+     */
+    'payment_processor_authorization_code'?: PaymentProcessorAuthorizationCodeRequest;
+}
+/**
+ * 
+ * @export
+ * @interface PaymentProcessorAuthorizationCodeResponse
+ */
+export interface PaymentProcessorAuthorizationCodeResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentProcessorAuthorizationCodeResponse
+     */
+    'authorization_code'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface PaymentProcessorAuthorizationCodeResponseBody
+ */
+export interface PaymentProcessorAuthorizationCodeResponseBody {
+    /**
+     * 
+     * @type {PaymentProcessorAuthorizationCodeResponse}
+     * @memberof PaymentProcessorAuthorizationCodeResponseBody
+     */
+    'payment_processor_authorization_code'?: PaymentProcessorAuthorizationCodeResponse;
+}
+/**
+ * 
+ * @export
  * @interface StatementResponse
  */
 export interface StatementResponse {
@@ -3886,6 +4002,12 @@ export interface WidgetRequest {
      * @type {boolean}
      * @memberof WidgetRequest
      */
+    'disable_background_agg'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof WidgetRequest
+     */
     'disable_institution_search'?: boolean;
     /**
      * 
@@ -4868,6 +4990,46 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * (This endpoint is deprecated. Clients should use `/authorization_code`.) Clients use this endpoint to request an authorization_code according to a user, member, and account specified in the request body. Clients then pass this code to processors. Processor access is scoped only to the user/member/account specified in this request. Before requesting an authorization_code, clients must have verified the specified member.
+         * @summary (Deprecated) Request an authorization code.
+         * @param {PaymentProcessorAuthorizationCodeRequestBody} paymentProcessorAuthorizationCodeRequestBody The scope for the authorization code.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deprecatedRequestPaymentProcessorAuthorizationCode: async (paymentProcessorAuthorizationCodeRequestBody: PaymentProcessorAuthorizationCodeRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'paymentProcessorAuthorizationCodeRequestBody' is not null or undefined
+            assertParamExists('deprecatedRequestPaymentProcessorAuthorizationCode', 'paymentProcessorAuthorizationCodeRequestBody', paymentProcessorAuthorizationCodeRequestBody)
+            const localVarPath = `/payment_processor_authorization_code`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(paymentProcessorAuthorizationCodeRequestBody, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -7529,6 +7691,46 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
+         * Clients use this endpoint to request an authorization code according to the parameters specified in the scope. Clients then pass this code to processors. Processor access is scoped only to the GUIDs and features specified in this request. Before requesting an authorization code which includes a member in the scope, clients must have verified that member.
+         * @summary Request an authorization code.
+         * @param {AuthorizationCodeRequestBody} authorizationCodeRequestBody The scope for the authorization code.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        requestAuthorizationCode: async (authorizationCodeRequestBody: AuthorizationCodeRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorizationCodeRequestBody' is not null or undefined
+            assertParamExists('requestAuthorizationCode', 'authorizationCodeRequestBody', authorizationCodeRequestBody)
+            const localVarPath = `/authorization_code`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(authorizationCodeRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * This endpoint will return a URL for an embeddable version of MX Connect.
          * @summary Request connect widget url
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
@@ -8568,6 +8770,17 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * (This endpoint is deprecated. Clients should use `/authorization_code`.) Clients use this endpoint to request an authorization_code according to a user, member, and account specified in the request body. Clients then pass this code to processors. Processor access is scoped only to the user/member/account specified in this request. Before requesting an authorization_code, clients must have verified the specified member.
+         * @summary (Deprecated) Request an authorization code.
+         * @param {PaymentProcessorAuthorizationCodeRequestBody} paymentProcessorAuthorizationCodeRequestBody The scope for the authorization code.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deprecatedRequestPaymentProcessorAuthorizationCode(paymentProcessorAuthorizationCodeRequestBody: PaymentProcessorAuthorizationCodeRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentProcessorAuthorizationCodeResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deprecatedRequestPaymentProcessorAuthorizationCode(paymentProcessorAuthorizationCodeRequestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Use this endpoint to download a specified statement PDF.
          * @summary Download statement pdf
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -9292,6 +9505,17 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Clients use this endpoint to request an authorization code according to the parameters specified in the scope. Clients then pass this code to processors. Processor access is scoped only to the GUIDs and features specified in this request. Before requesting an authorization code which includes a member in the scope, clients must have verified that member.
+         * @summary Request an authorization code.
+         * @param {AuthorizationCodeRequestBody} authorizationCodeRequestBody The scope for the authorization code.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async requestAuthorizationCode(authorizationCodeRequestBody: AuthorizationCodeRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthorizationCodeResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.requestAuthorizationCode(authorizationCodeRequestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * This endpoint will return a URL for an embeddable version of MX Connect.
          * @summary Request connect widget url
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
@@ -9736,6 +9960,16 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          */
         deleteUser(userGuid: string, options?: any): AxiosPromise<void> {
             return localVarFp.deleteUser(userGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * (This endpoint is deprecated. Clients should use `/authorization_code`.) Clients use this endpoint to request an authorization_code according to a user, member, and account specified in the request body. Clients then pass this code to processors. Processor access is scoped only to the user/member/account specified in this request. Before requesting an authorization_code, clients must have verified the specified member.
+         * @summary (Deprecated) Request an authorization code.
+         * @param {PaymentProcessorAuthorizationCodeRequestBody} paymentProcessorAuthorizationCodeRequestBody The scope for the authorization code.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deprecatedRequestPaymentProcessorAuthorizationCode(paymentProcessorAuthorizationCodeRequestBody: PaymentProcessorAuthorizationCodeRequestBody, options?: any): AxiosPromise<PaymentProcessorAuthorizationCodeResponseBody> {
+            return localVarFp.deprecatedRequestPaymentProcessorAuthorizationCode(paymentProcessorAuthorizationCodeRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
          * Use this endpoint to download a specified statement PDF.
@@ -10407,6 +10641,16 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
             return localVarFp.readUser(userGuid, options).then((request) => request(axios, basePath));
         },
         /**
+         * Clients use this endpoint to request an authorization code according to the parameters specified in the scope. Clients then pass this code to processors. Processor access is scoped only to the GUIDs and features specified in this request. Before requesting an authorization code which includes a member in the scope, clients must have verified that member.
+         * @summary Request an authorization code.
+         * @param {AuthorizationCodeRequestBody} authorizationCodeRequestBody The scope for the authorization code.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        requestAuthorizationCode(authorizationCodeRequestBody: AuthorizationCodeRequestBody, options?: any): AxiosPromise<AuthorizationCodeResponseBody> {
+            return localVarFp.requestAuthorizationCode(authorizationCodeRequestBody, options).then((request) => request(axios, basePath));
+        },
+        /**
          * This endpoint will return a URL for an embeddable version of MX Connect.
          * @summary Request connect widget url
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
@@ -10874,6 +11118,18 @@ export class MxPlatformApi extends BaseAPI {
      */
     public deleteUser(userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).deleteUser(userGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * (This endpoint is deprecated. Clients should use `/authorization_code`.) Clients use this endpoint to request an authorization_code according to a user, member, and account specified in the request body. Clients then pass this code to processors. Processor access is scoped only to the user/member/account specified in this request. Before requesting an authorization_code, clients must have verified the specified member.
+     * @summary (Deprecated) Request an authorization code.
+     * @param {PaymentProcessorAuthorizationCodeRequestBody} paymentProcessorAuthorizationCodeRequestBody The scope for the authorization code.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public deprecatedRequestPaymentProcessorAuthorizationCode(paymentProcessorAuthorizationCodeRequestBody: PaymentProcessorAuthorizationCodeRequestBody, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).deprecatedRequestPaymentProcessorAuthorizationCode(paymentProcessorAuthorizationCodeRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -11653,6 +11909,18 @@ export class MxPlatformApi extends BaseAPI {
      */
     public readUser(userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).readUser(userGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Clients use this endpoint to request an authorization code according to the parameters specified in the scope. Clients then pass this code to processors. Processor access is scoped only to the GUIDs and features specified in this request. Before requesting an authorization code which includes a member in the scope, clients must have verified that member.
+     * @summary Request an authorization code.
+     * @param {AuthorizationCodeRequestBody} authorizationCodeRequestBody The scope for the authorization code.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public requestAuthorizationCode(authorizationCodeRequestBody: AuthorizationCodeRequestBody, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).requestAuthorizationCode(authorizationCodeRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
