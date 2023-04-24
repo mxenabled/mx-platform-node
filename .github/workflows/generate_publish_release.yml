@@ -16,10 +16,8 @@ jobs:
       - name: Bump version
         id: bump_version
         run: echo "::set-output name=version::$(ruby .github/version.rb ${{ github.event.client_payload.version }})"
-
       - name: Clean repo
         run: ruby .github/clean.rb
-
       - name: Install openapi-generator-cli
         run: |
           npm install @openapitools/openapi-generator-cli -g
@@ -30,10 +28,8 @@ jobs:
             -g typescript-axios \
             -c ./openapi/config.yml \
             -t ./openapi/templates
-
       - name: Checkout master
         run: git checkout master
-
       - name: Create commit
         run: |
           git config user.name "devexperience"
@@ -42,11 +38,22 @@ jobs:
           git commit -m "Generated version ${{ steps.bump_version.outputs.version }}
 
           This commit was automatically created by a GitHub Action to generate version ${{ steps.bump_version.outputs.version }} of this library."
-
       - name: Push to master
         run: git push origin master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Slack notification
+        uses: ravsamhq/notify-slack-action@v2
+        if: always()
+        with:
+          status: ${{ job.status }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          notification_title: "{repo}: {workflow} workflow"
+          message_format: "{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}>"
+          footer: "<{workflow_url}|View Workflow>"
+          notify_when: "failure"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   Publish:
     runs-on: ubuntu-latest
     steps:
@@ -59,6 +66,18 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+      - name: Slack notification
+        uses: ravsamhq/notify-slack-action@v2
+        if: always()
+        with:
+          status: ${{ job.status }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          notification_title: "{repo}: {workflow} workflow"
+          message_format: "{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}>"
+          footer: "<{workflow_url}|View Workflow>"
+          notify_when: "failure"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   Release:
     runs-on: ubuntu-latest
     steps:
@@ -76,3 +95,15 @@ jobs:
           gh release create "v${{ steps.read_version.outputs.version }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Slack notification
+        uses: ravsamhq/notify-slack-action@v2
+        if: always()
+        with:
+          status: ${{ job.status }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          notification_title: "{repo}: {workflow} workflow"
+          message_format: "{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}>"
+          footer: "<{workflow_url}|View Workflow>"
+          notify_when: "failure"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
