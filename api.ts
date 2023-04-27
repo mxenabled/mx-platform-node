@@ -3327,6 +3327,105 @@ export interface TagsResponseBody {
 /**
  * 
  * @export
+ * @interface TaxDocumentResponse
+ */
+export interface TaxDocumentResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof TaxDocumentResponse
+     */
+    'content_hash'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TaxDocumentResponse
+     */
+    'created_at'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TaxDocumentResponse
+     */
+    'document_type'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TaxDocumentResponse
+     */
+    'guid'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TaxDocumentResponse
+     */
+    'issued_on'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TaxDocumentResponse
+     */
+    'member_guid'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TaxDocumentResponse
+     */
+    'tax_year'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TaxDocumentResponse
+     */
+    'updated_at'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TaxDocumentResponse
+     */
+    'uri'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TaxDocumentResponse
+     */
+    'user_guid'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface TaxDocumentResponseBody
+ */
+export interface TaxDocumentResponseBody {
+    /**
+     * 
+     * @type {TaxDocumentResponse}
+     * @memberof TaxDocumentResponseBody
+     */
+    'tax_document'?: TaxDocumentResponse;
+}
+/**
+ * 
+ * @export
+ * @interface TaxDocumentsResponseBody
+ */
+export interface TaxDocumentsResponseBody {
+    /**
+     * 
+     * @type {PaginationResponse}
+     * @memberof TaxDocumentsResponseBody
+     */
+    'pagination'?: PaginationResponse;
+    /**
+     * 
+     * @type {Array<TaxDocumentResponse>}
+     * @memberof TaxDocumentsResponseBody
+     */
+    'tax_documents'?: Array<TaxDocumentResponse>;
+}
+/**
+ * 
+ * @export
  * @interface TransactionResponse
  */
 export interface TransactionResponse {
@@ -5083,6 +5182,52 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
+         * Use this endpoint to download a PDF version of the specified tax document. The endpoint URL is the base URL appended with the uri of the tax_document.
+         * @summary Download a Tax Document PDF
+         * @param {string} taxDocumentGuid The unique id for a &#x60;tax_document&#x60;.
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        downloadTaxDocument: async (taxDocumentGuid: string, memberGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'taxDocumentGuid' is not null or undefined
+            assertParamExists('downloadTaxDocument', 'taxDocumentGuid', taxDocumentGuid)
+            // verify required parameter 'memberGuid' is not null or undefined
+            assertParamExists('downloadTaxDocument', 'memberGuid', memberGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('downloadTaxDocument', 'userGuid', userGuid)
+            const localVarPath = `/users/{user_guid}/members/{member_guid}/tax_documents/{tax_document_guid}.pdf`
+                .replace(`{${"tax_document_guid"}}`, encodeURIComponent(String(taxDocumentGuid)))
+                .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Use this endpoint to categorize, cleanse, and classify transactions. These transactions are not persisted or stored on the MX platform.
          * @summary Enhance transactions
          * @param {EnhanceTransactionsRequestBody} enhanceTransactionsRequestBody Transaction object to be enhanced
@@ -5178,6 +5323,48 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('fetchStatements', 'userGuid', userGuid)
             const localVarPath = `/users/{user_guid}/members/{member_guid}/fetch_statements`
+                .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to fetch (aggregate) the tax documents associated with the specified member. This request **does not** return the latest tax documents. It just starts the document aggregation process and returns the initial state of the process. You must interact with the newly aggregated data using the other document endpoints in this reference. This request may also trigger multi-factor authentication which requires end-user input and a specific process for answering authentication challenges.
+         * @summary Fetch Tax Documents
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fetchTaxDocuments: async (memberGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'memberGuid' is not null or undefined
+            assertParamExists('fetchTaxDocuments', 'memberGuid', memberGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('fetchTaxDocuments', 'userGuid', userGuid)
+            const localVarPath = `/users/{user_guid}/members/{member_guid}/fetch_tax_documents`
                 .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)))
                 .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -6489,6 +6676,58 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
+         * Use this endpoint to get a paginated list of tax documents.
+         * @summary List Tax Documents
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listTaxDocuments: async (memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'memberGuid' is not null or undefined
+            assertParamExists('listTaxDocuments', 'memberGuid', memberGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('listTaxDocuments', 'userGuid', userGuid)
+            const localVarPath = `/users/{user_guid}/members/{member_guid}/tax_documents`
+                .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Use this endpoint to read the attributes of all existing transaction rules belonging to the user.
          * @summary List transaction rules
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
@@ -7541,6 +7780,52 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             assertParamExists('readTagging', 'userGuid', userGuid)
             const localVarPath = `/users/{user_guid}/taggings/{tagging_guid}`
                 .replace(`{${"tagging_guid"}}`, encodeURIComponent(String(taggingGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to read the attributes of the specified tax document.
+         * @summary Read a Tax Document
+         * @param {string} taxDocumentGuid The unique id for a &#x60;tax_document&#x60;.
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readTaxDocument: async (taxDocumentGuid: string, memberGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'taxDocumentGuid' is not null or undefined
+            assertParamExists('readTaxDocument', 'taxDocumentGuid', taxDocumentGuid)
+            // verify required parameter 'memberGuid' is not null or undefined
+            assertParamExists('readTaxDocument', 'memberGuid', memberGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('readTaxDocument', 'userGuid', userGuid)
+            const localVarPath = `/users/{user_guid}/members/{member_guid}/tax_documents/{tax_document_guid}`
+                .replace(`{${"tax_document_guid"}}`, encodeURIComponent(String(taxDocumentGuid)))
+                .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)))
                 .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -8794,6 +9079,19 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Use this endpoint to download a PDF version of the specified tax document. The endpoint URL is the base URL appended with the uri of the tax_document.
+         * @summary Download a Tax Document PDF
+         * @param {string} taxDocumentGuid The unique id for a &#x60;tax_document&#x60;.
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async downloadTaxDocument(taxDocumentGuid: string, memberGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.downloadTaxDocument(taxDocumentGuid, memberGuid, userGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Use this endpoint to categorize, cleanse, and classify transactions. These transactions are not persisted or stored on the MX platform.
          * @summary Enhance transactions
          * @param {EnhanceTransactionsRequestBody} enhanceTransactionsRequestBody Transaction object to be enhanced
@@ -8826,6 +9124,18 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          */
         async fetchStatements(memberGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.fetchStatements(memberGuid, userGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to fetch (aggregate) the tax documents associated with the specified member. This request **does not** return the latest tax documents. It just starts the document aggregation process and returns the initial state of the process. You must interact with the newly aggregated data using the other document endpoints in this reference. This request may also trigger multi-factor authentication which requires end-user input and a specific process for answering authentication challenges.
+         * @summary Fetch Tax Documents
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async fetchTaxDocuments(memberGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.fetchTaxDocuments(memberGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -9172,6 +9482,20 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Use this endpoint to get a paginated list of tax documents.
+         * @summary List Tax Documents
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listTaxDocuments(memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaxDocumentsResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listTaxDocuments(memberGuid, userGuid, page, recordsPerPage, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Use this endpoint to read the attributes of all existing transaction rules belonging to the user.
          * @summary List transaction rules
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
@@ -9467,6 +9791,19 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          */
         async readTagging(taggingGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaggingResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.readTagging(taggingGuid, userGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to read the attributes of the specified tax document.
+         * @summary Read a Tax Document
+         * @param {string} taxDocumentGuid The unique id for a &#x60;tax_document&#x60;.
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async readTaxDocument(taxDocumentGuid: string, memberGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaxDocumentResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.readTaxDocument(taxDocumentGuid, memberGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -9984,6 +10321,18 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
             return localVarFp.downloadStatementPDF(memberGuid, statementGuid, userGuid, options).then((request) => request(axios, basePath));
         },
         /**
+         * Use this endpoint to download a PDF version of the specified tax document. The endpoint URL is the base URL appended with the uri of the tax_document.
+         * @summary Download a Tax Document PDF
+         * @param {string} taxDocumentGuid The unique id for a &#x60;tax_document&#x60;.
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        downloadTaxDocument(taxDocumentGuid: string, memberGuid: string, userGuid: string, options?: any): AxiosPromise<any> {
+            return localVarFp.downloadTaxDocument(taxDocumentGuid, memberGuid, userGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Use this endpoint to categorize, cleanse, and classify transactions. These transactions are not persisted or stored on the MX platform.
          * @summary Enhance transactions
          * @param {EnhanceTransactionsRequestBody} enhanceTransactionsRequestBody Transaction object to be enhanced
@@ -10014,6 +10363,17 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          */
         fetchStatements(memberGuid: string, userGuid: string, options?: any): AxiosPromise<MemberResponseBody> {
             return localVarFp.fetchStatements(memberGuid, userGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to fetch (aggregate) the tax documents associated with the specified member. This request **does not** return the latest tax documents. It just starts the document aggregation process and returns the initial state of the process. You must interact with the newly aggregated data using the other document endpoints in this reference. This request may also trigger multi-factor authentication which requires end-user input and a specific process for answering authentication challenges.
+         * @summary Fetch Tax Documents
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fetchTaxDocuments(memberGuid: string, userGuid: string, options?: any): AxiosPromise<MemberResponseBody> {
+            return localVarFp.fetchTaxDocuments(memberGuid, userGuid, options).then((request) => request(axios, basePath));
         },
         /**
          * The identify endpoint begins an identification process for an already-existing member.
@@ -10334,6 +10694,19 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
             return localVarFp.listTags(userGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
         },
         /**
+         * Use this endpoint to get a paginated list of tax documents.
+         * @summary List Tax Documents
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listTaxDocuments(memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<TaxDocumentsResponseBody> {
+            return localVarFp.listTaxDocuments(memberGuid, userGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Use this endpoint to read the attributes of all existing transaction rules belonging to the user.
          * @summary List transaction rules
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
@@ -10607,6 +10980,18 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          */
         readTagging(taggingGuid: string, userGuid: string, options?: any): AxiosPromise<TaggingResponseBody> {
             return localVarFp.readTagging(taggingGuid, userGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to read the attributes of the specified tax document.
+         * @summary Read a Tax Document
+         * @param {string} taxDocumentGuid The unique id for a &#x60;tax_document&#x60;.
+         * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readTaxDocument(taxDocumentGuid: string, memberGuid: string, userGuid: string, options?: any): AxiosPromise<TaxDocumentResponseBody> {
+            return localVarFp.readTaxDocument(taxDocumentGuid, memberGuid, userGuid, options).then((request) => request(axios, basePath));
         },
         /**
          * Requests to this endpoint will return the attributes of the specified `transaction`.
@@ -11147,6 +11532,20 @@ export class MxPlatformApi extends BaseAPI {
     }
 
     /**
+     * Use this endpoint to download a PDF version of the specified tax document. The endpoint URL is the base URL appended with the uri of the tax_document.
+     * @summary Download a Tax Document PDF
+     * @param {string} taxDocumentGuid The unique id for a &#x60;tax_document&#x60;.
+     * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public downloadTaxDocument(taxDocumentGuid: string, memberGuid: string, userGuid: string, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).downloadTaxDocument(taxDocumentGuid, memberGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Use this endpoint to categorize, cleanse, and classify transactions. These transactions are not persisted or stored on the MX platform.
      * @summary Enhance transactions
      * @param {EnhanceTransactionsRequestBody} enhanceTransactionsRequestBody Transaction object to be enhanced
@@ -11182,6 +11581,19 @@ export class MxPlatformApi extends BaseAPI {
      */
     public fetchStatements(memberGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).fetchStatements(memberGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to fetch (aggregate) the tax documents associated with the specified member. This request **does not** return the latest tax documents. It just starts the document aggregation process and returns the initial state of the process. You must interact with the newly aggregated data using the other document endpoints in this reference. This request may also trigger multi-factor authentication which requires end-user input and a specific process for answering authentication challenges.
+     * @summary Fetch Tax Documents
+     * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public fetchTaxDocuments(memberGuid: string, userGuid: string, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).fetchTaxDocuments(memberGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -11553,6 +11965,21 @@ export class MxPlatformApi extends BaseAPI {
     }
 
     /**
+     * Use this endpoint to get a paginated list of tax documents.
+     * @summary List Tax Documents
+     * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public listTaxDocuments(memberGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).listTaxDocuments(memberGuid, userGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Use this endpoint to read the attributes of all existing transaction rules belonging to the user.
      * @summary List transaction rules
      * @param {string} userGuid The unique id for a &#x60;user&#x60;.
@@ -11871,6 +12298,20 @@ export class MxPlatformApi extends BaseAPI {
      */
     public readTagging(taggingGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).readTagging(taggingGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to read the attributes of the specified tax document.
+     * @summary Read a Tax Document
+     * @param {string} taxDocumentGuid The unique id for a &#x60;tax_document&#x60;.
+     * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public readTaxDocument(taxDocumentGuid: string, memberGuid: string, userGuid: string, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).readTaxDocument(taxDocumentGuid, memberGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
