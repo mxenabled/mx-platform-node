@@ -1,0 +1,56 @@
+name: Generate SDK
+
+on:
+  repository_dispatch:
+    types: [generate_sdk]
+
+jobs:
+  Generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+      - name: Bump version
+        id: bump_version
+        run: echo "::set-output name=version::$(ruby .github/version.rb ${{ github.event.client_payload.version }})"
+      - name: Clean repo
+        run: ruby .github/clean.rb
+      - name: Install openapi-generator-cli
+        run: |
+          npm install @openapitools/openapi-generator-cli -g
+          openapi-generator-cli version-manager set 5.4.0
+      - run: |
+          openapi-generator-cli generate \
+            -i https://raw.githubusercontent.com/mxenabled/openapi/master/openapi/mx_platform_api.yml \
+            -g csharp-netcore \
+            -c ./openapi/config.yml \
+            -t ./openapi/templates
+      - name: Checkout master
+        run: git checkout master
+      - name: Create commit
+        run: |
+          git config user.name "devexperience"
+          git config user.email "devexperience@mx.com"
+          git add .
+          git commit -m "Generated version ${{ steps.bump_version.outputs.version }}
+
+          This commit was automatically created by a GitHub Action to generate version ${{ steps.bump_version.outputs.version }} of this library."
+      - name: Push to master
+        run: git push origin master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Slack notification
+        uses: ravsamhq/notify-slack-action@v2
+        if: always()
+        with:
+          status: ${{ job.status }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          notification_title: "{repo}: {workflow} workflow"
+          message_format: "{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}>"
+          footer: "<{workflow_url}|View Workflow>"
+          notify_when: "failure"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
