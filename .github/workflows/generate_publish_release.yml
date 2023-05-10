@@ -1,8 +1,8 @@
-name: Generate SDK
+name: Generate Publish Release
 
 on:
   repository_dispatch:
-    types: [generate_sdk]
+    types: [generate_publish_release]
 
 jobs:
   Generate:
@@ -25,7 +25,7 @@ jobs:
       - run: |
           openapi-generator-cli generate \
             -i https://raw.githubusercontent.com/mxenabled/openapi/master/openapi/mx_platform_api.yml \
-            -g csharp-netcore \
+            -g typescript-axios \
             -c ./openapi/config.yml \
             -t ./openapi/templates
       - name: Checkout master
@@ -42,6 +42,23 @@ jobs:
         run: git push origin master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Generate access token
+        id: generate_token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.PAPI_SDK_APP_ID }}
+          installation_id: ${{ secrets.PAPI_SDK_INSTALLATION_ID }}
+          private_key: ${{ secrets.PAPI_SDK_PRIVATE_KEY }}
+      - name: Publish
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ steps.generate_token.outputs.token }}
+          event-type: publish_sdk
+      - name: Release
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ steps.generate_token.outputs.token }}
+          event-type: release_sdk
       - name: Slack notification
         uses: ravsamhq/notify-slack-action@v2
         if: always()
