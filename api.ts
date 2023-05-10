@@ -1467,6 +1467,18 @@ export interface InstitutionResponse {
      * @type {string}
      * @memberof InstitutionResponse
      */
+    'forgot_password_url'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof InstitutionResponse
+     */
+    'forgot_username_url'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof InstitutionResponse
+     */
     'instructional_text'?: string | null;
     /**
      * 
@@ -1516,6 +1528,12 @@ export interface InstitutionResponse {
      * @memberof InstitutionResponse
      */
     'supports_transaction_history'?: boolean | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof InstitutionResponse
+     */
+    'trouble_signing_in_url'?: string | null;
     /**
      * 
      * @type {string}
