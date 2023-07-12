@@ -24,6 +24,218 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 /**
  * 
  * @export
+ * @interface AccountCreateRequest
+ */
+export interface AccountCreateRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountCreateRequest
+     */
+    'account_number'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountCreateRequest
+     */
+    'apr'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountCreateRequest
+     */
+    'apy'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountCreateRequest
+     */
+    'available_balance'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountCreateRequest
+     */
+    'available_credit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountCreateRequest
+     */
+    'balance': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountCreateRequest
+     */
+    'cash_surrender_value'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountCreateRequest
+     */
+    'credit_limit'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountCreateRequest
+     */
+    'currency_code'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountCreateRequest
+     */
+    'day_payment_is_due'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountCreateRequest
+     */
+    'death_benefit'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountCreateRequest
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountCreateRequest
+     */
+    'interest_rate'?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AccountCreateRequest
+     */
+    'is_closed'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AccountCreateRequest
+     */
+    'is_hidden'?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountCreateRequest
+     */
+    'last_payment'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountCreateRequest
+     */
+    'last_payment_at'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountCreateRequest
+     */
+    'loan_amount'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountCreateRequest
+     */
+    'matures_on'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountCreateRequest
+     */
+    'metadata'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountCreateRequest
+     */
+    'minimum_balance'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountCreateRequest
+     */
+    'minimum_payment'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountCreateRequest
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountCreateRequest
+     */
+    'nickname'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountCreateRequest
+     */
+    'original_balance'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountCreateRequest
+     */
+    'payment_due_at'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountCreateRequest
+     */
+    'payoff_balance'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountCreateRequest
+     */
+    'routing_number'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountCreateRequest
+     */
+    'started_on'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountCreateRequest
+     */
+    'subtype'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountCreateRequest
+     */
+    'type': string;
+}
+/**
+ * 
+ * @export
+ * @interface AccountCreateRequestBody
+ */
+export interface AccountCreateRequestBody {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AccountCreateRequestBody
+     */
+    'skip_webhook'?: boolean | null;
+    /**
+     * 
+     * @type {AccountCreateRequest}
+     * @memberof AccountCreateRequestBody
+     */
+    'account'?: AccountCreateRequest;
+}
+/**
+ * 
+ * @export
  * @interface AccountNumberResponse
  */
 export interface AccountNumberResponse {
@@ -342,6 +554,12 @@ export interface AccountResponse {
      * @type {boolean}
      * @memberof AccountResponse
      */
+    'is_business'?: boolean | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AccountResponse
+     */
     'is_closed'?: boolean | null;
     /**
      * 
@@ -349,6 +567,12 @@ export interface AccountResponse {
      * @memberof AccountResponse
      */
     'is_hidden'?: boolean | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AccountResponse
+     */
+    'is_manual'?: boolean | null;
     /**
      * 
      * @type {number}
@@ -451,6 +675,12 @@ export interface AccountResponse {
      * @memberof AccountResponse
      */
     'premium_amount'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountResponse
+     */
+    'property_type'?: string | null;
     /**
      * 
      * @type {string}
@@ -4512,6 +4742,50 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
+         * This endpoint can only be used to create manual accounts. Creating a manual account will automatically create it under the Manual Institution member. Since a manual account has no credentials tied to the member, the account will never aggregate or include data from a data feed..
+         * @summary Create manual account
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {AccountCreateRequestBody} accountCreateRequestBody Manual account object to be created.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createManualAccount: async (userGuid: string, accountCreateRequestBody: AccountCreateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('createManualAccount', 'userGuid', userGuid)
+            // verify required parameter 'accountCreateRequestBody' is not null or undefined
+            assertParamExists('createManualAccount', 'accountCreateRequestBody', accountCreateRequestBody)
+            const localVarPath = `/users/{user_guid}/accounts`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(accountCreateRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * This endpoint allows you to create a new member. Members are created with the required parameters credentials and institution_code, and the optional parameters id and metadata. When creating a member, youll need to include the correct type of credential required by the financial institution and provided by the user. You can find out which credential type is required with the `/institutions/{institution_code}/credentials` endpoint. If successful, the MX Platform API will respond with the newly-created member object. Once you successfully create a member, MX will immediately validate the provided credentials and attempt to aggregate data for accounts and transactions.
          * @summary Create member
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
@@ -4880,6 +5154,48 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
                 .replace(`{${"account_guid"}}`, encodeURIComponent(String(accountGuid)))
                 .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)))
                 .replace(`{${"transaction_guid"}}`, encodeURIComponent(String(transactionGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This endpoint deletes accounts that were manually created. The API will respond with an empty object and a status of `204 No Content`.
+         * @summary Delete manual account
+         * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteManualAccount: async (accountGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'accountGuid' is not null or undefined
+            assertParamExists('deleteManualAccount', 'accountGuid', accountGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('deleteManualAccount', 'userGuid', userGuid)
+            const localVarPath = `/users/{user_guid}/accounts/{account_guid}`
+                .replace(`{${"account_guid"}}`, encodeURIComponent(String(accountGuid)))
                 .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -8904,6 +9220,18 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * This endpoint can only be used to create manual accounts. Creating a manual account will automatically create it under the Manual Institution member. Since a manual account has no credentials tied to the member, the account will never aggregate or include data from a data feed..
+         * @summary Create manual account
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {AccountCreateRequestBody} accountCreateRequestBody Manual account object to be created.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createManualAccount(userGuid: string, accountCreateRequestBody: AccountCreateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createManualAccount(userGuid, accountCreateRequestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * This endpoint allows you to create a new member. Members are created with the required parameters credentials and institution_code, and the optional parameters id and metadata. When creating a member, youll need to include the correct type of credential required by the financial institution and provided by the user. You can find out which credential type is required with the `/institutions/{institution_code}/credentials` endpoint. If successful, the MX Platform API will respond with the newly-created member object. Once you successfully create a member, MX will immediately validate the provided credentials and attempt to aggregate data for accounts and transactions.
          * @summary Create member
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
@@ -9011,6 +9339,18 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          */
         async deleteManagedTransaction(accountGuid: string, memberGuid: string, transactionGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteManagedTransaction(accountGuid, memberGuid, transactionGuid, userGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * This endpoint deletes accounts that were manually created. The API will respond with an empty object and a status of `204 No Content`.
+         * @summary Delete manual account
+         * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteManualAccount(accountGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteManualAccount(accountGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -10162,6 +10502,17 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
             return localVarFp.createManagedTransaction(accountGuid, memberGuid, userGuid, managedTransactionCreateRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
+         * This endpoint can only be used to create manual accounts. Creating a manual account will automatically create it under the Manual Institution member. Since a manual account has no credentials tied to the member, the account will never aggregate or include data from a data feed..
+         * @summary Create manual account
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {AccountCreateRequestBody} accountCreateRequestBody Manual account object to be created.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createManualAccount(userGuid: string, accountCreateRequestBody: AccountCreateRequestBody, options?: any): AxiosPromise<AccountResponseBody> {
+            return localVarFp.createManualAccount(userGuid, accountCreateRequestBody, options).then((request) => request(axios, basePath));
+        },
+        /**
          * This endpoint allows you to create a new member. Members are created with the required parameters credentials and institution_code, and the optional parameters id and metadata. When creating a member, youll need to include the correct type of credential required by the financial institution and provided by the user. You can find out which credential type is required with the `/institutions/{institution_code}/credentials` endpoint. If successful, the MX Platform API will respond with the newly-created member object. Once you successfully create a member, MX will immediately validate the provided credentials and attempt to aggregate data for accounts and transactions.
          * @summary Create member
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
@@ -10261,6 +10612,17 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          */
         deleteManagedTransaction(accountGuid: string, memberGuid: string, transactionGuid: string, userGuid: string, options?: any): AxiosPromise<void> {
             return localVarFp.deleteManagedTransaction(accountGuid, memberGuid, transactionGuid, userGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This endpoint deletes accounts that were manually created. The API will respond with an empty object and a status of `204 No Content`.
+         * @summary Delete manual account
+         * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteManualAccount(accountGuid: string, userGuid: string, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteManualAccount(accountGuid, userGuid, options).then((request) => request(axios, basePath));
         },
         /**
          * Accessing this endpoint will permanently delete a member.
@@ -11341,6 +11703,19 @@ export class MxPlatformApi extends BaseAPI {
     }
 
     /**
+     * This endpoint can only be used to create manual accounts. Creating a manual account will automatically create it under the Manual Institution member. Since a manual account has no credentials tied to the member, the account will never aggregate or include data from a data feed..
+     * @summary Create manual account
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {AccountCreateRequestBody} accountCreateRequestBody Manual account object to be created.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public createManualAccount(userGuid: string, accountCreateRequestBody: AccountCreateRequestBody, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).createManualAccount(userGuid, accountCreateRequestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * This endpoint allows you to create a new member. Members are created with the required parameters credentials and institution_code, and the optional parameters id and metadata. When creating a member, youll need to include the correct type of credential required by the financial institution and provided by the user. You can find out which credential type is required with the `/institutions/{institution_code}/credentials` endpoint. If successful, the MX Platform API will respond with the newly-created member object. Once you successfully create a member, MX will immediately validate the provided credentials and attempt to aggregate data for accounts and transactions.
      * @summary Create member
      * @param {string} userGuid The unique id for a &#x60;user&#x60;.
@@ -11457,6 +11832,19 @@ export class MxPlatformApi extends BaseAPI {
      */
     public deleteManagedTransaction(accountGuid: string, memberGuid: string, transactionGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).deleteManagedTransaction(accountGuid, memberGuid, transactionGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This endpoint deletes accounts that were manually created. The API will respond with an empty object and a status of `204 No Content`.
+     * @summary Delete manual account
+     * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public deleteManualAccount(accountGuid: string, userGuid: string, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).deleteManualAccount(accountGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
