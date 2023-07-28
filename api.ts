@@ -32,7 +32,13 @@ export interface AccountCreateRequest {
      * @type {string}
      * @memberof AccountCreateRequest
      */
-    'account_number'?: string;
+    'account_subtype_name'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountCreateRequest
+     */
+    'account_type': number;
     /**
      * 
      * @type {number}
@@ -56,13 +62,7 @@ export interface AccountCreateRequest {
      * @type {number}
      * @memberof AccountCreateRequest
      */
-    'available_credit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AccountCreateRequest
-     */
-    'balance': number;
+    'balance'?: number;
     /**
      * 
      * @type {number}
@@ -86,25 +86,19 @@ export interface AccountCreateRequest {
      * @type {number}
      * @memberof AccountCreateRequest
      */
-    'day_payment_is_due'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AccountCreateRequest
-     */
     'death_benefit'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof AccountCreateRequest
-     */
-    'id'?: string;
     /**
      * 
      * @type {number}
      * @memberof AccountCreateRequest
      */
     'interest_rate'?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AccountCreateRequest
+     */
+    'is_business'?: boolean;
     /**
      * 
      * @type {boolean}
@@ -122,43 +116,13 @@ export interface AccountCreateRequest {
      * @type {number}
      * @memberof AccountCreateRequest
      */
-    'last_payment'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof AccountCreateRequest
-     */
-    'last_payment_at'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof AccountCreateRequest
-     */
     'loan_amount'?: number;
     /**
      * 
      * @type {string}
      * @memberof AccountCreateRequest
      */
-    'matures_on'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AccountCreateRequest
-     */
     'metadata'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof AccountCreateRequest
-     */
-    'minimum_balance'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AccountCreateRequest
-     */
-    'minimum_payment'?: number;
     /**
      * 
      * @type {string}
@@ -179,40 +143,22 @@ export interface AccountCreateRequest {
     'original_balance'?: number;
     /**
      * 
-     * @type {string}
-     * @memberof AccountCreateRequest
-     */
-    'payment_due_at'?: string;
-    /**
-     * 
      * @type {number}
      * @memberof AccountCreateRequest
      */
-    'payoff_balance'?: number;
+    'property_type'?: number;
     /**
      * 
      * @type {string}
      * @memberof AccountCreateRequest
      */
-    'routing_number'?: string;
+    'property_type_name'?: string;
     /**
      * 
-     * @type {string}
+     * @type {boolean}
      * @memberof AccountCreateRequest
      */
-    'started_on'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AccountCreateRequest
-     */
-    'subtype'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AccountCreateRequest
-     */
-    'type': string;
+    'skip_webhook'?: boolean;
 }
 /**
  * 
@@ -437,6 +383,30 @@ export interface AccountResponse {
     'account_number'?: string | null;
     /**
      * 
+     * @type {string}
+     * @memberof AccountResponse
+     */
+    'account_ownership'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountResponse
+     */
+    'annuity_policy_to_date'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountResponse
+     */
+    'annuity_provider'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'annuity_term_year'?: number | null;
+    /**
+     * 
      * @type {number}
      * @memberof AccountResponse
      */
@@ -482,7 +452,7 @@ export interface AccountResponse {
      * @type {string}
      * @memberof AccountResponse
      */
-    'created_at'?: string | null;
+    'created_at'?: string;
     /**
      * 
      * @type {number}
@@ -533,6 +503,12 @@ export interface AccountResponse {
     'imported_at'?: string | null;
     /**
      * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'interest_rate'?: number | null;
+    /**
+     * 
      * @type {string}
      * @memberof AccountResponse
      */
@@ -543,18 +519,6 @@ export interface AccountResponse {
      * @memberof AccountResponse
      */
     'insured_name'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof AccountResponse
-     */
-    'interest_rate'?: number | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof AccountResponse
-     */
-    'is_business'?: boolean | null;
     /**
      * 
      * @type {boolean}
@@ -591,6 +555,12 @@ export interface AccountResponse {
      * @memberof AccountResponse
      */
     'loan_amount'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'margin_balance'?: number | null;
     /**
      * 
      * @type {string}
@@ -680,12 +650,6 @@ export interface AccountResponse {
      * @type {string}
      * @memberof AccountResponse
      */
-    'property_type'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof AccountResponse
-     */
     'routing_number'?: string | null;
     /**
      * 
@@ -699,6 +663,18 @@ export interface AccountResponse {
      * @memberof AccountResponse
      */
     'subtype'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'today_ugl_amount'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'today_ugl_percentage'?: number | null;
     /**
      * 
      * @type {number}
