@@ -168,12 +168,6 @@ export interface AccountCreateRequest {
 export interface AccountCreateRequestBody {
     /**
      * 
-     * @type {boolean}
-     * @memberof AccountCreateRequestBody
-     */
-    'skip_webhook'?: boolean | null;
-    /**
-     * 
      * @type {AccountCreateRequest}
      * @memberof AccountCreateRequestBody
      */
@@ -645,6 +639,18 @@ export interface AccountResponse {
      * @memberof AccountResponse
      */
     'premium_amount'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'property_type'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountResponse
+     */
+    'property_type_name'?: string | null;
     /**
      * 
      * @type {string}
