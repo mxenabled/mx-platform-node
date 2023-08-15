@@ -32,13 +32,13 @@ export interface AccountCreateRequest {
      * @type {string}
      * @memberof AccountCreateRequest
      */
-    'account_subtype_name'?: string;
+    'account_subtype'?: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof AccountCreateRequest
      */
-    'account_type': number;
+    'account_type': string;
     /**
      * 
      * @type {number}
@@ -143,16 +143,10 @@ export interface AccountCreateRequest {
     'original_balance'?: number;
     /**
      * 
-     * @type {number}
-     * @memberof AccountCreateRequest
-     */
-    'property_type'?: number;
-    /**
-     * 
      * @type {string}
      * @memberof AccountCreateRequest
      */
-    'property_type_name'?: string;
+    'property_type'?: string;
     /**
      * 
      * @type {boolean}
@@ -641,16 +635,10 @@ export interface AccountResponse {
     'premium_amount'?: number | null;
     /**
      * 
-     * @type {number}
-     * @memberof AccountResponse
-     */
-    'property_type'?: number | null;
-    /**
-     * 
      * @type {string}
      * @memberof AccountResponse
      */
-    'property_type_name'?: string | null;
+    'property_type'?: string | null;
     /**
      * 
      * @type {string}
@@ -733,10 +721,130 @@ export interface AccountResponseBody {
 export interface AccountUpdateRequest {
     /**
      * 
+     * @type {string}
+     * @memberof AccountUpdateRequest
+     */
+    'account_subtype'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountUpdateRequest
+     */
+    'account_type'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountUpdateRequest
+     */
+    'apr'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountUpdateRequest
+     */
+    'apy'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountUpdateRequest
+     */
+    'available_balance'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountUpdateRequest
+     */
+    'balance'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountUpdateRequest
+     */
+    'cash_surrender_value'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountUpdateRequest
+     */
+    'credit_limit'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountUpdateRequest
+     */
+    'currency_code'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountUpdateRequest
+     */
+    'death_benefit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountUpdateRequest
+     */
+    'interest_rate'?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AccountUpdateRequest
+     */
+    'is_business'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AccountUpdateRequest
+     */
+    'is_closed'?: boolean;
+    /**
+     * 
      * @type {boolean}
      * @memberof AccountUpdateRequest
      */
     'is_hidden'?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountUpdateRequest
+     */
+    'loan_amount'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountUpdateRequest
+     */
+    'metadata'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountUpdateRequest
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountUpdateRequest
+     */
+    'nickname'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountUpdateRequest
+     */
+    'original_balance'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountUpdateRequest
+     */
+    'property_type'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AccountUpdateRequest
+     */
+    'skip_webhook'?: boolean;
 }
 /**
  * 
@@ -7341,11 +7449,12 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
          * @param {boolean} [memberIsManagedByUser] List only accounts whose member is managed by the user.
          * @param {number} [page] Specify current page.
+         * @param {boolean} [isManual] List only accounts that were manually created.
          * @param {number} [recordsPerPage] Specify records per page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listUserAccounts: async (userGuid: string, memberIsManagedByUser?: boolean, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listUserAccounts: async (userGuid: string, memberIsManagedByUser?: boolean, page?: number, isManual?: boolean, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userGuid' is not null or undefined
             assertParamExists('listUserAccounts', 'userGuid', userGuid)
             const localVarPath = `/users/{user_guid}/accounts`
@@ -7371,6 +7480,10 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
             if (page !== undefined) {
                 localVarQueryParameter['page'] = page;
+            }
+
+            if (isManual !== undefined) {
+                localVarQueryParameter['is_manual'] = isManual;
             }
 
             if (recordsPerPage !== undefined) {
@@ -9917,12 +10030,13 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
          * @param {boolean} [memberIsManagedByUser] List only accounts whose member is managed by the user.
          * @param {number} [page] Specify current page.
+         * @param {boolean} [isManual] List only accounts that were manually created.
          * @param {number} [recordsPerPage] Specify records per page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listUserAccounts(userGuid: string, memberIsManagedByUser?: boolean, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountsResponseBody>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listUserAccounts(userGuid, memberIsManagedByUser, page, recordsPerPage, options);
+        async listUserAccounts(userGuid: string, memberIsManagedByUser?: boolean, page?: number, isManual?: boolean, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountsResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listUserAccounts(userGuid, memberIsManagedByUser, page, isManual, recordsPerPage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -11145,12 +11259,13 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
          * @param {boolean} [memberIsManagedByUser] List only accounts whose member is managed by the user.
          * @param {number} [page] Specify current page.
+         * @param {boolean} [isManual] List only accounts that were manually created.
          * @param {number} [recordsPerPage] Specify records per page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listUserAccounts(userGuid: string, memberIsManagedByUser?: boolean, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<AccountsResponseBody> {
-            return localVarFp.listUserAccounts(userGuid, memberIsManagedByUser, page, recordsPerPage, options).then((request) => request(axios, basePath));
+        listUserAccounts(userGuid: string, memberIsManagedByUser?: boolean, page?: number, isManual?: boolean, recordsPerPage?: number, options?: any): AxiosPromise<AccountsResponseBody> {
+            return localVarFp.listUserAccounts(userGuid, memberIsManagedByUser, page, isManual, recordsPerPage, options).then((request) => request(axios, basePath));
         },
         /**
          * Use this endpoint to list every user you\'ve created in the MX Platform API.
@@ -12454,13 +12569,14 @@ export class MxPlatformApi extends BaseAPI {
      * @param {string} userGuid The unique id for a &#x60;user&#x60;.
      * @param {boolean} [memberIsManagedByUser] List only accounts whose member is managed by the user.
      * @param {number} [page] Specify current page.
+     * @param {boolean} [isManual] List only accounts that were manually created.
      * @param {number} [recordsPerPage] Specify records per page.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public listUserAccounts(userGuid: string, memberIsManagedByUser?: boolean, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
-        return MxPlatformApiFp(this.configuration).listUserAccounts(userGuid, memberIsManagedByUser, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    public listUserAccounts(userGuid: string, memberIsManagedByUser?: boolean, page?: number, isManual?: boolean, recordsPerPage?: number, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).listUserAccounts(userGuid, memberIsManagedByUser, page, isManual, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
