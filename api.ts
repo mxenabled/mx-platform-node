@@ -2730,6 +2730,12 @@ export interface MemberCreateRequestBody {
     'client_redirect_url'?: string;
     /**
      * 
+     * @type {boolean}
+     * @memberof MemberCreateRequestBody
+     */
+    'enable_app2app'?: boolean;
+    /**
+     * 
      * @type {MemberCreateRequest}
      * @memberof MemberCreateRequestBody
      */
@@ -8494,13 +8500,14 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
          * @param {string} [clientRedirectUrl] A URL that MX will redirect to at the end of OAuth with additional query parameters. Only available with &#x60;referral_source&#x3D;APP&#x60;.
+         * @param {string} [enableApp2app] This indicates whether OAuth app2app behavior is enabled for institutions that support it. Defaults to &#x60;true&#x60;. This setting is not persistent.
          * @param {string} [referralSource] Must be either &#x60;BROWSER&#x60; or &#x60;APP&#x60; depending on the implementation. Defaults to &#x60;BROWSER&#x60;.
          * @param {boolean} [skipAggregation] Setting this parameter to &#x60;true&#x60; will prevent the member from automatically aggregating after being redirected from the authorization page.
          * @param {string} [uiMessageWebviewUrlScheme] A scheme for routing the user back to the application state they were previously in. Only available with &#x60;referral_source&#x3D;APP&#x60;.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        requestOAuthWindowURI: async (memberGuid: string, userGuid: string, clientRedirectUrl?: string, referralSource?: string, skipAggregation?: boolean, uiMessageWebviewUrlScheme?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        requestOAuthWindowURI: async (memberGuid: string, userGuid: string, clientRedirectUrl?: string, enableApp2app?: string, referralSource?: string, skipAggregation?: boolean, uiMessageWebviewUrlScheme?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('requestOAuthWindowURI', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -8525,6 +8532,10 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
 
             if (clientRedirectUrl !== undefined) {
                 localVarQueryParameter['client_redirect_url'] = clientRedirectUrl;
+            }
+
+            if (enableApp2app !== undefined) {
+                localVarQueryParameter['enable_app2app'] = enableApp2app;
             }
 
             if (referralSource !== undefined) {
@@ -10324,14 +10335,15 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
          * @param {string} [clientRedirectUrl] A URL that MX will redirect to at the end of OAuth with additional query parameters. Only available with &#x60;referral_source&#x3D;APP&#x60;.
+         * @param {string} [enableApp2app] This indicates whether OAuth app2app behavior is enabled for institutions that support it. Defaults to &#x60;true&#x60;. This setting is not persistent.
          * @param {string} [referralSource] Must be either &#x60;BROWSER&#x60; or &#x60;APP&#x60; depending on the implementation. Defaults to &#x60;BROWSER&#x60;.
          * @param {boolean} [skipAggregation] Setting this parameter to &#x60;true&#x60; will prevent the member from automatically aggregating after being redirected from the authorization page.
          * @param {string} [uiMessageWebviewUrlScheme] A scheme for routing the user back to the application state they were previously in. Only available with &#x60;referral_source&#x3D;APP&#x60;.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async requestOAuthWindowURI(memberGuid: string, userGuid: string, clientRedirectUrl?: string, referralSource?: string, skipAggregation?: boolean, uiMessageWebviewUrlScheme?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OAuthWindowResponseBody>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.requestOAuthWindowURI(memberGuid, userGuid, clientRedirectUrl, referralSource, skipAggregation, uiMessageWebviewUrlScheme, options);
+        async requestOAuthWindowURI(memberGuid: string, userGuid: string, clientRedirectUrl?: string, enableApp2app?: string, referralSource?: string, skipAggregation?: boolean, uiMessageWebviewUrlScheme?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OAuthWindowResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.requestOAuthWindowURI(memberGuid, userGuid, clientRedirectUrl, enableApp2app, referralSource, skipAggregation, uiMessageWebviewUrlScheme, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -11529,14 +11541,15 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
          * @param {string} [clientRedirectUrl] A URL that MX will redirect to at the end of OAuth with additional query parameters. Only available with &#x60;referral_source&#x3D;APP&#x60;.
+         * @param {string} [enableApp2app] This indicates whether OAuth app2app behavior is enabled for institutions that support it. Defaults to &#x60;true&#x60;. This setting is not persistent.
          * @param {string} [referralSource] Must be either &#x60;BROWSER&#x60; or &#x60;APP&#x60; depending on the implementation. Defaults to &#x60;BROWSER&#x60;.
          * @param {boolean} [skipAggregation] Setting this parameter to &#x60;true&#x60; will prevent the member from automatically aggregating after being redirected from the authorization page.
          * @param {string} [uiMessageWebviewUrlScheme] A scheme for routing the user back to the application state they were previously in. Only available with &#x60;referral_source&#x3D;APP&#x60;.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        requestOAuthWindowURI(memberGuid: string, userGuid: string, clientRedirectUrl?: string, referralSource?: string, skipAggregation?: boolean, uiMessageWebviewUrlScheme?: string, options?: any): AxiosPromise<OAuthWindowResponseBody> {
-            return localVarFp.requestOAuthWindowURI(memberGuid, userGuid, clientRedirectUrl, referralSource, skipAggregation, uiMessageWebviewUrlScheme, options).then((request) => request(axios, basePath));
+        requestOAuthWindowURI(memberGuid: string, userGuid: string, clientRedirectUrl?: string, enableApp2app?: string, referralSource?: string, skipAggregation?: boolean, uiMessageWebviewUrlScheme?: string, options?: any): AxiosPromise<OAuthWindowResponseBody> {
+            return localVarFp.requestOAuthWindowURI(memberGuid, userGuid, clientRedirectUrl, enableApp2app, referralSource, skipAggregation, uiMessageWebviewUrlScheme, options).then((request) => request(axios, basePath));
         },
         /**
          * This endpoint allows partners to get a URL by passing the `widget_type` in the request body, as well as configuring it in several different ways. In the case of Connect, that means setting the `widget_type` to `connect_widget`. Partners may also pass an optional `Accept-Language` header as well as a number of configuration options. Note that this is a `POST` request.
@@ -12887,6 +12900,7 @@ export class MxPlatformApi extends BaseAPI {
      * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
      * @param {string} userGuid The unique id for a &#x60;user&#x60;.
      * @param {string} [clientRedirectUrl] A URL that MX will redirect to at the end of OAuth with additional query parameters. Only available with &#x60;referral_source&#x3D;APP&#x60;.
+     * @param {string} [enableApp2app] This indicates whether OAuth app2app behavior is enabled for institutions that support it. Defaults to &#x60;true&#x60;. This setting is not persistent.
      * @param {string} [referralSource] Must be either &#x60;BROWSER&#x60; or &#x60;APP&#x60; depending on the implementation. Defaults to &#x60;BROWSER&#x60;.
      * @param {boolean} [skipAggregation] Setting this parameter to &#x60;true&#x60; will prevent the member from automatically aggregating after being redirected from the authorization page.
      * @param {string} [uiMessageWebviewUrlScheme] A scheme for routing the user back to the application state they were previously in. Only available with &#x60;referral_source&#x3D;APP&#x60;.
@@ -12894,8 +12908,8 @@ export class MxPlatformApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public requestOAuthWindowURI(memberGuid: string, userGuid: string, clientRedirectUrl?: string, referralSource?: string, skipAggregation?: boolean, uiMessageWebviewUrlScheme?: string, options?: AxiosRequestConfig) {
-        return MxPlatformApiFp(this.configuration).requestOAuthWindowURI(memberGuid, userGuid, clientRedirectUrl, referralSource, skipAggregation, uiMessageWebviewUrlScheme, options).then((request) => request(this.axios, this.basePath));
+    public requestOAuthWindowURI(memberGuid: string, userGuid: string, clientRedirectUrl?: string, enableApp2app?: string, referralSource?: string, skipAggregation?: boolean, uiMessageWebviewUrlScheme?: string, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).requestOAuthWindowURI(memberGuid, userGuid, clientRedirectUrl, enableApp2app, referralSource, skipAggregation, uiMessageWebviewUrlScheme, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
