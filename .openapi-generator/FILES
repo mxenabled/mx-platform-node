@@ -7,4 +7,5 @@ common.ts
 configuration.ts
 index.ts
 package.json
+tsconfig.esm.json
 tsconfig.json

@@ -13,13 +13,15 @@
  */
 
 
-import { Configuration } from './configuration';
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { Configuration } from './configuration';
+import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from './common';
+import type { RequestArgs } from './base';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from './base';
+import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError } from './base';
 
 /**
  * 
@@ -9569,7 +9571,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             // http basic authentication required
             setBasicAuthToObject(localVarRequestOptions, configuration)
 
-            if (acceptLanguage !== undefined && acceptLanguage !== null) {
+            if (acceptLanguage != null) {
                 localVarHeaderParameter['Accept-Language'] = String(acceptLanguage);
             }
 
@@ -10629,7 +10631,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async downloadStatementPDF(memberGuid: string, statementGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+        async downloadStatementPDF(memberGuid: string, statementGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.downloadStatementPDF(memberGuid, statementGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10642,7 +10644,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async downloadTaxDocument(taxDocumentGuid: string, memberGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+        async downloadTaxDocument(taxDocumentGuid: string, memberGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.downloadTaxDocument(taxDocumentGuid, memberGuid, userGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -12081,7 +12083,7 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        downloadStatementPDF(memberGuid: string, statementGuid: string, userGuid: string, options?: any): AxiosPromise<any> {
+        downloadStatementPDF(memberGuid: string, statementGuid: string, userGuid: string, options?: any): AxiosPromise<File> {
             return localVarFp.downloadStatementPDF(memberGuid, statementGuid, userGuid, options).then((request) => request(axios, basePath));
         },
         /**
@@ -12093,7 +12095,7 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        downloadTaxDocument(taxDocumentGuid: string, memberGuid: string, userGuid: string, options?: any): AxiosPromise<any> {
+        downloadTaxDocument(taxDocumentGuid: string, memberGuid: string, userGuid: string, options?: any): AxiosPromise<File> {
             return localVarFp.downloadTaxDocument(taxDocumentGuid, memberGuid, userGuid, options).then((request) => request(axios, basePath));
         },
         /**
@@ -14709,5 +14711,6 @@ export class MxPlatformApi extends BaseAPI {
         return MxPlatformApiFp(this.configuration).verifyMember(memberGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
     }
 }
+
 
 
