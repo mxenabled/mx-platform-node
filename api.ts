@@ -3672,7 +3672,7 @@ export interface SpendingPlansResponseBody {
      * @type {Array<SpendingPlanResponse>}
      * @memberof SpendingPlansResponseBody
      */
-    'iteration_items'?: Array<SpendingPlanResponse>;
+    'spending_plans'?: Array<SpendingPlanResponse>;
     /**
      * 
      * @type {PaginationResponse}
