@@ -5261,92 +5261,6 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * This endpoint creates a new `spending_plan` for the user.
-         * @summary Create spending plan
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createSpendingPlan: async (userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userGuid' is not null or undefined
-            assertParamExists('createSpendingPlan', 'userGuid', userGuid)
-            const localVarPath = `/users/{user_guid}/spending_plans`
-                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * This endpoint creates a new `spending_plan_iteration_item`.
-         * @summary Create spending plan iteration item
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item to be created with required parameters (planned_amount)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createSpendingPlanIterationItem: async (spendingPlanGuid: string, userGuid: string, spendingPlanIterationItemCreateRequestBody: SpendingPlanIterationItemCreateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'spendingPlanGuid' is not null or undefined
-            assertParamExists('createSpendingPlanIterationItem', 'spendingPlanGuid', spendingPlanGuid)
-            // verify required parameter 'userGuid' is not null or undefined
-            assertParamExists('createSpendingPlanIterationItem', 'userGuid', userGuid)
-            // verify required parameter 'spendingPlanIterationItemCreateRequestBody' is not null or undefined
-            assertParamExists('createSpendingPlanIterationItem', 'spendingPlanIterationItemCreateRequestBody', spendingPlanIterationItemCreateRequestBody)
-            const localVarPath = `/users/{user_guid}/spending_plans/{spending_plan_guid}/iterations/current/iteration_items`
-                .replace(`{${"spending_plan_guid"}}`, encodeURIComponent(String(spendingPlanGuid)))
-                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(spendingPlanIterationItemCreateRequestBody, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Use this endpoint to create a new custom tag.
          * @summary Create tag
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
@@ -5756,140 +5670,6 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             const localVarPath = `/users/{user_guid}/members/{member_guid}`
                 .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)))
                 .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Use this endpoint to delete a user\'s `spending_plan`.
-         * @summary Delete spending plan
-         * @param {string} userGuid The unique ID for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteSpendingPlan: async (userGuid: string, spendingPlanGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userGuid' is not null or undefined
-            assertParamExists('deleteSpendingPlan', 'userGuid', userGuid)
-            // verify required parameter 'spendingPlanGuid' is not null or undefined
-            assertParamExists('deleteSpendingPlan', 'spendingPlanGuid', spendingPlanGuid)
-            const localVarPath = `/users/{user_guid}/spending_plans/{spending_plan_guid}`
-                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
-                .replace(`{${"spending_plan_guid"}}`, encodeURIComponent(String(spendingPlanGuid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Use this endpoint to delete a `spending_plan_account`.
-         * @summary Delete spending plan account
-         * @param {string} userGuid The unique ID for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {string} spendingPlanAccountGuid The unique ID for the specified account.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteSpendingPlanAccount: async (userGuid: string, spendingPlanGuid: string, spendingPlanAccountGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userGuid' is not null or undefined
-            assertParamExists('deleteSpendingPlanAccount', 'userGuid', userGuid)
-            // verify required parameter 'spendingPlanGuid' is not null or undefined
-            assertParamExists('deleteSpendingPlanAccount', 'spendingPlanGuid', spendingPlanGuid)
-            // verify required parameter 'spendingPlanAccountGuid' is not null or undefined
-            assertParamExists('deleteSpendingPlanAccount', 'spendingPlanAccountGuid', spendingPlanAccountGuid)
-            const localVarPath = `/users/{user_guid}/spending_plans/{spending_plan_guid}/spending_plan_accounts/{spending_plan_account_guid}`
-                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
-                .replace(`{${"spending_plan_guid"}}`, encodeURIComponent(String(spendingPlanGuid)))
-                .replace(`{${"spending_plan_account_guid"}}`, encodeURIComponent(String(spendingPlanAccountGuid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Use this endpoint to delete a spending plan `iteration_item`.
-         * @summary Delete spending plan iteration item
-         * @param {string} userGuid The unique ID for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteSpendingPlanIterationItem: async (userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userGuid' is not null or undefined
-            assertParamExists('deleteSpendingPlanIterationItem', 'userGuid', userGuid)
-            // verify required parameter 'spendingPlanGuid' is not null or undefined
-            assertParamExists('deleteSpendingPlanIterationItem', 'spendingPlanGuid', spendingPlanGuid)
-            // verify required parameter 'iterationItemGuid' is not null or undefined
-            assertParamExists('deleteSpendingPlanIterationItem', 'iterationItemGuid', iterationItemGuid)
-            const localVarPath = `/users/{user_guid}/spending_plans/{spending_plan_guid}/iterations/current/iteration_items/{iteration_item_guid}`
-                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
-                .replace(`{${"spending_plan_guid"}}`, encodeURIComponent(String(spendingPlanGuid)))
-                .replace(`{${"iteration_item_guid"}}`, encodeURIComponent(String(iterationItemGuid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7513,210 +7293,6 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Use this endpoint to list all the spending plan accounts associated with the spending plan.
-         * @summary List spending plan accounts
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {number} [page] Specify current page.
-         * @param {number} [recordsPerPage] Specify records per page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listSpendingPlanAccounts: async (userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userGuid' is not null or undefined
-            assertParamExists('listSpendingPlanAccounts', 'userGuid', userGuid)
-            // verify required parameter 'spendingPlanGuid' is not null or undefined
-            assertParamExists('listSpendingPlanAccounts', 'spendingPlanGuid', spendingPlanGuid)
-            const localVarPath = `/users/{user_guid}/spending_plans/{spending_plan_guid}/spending_plan_accounts`
-                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
-                .replace(`{${"spending_plan_guid"}}`, encodeURIComponent(String(spendingPlanGuid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            if (page !== undefined) {
-                localVarQueryParameter['page'] = page;
-            }
-
-            if (recordsPerPage !== undefined) {
-                localVarQueryParameter['records_per_page'] = recordsPerPage;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Use this endpoint to list all the spending plan `iteration_items` associated with the `iteration`.
-         * @summary List spending plan iteration items
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {number} [page] Specify current page.
-         * @param {number} [recordsPerPage] Specify records per page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listSpendingPlanIterationItems: async (userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userGuid' is not null or undefined
-            assertParamExists('listSpendingPlanIterationItems', 'userGuid', userGuid)
-            // verify required parameter 'spendingPlanGuid' is not null or undefined
-            assertParamExists('listSpendingPlanIterationItems', 'spendingPlanGuid', spendingPlanGuid)
-            const localVarPath = `/users/{user_guid}/spending_plans/{spending_plan_guid}/iterations/current/iteration_items`
-                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
-                .replace(`{${"spending_plan_guid"}}`, encodeURIComponent(String(spendingPlanGuid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            if (page !== undefined) {
-                localVarQueryParameter['page'] = page;
-            }
-
-            if (recordsPerPage !== undefined) {
-                localVarQueryParameter['records_per_page'] = recordsPerPage;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Use this endpoint to list all the spending plan `iterations` associated with the `spending_plan`.
-         * @summary List spending plan iterations
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {number} [page] Specify current page.
-         * @param {number} [recordsPerPage] Specify records per page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listSpendingPlanIterations: async (userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userGuid' is not null or undefined
-            assertParamExists('listSpendingPlanIterations', 'userGuid', userGuid)
-            // verify required parameter 'spendingPlanGuid' is not null or undefined
-            assertParamExists('listSpendingPlanIterations', 'spendingPlanGuid', spendingPlanGuid)
-            const localVarPath = `/users/{user_guid}/spending_plans/{spending_plan_guid}/iterations`
-                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
-                .replace(`{${"spending_plan_guid"}}`, encodeURIComponent(String(spendingPlanGuid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            if (page !== undefined) {
-                localVarQueryParameter['page'] = page;
-            }
-
-            if (recordsPerPage !== undefined) {
-                localVarQueryParameter['records_per_page'] = recordsPerPage;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Use this endpoint to list all the spending plans associated with the user.
-         * @summary List spending plans
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {number} [page] Specify current page.
-         * @param {number} [recordsPerPage] Specify records per page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listSpendingPlans: async (userGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userGuid' is not null or undefined
-            assertParamExists('listSpendingPlans', 'userGuid', userGuid)
-            const localVarPath = `/users/{user_guid}/spending_plans`
-                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            if (page !== undefined) {
-                localVarQueryParameter['page'] = page;
-            }
-
-            if (recordsPerPage !== undefined) {
-                localVarQueryParameter['records_per_page'] = recordsPerPage;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Use this endpoint to get an array of available statements.
          * @summary List statements by member
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -8872,226 +8448,6 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Use this endpoint to read the attributes of a specific spending plan account according to its unique GUID.
-         * @summary Read spending plan account
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {string} spendingPlanAccountGuid The unique ID for the specified account.
-         * @param {number} [page] Specify current page.
-         * @param {number} [recordsPerPage] Specify records per page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        readSpendingPlanAccount: async (userGuid: string, spendingPlanGuid: string, spendingPlanAccountGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userGuid' is not null or undefined
-            assertParamExists('readSpendingPlanAccount', 'userGuid', userGuid)
-            // verify required parameter 'spendingPlanGuid' is not null or undefined
-            assertParamExists('readSpendingPlanAccount', 'spendingPlanGuid', spendingPlanGuid)
-            // verify required parameter 'spendingPlanAccountGuid' is not null or undefined
-            assertParamExists('readSpendingPlanAccount', 'spendingPlanAccountGuid', spendingPlanAccountGuid)
-            const localVarPath = `/users/{user_guid}/spending_plans/{spending_plan_guid}/spending_plan_accounts/{spending_plan_account_guid}`
-                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
-                .replace(`{${"spending_plan_guid"}}`, encodeURIComponent(String(spendingPlanGuid)))
-                .replace(`{${"spending_plan_account_guid"}}`, encodeURIComponent(String(spendingPlanAccountGuid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            if (page !== undefined) {
-                localVarQueryParameter['page'] = page;
-            }
-
-            if (recordsPerPage !== undefined) {
-                localVarQueryParameter['records_per_page'] = recordsPerPage;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Use this endpoint to read the attributes of a specific spending plan `iteration` according to its `iteration_number`.
-         * @summary Read a spending plan iteration
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {number} iterationNumber The current iteration number for the spending plan &#x60;iteration&#x60;&#x60;.
-         * @param {number} [page] Specify current page.
-         * @param {number} [recordsPerPage] Specify records per page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        readSpendingPlanIteration: async (userGuid: string, spendingPlanGuid: string, iterationNumber: number, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userGuid' is not null or undefined
-            assertParamExists('readSpendingPlanIteration', 'userGuid', userGuid)
-            // verify required parameter 'spendingPlanGuid' is not null or undefined
-            assertParamExists('readSpendingPlanIteration', 'spendingPlanGuid', spendingPlanGuid)
-            // verify required parameter 'iterationNumber' is not null or undefined
-            assertParamExists('readSpendingPlanIteration', 'iterationNumber', iterationNumber)
-            const localVarPath = `/users/{user_guid}/spending_plans/{spending_plan_guid}/iterations/{iteration_number}`
-                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
-                .replace(`{${"spending_plan_guid"}}`, encodeURIComponent(String(spendingPlanGuid)))
-                .replace(`{${"iteration_number"}}`, encodeURIComponent(String(iterationNumber)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            if (page !== undefined) {
-                localVarQueryParameter['page'] = page;
-            }
-
-            if (recordsPerPage !== undefined) {
-                localVarQueryParameter['records_per_page'] = recordsPerPage;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Use this endpoint to read the attributes of a specific spending plan `iteration_item` according to its unique GUID.
-         * @summary Read a spending plan iteration item
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
-         * @param {number} [page] Specify current page.
-         * @param {number} [recordsPerPage] Specify records per page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        readSpendingPlanIterationItem: async (userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userGuid' is not null or undefined
-            assertParamExists('readSpendingPlanIterationItem', 'userGuid', userGuid)
-            // verify required parameter 'spendingPlanGuid' is not null or undefined
-            assertParamExists('readSpendingPlanIterationItem', 'spendingPlanGuid', spendingPlanGuid)
-            // verify required parameter 'iterationItemGuid' is not null or undefined
-            assertParamExists('readSpendingPlanIterationItem', 'iterationItemGuid', iterationItemGuid)
-            const localVarPath = `/users/{user_guid}/spending_plans/{spending_plan_guid}/iterations/current/iteration_items/{iteration_item_guid}`
-                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
-                .replace(`{${"spending_plan_guid"}}`, encodeURIComponent(String(spendingPlanGuid)))
-                .replace(`{${"iteration_item_guid"}}`, encodeURIComponent(String(iterationItemGuid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            if (page !== undefined) {
-                localVarQueryParameter['page'] = page;
-            }
-
-            if (recordsPerPage !== undefined) {
-                localVarQueryParameter['records_per_page'] = recordsPerPage;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Use this endpoint to read the attributes of a specific spending plan according to its unique GUID.
-         * @summary Read a spending plan for a user
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {number} [page] Specify current page.
-         * @param {number} [recordsPerPage] Specify records per page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        readSpendingPlanUser: async (userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userGuid' is not null or undefined
-            assertParamExists('readSpendingPlanUser', 'userGuid', userGuid)
-            // verify required parameter 'spendingPlanGuid' is not null or undefined
-            assertParamExists('readSpendingPlanUser', 'spendingPlanGuid', spendingPlanGuid)
-            const localVarPath = `/users/{user_guid}/spending_plans/{spending_plan_guid}`
-                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
-                .replace(`{${"spending_plan_guid"}}`, encodeURIComponent(String(spendingPlanGuid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            if (page !== undefined) {
-                localVarQueryParameter['page'] = page;
-            }
-
-            if (recordsPerPage !== undefined) {
-                localVarQueryParameter['records_per_page'] = recordsPerPage;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Use this endpoint to read a JSON representation of the statement.
          * @summary Read statement by member
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -9942,58 +9298,6 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Use this endpoint to update an existing `spending_plan_iteration_item`.
-         * @summary Update a spending plan iteration item
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
-         * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item object to be updated with required parameter (iteration_item_guid)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        updateSpendingPlanIterationItem: async (userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, spendingPlanIterationItemCreateRequestBody: SpendingPlanIterationItemCreateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userGuid' is not null or undefined
-            assertParamExists('updateSpendingPlanIterationItem', 'userGuid', userGuid)
-            // verify required parameter 'spendingPlanGuid' is not null or undefined
-            assertParamExists('updateSpendingPlanIterationItem', 'spendingPlanGuid', spendingPlanGuid)
-            // verify required parameter 'iterationItemGuid' is not null or undefined
-            assertParamExists('updateSpendingPlanIterationItem', 'iterationItemGuid', iterationItemGuid)
-            // verify required parameter 'spendingPlanIterationItemCreateRequestBody' is not null or undefined
-            assertParamExists('updateSpendingPlanIterationItem', 'spendingPlanIterationItemCreateRequestBody', spendingPlanIterationItemCreateRequestBody)
-            const localVarPath = `/users/{user_guid}/spending_plans/{spending_plan_guid}/iterations/current/iteration_items/{iteration_item_guid}`
-                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
-                .replace(`{${"spending_plan_guid"}}`, encodeURIComponent(String(spendingPlanGuid)))
-                .replace(`{${"iteration_item_guid"}}`, encodeURIComponent(String(iterationItemGuid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(spendingPlanIterationItemCreateRequestBody, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Use this endpoint to update the name of a specific tag according to its unique GUID.
          * @summary Update tag
          * @param {string} tagGuid The unique id for a &#x60;tag&#x60;.
@@ -10381,30 +9685,6 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * This endpoint creates a new `spending_plan` for the user.
-         * @summary Create spending plan
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createSpendingPlan(userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpendingPlanResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createSpendingPlan(userGuid, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * This endpoint creates a new `spending_plan_iteration_item`.
-         * @summary Create spending plan iteration item
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item to be created with required parameters (planned_amount)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createSpendingPlanIterationItem(spendingPlanGuid: string, userGuid: string, spendingPlanIterationItemCreateRequestBody: SpendingPlanIterationItemCreateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpendingPlanIterationItemResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createSpendingPlanIterationItem(spendingPlanGuid, userGuid, spendingPlanIterationItemCreateRequestBody, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
          * Use this endpoint to create a new custom tag.
          * @summary Create tag
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
@@ -10524,44 +9804,6 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          */
         async deleteMember(memberGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteMember(memberGuid, userGuid, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Use this endpoint to delete a user\'s `spending_plan`.
-         * @summary Delete spending plan
-         * @param {string} userGuid The unique ID for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async deleteSpendingPlan(userGuid: string, spendingPlanGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteSpendingPlan(userGuid, spendingPlanGuid, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Use this endpoint to delete a `spending_plan_account`.
-         * @summary Delete spending plan account
-         * @param {string} userGuid The unique ID for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {string} spendingPlanAccountGuid The unique ID for the specified account.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async deleteSpendingPlanAccount(userGuid: string, spendingPlanGuid: string, spendingPlanAccountGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteSpendingPlanAccount(userGuid, spendingPlanGuid, spendingPlanAccountGuid, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Use this endpoint to delete a spending plan `iteration_item`.
-         * @summary Delete spending plan iteration item
-         * @param {string} userGuid The unique ID for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async deleteSpendingPlanIterationItem(userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteSpendingPlanIterationItem(userGuid, spendingPlanGuid, iterationItemGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -10999,61 +10241,6 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Use this endpoint to list all the spending plan accounts associated with the spending plan.
-         * @summary List spending plan accounts
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {number} [page] Specify current page.
-         * @param {number} [recordsPerPage] Specify records per page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async listSpendingPlanAccounts(userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpendingPlanAccountsResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listSpendingPlanAccounts(userGuid, spendingPlanGuid, page, recordsPerPage, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Use this endpoint to list all the spending plan `iteration_items` associated with the `iteration`.
-         * @summary List spending plan iteration items
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {number} [page] Specify current page.
-         * @param {number} [recordsPerPage] Specify records per page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async listSpendingPlanIterationItems(userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpendingPlanIterationItemsResponseBody>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listSpendingPlanIterationItems(userGuid, spendingPlanGuid, page, recordsPerPage, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Use this endpoint to list all the spending plan `iterations` associated with the `spending_plan`.
-         * @summary List spending plan iterations
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {number} [page] Specify current page.
-         * @param {number} [recordsPerPage] Specify records per page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async listSpendingPlanIterations(userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpendingPlanIterationsResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listSpendingPlanIterations(userGuid, spendingPlanGuid, page, recordsPerPage, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Use this endpoint to list all the spending plans associated with the user.
-         * @summary List spending plans
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {number} [page] Specify current page.
-         * @param {number} [recordsPerPage] Specify records per page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async listSpendingPlans(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpendingPlansResponseBody>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listSpendingPlans(userGuid, page, recordsPerPage, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
          * Use this endpoint to get an array of available statements.
          * @summary List statements by member
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -11370,65 +10557,6 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Use this endpoint to read the attributes of a specific spending plan account according to its unique GUID.
-         * @summary Read spending plan account
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {string} spendingPlanAccountGuid The unique ID for the specified account.
-         * @param {number} [page] Specify current page.
-         * @param {number} [recordsPerPage] Specify records per page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async readSpendingPlanAccount(userGuid: string, spendingPlanGuid: string, spendingPlanAccountGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpendingPlanAccountResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.readSpendingPlanAccount(userGuid, spendingPlanGuid, spendingPlanAccountGuid, page, recordsPerPage, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Use this endpoint to read the attributes of a specific spending plan `iteration` according to its `iteration_number`.
-         * @summary Read a spending plan iteration
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {number} iterationNumber The current iteration number for the spending plan &#x60;iteration&#x60;&#x60;.
-         * @param {number} [page] Specify current page.
-         * @param {number} [recordsPerPage] Specify records per page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async readSpendingPlanIteration(userGuid: string, spendingPlanGuid: string, iterationNumber: number, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpendingPlanIterationResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.readSpendingPlanIteration(userGuid, spendingPlanGuid, iterationNumber, page, recordsPerPage, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Use this endpoint to read the attributes of a specific spending plan `iteration_item` according to its unique GUID.
-         * @summary Read a spending plan iteration item
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
-         * @param {number} [page] Specify current page.
-         * @param {number} [recordsPerPage] Specify records per page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async readSpendingPlanIterationItem(userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpendingPlanIterationItemResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.readSpendingPlanIterationItem(userGuid, spendingPlanGuid, iterationItemGuid, page, recordsPerPage, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Use this endpoint to read the attributes of a specific spending plan according to its unique GUID.
-         * @summary Read a spending plan for a user
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {number} [page] Specify current page.
-         * @param {number} [recordsPerPage] Specify records per page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async readSpendingPlanUser(userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpendingPlanResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.readSpendingPlanUser(userGuid, spendingPlanGuid, page, recordsPerPage, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
          * Use this endpoint to read a JSON representation of the statement.
          * @summary Read statement by member
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -11662,20 +10790,6 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Use this endpoint to update an existing `spending_plan_iteration_item`.
-         * @summary Update a spending plan iteration item
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
-         * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item object to be updated with required parameter (iteration_item_guid)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async updateSpendingPlanIterationItem(userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, spendingPlanIterationItemCreateRequestBody: SpendingPlanIterationItemCreateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpendingPlanIterationItemResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateSpendingPlanIterationItem(userGuid, spendingPlanGuid, iterationItemGuid, spendingPlanIterationItemCreateRequestBody, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
          * Use this endpoint to update the name of a specific tag according to its unique GUID.
          * @summary Update tag
          * @param {string} tagGuid The unique id for a &#x60;tag&#x60;.
@@ -11853,28 +10967,6 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
             return localVarFp.createMember(userGuid, memberCreateRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
-         * This endpoint creates a new `spending_plan` for the user.
-         * @summary Create spending plan
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createSpendingPlan(userGuid: string, options?: any): AxiosPromise<SpendingPlanResponse> {
-            return localVarFp.createSpendingPlan(userGuid, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * This endpoint creates a new `spending_plan_iteration_item`.
-         * @summary Create spending plan iteration item
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item to be created with required parameters (planned_amount)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createSpendingPlanIterationItem(spendingPlanGuid: string, userGuid: string, spendingPlanIterationItemCreateRequestBody: SpendingPlanIterationItemCreateRequestBody, options?: any): AxiosPromise<SpendingPlanIterationItemResponse> {
-            return localVarFp.createSpendingPlanIterationItem(spendingPlanGuid, userGuid, spendingPlanIterationItemCreateRequestBody, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Use this endpoint to create a new custom tag.
          * @summary Create tag
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
@@ -11985,41 +11077,6 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          */
         deleteMember(memberGuid: string, userGuid: string, options?: any): AxiosPromise<void> {
             return localVarFp.deleteMember(memberGuid, userGuid, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Use this endpoint to delete a user\'s `spending_plan`.
-         * @summary Delete spending plan
-         * @param {string} userGuid The unique ID for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteSpendingPlan(userGuid: string, spendingPlanGuid: string, options?: any): AxiosPromise<void> {
-            return localVarFp.deleteSpendingPlan(userGuid, spendingPlanGuid, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Use this endpoint to delete a `spending_plan_account`.
-         * @summary Delete spending plan account
-         * @param {string} userGuid The unique ID for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {string} spendingPlanAccountGuid The unique ID for the specified account.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteSpendingPlanAccount(userGuid: string, spendingPlanGuid: string, spendingPlanAccountGuid: string, options?: any): AxiosPromise<void> {
-            return localVarFp.deleteSpendingPlanAccount(userGuid, spendingPlanGuid, spendingPlanAccountGuid, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Use this endpoint to delete a spending plan `iteration_item`.
-         * @summary Delete spending plan iteration item
-         * @param {string} userGuid The unique ID for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteSpendingPlanIterationItem(userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, options?: any): AxiosPromise<void> {
-            return localVarFp.deleteSpendingPlanIterationItem(userGuid, spendingPlanGuid, iterationItemGuid, options).then((request) => request(axios, basePath));
         },
         /**
          * Use this endpoint to permanently delete a specific tag based on its unique GUID. If successful, the API will respond with status of `204 No Content`.
@@ -12423,57 +11480,6 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
             return localVarFp.listMerchants(page, recordsPerPage, options).then((request) => request(axios, basePath));
         },
         /**
-         * Use this endpoint to list all the spending plan accounts associated with the spending plan.
-         * @summary List spending plan accounts
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {number} [page] Specify current page.
-         * @param {number} [recordsPerPage] Specify records per page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listSpendingPlanAccounts(userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<SpendingPlanAccountsResponse> {
-            return localVarFp.listSpendingPlanAccounts(userGuid, spendingPlanGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Use this endpoint to list all the spending plan `iteration_items` associated with the `iteration`.
-         * @summary List spending plan iteration items
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {number} [page] Specify current page.
-         * @param {number} [recordsPerPage] Specify records per page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listSpendingPlanIterationItems(userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<SpendingPlanIterationItemsResponseBody> {
-            return localVarFp.listSpendingPlanIterationItems(userGuid, spendingPlanGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Use this endpoint to list all the spending plan `iterations` associated with the `spending_plan`.
-         * @summary List spending plan iterations
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {number} [page] Specify current page.
-         * @param {number} [recordsPerPage] Specify records per page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listSpendingPlanIterations(userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<SpendingPlanIterationsResponse> {
-            return localVarFp.listSpendingPlanIterations(userGuid, spendingPlanGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Use this endpoint to list all the spending plans associated with the user.
-         * @summary List spending plans
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {number} [page] Specify current page.
-         * @param {number} [recordsPerPage] Specify records per page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listSpendingPlans(userGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<SpendingPlansResponseBody> {
-            return localVarFp.listSpendingPlans(userGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Use this endpoint to get an array of available statements.
          * @summary List statements by member
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -12766,61 +11772,6 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
             return localVarFp.readMerchantLocation(merchantLocationGuid, options).then((request) => request(axios, basePath));
         },
         /**
-         * Use this endpoint to read the attributes of a specific spending plan account according to its unique GUID.
-         * @summary Read spending plan account
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {string} spendingPlanAccountGuid The unique ID for the specified account.
-         * @param {number} [page] Specify current page.
-         * @param {number} [recordsPerPage] Specify records per page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        readSpendingPlanAccount(userGuid: string, spendingPlanGuid: string, spendingPlanAccountGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<SpendingPlanAccountResponse> {
-            return localVarFp.readSpendingPlanAccount(userGuid, spendingPlanGuid, spendingPlanAccountGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Use this endpoint to read the attributes of a specific spending plan `iteration` according to its `iteration_number`.
-         * @summary Read a spending plan iteration
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {number} iterationNumber The current iteration number for the spending plan &#x60;iteration&#x60;&#x60;.
-         * @param {number} [page] Specify current page.
-         * @param {number} [recordsPerPage] Specify records per page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        readSpendingPlanIteration(userGuid: string, spendingPlanGuid: string, iterationNumber: number, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<SpendingPlanIterationResponse> {
-            return localVarFp.readSpendingPlanIteration(userGuid, spendingPlanGuid, iterationNumber, page, recordsPerPage, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Use this endpoint to read the attributes of a specific spending plan `iteration_item` according to its unique GUID.
-         * @summary Read a spending plan iteration item
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
-         * @param {number} [page] Specify current page.
-         * @param {number} [recordsPerPage] Specify records per page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        readSpendingPlanIterationItem(userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<SpendingPlanIterationItemResponse> {
-            return localVarFp.readSpendingPlanIterationItem(userGuid, spendingPlanGuid, iterationItemGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Use this endpoint to read the attributes of a specific spending plan according to its unique GUID.
-         * @summary Read a spending plan for a user
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {number} [page] Specify current page.
-         * @param {number} [recordsPerPage] Specify records per page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        readSpendingPlanUser(userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<SpendingPlanResponse> {
-            return localVarFp.readSpendingPlanUser(userGuid, spendingPlanGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Use this endpoint to read a JSON representation of the statement.
          * @summary Read statement by member
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -13036,19 +11987,6 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
             return localVarFp.updateMember(memberGuid, userGuid, memberUpdateRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
-         * Use this endpoint to update an existing `spending_plan_iteration_item`.
-         * @summary Update a spending plan iteration item
-         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-         * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
-         * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item object to be updated with required parameter (iteration_item_guid)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        updateSpendingPlanIterationItem(userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, spendingPlanIterationItemCreateRequestBody: SpendingPlanIterationItemCreateRequestBody, options?: any): AxiosPromise<SpendingPlanIterationItemResponse> {
-            return localVarFp.updateSpendingPlanIterationItem(userGuid, spendingPlanGuid, iterationItemGuid, spendingPlanIterationItemCreateRequestBody, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Use this endpoint to update the name of a specific tag according to its unique GUID.
          * @summary Update tag
          * @param {string} tagGuid The unique id for a &#x60;tag&#x60;.
@@ -13236,32 +12174,6 @@ export class MxPlatformApi extends BaseAPI {
     }
 
     /**
-     * This endpoint creates a new `spending_plan` for the user.
-     * @summary Create spending plan
-     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MxPlatformApi
-     */
-    public createSpendingPlan(userGuid: string, options?: AxiosRequestConfig) {
-        return MxPlatformApiFp(this.configuration).createSpendingPlan(userGuid, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * This endpoint creates a new `spending_plan_iteration_item`.
-     * @summary Create spending plan iteration item
-     * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-     * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item to be created with required parameters (planned_amount)
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MxPlatformApi
-     */
-    public createSpendingPlanIterationItem(spendingPlanGuid: string, userGuid: string, spendingPlanIterationItemCreateRequestBody: SpendingPlanIterationItemCreateRequestBody, options?: AxiosRequestConfig) {
-        return MxPlatformApiFp(this.configuration).createSpendingPlanIterationItem(spendingPlanGuid, userGuid, spendingPlanIterationItemCreateRequestBody, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Use this endpoint to create a new custom tag.
      * @summary Create tag
      * @param {string} userGuid The unique id for a &#x60;user&#x60;.
@@ -13391,47 +12303,6 @@ export class MxPlatformApi extends BaseAPI {
      */
     public deleteMember(memberGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).deleteMember(memberGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Use this endpoint to delete a user\'s `spending_plan`.
-     * @summary Delete spending plan
-     * @param {string} userGuid The unique ID for a &#x60;user&#x60;.
-     * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MxPlatformApi
-     */
-    public deleteSpendingPlan(userGuid: string, spendingPlanGuid: string, options?: AxiosRequestConfig) {
-        return MxPlatformApiFp(this.configuration).deleteSpendingPlan(userGuid, spendingPlanGuid, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Use this endpoint to delete a `spending_plan_account`.
-     * @summary Delete spending plan account
-     * @param {string} userGuid The unique ID for a &#x60;user&#x60;.
-     * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-     * @param {string} spendingPlanAccountGuid The unique ID for the specified account.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MxPlatformApi
-     */
-    public deleteSpendingPlanAccount(userGuid: string, spendingPlanGuid: string, spendingPlanAccountGuid: string, options?: AxiosRequestConfig) {
-        return MxPlatformApiFp(this.configuration).deleteSpendingPlanAccount(userGuid, spendingPlanGuid, spendingPlanAccountGuid, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Use this endpoint to delete a spending plan `iteration_item`.
-     * @summary Delete spending plan iteration item
-     * @param {string} userGuid The unique ID for a &#x60;user&#x60;.
-     * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-     * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MxPlatformApi
-     */
-    public deleteSpendingPlanIterationItem(userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, options?: AxiosRequestConfig) {
-        return MxPlatformApiFp(this.configuration).deleteSpendingPlanIterationItem(userGuid, spendingPlanGuid, iterationItemGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -13902,65 +12773,6 @@ export class MxPlatformApi extends BaseAPI {
     }
 
     /**
-     * Use this endpoint to list all the spending plan accounts associated with the spending plan.
-     * @summary List spending plan accounts
-     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-     * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-     * @param {number} [page] Specify current page.
-     * @param {number} [recordsPerPage] Specify records per page.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MxPlatformApi
-     */
-    public listSpendingPlanAccounts(userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
-        return MxPlatformApiFp(this.configuration).listSpendingPlanAccounts(userGuid, spendingPlanGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Use this endpoint to list all the spending plan `iteration_items` associated with the `iteration`.
-     * @summary List spending plan iteration items
-     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-     * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-     * @param {number} [page] Specify current page.
-     * @param {number} [recordsPerPage] Specify records per page.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MxPlatformApi
-     */
-    public listSpendingPlanIterationItems(userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
-        return MxPlatformApiFp(this.configuration).listSpendingPlanIterationItems(userGuid, spendingPlanGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Use this endpoint to list all the spending plan `iterations` associated with the `spending_plan`.
-     * @summary List spending plan iterations
-     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-     * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-     * @param {number} [page] Specify current page.
-     * @param {number} [recordsPerPage] Specify records per page.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MxPlatformApi
-     */
-    public listSpendingPlanIterations(userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
-        return MxPlatformApiFp(this.configuration).listSpendingPlanIterations(userGuid, spendingPlanGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Use this endpoint to list all the spending plans associated with the user.
-     * @summary List spending plans
-     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-     * @param {number} [page] Specify current page.
-     * @param {number} [recordsPerPage] Specify records per page.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MxPlatformApi
-     */
-    public listSpendingPlans(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
-        return MxPlatformApiFp(this.configuration).listSpendingPlans(userGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Use this endpoint to get an array of available statements.
      * @summary List statements by member
      * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -14301,69 +13113,6 @@ export class MxPlatformApi extends BaseAPI {
     }
 
     /**
-     * Use this endpoint to read the attributes of a specific spending plan account according to its unique GUID.
-     * @summary Read spending plan account
-     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-     * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-     * @param {string} spendingPlanAccountGuid The unique ID for the specified account.
-     * @param {number} [page] Specify current page.
-     * @param {number} [recordsPerPage] Specify records per page.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MxPlatformApi
-     */
-    public readSpendingPlanAccount(userGuid: string, spendingPlanGuid: string, spendingPlanAccountGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
-        return MxPlatformApiFp(this.configuration).readSpendingPlanAccount(userGuid, spendingPlanGuid, spendingPlanAccountGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Use this endpoint to read the attributes of a specific spending plan `iteration` according to its `iteration_number`.
-     * @summary Read a spending plan iteration
-     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-     * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-     * @param {number} iterationNumber The current iteration number for the spending plan &#x60;iteration&#x60;&#x60;.
-     * @param {number} [page] Specify current page.
-     * @param {number} [recordsPerPage] Specify records per page.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MxPlatformApi
-     */
-    public readSpendingPlanIteration(userGuid: string, spendingPlanGuid: string, iterationNumber: number, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
-        return MxPlatformApiFp(this.configuration).readSpendingPlanIteration(userGuid, spendingPlanGuid, iterationNumber, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Use this endpoint to read the attributes of a specific spending plan `iteration_item` according to its unique GUID.
-     * @summary Read a spending plan iteration item
-     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-     * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-     * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
-     * @param {number} [page] Specify current page.
-     * @param {number} [recordsPerPage] Specify records per page.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MxPlatformApi
-     */
-    public readSpendingPlanIterationItem(userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
-        return MxPlatformApiFp(this.configuration).readSpendingPlanIterationItem(userGuid, spendingPlanGuid, iterationItemGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Use this endpoint to read the attributes of a specific spending plan according to its unique GUID.
-     * @summary Read a spending plan for a user
-     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-     * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-     * @param {number} [page] Specify current page.
-     * @param {number} [recordsPerPage] Specify records per page.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MxPlatformApi
-     */
-    public readSpendingPlanUser(userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
-        return MxPlatformApiFp(this.configuration).readSpendingPlanUser(userGuid, spendingPlanGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Use this endpoint to read a JSON representation of the statement.
      * @summary Read statement by member
      * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -14615,21 +13364,6 @@ export class MxPlatformApi extends BaseAPI {
     }
 
     /**
-     * Use this endpoint to update an existing `spending_plan_iteration_item`.
-     * @summary Update a spending plan iteration item
-     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-     * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
-     * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
-     * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item object to be updated with required parameter (iteration_item_guid)
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MxPlatformApi
-     */
-    public updateSpendingPlanIterationItem(userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, spendingPlanIterationItemCreateRequestBody: SpendingPlanIterationItemCreateRequestBody, options?: AxiosRequestConfig) {
-        return MxPlatformApiFp(this.configuration).updateSpendingPlanIterationItem(userGuid, spendingPlanGuid, iterationItemGuid, spendingPlanIterationItemCreateRequestBody, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Use this endpoint to update the name of a specific tag according to its unique GUID.
      * @summary Update tag
      * @param {string} tagGuid The unique id for a &#x60;tag&#x60;.
@@ -14709,6 +13443,1311 @@ export class MxPlatformApi extends BaseAPI {
      */
     public verifyMember(memberGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).verifyMember(memberGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * SpendingPlanApi - axios parameter creator
+ * @export
+ */
+export const SpendingPlanApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * This endpoint creates a new `spending_plan` for the user.
+         * @summary Create spending plan
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createSpendingPlan: async (userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('createSpendingPlan', 'userGuid', userGuid)
+            const localVarPath = `/users/{user_guid}/spending_plans`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This endpoint creates a new `spending_plan_iteration_item`.
+         * @summary Create spending plan iteration item
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item to be created with required parameters (planned_amount)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createSpendingPlanIterationItem: async (spendingPlanGuid: string, userGuid: string, spendingPlanIterationItemCreateRequestBody: SpendingPlanIterationItemCreateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'spendingPlanGuid' is not null or undefined
+            assertParamExists('createSpendingPlanIterationItem', 'spendingPlanGuid', spendingPlanGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('createSpendingPlanIterationItem', 'userGuid', userGuid)
+            // verify required parameter 'spendingPlanIterationItemCreateRequestBody' is not null or undefined
+            assertParamExists('createSpendingPlanIterationItem', 'spendingPlanIterationItemCreateRequestBody', spendingPlanIterationItemCreateRequestBody)
+            const localVarPath = `/users/{user_guid}/spending_plans/{spending_plan_guid}/iterations/current/iteration_items`
+                .replace(`{${"spending_plan_guid"}}`, encodeURIComponent(String(spendingPlanGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(spendingPlanIterationItemCreateRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to delete a user\'s `spending_plan`.
+         * @summary Delete spending plan
+         * @param {string} userGuid The unique ID for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteSpendingPlan: async (userGuid: string, spendingPlanGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('deleteSpendingPlan', 'userGuid', userGuid)
+            // verify required parameter 'spendingPlanGuid' is not null or undefined
+            assertParamExists('deleteSpendingPlan', 'spendingPlanGuid', spendingPlanGuid)
+            const localVarPath = `/users/{user_guid}/spending_plans/{spending_plan_guid}`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"spending_plan_guid"}}`, encodeURIComponent(String(spendingPlanGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to delete a `spending_plan_account`.
+         * @summary Delete spending plan account
+         * @param {string} userGuid The unique ID for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {string} spendingPlanAccountGuid The unique ID for the specified account.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteSpendingPlanAccount: async (userGuid: string, spendingPlanGuid: string, spendingPlanAccountGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('deleteSpendingPlanAccount', 'userGuid', userGuid)
+            // verify required parameter 'spendingPlanGuid' is not null or undefined
+            assertParamExists('deleteSpendingPlanAccount', 'spendingPlanGuid', spendingPlanGuid)
+            // verify required parameter 'spendingPlanAccountGuid' is not null or undefined
+            assertParamExists('deleteSpendingPlanAccount', 'spendingPlanAccountGuid', spendingPlanAccountGuid)
+            const localVarPath = `/users/{user_guid}/spending_plans/{spending_plan_guid}/spending_plan_accounts/{spending_plan_account_guid}`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"spending_plan_guid"}}`, encodeURIComponent(String(spendingPlanGuid)))
+                .replace(`{${"spending_plan_account_guid"}}`, encodeURIComponent(String(spendingPlanAccountGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to delete a spending plan `iteration_item`.
+         * @summary Delete spending plan iteration item
+         * @param {string} userGuid The unique ID for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteSpendingPlanIterationItem: async (userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('deleteSpendingPlanIterationItem', 'userGuid', userGuid)
+            // verify required parameter 'spendingPlanGuid' is not null or undefined
+            assertParamExists('deleteSpendingPlanIterationItem', 'spendingPlanGuid', spendingPlanGuid)
+            // verify required parameter 'iterationItemGuid' is not null or undefined
+            assertParamExists('deleteSpendingPlanIterationItem', 'iterationItemGuid', iterationItemGuid)
+            const localVarPath = `/users/{user_guid}/spending_plans/{spending_plan_guid}/iterations/current/iteration_items/{iteration_item_guid}`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"spending_plan_guid"}}`, encodeURIComponent(String(spendingPlanGuid)))
+                .replace(`{${"iteration_item_guid"}}`, encodeURIComponent(String(iterationItemGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to list all the spending plan accounts associated with the spending plan.
+         * @summary List spending plan accounts
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listSpendingPlanAccounts: async (userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('listSpendingPlanAccounts', 'userGuid', userGuid)
+            // verify required parameter 'spendingPlanGuid' is not null or undefined
+            assertParamExists('listSpendingPlanAccounts', 'spendingPlanGuid', spendingPlanGuid)
+            const localVarPath = `/users/{user_guid}/spending_plans/{spending_plan_guid}/spending_plan_accounts`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"spending_plan_guid"}}`, encodeURIComponent(String(spendingPlanGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to list all the spending plan `iteration_items` associated with the `iteration`.
+         * @summary List spending plan iteration items
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listSpendingPlanIterationItems: async (userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('listSpendingPlanIterationItems', 'userGuid', userGuid)
+            // verify required parameter 'spendingPlanGuid' is not null or undefined
+            assertParamExists('listSpendingPlanIterationItems', 'spendingPlanGuid', spendingPlanGuid)
+            const localVarPath = `/users/{user_guid}/spending_plans/{spending_plan_guid}/iterations/current/iteration_items`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"spending_plan_guid"}}`, encodeURIComponent(String(spendingPlanGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to list all the spending plan `iterations` associated with the `spending_plan`.
+         * @summary List spending plan iterations
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listSpendingPlanIterations: async (userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('listSpendingPlanIterations', 'userGuid', userGuid)
+            // verify required parameter 'spendingPlanGuid' is not null or undefined
+            assertParamExists('listSpendingPlanIterations', 'spendingPlanGuid', spendingPlanGuid)
+            const localVarPath = `/users/{user_guid}/spending_plans/{spending_plan_guid}/iterations`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"spending_plan_guid"}}`, encodeURIComponent(String(spendingPlanGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to list all the spending plans associated with the user.
+         * @summary List spending plans
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listSpendingPlans: async (userGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('listSpendingPlans', 'userGuid', userGuid)
+            const localVarPath = `/users/{user_guid}/spending_plans`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to read the attributes of a specific spending plan account according to its unique GUID.
+         * @summary Read spending plan account
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {string} spendingPlanAccountGuid The unique ID for the specified account.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readSpendingPlanAccount: async (userGuid: string, spendingPlanGuid: string, spendingPlanAccountGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('readSpendingPlanAccount', 'userGuid', userGuid)
+            // verify required parameter 'spendingPlanGuid' is not null or undefined
+            assertParamExists('readSpendingPlanAccount', 'spendingPlanGuid', spendingPlanGuid)
+            // verify required parameter 'spendingPlanAccountGuid' is not null or undefined
+            assertParamExists('readSpendingPlanAccount', 'spendingPlanAccountGuid', spendingPlanAccountGuid)
+            const localVarPath = `/users/{user_guid}/spending_plans/{spending_plan_guid}/spending_plan_accounts/{spending_plan_account_guid}`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"spending_plan_guid"}}`, encodeURIComponent(String(spendingPlanGuid)))
+                .replace(`{${"spending_plan_account_guid"}}`, encodeURIComponent(String(spendingPlanAccountGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to read the attributes of a specific spending plan `iteration` according to its `iteration_number`.
+         * @summary Read a spending plan iteration
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {number} iterationNumber The current iteration number for the spending plan &#x60;iteration&#x60;&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readSpendingPlanIteration: async (userGuid: string, spendingPlanGuid: string, iterationNumber: number, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('readSpendingPlanIteration', 'userGuid', userGuid)
+            // verify required parameter 'spendingPlanGuid' is not null or undefined
+            assertParamExists('readSpendingPlanIteration', 'spendingPlanGuid', spendingPlanGuid)
+            // verify required parameter 'iterationNumber' is not null or undefined
+            assertParamExists('readSpendingPlanIteration', 'iterationNumber', iterationNumber)
+            const localVarPath = `/users/{user_guid}/spending_plans/{spending_plan_guid}/iterations/{iteration_number}`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"spending_plan_guid"}}`, encodeURIComponent(String(spendingPlanGuid)))
+                .replace(`{${"iteration_number"}}`, encodeURIComponent(String(iterationNumber)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to read the attributes of a specific spending plan `iteration_item` according to its unique GUID.
+         * @summary Read a spending plan iteration item
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readSpendingPlanIterationItem: async (userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('readSpendingPlanIterationItem', 'userGuid', userGuid)
+            // verify required parameter 'spendingPlanGuid' is not null or undefined
+            assertParamExists('readSpendingPlanIterationItem', 'spendingPlanGuid', spendingPlanGuid)
+            // verify required parameter 'iterationItemGuid' is not null or undefined
+            assertParamExists('readSpendingPlanIterationItem', 'iterationItemGuid', iterationItemGuid)
+            const localVarPath = `/users/{user_guid}/spending_plans/{spending_plan_guid}/iterations/current/iteration_items/{iteration_item_guid}`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"spending_plan_guid"}}`, encodeURIComponent(String(spendingPlanGuid)))
+                .replace(`{${"iteration_item_guid"}}`, encodeURIComponent(String(iterationItemGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to read the attributes of a specific spending plan according to its unique GUID.
+         * @summary Read a spending plan for a user
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readSpendingPlanUser: async (userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('readSpendingPlanUser', 'userGuid', userGuid)
+            // verify required parameter 'spendingPlanGuid' is not null or undefined
+            assertParamExists('readSpendingPlanUser', 'spendingPlanGuid', spendingPlanGuid)
+            const localVarPath = `/users/{user_guid}/spending_plans/{spending_plan_guid}`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"spending_plan_guid"}}`, encodeURIComponent(String(spendingPlanGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to update an existing `spending_plan_iteration_item`.
+         * @summary Update a spending plan iteration item
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
+         * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item object to be updated with required parameter (iteration_item_guid)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateSpendingPlanIterationItem: async (userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, spendingPlanIterationItemCreateRequestBody: SpendingPlanIterationItemCreateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('updateSpendingPlanIterationItem', 'userGuid', userGuid)
+            // verify required parameter 'spendingPlanGuid' is not null or undefined
+            assertParamExists('updateSpendingPlanIterationItem', 'spendingPlanGuid', spendingPlanGuid)
+            // verify required parameter 'iterationItemGuid' is not null or undefined
+            assertParamExists('updateSpendingPlanIterationItem', 'iterationItemGuid', iterationItemGuid)
+            // verify required parameter 'spendingPlanIterationItemCreateRequestBody' is not null or undefined
+            assertParamExists('updateSpendingPlanIterationItem', 'spendingPlanIterationItemCreateRequestBody', spendingPlanIterationItemCreateRequestBody)
+            const localVarPath = `/users/{user_guid}/spending_plans/{spending_plan_guid}/iterations/current/iteration_items/{iteration_item_guid}`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"spending_plan_guid"}}`, encodeURIComponent(String(spendingPlanGuid)))
+                .replace(`{${"iteration_item_guid"}}`, encodeURIComponent(String(iterationItemGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(spendingPlanIterationItemCreateRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * SpendingPlanApi - functional programming interface
+ * @export
+ */
+export const SpendingPlanApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = SpendingPlanApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * This endpoint creates a new `spending_plan` for the user.
+         * @summary Create spending plan
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createSpendingPlan(userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpendingPlanResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createSpendingPlan(userGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * This endpoint creates a new `spending_plan_iteration_item`.
+         * @summary Create spending plan iteration item
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item to be created with required parameters (planned_amount)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createSpendingPlanIterationItem(spendingPlanGuid: string, userGuid: string, spendingPlanIterationItemCreateRequestBody: SpendingPlanIterationItemCreateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpendingPlanIterationItemResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createSpendingPlanIterationItem(spendingPlanGuid, userGuid, spendingPlanIterationItemCreateRequestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to delete a user\'s `spending_plan`.
+         * @summary Delete spending plan
+         * @param {string} userGuid The unique ID for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteSpendingPlan(userGuid: string, spendingPlanGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteSpendingPlan(userGuid, spendingPlanGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to delete a `spending_plan_account`.
+         * @summary Delete spending plan account
+         * @param {string} userGuid The unique ID for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {string} spendingPlanAccountGuid The unique ID for the specified account.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteSpendingPlanAccount(userGuid: string, spendingPlanGuid: string, spendingPlanAccountGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteSpendingPlanAccount(userGuid, spendingPlanGuid, spendingPlanAccountGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to delete a spending plan `iteration_item`.
+         * @summary Delete spending plan iteration item
+         * @param {string} userGuid The unique ID for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteSpendingPlanIterationItem(userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteSpendingPlanIterationItem(userGuid, spendingPlanGuid, iterationItemGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to list all the spending plan accounts associated with the spending plan.
+         * @summary List spending plan accounts
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listSpendingPlanAccounts(userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpendingPlanAccountsResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listSpendingPlanAccounts(userGuid, spendingPlanGuid, page, recordsPerPage, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to list all the spending plan `iteration_items` associated with the `iteration`.
+         * @summary List spending plan iteration items
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listSpendingPlanIterationItems(userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpendingPlanIterationItemsResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listSpendingPlanIterationItems(userGuid, spendingPlanGuid, page, recordsPerPage, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to list all the spending plan `iterations` associated with the `spending_plan`.
+         * @summary List spending plan iterations
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listSpendingPlanIterations(userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpendingPlanIterationsResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listSpendingPlanIterations(userGuid, spendingPlanGuid, page, recordsPerPage, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to list all the spending plans associated with the user.
+         * @summary List spending plans
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listSpendingPlans(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpendingPlansResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listSpendingPlans(userGuid, page, recordsPerPage, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to read the attributes of a specific spending plan account according to its unique GUID.
+         * @summary Read spending plan account
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {string} spendingPlanAccountGuid The unique ID for the specified account.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async readSpendingPlanAccount(userGuid: string, spendingPlanGuid: string, spendingPlanAccountGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpendingPlanAccountResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.readSpendingPlanAccount(userGuid, spendingPlanGuid, spendingPlanAccountGuid, page, recordsPerPage, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to read the attributes of a specific spending plan `iteration` according to its `iteration_number`.
+         * @summary Read a spending plan iteration
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {number} iterationNumber The current iteration number for the spending plan &#x60;iteration&#x60;&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async readSpendingPlanIteration(userGuid: string, spendingPlanGuid: string, iterationNumber: number, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpendingPlanIterationResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.readSpendingPlanIteration(userGuid, spendingPlanGuid, iterationNumber, page, recordsPerPage, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to read the attributes of a specific spending plan `iteration_item` according to its unique GUID.
+         * @summary Read a spending plan iteration item
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async readSpendingPlanIterationItem(userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpendingPlanIterationItemResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.readSpendingPlanIterationItem(userGuid, spendingPlanGuid, iterationItemGuid, page, recordsPerPage, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to read the attributes of a specific spending plan according to its unique GUID.
+         * @summary Read a spending plan for a user
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async readSpendingPlanUser(userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpendingPlanResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.readSpendingPlanUser(userGuid, spendingPlanGuid, page, recordsPerPage, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to update an existing `spending_plan_iteration_item`.
+         * @summary Update a spending plan iteration item
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
+         * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item object to be updated with required parameter (iteration_item_guid)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateSpendingPlanIterationItem(userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, spendingPlanIterationItemCreateRequestBody: SpendingPlanIterationItemCreateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SpendingPlanIterationItemResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateSpendingPlanIterationItem(userGuid, spendingPlanGuid, iterationItemGuid, spendingPlanIterationItemCreateRequestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * SpendingPlanApi - factory interface
+ * @export
+ */
+export const SpendingPlanApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = SpendingPlanApiFp(configuration)
+    return {
+        /**
+         * This endpoint creates a new `spending_plan` for the user.
+         * @summary Create spending plan
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createSpendingPlan(userGuid: string, options?: any): AxiosPromise<SpendingPlanResponse> {
+            return localVarFp.createSpendingPlan(userGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This endpoint creates a new `spending_plan_iteration_item`.
+         * @summary Create spending plan iteration item
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item to be created with required parameters (planned_amount)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createSpendingPlanIterationItem(spendingPlanGuid: string, userGuid: string, spendingPlanIterationItemCreateRequestBody: SpendingPlanIterationItemCreateRequestBody, options?: any): AxiosPromise<SpendingPlanIterationItemResponse> {
+            return localVarFp.createSpendingPlanIterationItem(spendingPlanGuid, userGuid, spendingPlanIterationItemCreateRequestBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to delete a user\'s `spending_plan`.
+         * @summary Delete spending plan
+         * @param {string} userGuid The unique ID for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteSpendingPlan(userGuid: string, spendingPlanGuid: string, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteSpendingPlan(userGuid, spendingPlanGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to delete a `spending_plan_account`.
+         * @summary Delete spending plan account
+         * @param {string} userGuid The unique ID for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {string} spendingPlanAccountGuid The unique ID for the specified account.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteSpendingPlanAccount(userGuid: string, spendingPlanGuid: string, spendingPlanAccountGuid: string, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteSpendingPlanAccount(userGuid, spendingPlanGuid, spendingPlanAccountGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to delete a spending plan `iteration_item`.
+         * @summary Delete spending plan iteration item
+         * @param {string} userGuid The unique ID for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteSpendingPlanIterationItem(userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteSpendingPlanIterationItem(userGuid, spendingPlanGuid, iterationItemGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to list all the spending plan accounts associated with the spending plan.
+         * @summary List spending plan accounts
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listSpendingPlanAccounts(userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<SpendingPlanAccountsResponse> {
+            return localVarFp.listSpendingPlanAccounts(userGuid, spendingPlanGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to list all the spending plan `iteration_items` associated with the `iteration`.
+         * @summary List spending plan iteration items
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listSpendingPlanIterationItems(userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<SpendingPlanIterationItemsResponseBody> {
+            return localVarFp.listSpendingPlanIterationItems(userGuid, spendingPlanGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to list all the spending plan `iterations` associated with the `spending_plan`.
+         * @summary List spending plan iterations
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listSpendingPlanIterations(userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<SpendingPlanIterationsResponse> {
+            return localVarFp.listSpendingPlanIterations(userGuid, spendingPlanGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to list all the spending plans associated with the user.
+         * @summary List spending plans
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listSpendingPlans(userGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<SpendingPlansResponseBody> {
+            return localVarFp.listSpendingPlans(userGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to read the attributes of a specific spending plan account according to its unique GUID.
+         * @summary Read spending plan account
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {string} spendingPlanAccountGuid The unique ID for the specified account.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readSpendingPlanAccount(userGuid: string, spendingPlanGuid: string, spendingPlanAccountGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<SpendingPlanAccountResponse> {
+            return localVarFp.readSpendingPlanAccount(userGuid, spendingPlanGuid, spendingPlanAccountGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to read the attributes of a specific spending plan `iteration` according to its `iteration_number`.
+         * @summary Read a spending plan iteration
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {number} iterationNumber The current iteration number for the spending plan &#x60;iteration&#x60;&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readSpendingPlanIteration(userGuid: string, spendingPlanGuid: string, iterationNumber: number, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<SpendingPlanIterationResponse> {
+            return localVarFp.readSpendingPlanIteration(userGuid, spendingPlanGuid, iterationNumber, page, recordsPerPage, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to read the attributes of a specific spending plan `iteration_item` according to its unique GUID.
+         * @summary Read a spending plan iteration item
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readSpendingPlanIterationItem(userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<SpendingPlanIterationItemResponse> {
+            return localVarFp.readSpendingPlanIterationItem(userGuid, spendingPlanGuid, iterationItemGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to read the attributes of a specific spending plan according to its unique GUID.
+         * @summary Read a spending plan for a user
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readSpendingPlanUser(userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<SpendingPlanResponse> {
+            return localVarFp.readSpendingPlanUser(userGuid, spendingPlanGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to update an existing `spending_plan_iteration_item`.
+         * @summary Update a spending plan iteration item
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+         * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
+         * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item object to be updated with required parameter (iteration_item_guid)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateSpendingPlanIterationItem(userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, spendingPlanIterationItemCreateRequestBody: SpendingPlanIterationItemCreateRequestBody, options?: any): AxiosPromise<SpendingPlanIterationItemResponse> {
+            return localVarFp.updateSpendingPlanIterationItem(userGuid, spendingPlanGuid, iterationItemGuid, spendingPlanIterationItemCreateRequestBody, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * SpendingPlanApi - object-oriented interface
+ * @export
+ * @class SpendingPlanApi
+ * @extends {BaseAPI}
+ */
+export class SpendingPlanApi extends BaseAPI {
+    /**
+     * This endpoint creates a new `spending_plan` for the user.
+     * @summary Create spending plan
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SpendingPlanApi
+     */
+    public createSpendingPlan(userGuid: string, options?: AxiosRequestConfig) {
+        return SpendingPlanApiFp(this.configuration).createSpendingPlan(userGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This endpoint creates a new `spending_plan_iteration_item`.
+     * @summary Create spending plan iteration item
+     * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item to be created with required parameters (planned_amount)
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SpendingPlanApi
+     */
+    public createSpendingPlanIterationItem(spendingPlanGuid: string, userGuid: string, spendingPlanIterationItemCreateRequestBody: SpendingPlanIterationItemCreateRequestBody, options?: AxiosRequestConfig) {
+        return SpendingPlanApiFp(this.configuration).createSpendingPlanIterationItem(spendingPlanGuid, userGuid, spendingPlanIterationItemCreateRequestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to delete a user\'s `spending_plan`.
+     * @summary Delete spending plan
+     * @param {string} userGuid The unique ID for a &#x60;user&#x60;.
+     * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SpendingPlanApi
+     */
+    public deleteSpendingPlan(userGuid: string, spendingPlanGuid: string, options?: AxiosRequestConfig) {
+        return SpendingPlanApiFp(this.configuration).deleteSpendingPlan(userGuid, spendingPlanGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to delete a `spending_plan_account`.
+     * @summary Delete spending plan account
+     * @param {string} userGuid The unique ID for a &#x60;user&#x60;.
+     * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+     * @param {string} spendingPlanAccountGuid The unique ID for the specified account.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SpendingPlanApi
+     */
+    public deleteSpendingPlanAccount(userGuid: string, spendingPlanGuid: string, spendingPlanAccountGuid: string, options?: AxiosRequestConfig) {
+        return SpendingPlanApiFp(this.configuration).deleteSpendingPlanAccount(userGuid, spendingPlanGuid, spendingPlanAccountGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to delete a spending plan `iteration_item`.
+     * @summary Delete spending plan iteration item
+     * @param {string} userGuid The unique ID for a &#x60;user&#x60;.
+     * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+     * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SpendingPlanApi
+     */
+    public deleteSpendingPlanIterationItem(userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, options?: AxiosRequestConfig) {
+        return SpendingPlanApiFp(this.configuration).deleteSpendingPlanIterationItem(userGuid, spendingPlanGuid, iterationItemGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to list all the spending plan accounts associated with the spending plan.
+     * @summary List spending plan accounts
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SpendingPlanApi
+     */
+    public listSpendingPlanAccounts(userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
+        return SpendingPlanApiFp(this.configuration).listSpendingPlanAccounts(userGuid, spendingPlanGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to list all the spending plan `iteration_items` associated with the `iteration`.
+     * @summary List spending plan iteration items
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SpendingPlanApi
+     */
+    public listSpendingPlanIterationItems(userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
+        return SpendingPlanApiFp(this.configuration).listSpendingPlanIterationItems(userGuid, spendingPlanGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to list all the spending plan `iterations` associated with the `spending_plan`.
+     * @summary List spending plan iterations
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SpendingPlanApi
+     */
+    public listSpendingPlanIterations(userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
+        return SpendingPlanApiFp(this.configuration).listSpendingPlanIterations(userGuid, spendingPlanGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to list all the spending plans associated with the user.
+     * @summary List spending plans
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SpendingPlanApi
+     */
+    public listSpendingPlans(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
+        return SpendingPlanApiFp(this.configuration).listSpendingPlans(userGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to read the attributes of a specific spending plan account according to its unique GUID.
+     * @summary Read spending plan account
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+     * @param {string} spendingPlanAccountGuid The unique ID for the specified account.
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SpendingPlanApi
+     */
+    public readSpendingPlanAccount(userGuid: string, spendingPlanGuid: string, spendingPlanAccountGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
+        return SpendingPlanApiFp(this.configuration).readSpendingPlanAccount(userGuid, spendingPlanGuid, spendingPlanAccountGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to read the attributes of a specific spending plan `iteration` according to its `iteration_number`.
+     * @summary Read a spending plan iteration
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+     * @param {number} iterationNumber The current iteration number for the spending plan &#x60;iteration&#x60;&#x60;.
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SpendingPlanApi
+     */
+    public readSpendingPlanIteration(userGuid: string, spendingPlanGuid: string, iterationNumber: number, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
+        return SpendingPlanApiFp(this.configuration).readSpendingPlanIteration(userGuid, spendingPlanGuid, iterationNumber, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to read the attributes of a specific spending plan `iteration_item` according to its unique GUID.
+     * @summary Read a spending plan iteration item
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+     * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SpendingPlanApi
+     */
+    public readSpendingPlanIterationItem(userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
+        return SpendingPlanApiFp(this.configuration).readSpendingPlanIterationItem(userGuid, spendingPlanGuid, iterationItemGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to read the attributes of a specific spending plan according to its unique GUID.
+     * @summary Read a spending plan for a user
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SpendingPlanApi
+     */
+    public readSpendingPlanUser(userGuid: string, spendingPlanGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
+        return SpendingPlanApiFp(this.configuration).readSpendingPlanUser(userGuid, spendingPlanGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to update an existing `spending_plan_iteration_item`.
+     * @summary Update a spending plan iteration item
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
+     * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
+     * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item object to be updated with required parameter (iteration_item_guid)
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SpendingPlanApi
+     */
+    public updateSpendingPlanIterationItem(userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, spendingPlanIterationItemCreateRequestBody: SpendingPlanIterationItemCreateRequestBody, options?: AxiosRequestConfig) {
+        return SpendingPlanApiFp(this.configuration).updateSpendingPlanIterationItem(userGuid, spendingPlanGuid, iterationItemGuid, spendingPlanIterationItemCreateRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
