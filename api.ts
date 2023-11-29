@@ -13497,7 +13497,7 @@ export const SpendingPlanApiAxiosParamCreator = function (configuration?: Config
          * @summary Create spending plan iteration item
          * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item to be created with required parameters (planned_amount)
+         * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item to be created with required parameter (planned_amount)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -14104,7 +14104,7 @@ export const SpendingPlanApiAxiosParamCreator = function (configuration?: Config
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
          * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
          * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
-         * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item object to be updated with required parameter (iteration_item_guid)
+         * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item to be updated with required parameter (planned_amount)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -14176,7 +14176,7 @@ export const SpendingPlanApiFp = function(configuration?: Configuration) {
          * @summary Create spending plan iteration item
          * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item to be created with required parameters (planned_amount)
+         * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item to be created with required parameter (planned_amount)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -14342,7 +14342,7 @@ export const SpendingPlanApiFp = function(configuration?: Configuration) {
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
          * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
          * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
-         * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item object to be updated with required parameter (iteration_item_guid)
+         * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item to be updated with required parameter (planned_amount)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -14375,7 +14375,7 @@ export const SpendingPlanApiFactory = function (configuration?: Configuration, b
          * @summary Create spending plan iteration item
          * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item to be created with required parameters (planned_amount)
+         * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item to be created with required parameter (planned_amount)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -14529,7 +14529,7 @@ export const SpendingPlanApiFactory = function (configuration?: Configuration, b
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
          * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
          * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
-         * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item object to be updated with required parameter (iteration_item_guid)
+         * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item to be updated with required parameter (planned_amount)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -14563,7 +14563,7 @@ export class SpendingPlanApi extends BaseAPI {
      * @summary Create spending plan iteration item
      * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
      * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-     * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item to be created with required parameters (planned_amount)
+     * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item to be created with required parameter (planned_amount)
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SpendingPlanApi
@@ -14741,7 +14741,7 @@ export class SpendingPlanApi extends BaseAPI {
      * @param {string} userGuid The unique id for a &#x60;user&#x60;.
      * @param {string} spendingPlanGuid The unique ID for the &#x60;spending_plan&#x60;.
      * @param {string} iterationItemGuid The unique ID for the &#x60;iteration_item&#x60;.
-     * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item object to be updated with required parameter (iteration_item_guid)
+     * @param {SpendingPlanIterationItemCreateRequestBody} spendingPlanIterationItemCreateRequestBody Iteration item to be updated with required parameter (planned_amount)
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SpendingPlanApi
