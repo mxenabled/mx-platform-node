@@ -4810,6 +4810,12 @@ export interface WidgetRequest {
      * @type {string}
      * @memberof WidgetRequest
      */
+    'microwidget_instance_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof WidgetRequest
+     */
     'mode'?: string;
     /**
      * 
