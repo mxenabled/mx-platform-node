@@ -5,6 +5,7 @@ on:
     branches: [master]
   repository_dispatch:
     types: [publish_sdk]
+  workflow_dispatch:
 
 jobs:
   Publish:
