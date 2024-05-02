@@ -4801,6 +4801,12 @@ export interface WidgetRequest {
     'include_transactions'?: boolean;
     /**
      * 
+     * @type {string}
+     * @memberof WidgetRequest
+     */
+    'insight_guid'?: string;
+    /**
+     * 
      * @type {boolean}
      * @memberof WidgetRequest
      */
