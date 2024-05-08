@@ -493,12 +493,6 @@ export interface AccountResponse {
     'imported_at'?: string | null;
     /**
      * 
-     * @type {number}
-     * @memberof AccountResponse
-     */
-    'interest_rate'?: number | null;
-    /**
-     * 
      * @type {string}
      * @memberof AccountResponse
      */
@@ -509,6 +503,12 @@ export interface AccountResponse {
      * @memberof AccountResponse
      */
     'insured_name'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'interest_rate'?: number | null;
     /**
      * 
      * @type {boolean}
@@ -1771,6 +1771,184 @@ export interface ImageOptionResponse {
      * @memberof ImageOptionResponse
      */
     'value'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface InsightResponse
+ */
+export interface InsightResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof InsightResponse
+     */
+    'active_at'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof InsightResponse
+     */
+    'client_guid'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof InsightResponse
+     */
+    'created_at'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof InsightResponse
+     */
+    'cta_clicked_at'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof InsightResponse
+     */
+    'description'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof InsightResponse
+     */
+    'guid'?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InsightResponse
+     */
+    'has_associated_accounts'?: boolean | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InsightResponse
+     */
+    'has_associated_merchants'?: boolean | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InsightResponse
+     */
+    'has_associated_scheduled_payments'?: boolean | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InsightResponse
+     */
+    'has_associated_transactions'?: boolean | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InsightResponse
+     */
+    'has_been_displayed'?: boolean | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InsightResponse
+     */
+    'is_dismissed'?: boolean | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof InsightResponse
+     */
+    'micro_call_to_action'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof InsightResponse
+     */
+    'micro_description'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof InsightResponse
+     */
+    'micro_title'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof InsightResponse
+     */
+    'template'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof InsightResponse
+     */
+    'title'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof InsightResponse
+     */
+    'updated_at'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof InsightResponse
+     */
+    'user_guid'?: string;
+    /**
+     * 
+     * @type {any}
+     * @memberof InsightResponse
+     */
+    'user_id'?: any;
+}
+/**
+ * 
+ * @export
+ * @interface InsightResponseBody
+ */
+export interface InsightResponseBody {
+    /**
+     * 
+     * @type {Array<InsightResponse>}
+     * @memberof InsightResponseBody
+     */
+    'insight'?: Array<InsightResponse>;
+}
+/**
+ * 
+ * @export
+ * @interface InsightUpdateRequest
+ */
+export interface InsightUpdateRequest {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InsightUpdateRequest
+     */
+    'has_been_displayed'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InsightUpdateRequest
+     */
+    'is_dismissed'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface InsightsResponseBody
+ */
+export interface InsightsResponseBody {
+    /**
+     * 
+     * @type {Array<InsightResponse>}
+     * @memberof InsightsResponseBody
+     */
+    'insights'?: Array<InsightResponse>;
+    /**
+     * 
+     * @type {PaginationResponse}
+     * @memberof InsightsResponseBody
+     */
+    'pagination'?: PaginationResponse;
 }
 /**
  * 
@@ -3350,6 +3528,110 @@ export interface PaymentProcessorAuthorizationCodeResponseBody {
 /**
  * 
  * @export
+ * @interface ScheduledPaymentResponse
+ */
+export interface ScheduledPaymentResponse {
+    /**
+     * 
+     * @type {number}
+     * @memberof ScheduledPaymentResponse
+     */
+    'amount'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ScheduledPaymentResponse
+     */
+    'created_at'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ScheduledPaymentResponse
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ScheduledPaymentResponse
+     */
+    'guid'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ScheduledPaymentResponse
+     */
+    'is_completed'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ScheduledPaymentResponse
+     */
+    'is_recurring'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof ScheduledPaymentResponse
+     */
+    'merchant_guid'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ScheduledPaymentResponse
+     */
+    'occurs_on'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ScheduledPaymentResponse
+     */
+    'recurrence_day'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ScheduledPaymentResponse
+     */
+    'recurrence_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ScheduledPaymentResponse
+     */
+    'transaction_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ScheduledPaymentResponse
+     */
+    'updated_at'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ScheduledPaymentResponse
+     */
+    'user_guid'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ScheduledPaymentsResponseBody
+ */
+export interface ScheduledPaymentsResponseBody {
+    /**
+     * 
+     * @type {PaginationResponse}
+     * @memberof ScheduledPaymentsResponseBody
+     */
+    'pagination'?: PaginationResponse;
+    /**
+     * 
+     * @type {Array<ScheduledPaymentResponse>}
+     * @memberof ScheduledPaymentsResponseBody
+     */
+    'scheduled_payments'?: Array<ScheduledPaymentResponse>;
+}
+/**
+ * 
+ * @export
  * @interface SpendingPlanAccountResponse
  */
 export interface SpendingPlanAccountResponse {
@@ -4907,6 +5189,861 @@ export interface WidgetResponseBody {
 }
 
 /**
+ * InsightsApi - axios parameter creator
+ * @export
+ */
+export const InsightsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Use this endpoint to list all the accounts associated with the insight.
+         * @summary List all accounts associated with an insight.
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAccountsInsight: async (userGuid: string, insightGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('listAccountsInsight', 'userGuid', userGuid)
+            // verify required parameter 'insightGuid' is not null or undefined
+            assertParamExists('listAccountsInsight', 'insightGuid', insightGuid)
+            const localVarPath = `/users/{user_guid}/insights/{insight_guid}/accounts`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"insight_guid"}}`, encodeURIComponent(String(insightGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to list all the categories associated with the insight.
+         * @summary List all categories associated with an insight.
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listCategoriesInsight: async (userGuid: string, insightGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('listCategoriesInsight', 'userGuid', userGuid)
+            // verify required parameter 'insightGuid' is not null or undefined
+            assertParamExists('listCategoriesInsight', 'insightGuid', insightGuid)
+            const localVarPath = `/users/{user_guid}/insights/{insight_guid}/categories`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"insight_guid"}}`, encodeURIComponent(String(insightGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to list all insights associated with a specified account GUID.
+         * @summary List insights by account
+         * @param {string} accountGuid The unique id for the &#x60;account&#x60;.
+         * @param {string} userGuid The unique id for the &#x60;user&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listInsightsByAccount: async (accountGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'accountGuid' is not null or undefined
+            assertParamExists('listInsightsByAccount', 'accountGuid', accountGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('listInsightsByAccount', 'userGuid', userGuid)
+            const localVarPath = `/users/{user_guid}/accounts/{account_guid}/insights`
+                .replace(`{${"account_guid"}}`, encodeURIComponent(String(accountGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to list all the insights associated with the user.
+         * @summary List all insights for a user.
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listInsightsUser: async (userGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('listInsightsUser', 'userGuid', userGuid)
+            const localVarPath = `/users/{user_guid}/insights`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to list all the merchants associated with the insight.
+         * @summary List all merchants associated with an insight.
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listMerchantsInsight: async (userGuid: string, insightGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('listMerchantsInsight', 'userGuid', userGuid)
+            // verify required parameter 'insightGuid' is not null or undefined
+            assertParamExists('listMerchantsInsight', 'insightGuid', insightGuid)
+            const localVarPath = `/users/{user_guid}/insights/{insight_guid}/merchants`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"insight_guid"}}`, encodeURIComponent(String(insightGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to list all the scheduled payments associated with the insight.
+         * @summary List all scheduled payments associated with an insight
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listScheduledPaymentsInsight: async (userGuid: string, insightGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('listScheduledPaymentsInsight', 'userGuid', userGuid)
+            // verify required parameter 'insightGuid' is not null or undefined
+            assertParamExists('listScheduledPaymentsInsight', 'insightGuid', insightGuid)
+            const localVarPath = `/users/{user_guid}/insights/{insight_guid}/scheduled_payments`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"insight_guid"}}`, encodeURIComponent(String(insightGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to list all the transactions associated with the insight.
+         * @summary List all transactions associated with an insight.
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listTransactionsInsight: async (userGuid: string, insightGuid: string, page?: number, recordsPerPage?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('listTransactionsInsight', 'userGuid', userGuid)
+            // verify required parameter 'insightGuid' is not null or undefined
+            assertParamExists('listTransactionsInsight', 'insightGuid', insightGuid)
+            const localVarPath = `/users/{user_guid}/insights/{insight_guid}/transactions`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"insight_guid"}}`, encodeURIComponent(String(insightGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerPage !== undefined) {
+                localVarQueryParameter['records_per_page'] = recordsPerPage;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to read the attributes of a specific insight according to its unique GUID.
+         * @summary Read a specific insight.
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readInsightsUser: async (userGuid: string, insightGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('readInsightsUser', 'userGuid', userGuid)
+            // verify required parameter 'insightGuid' is not null or undefined
+            assertParamExists('readInsightsUser', 'insightGuid', insightGuid)
+            const localVarPath = `/users/{user_guid}/insights{insight_guid}`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"insight_guid"}}`, encodeURIComponent(String(insightGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to update the attributes of a particular insight according to its unique GUID.
+         * @summary Update insight
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+         * @param {InsightUpdateRequest} insightUpdateRequest The insight to be updated (None of these parameters are required, but the user object cannot be empty.)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateInsight: async (userGuid: string, insightGuid: string, insightUpdateRequest: InsightUpdateRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('updateInsight', 'userGuid', userGuid)
+            // verify required parameter 'insightGuid' is not null or undefined
+            assertParamExists('updateInsight', 'insightGuid', insightGuid)
+            // verify required parameter 'insightUpdateRequest' is not null or undefined
+            assertParamExists('updateInsight', 'insightUpdateRequest', insightUpdateRequest)
+            const localVarPath = `/users/{user_guid}/insights{insight_guid}`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"insight_guid"}}`, encodeURIComponent(String(insightGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(insightUpdateRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * InsightsApi - functional programming interface
+ * @export
+ */
+export const InsightsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = InsightsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Use this endpoint to list all the accounts associated with the insight.
+         * @summary List all accounts associated with an insight.
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listAccountsInsight(userGuid: string, insightGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountsResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listAccountsInsight(userGuid, insightGuid, page, recordsPerPage, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to list all the categories associated with the insight.
+         * @summary List all categories associated with an insight.
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listCategoriesInsight(userGuid: string, insightGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoriesResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listCategoriesInsight(userGuid, insightGuid, page, recordsPerPage, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to list all insights associated with a specified account GUID.
+         * @summary List insights by account
+         * @param {string} accountGuid The unique id for the &#x60;account&#x60;.
+         * @param {string} userGuid The unique id for the &#x60;user&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listInsightsByAccount(accountGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InsightsResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listInsightsByAccount(accountGuid, userGuid, page, recordsPerPage, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to list all the insights associated with the user.
+         * @summary List all insights for a user.
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listInsightsUser(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InsightsResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listInsightsUser(userGuid, page, recordsPerPage, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to list all the merchants associated with the insight.
+         * @summary List all merchants associated with an insight.
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listMerchantsInsight(userGuid: string, insightGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MerchantsResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listMerchantsInsight(userGuid, insightGuid, page, recordsPerPage, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to list all the scheduled payments associated with the insight.
+         * @summary List all scheduled payments associated with an insight
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listScheduledPaymentsInsight(userGuid: string, insightGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScheduledPaymentsResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listScheduledPaymentsInsight(userGuid, insightGuid, page, recordsPerPage, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to list all the transactions associated with the insight.
+         * @summary List all transactions associated with an insight.
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listTransactionsInsight(userGuid: string, insightGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionsResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listTransactionsInsight(userGuid, insightGuid, page, recordsPerPage, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to read the attributes of a specific insight according to its unique GUID.
+         * @summary Read a specific insight.
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async readInsightsUser(userGuid: string, insightGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InsightResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.readInsightsUser(userGuid, insightGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to update the attributes of a particular insight according to its unique GUID.
+         * @summary Update insight
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+         * @param {InsightUpdateRequest} insightUpdateRequest The insight to be updated (None of these parameters are required, but the user object cannot be empty.)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateInsight(userGuid: string, insightGuid: string, insightUpdateRequest: InsightUpdateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InsightResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateInsight(userGuid, insightGuid, insightUpdateRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * InsightsApi - factory interface
+ * @export
+ */
+export const InsightsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = InsightsApiFp(configuration)
+    return {
+        /**
+         * Use this endpoint to list all the accounts associated with the insight.
+         * @summary List all accounts associated with an insight.
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAccountsInsight(userGuid: string, insightGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<AccountsResponseBody> {
+            return localVarFp.listAccountsInsight(userGuid, insightGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to list all the categories associated with the insight.
+         * @summary List all categories associated with an insight.
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listCategoriesInsight(userGuid: string, insightGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<CategoriesResponseBody> {
+            return localVarFp.listCategoriesInsight(userGuid, insightGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to list all insights associated with a specified account GUID.
+         * @summary List insights by account
+         * @param {string} accountGuid The unique id for the &#x60;account&#x60;.
+         * @param {string} userGuid The unique id for the &#x60;user&#x60;.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listInsightsByAccount(accountGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<InsightsResponseBody> {
+            return localVarFp.listInsightsByAccount(accountGuid, userGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to list all the insights associated with the user.
+         * @summary List all insights for a user.
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listInsightsUser(userGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<InsightsResponseBody> {
+            return localVarFp.listInsightsUser(userGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to list all the merchants associated with the insight.
+         * @summary List all merchants associated with an insight.
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listMerchantsInsight(userGuid: string, insightGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<MerchantsResponseBody> {
+            return localVarFp.listMerchantsInsight(userGuid, insightGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to list all the scheduled payments associated with the insight.
+         * @summary List all scheduled payments associated with an insight
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listScheduledPaymentsInsight(userGuid: string, insightGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<ScheduledPaymentsResponseBody> {
+            return localVarFp.listScheduledPaymentsInsight(userGuid, insightGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to list all the transactions associated with the insight.
+         * @summary List all transactions associated with an insight.
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+         * @param {number} [page] Specify current page.
+         * @param {number} [recordsPerPage] Specify records per page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listTransactionsInsight(userGuid: string, insightGuid: string, page?: number, recordsPerPage?: number, options?: any): AxiosPromise<TransactionsResponseBody> {
+            return localVarFp.listTransactionsInsight(userGuid, insightGuid, page, recordsPerPage, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to read the attributes of a specific insight according to its unique GUID.
+         * @summary Read a specific insight.
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readInsightsUser(userGuid: string, insightGuid: string, options?: any): AxiosPromise<InsightResponseBody> {
+            return localVarFp.readInsightsUser(userGuid, insightGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to update the attributes of a particular insight according to its unique GUID.
+         * @summary Update insight
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+         * @param {InsightUpdateRequest} insightUpdateRequest The insight to be updated (None of these parameters are required, but the user object cannot be empty.)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateInsight(userGuid: string, insightGuid: string, insightUpdateRequest: InsightUpdateRequest, options?: any): AxiosPromise<InsightResponse> {
+            return localVarFp.updateInsight(userGuid, insightGuid, insightUpdateRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * InsightsApi - object-oriented interface
+ * @export
+ * @class InsightsApi
+ * @extends {BaseAPI}
+ */
+export class InsightsApi extends BaseAPI {
+    /**
+     * Use this endpoint to list all the accounts associated with the insight.
+     * @summary List all accounts associated with an insight.
+     * @param {string} userGuid The unique identifier for the user. Defined by MX.
+     * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof InsightsApi
+     */
+    public listAccountsInsight(userGuid: string, insightGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
+        return InsightsApiFp(this.configuration).listAccountsInsight(userGuid, insightGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to list all the categories associated with the insight.
+     * @summary List all categories associated with an insight.
+     * @param {string} userGuid The unique identifier for the user. Defined by MX.
+     * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof InsightsApi
+     */
+    public listCategoriesInsight(userGuid: string, insightGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
+        return InsightsApiFp(this.configuration).listCategoriesInsight(userGuid, insightGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to list all insights associated with a specified account GUID.
+     * @summary List insights by account
+     * @param {string} accountGuid The unique id for the &#x60;account&#x60;.
+     * @param {string} userGuid The unique id for the &#x60;user&#x60;.
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof InsightsApi
+     */
+    public listInsightsByAccount(accountGuid: string, userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
+        return InsightsApiFp(this.configuration).listInsightsByAccount(accountGuid, userGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to list all the insights associated with the user.
+     * @summary List all insights for a user.
+     * @param {string} userGuid The unique identifier for the user. Defined by MX.
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof InsightsApi
+     */
+    public listInsightsUser(userGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
+        return InsightsApiFp(this.configuration).listInsightsUser(userGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to list all the merchants associated with the insight.
+     * @summary List all merchants associated with an insight.
+     * @param {string} userGuid The unique identifier for the user. Defined by MX.
+     * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof InsightsApi
+     */
+    public listMerchantsInsight(userGuid: string, insightGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
+        return InsightsApiFp(this.configuration).listMerchantsInsight(userGuid, insightGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to list all the scheduled payments associated with the insight.
+     * @summary List all scheduled payments associated with an insight
+     * @param {string} userGuid The unique identifier for the user. Defined by MX.
+     * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof InsightsApi
+     */
+    public listScheduledPaymentsInsight(userGuid: string, insightGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
+        return InsightsApiFp(this.configuration).listScheduledPaymentsInsight(userGuid, insightGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to list all the transactions associated with the insight.
+     * @summary List all transactions associated with an insight.
+     * @param {string} userGuid The unique identifier for the user. Defined by MX.
+     * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+     * @param {number} [page] Specify current page.
+     * @param {number} [recordsPerPage] Specify records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof InsightsApi
+     */
+    public listTransactionsInsight(userGuid: string, insightGuid: string, page?: number, recordsPerPage?: number, options?: AxiosRequestConfig) {
+        return InsightsApiFp(this.configuration).listTransactionsInsight(userGuid, insightGuid, page, recordsPerPage, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to read the attributes of a specific insight according to its unique GUID.
+     * @summary Read a specific insight.
+     * @param {string} userGuid The unique identifier for the user. Defined by MX.
+     * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof InsightsApi
+     */
+    public readInsightsUser(userGuid: string, insightGuid: string, options?: AxiosRequestConfig) {
+        return InsightsApiFp(this.configuration).readInsightsUser(userGuid, insightGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to update the attributes of a particular insight according to its unique GUID.
+     * @summary Update insight
+     * @param {string} userGuid The unique identifier for the user. Defined by MX.
+     * @param {string} insightGuid The unique identifier for the insight. Defined by MX.
+     * @param {InsightUpdateRequest} insightUpdateRequest The insight to be updated (None of these parameters are required, but the user object cannot be empty.)
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof InsightsApi
+     */
+    public updateInsight(userGuid: string, insightGuid: string, insightUpdateRequest: InsightUpdateRequest, options?: AxiosRequestConfig) {
+        return InsightsApiFp(this.configuration).updateInsight(userGuid, insightGuid, insightUpdateRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
  * MxPlatformApi - axios parameter creator
  * @export
  */
@@ -5185,7 +6322,7 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * This endpoint can only be used to create manual accounts. Creating a manual account will automatically create it under the Manual Institution member. Since a manual account has no credentials tied to the member, the account will never aggregate or include data from a data feed..
+         * This endpoint can only be used to create manual accounts. Creating a manual account will automatically create it under the Manual Institution member. Since a manual account has no credentials tied to the member, the account will never aggregate or include data from a data feed.
          * @summary Create manual account
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
          * @param {AccountCreateRequestBody} accountCreateRequestBody Manual account object to be created.
@@ -9673,7 +10810,7 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * This endpoint can only be used to create manual accounts. Creating a manual account will automatically create it under the Manual Institution member. Since a manual account has no credentials tied to the member, the account will never aggregate or include data from a data feed..
+         * This endpoint can only be used to create manual accounts. Creating a manual account will automatically create it under the Manual Institution member. Since a manual account has no credentials tied to the member, the account will never aggregate or include data from a data feed.
          * @summary Create manual account
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
          * @param {AccountCreateRequestBody} accountCreateRequestBody Manual account object to be created.
@@ -10957,7 +12094,7 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
             return localVarFp.createManagedTransaction(accountGuid, memberGuid, userGuid, managedTransactionCreateRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
-         * This endpoint can only be used to create manual accounts. Creating a manual account will automatically create it under the Manual Institution member. Since a manual account has no credentials tied to the member, the account will never aggregate or include data from a data feed..
+         * This endpoint can only be used to create manual accounts. Creating a manual account will automatically create it under the Manual Institution member. Since a manual account has no credentials tied to the member, the account will never aggregate or include data from a data feed.
          * @summary Create manual account
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
          * @param {AccountCreateRequestBody} accountCreateRequestBody Manual account object to be created.
@@ -12160,7 +13297,7 @@ export class MxPlatformApi extends BaseAPI {
     }
 
     /**
-     * This endpoint can only be used to create manual accounts. Creating a manual account will automatically create it under the Manual Institution member. Since a manual account has no credentials tied to the member, the account will never aggregate or include data from a data feed..
+     * This endpoint can only be used to create manual accounts. Creating a manual account will automatically create it under the Manual Institution member. Since a manual account has no credentials tied to the member, the account will never aggregate or include data from a data feed.
      * @summary Create manual account
      * @param {string} userGuid The unique id for a &#x60;user&#x60;.
      * @param {AccountCreateRequestBody} accountCreateRequestBody Manual account object to be created.
