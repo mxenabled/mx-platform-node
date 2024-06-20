@@ -3110,6 +3110,12 @@ export interface MemberStatusResponse {
      * @type {boolean}
      * @memberof MemberStatusResponse
      */
+    'has_processed_account_numbers'?: boolean | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof MemberStatusResponse
+     */
     'has_processed_transactions'?: boolean | null;
     /**
      * 
