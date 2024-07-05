@@ -2992,6 +2992,12 @@ export interface MemberResponse {
      * @type {boolean}
      * @memberof MemberResponse
      */
+    'is_manual'?: boolean | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof MemberResponse
+     */
     'is_oauth'?: boolean | null;
     /**
      * 
@@ -2999,6 +3005,18 @@ export interface MemberResponse {
      * @memberof MemberResponse
      */
     'metadata'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MemberResponse
+     */
+    'most_recent_job_detail_code'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MemberResponse
+     */
+    'most_recent_job_detail_text'?: string | null;
     /**
      * 
      * @type {string}
