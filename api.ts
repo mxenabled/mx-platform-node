@@ -198,6 +198,12 @@ export interface AccountNumberResponse {
      * @type {string}
      * @memberof AccountNumberResponse
      */
+    'loan_guarantor'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountNumberResponse
+     */
     'institution_number'?: string | null;
     /**
      * 
