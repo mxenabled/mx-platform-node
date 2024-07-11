@@ -679,6 +679,12 @@ export interface AccountResponse {
     'total_account_value'?: number | null;
     /**
      * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'total_account_value_ugl'?: number | null;
+    /**
+     * 
      * @type {string}
      * @memberof AccountResponse
      */
