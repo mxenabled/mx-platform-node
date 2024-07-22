@@ -204,6 +204,12 @@ export interface AccountNumberResponse {
      * @type {string}
      * @memberof AccountNumberResponse
      */
+    'loan_reference_number'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountNumberResponse
+     */
     'institution_number'?: string | null;
     /**
      * 
@@ -223,6 +229,12 @@ export interface AccountNumberResponse {
      * @memberof AccountNumberResponse
      */
     'routing_number'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountNumberResponse
+     */
+    'sequence_number'?: string | null;
     /**
      * 
      * @type {string}
