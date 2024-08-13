@@ -1401,6 +1401,110 @@ export interface CredentialsResponseBody {
 /**
  * 
  * @export
+ * @interface CreditCardProduct
+ */
+export interface CreditCardProduct {
+    /**
+     * 
+     * @type {any}
+     * @memberof CreditCardProduct
+     */
+    'annual_fee'?: any;
+    /**
+     * 
+     * @type {any}
+     * @memberof CreditCardProduct
+     */
+    'duration_of_introductory_rate_on_balance_transfer'?: any;
+    /**
+     * 
+     * @type {any}
+     * @memberof CreditCardProduct
+     */
+    'duration_of_introductory_rate_on_purchases'?: any;
+    /**
+     * 
+     * @type {any}
+     * @memberof CreditCardProduct
+     */
+    'guid'?: any;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreditCardProduct
+     */
+    'has_cashback_rewards'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreditCardProduct
+     */
+    'has_other_rewards'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreditCardProduct
+     */
+    'has_travel_rewards'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreditCardProduct
+     */
+    'has_zero_introductory_annual_fee'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreditCardProduct
+     */
+    'has_zero_percent_introductory_rate'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreditCardProduct
+     */
+    'has_zero_percent_introductory_rate_on_balance_transfer'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreditCardProduct
+     */
+    'financial_institution'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreditCardProduct
+     */
+    'is_accepting_applications'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreditCardProduct
+     */
+    'is_small_business_card'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreditCardProduct
+     */
+    'name'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface CreditCardProductResponse
+ */
+export interface CreditCardProductResponse {
+    /**
+     * 
+     * @type {CreditCardProduct}
+     * @memberof CreditCardProductResponse
+     */
+    'reward'?: CreditCardProduct;
+}
+/**
+ * 
+ * @export
  * @interface EnhanceTransactionResponse
  */
 export interface EnhanceTransactionResponse {
@@ -3572,6 +3676,172 @@ export interface PaymentProcessorAuthorizationCodeResponseBody {
      * @memberof PaymentProcessorAuthorizationCodeResponseBody
      */
     'payment_processor_authorization_code'?: PaymentProcessorAuthorizationCodeResponse;
+}
+/**
+ * 
+ * @export
+ * @interface RewardResponse
+ */
+export interface RewardResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof RewardResponse
+     */
+    'account_guid'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RewardResponse
+     */
+    'balance_type'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof RewardResponse
+     */
+    'balance'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof RewardResponse
+     */
+    'created_at'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RewardResponse
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RewardResponse
+     */
+    'expires_on'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RewardResponse
+     */
+    'guid'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RewardResponse
+     */
+    'member_guid'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RewardResponse
+     */
+    'unit_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RewardResponse
+     */
+    'user_guid'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface RewardResponseBody
+ */
+export interface RewardResponseBody {
+    /**
+     * 
+     * @type {RewardResponse}
+     * @memberof RewardResponseBody
+     */
+    'reward'?: RewardResponse;
+}
+/**
+ * 
+ * @export
+ * @interface RewardsResponse
+ */
+export interface RewardsResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof RewardsResponse
+     */
+    'account_guid'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RewardsResponse
+     */
+    'balance_type'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof RewardsResponse
+     */
+    'balance'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof RewardsResponse
+     */
+    'created_at'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RewardsResponse
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RewardsResponse
+     */
+    'expires_on'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RewardsResponse
+     */
+    'guid'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RewardsResponse
+     */
+    'member_guid'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RewardsResponse
+     */
+    'unit_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RewardsResponse
+     */
+    'user_guid'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface RewardsResponseBody
+ */
+export interface RewardsResponseBody {
+    /**
+     * 
+     * @type {Array<RewardsResponse>}
+     * @memberof RewardsResponseBody
+     */
+    'rewards'?: Array<RewardsResponse>;
+    /**
+     * 
+     * @type {PaginationResponse}
+     * @memberof RewardsResponseBody
+     */
+    'pagination'?: PaginationResponse;
 }
 /**
  * 
@@ -6630,6 +6900,44 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
+         * This endpoint returns the specified `credit_card_product` according to the unique GUID.
+         * @summary Read a Credit Card Product
+         * @param {string} creditCardProductGuid The required &#x60;credit_card_product_guid&#x60; can be found on the &#x60;account&#x60; object.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creditCard: async (creditCardProductGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'creditCardProductGuid' is not null or undefined
+            assertParamExists('creditCard', 'creditCardProductGuid', creditCardProductGuid)
+            const localVarPath = `/credit_card_products/{credit_card_product_guid}`
+                .replace(`{${"credit_card_product_guid"}}`, encodeURIComponent(String(creditCardProductGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Use this endpoint to delete a specific custom category according to its unique GUID. The API will respond with an empty object and a status of `204 No Content`.
          * @summary Delete category
          * @param {string} categoryGuid The unique id for a &#x60;category&#x60;.
@@ -7245,6 +7553,48 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             const localVarPath = `/users/{user_guid}/members/{member_guid}/extend_history`
                 .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)))
                 .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Calling this endpoint initiates an aggregation-type event which will gather the member\'s rewards information, as well as account and transaction information. Rewards data is also gathered with daily background aggregations.
+         * @summary Fetch Rewards
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} memberGuid The unique identifier for the member. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fetchRewards: async (userGuid: string, memberGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('fetchRewards', 'userGuid', userGuid)
+            // verify required parameter 'memberGuid' is not null or undefined
+            assertParamExists('fetchRewards', 'memberGuid', memberGuid)
+            const localVarPath = `/users/{user_guid}/members/{member_guid}/fetch_rewards`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -8490,6 +8840,48 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
+         * Use this endpoint to list all the `rewards` associated with a specified `member`.
+         * @summary List Rewards
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} memberGuid The unique identifier for the member. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listRewards: async (userGuid: string, memberGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('listRewards', 'userGuid', userGuid)
+            // verify required parameter 'memberGuid' is not null or undefined
+            assertParamExists('listRewards', 'memberGuid', memberGuid)
+            const localVarPath = `/users/{user_guid}/members/{member_guid}/rewards`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Use this endpoint to get an array of available statements.
          * @summary List statements by member
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -9618,6 +10010,52 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             assertParamExists('readMerchantLocation', 'merchantLocationGuid', merchantLocationGuid)
             const localVarPath = `/merchant_locations/{merchant_location_guid}`
                 .replace(`{${"merchant_location_guid"}}`, encodeURIComponent(String(merchantLocationGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to read a specific `reward` based on its unique GUID..
+         * @summary Read Reward
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} memberGuid The unique identifier for the member. Defined by MX.
+         * @param {string} rewardGuid The unique identifier for the rewards. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readRewards: async (userGuid: string, memberGuid: string, rewardGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('readRewards', 'userGuid', userGuid)
+            // verify required parameter 'memberGuid' is not null or undefined
+            assertParamExists('readRewards', 'memberGuid', memberGuid)
+            // verify required parameter 'rewardGuid' is not null or undefined
+            assertParamExists('readRewards', 'rewardGuid', rewardGuid)
+            const localVarPath = `/users/{user_guid}/members/{member_guid}/rewards/{reward_guid}`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"member_guid"}}`, encodeURIComponent(String(memberGuid)))
+                .replace(`{${"reward_guid"}}`, encodeURIComponent(String(rewardGuid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10929,6 +11367,17 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * This endpoint returns the specified `credit_card_product` according to the unique GUID.
+         * @summary Read a Credit Card Product
+         * @param {string} creditCardProductGuid The required &#x60;credit_card_product_guid&#x60; can be found on the &#x60;account&#x60; object.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async creditCard(creditCardProductGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreditCardProductResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.creditCard(creditCardProductGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Use this endpoint to delete a specific custom category according to its unique GUID. The API will respond with an empty object and a status of `204 No Content`.
          * @summary Delete category
          * @param {string} categoryGuid The unique id for a &#x60;category&#x60;.
@@ -11108,6 +11557,18 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          */
         async extendHistory(memberGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.extendHistory(memberGuid, userGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Calling this endpoint initiates an aggregation-type event which will gather the member\'s rewards information, as well as account and transaction information. Rewards data is also gathered with daily background aggregations.
+         * @summary Fetch Rewards
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} memberGuid The unique identifier for the member. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async fetchRewards(userGuid: string, memberGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.fetchRewards(userGuid, memberGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -11438,6 +11899,18 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Use this endpoint to list all the `rewards` associated with a specified `member`.
+         * @summary List Rewards
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} memberGuid The unique identifier for the member. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listRewards(userGuid: string, memberGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RewardsResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listRewards(userGuid, memberGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Use this endpoint to get an array of available statements.
          * @summary List statements by member
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -11751,6 +12224,19 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          */
         async readMerchantLocation(merchantLocationGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MerchantLocationResponseBody>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.readMerchantLocation(merchantLocationGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to read a specific `reward` based on its unique GUID..
+         * @summary Read Reward
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} memberGuid The unique identifier for the member. Defined by MX.
+         * @param {string} rewardGuid The unique identifier for the rewards. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async readRewards(userGuid: string, memberGuid: string, rewardGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RewardResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.readRewards(userGuid, memberGuid, rewardGuid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -12207,6 +12693,16 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
             return localVarFp.createUser(userCreateRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
+         * This endpoint returns the specified `credit_card_product` according to the unique GUID.
+         * @summary Read a Credit Card Product
+         * @param {string} creditCardProductGuid The required &#x60;credit_card_product_guid&#x60; can be found on the &#x60;account&#x60; object.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creditCard(creditCardProductGuid: string, options?: any): AxiosPromise<CreditCardProductResponse> {
+            return localVarFp.creditCard(creditCardProductGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Use this endpoint to delete a specific custom category according to its unique GUID. The API will respond with an empty object and a status of `204 No Content`.
          * @summary Delete category
          * @param {string} categoryGuid The unique id for a &#x60;category&#x60;.
@@ -12372,6 +12868,17 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          */
         extendHistory(memberGuid: string, userGuid: string, options?: any): AxiosPromise<MemberResponseBody> {
             return localVarFp.extendHistory(memberGuid, userGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Calling this endpoint initiates an aggregation-type event which will gather the member\'s rewards information, as well as account and transaction information. Rewards data is also gathered with daily background aggregations.
+         * @summary Fetch Rewards
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} memberGuid The unique identifier for the member. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fetchRewards(userGuid: string, memberGuid: string, options?: any): AxiosPromise<MemberResponseBody> {
+            return localVarFp.fetchRewards(userGuid, memberGuid, options).then((request) => request(axios, basePath));
         },
         /**
          * Use this endpoint to fetch the statements associated with a particular member.
@@ -12677,6 +13184,17 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
             return localVarFp.listMerchants(page, recordsPerPage, options).then((request) => request(axios, basePath));
         },
         /**
+         * Use this endpoint to list all the `rewards` associated with a specified `member`.
+         * @summary List Rewards
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} memberGuid The unique identifier for the member. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listRewards(userGuid: string, memberGuid: string, options?: any): AxiosPromise<RewardsResponseBody> {
+            return localVarFp.listRewards(userGuid, memberGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Use this endpoint to get an array of available statements.
          * @summary List statements by member
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -12967,6 +13485,18 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          */
         readMerchantLocation(merchantLocationGuid: string, options?: any): AxiosPromise<MerchantLocationResponseBody> {
             return localVarFp.readMerchantLocation(merchantLocationGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to read a specific `reward` based on its unique GUID..
+         * @summary Read Reward
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {string} memberGuid The unique identifier for the member. Defined by MX.
+         * @param {string} rewardGuid The unique identifier for the rewards. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readRewards(userGuid: string, memberGuid: string, rewardGuid: string, options?: any): AxiosPromise<RewardResponseBody> {
+            return localVarFp.readRewards(userGuid, memberGuid, rewardGuid, options).then((request) => request(axios, basePath));
         },
         /**
          * Use this endpoint to read a JSON representation of the statement.
@@ -13422,6 +13952,18 @@ export class MxPlatformApi extends BaseAPI {
     }
 
     /**
+     * This endpoint returns the specified `credit_card_product` according to the unique GUID.
+     * @summary Read a Credit Card Product
+     * @param {string} creditCardProductGuid The required &#x60;credit_card_product_guid&#x60; can be found on the &#x60;account&#x60; object.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public creditCard(creditCardProductGuid: string, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).creditCard(creditCardProductGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Use this endpoint to delete a specific custom category according to its unique GUID. The API will respond with an empty object and a status of `204 No Content`.
      * @summary Delete category
      * @param {string} categoryGuid The unique id for a &#x60;category&#x60;.
@@ -13616,6 +14158,19 @@ export class MxPlatformApi extends BaseAPI {
      */
     public extendHistory(memberGuid: string, userGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).extendHistory(memberGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Calling this endpoint initiates an aggregation-type event which will gather the member\'s rewards information, as well as account and transaction information. Rewards data is also gathered with daily background aggregations.
+     * @summary Fetch Rewards
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {string} memberGuid The unique identifier for the member. Defined by MX.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public fetchRewards(userGuid: string, memberGuid: string, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).fetchRewards(userGuid, memberGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -13970,6 +14525,19 @@ export class MxPlatformApi extends BaseAPI {
     }
 
     /**
+     * Use this endpoint to list all the `rewards` associated with a specified `member`.
+     * @summary List Rewards
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {string} memberGuid The unique identifier for the member. Defined by MX.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public listRewards(userGuid: string, memberGuid: string, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).listRewards(userGuid, memberGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Use this endpoint to get an array of available statements.
      * @summary List statements by member
      * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -14307,6 +14875,20 @@ export class MxPlatformApi extends BaseAPI {
      */
     public readMerchantLocation(merchantLocationGuid: string, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).readMerchantLocation(merchantLocationGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to read a specific `reward` based on its unique GUID..
+     * @summary Read Reward
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {string} memberGuid The unique identifier for the member. Defined by MX.
+     * @param {string} rewardGuid The unique identifier for the rewards. Defined by MX.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public readRewards(userGuid: string, memberGuid: string, rewardGuid: string, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).readRewards(userGuid, memberGuid, rewardGuid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
