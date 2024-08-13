@@ -673,6 +673,12 @@ export interface AccountResponse {
     'started_on'?: string | null;
     /**
      * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'statement_balance'?: number | null;
+    /**
+     * 
      * @type {string}
      * @memberof AccountResponse
      */
