@@ -965,6 +965,210 @@ export interface AuthorizationCodeResponseBody {
 /**
  * 
  * @export
+ * @interface BudgetCreateRequest
+ */
+export interface BudgetCreateRequest {
+    /**
+     * Unique identifier of the category.
+     * @type {string}
+     * @memberof BudgetCreateRequest
+     */
+    'category_guid': string;
+    /**
+     * Unique identifier of the parent budget. This is only required when creating a budget on a sub-category.
+     * @type {string}
+     * @memberof BudgetCreateRequest
+     */
+    'parent_guid': string;
+    /**
+     * Amount of the budget.
+     * @type {number}
+     * @memberof BudgetCreateRequest
+     */
+    'amount'?: number;
+    /**
+     * Additional information a partner can store on the budget.
+     * @type {string}
+     * @memberof BudgetCreateRequest
+     */
+    'metadata'?: string;
+    /**
+     * When set to true, this parameter will prevent a webhook from being triggered by the request.
+     * @type {boolean}
+     * @memberof BudgetCreateRequest
+     */
+    'skip_webhook'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface BudgetCreateRequestBody
+ */
+export interface BudgetCreateRequestBody {
+    /**
+     * 
+     * @type {BudgetCreateRequest}
+     * @memberof BudgetCreateRequestBody
+     */
+    'budget'?: BudgetCreateRequest;
+}
+/**
+ * 
+ * @export
+ * @interface BudgetResponse
+ */
+export interface BudgetResponse {
+    /**
+     * A goal amount set by the user for a category\'s transaction total during a month.
+     * @type {number}
+     * @memberof BudgetResponse
+     */
+    'amount'?: number;
+    /**
+     * Unique identifier for the budget category. Defined by MX.
+     * @type {string}
+     * @memberof BudgetResponse
+     */
+    'category_guid'?: string;
+    /**
+     * Date and time the budget was created, represented in ISO 8601 format with timestamp.
+     * @type {string}
+     * @memberof BudgetResponse
+     */
+    'created_at'?: string;
+    /**
+     * Unique identifier for the budget. Defined by MX.
+     * @type {string}
+     * @memberof BudgetResponse
+     */
+    'guid'?: string;
+    /**
+     * If the budget has been exceeded, this field will be true. Otherwise, this field will be false.
+     * @type {boolean}
+     * @memberof BudgetResponse
+     */
+    'is_exceeded'?: boolean;
+    /**
+     * If the budget is off track, this field will be true. Otherwise, this field will be false.
+     * @type {boolean}
+     * @memberof BudgetResponse
+     */
+    'is_off_track'?: boolean;
+    /**
+     * Additional information a partner can store on the budget.
+     * @type {string}
+     * @memberof BudgetResponse
+     */
+    'metadata'?: string | null;
+    /**
+     * The name of the budget that is visible to the user (ie \"Food\", \"Bills\", \"Entertainment\", etc).
+     * @type {string}
+     * @memberof BudgetResponse
+     */
+    'name'?: string | null;
+    /**
+     * The percentage amount of off track spending. (Deprecated).
+     * @type {number}
+     * @memberof BudgetResponse
+     */
+    'off_track_percentage'?: number | null;
+    /**
+     * Unique identifier for the parent budget. Defined by MX.
+     * @type {string}
+     * @memberof BudgetResponse
+     */
+    'parent_guid'?: string | null;
+    /**
+     * The percentage of a budget that has been spent during the current calendar month Calculated as the transaction total divided by the amount and then multiplied by 100.A value of zero will be returned when `amount` is zero.
+     * @type {number}
+     * @memberof BudgetResponse
+     */
+    'percent_spent'?: number | null;
+    /**
+     * The projected amount of spending for the budget.
+     * @type {number}
+     * @memberof BudgetResponse
+     */
+    'projected_spending'?: number;
+    /**
+     * The revision number of this budget record.
+     * @type {number}
+     * @memberof BudgetResponse
+     */
+    'revision'?: number;
+    /**
+     * The cumulative amount of all transactions under the budget.
+     * @type {any}
+     * @memberof BudgetResponse
+     */
+    'transaction_total'?: any;
+    /**
+     * Date and time the budget was updated, represented in ISO 8601 format with timestamp.
+     * @type {any}
+     * @memberof BudgetResponse
+     */
+    'updated_at'?: any;
+    /**
+     * Unique identifier for the user. Defined by MX.
+     * @type {any}
+     * @memberof BudgetResponse
+     */
+    'user_guid'?: any;
+}
+/**
+ * 
+ * @export
+ * @interface BudgetResponseBody
+ */
+export interface BudgetResponseBody {
+    /**
+     * 
+     * @type {BudgetResponse}
+     * @memberof BudgetResponseBody
+     */
+    'budget'?: BudgetResponse;
+}
+/**
+ * 
+ * @export
+ * @interface BudgetUpdateRequest
+ */
+export interface BudgetUpdateRequest {
+    /**
+     * Amount of the budget.
+     * @type {number}
+     * @memberof BudgetUpdateRequest
+     */
+    'amount'?: number;
+    /**
+     * Additional information a partner can store on the budget.
+     * @type {string}
+     * @memberof BudgetUpdateRequest
+     */
+    'metadata'?: string;
+    /**
+     * When set to true, this parameter will prevent a webhook from being triggered by the request.
+     * @type {boolean}
+     * @memberof BudgetUpdateRequest
+     */
+    'skip_webhook'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface BudgetUpdateRequestBody
+ */
+export interface BudgetUpdateRequestBody {
+    /**
+     * 
+     * @type {BudgetUpdateRequest}
+     * @memberof BudgetUpdateRequestBody
+     */
+    'budget'?: BudgetUpdateRequest;
+}
+/**
+ * 
+ * @export
  * @interface CategoriesResponseBody
  */
 export interface CategoriesResponseBody {
@@ -1412,28 +1616,28 @@ export interface CredentialsResponseBody {
 export interface CreditCardProduct {
     /**
      * 
-     * @type {any}
+     * @type {number}
      * @memberof CreditCardProduct
      */
-    'annual_fee'?: any;
+    'annual_fee'?: number;
     /**
      * 
-     * @type {any}
+     * @type {number}
      * @memberof CreditCardProduct
      */
-    'duration_of_introductory_rate_on_balance_transfer'?: any;
+    'duration_of_introductory_rate_on_balance_transfer'?: number;
     /**
      * 
-     * @type {any}
+     * @type {number}
      * @memberof CreditCardProduct
      */
-    'duration_of_introductory_rate_on_purchases'?: any;
+    'duration_of_introductory_rate_on_purchases'?: number;
     /**
      * 
-     * @type {any}
+     * @type {string}
      * @memberof CreditCardProduct
      */
-    'guid'?: any;
+    'guid'?: string;
     /**
      * 
      * @type {boolean}
@@ -1475,13 +1679,13 @@ export interface CreditCardProduct {
      * @type {boolean}
      * @memberof CreditCardProduct
      */
-    'financial_institution'?: boolean;
+    'is_accepting_applicants'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof CreditCardProduct
      */
-    'is_accepting_applications'?: boolean;
+    'is_active_credit_card_product'?: boolean;
     /**
      * 
      * @type {boolean}
@@ -1506,7 +1710,7 @@ export interface CreditCardProductResponse {
      * @type {CreditCardProduct}
      * @memberof CreditCardProductResponse
      */
-    'reward'?: CreditCardProduct;
+    'credit_card_product'?: CreditCardProduct;
 }
 /**
  * 
@@ -1727,6 +1931,330 @@ export interface EnhanceTransactionsResponseBody {
      * @memberof EnhanceTransactionsResponseBody
      */
     'transactions'?: Array<EnhanceTransactionResponse>;
+}
+/**
+ * 
+ * @export
+ * @interface GoalRequest
+ */
+export interface GoalRequest {
+    /**
+     * Unique identifier of the account for the goal.
+     * @type {string}
+     * @memberof GoalRequest
+     */
+    'account_guid': string;
+    /**
+     * Amount of the goal.
+     * @type {number}
+     * @memberof GoalRequest
+     */
+    'amount': number;
+    /**
+     * The goal type.
+     * @type {string}
+     * @memberof GoalRequest
+     */
+    'goal_type_name': string;
+    /**
+     * The category of the goal.
+     * @type {string}
+     * @memberof GoalRequest
+     */
+    'meta_type_name': string;
+    /**
+     * The name of the goal.
+     * @type {string}
+     * @memberof GoalRequest
+     */
+    'name': string;
+    /**
+     * Date and time the goal was completed.
+     * @type {string}
+     * @memberof GoalRequest
+     */
+    'completed_at'?: string;
+    /**
+     * Determines if the goal has been spent.
+     * @type {boolean}
+     * @memberof GoalRequest
+     */
+    'has_been_spent'?: boolean;
+    /**
+     * Determines if the goal is complete.
+     * @type {boolean}
+     * @memberof GoalRequest
+     */
+    'is_complete'?: boolean;
+    /**
+     * Additional information a partner can store on the goal.
+     * @type {string}
+     * @memberof GoalRequest
+     */
+    'metadata'?: string;
+    /**
+     * The priority of the goal in relation to multiple goals.
+     * @type {number}
+     * @memberof GoalRequest
+     */
+    'position'?: number;
+    /**
+     * Date and time the goal is to complete. Intended for users to set their own goal completion dates.
+     * @type {string}
+     * @memberof GoalRequest
+     */
+    'targeted_to_complete_at'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface GoalRequestBody
+ */
+export interface GoalRequestBody {
+    /**
+     * 
+     * @type {GoalRequest}
+     * @memberof GoalRequestBody
+     */
+    'goal'?: GoalRequest;
+}
+/**
+ * 
+ * @export
+ * @interface GoalResponse
+ */
+export interface GoalResponse {
+    /**
+     * Unique identifier of the account for the goal.
+     * @type {string}
+     * @memberof GoalResponse
+     */
+    'account_guid'?: string;
+    /**
+     * Amount of the goal.
+     * @type {number}
+     * @memberof GoalResponse
+     */
+    'amount'?: number;
+    /**
+     * Date and time the goal was completed.
+     * @type {string}
+     * @memberof GoalResponse
+     */
+    'completed_at'?: string;
+    /**
+     * The current amount of the goal.
+     * @type {number}
+     * @memberof GoalResponse
+     */
+    'current_amount'?: number;
+    /**
+     * The goal type.
+     * @type {string}
+     * @memberof GoalResponse
+     */
+    'goal_type_name'?: string;
+    /**
+     * Unique identifier for the goal. Defined by MX.
+     * @type {string}
+     * @memberof GoalResponse
+     */
+    'guid'?: string;
+    /**
+     * Determines if the goal has been spent.
+     * @type {boolean}
+     * @memberof GoalResponse
+     */
+    'has_been_spent'?: boolean;
+    /**
+     * Determines if the goal is complete.
+     * @type {boolean}
+     * @memberof GoalResponse
+     */
+    'is_complete'?: boolean;
+    /**
+     * Additional information a partner can store on the goal.
+     * @type {string}
+     * @memberof GoalResponse
+     */
+    'metadata'?: string;
+    /**
+     * The category of the goal.
+     * @type {string}
+     * @memberof GoalResponse
+     */
+    'meta_type_name'?: string;
+    /**
+     * The name of the goal.
+     * @type {string}
+     * @memberof GoalResponse
+     */
+    'name'?: string;
+    /**
+     * The priority of the goal in relation to multiple goals.
+     * @type {number}
+     * @memberof GoalResponse
+     */
+    'position'?: number;
+    /**
+     * Date and time the goal is projected to be completed.
+     * @type {string}
+     * @memberof GoalResponse
+     */
+    'projected_to_complete_at'?: string;
+    /**
+     * Date and time the goal is to complete. Intended for users to set their own goal completion dates.
+     * @type {string}
+     * @memberof GoalResponse
+     */
+    'targeted_to_complete_at'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GoalResponse
+     */
+    'track_type_name'?: string;
+    /**
+     * The unique identifier for the the user. Defined by MX.
+     * @type {string}
+     * @memberof GoalResponse
+     */
+    'user_guid'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface GoalResponseBody
+ */
+export interface GoalResponseBody {
+    /**
+     * 
+     * @type {GoalResponse}
+     * @memberof GoalResponseBody
+     */
+    'goal'?: GoalResponse;
+}
+/**
+ * 
+ * @export
+ * @interface GoalsResponse
+ */
+export interface GoalsResponse {
+    /**
+     * Unique identifier of the account for the goal.
+     * @type {string}
+     * @memberof GoalsResponse
+     */
+    'account_guid'?: string;
+    /**
+     * Amount of the goal.
+     * @type {number}
+     * @memberof GoalsResponse
+     */
+    'amount'?: number;
+    /**
+     * The current amount of the goal.
+     * @type {number}
+     * @memberof GoalsResponse
+     */
+    'current_amount'?: number;
+    /**
+     * The unique identifier for the goal. Defined by MX.
+     * @type {string}
+     * @memberof GoalsResponse
+     */
+    'guid'?: string;
+    /**
+     * The goal type.
+     * @type {string}
+     * @memberof GoalsResponse
+     */
+    'goal_type_name'?: string;
+    /**
+     * The category of the goal.
+     * @type {string}
+     * @memberof GoalsResponse
+     */
+    'meta_type_name'?: string;
+    /**
+     * The name of the goal.
+     * @type {string}
+     * @memberof GoalsResponse
+     */
+    'name'?: string;
+    /**
+     * Date and time the goal was completed.
+     * @type {string}
+     * @memberof GoalsResponse
+     */
+    'completed_at'?: string;
+    /**
+     * Determines if the goal has been spent.
+     * @type {boolean}
+     * @memberof GoalsResponse
+     */
+    'has_been_spent'?: boolean;
+    /**
+     * Determines if the goal is complete.
+     * @type {boolean}
+     * @memberof GoalsResponse
+     */
+    'is_complete'?: boolean;
+    /**
+     * Additional information a partner can store on the goal.
+     * @type {string}
+     * @memberof GoalsResponse
+     */
+    'metadata'?: string;
+    /**
+     * The priority of the goal in relation to multiple goals.
+     * @type {number}
+     * @memberof GoalsResponse
+     */
+    'position'?: number;
+    /**
+     * The date on which the project was completed.
+     * @type {string}
+     * @memberof GoalsResponse
+     */
+    'projected_to_complete_at'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GoalsResponse
+     */
+    'targeted_to_complete_at'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GoalsResponse
+     */
+    'track_type_name'?: string;
+    /**
+     * The unique identifier for the the user. Defined by MX.
+     * @type {string}
+     * @memberof GoalsResponse
+     */
+    'user_guid'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface GoalsResponseBody
+ */
+export interface GoalsResponseBody {
+    /**
+     * 
+     * @type {Array<GoalsResponse>}
+     * @memberof GoalsResponseBody
+     */
+    'goals'?: Array<GoalsResponse>;
+    /**
+     * 
+     * @type {PaginationResponse}
+     * @memberof GoalsResponseBody
+     */
+    'pagination'?: PaginationResponse;
 }
 /**
  * 
@@ -3540,6 +4068,100 @@ export interface MerchantsResponseBody {
 /**
  * 
  * @export
+ * @interface MonthlyCashFlowProfileRequest
+ */
+export interface MonthlyCashFlowProfileRequest {
+    /**
+     * The monthly dollar amount allocated for goals.
+     * @type {number}
+     * @memberof MonthlyCashFlowProfileRequest
+     */
+    'goals_contribution'?: number;
+    /**
+     * Determines if the user uses estimated goals contribution.
+     * @type {boolean}
+     * @memberof MonthlyCashFlowProfileRequest
+     */
+    'uses_estimated_goals_contribution'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface MonthlyCashFlowProfileRequestBody
+ */
+export interface MonthlyCashFlowProfileRequestBody {
+    /**
+     * 
+     * @type {MonthlyCashFlowProfileRequest}
+     * @memberof MonthlyCashFlowProfileRequestBody
+     */
+    'institution'?: MonthlyCashFlowProfileRequest;
+}
+/**
+ * 
+ * @export
+ * @interface MonthlyCashFlowResponse
+ */
+export interface MonthlyCashFlowResponse {
+    /**
+     * Unique identifier for the monthly cash flow profile. Defined by MX.
+     * @type {string}
+     * @memberof MonthlyCashFlowResponse
+     */
+    'guid'?: string;
+    /**
+     * Unique identifier for the user the monthly cash flow profile is attached to. Defined by MX.
+     * @type {string}
+     * @memberof MonthlyCashFlowResponse
+     */
+    'user_guid'?: string;
+    /**
+     * The amount of the budgeted income for the user.
+     * @type {number}
+     * @memberof MonthlyCashFlowResponse
+     */
+    'budgeted_income'?: number;
+    /**
+     * The amount of the budgeted expenses for the user.
+     * @type {number}
+     * @memberof MonthlyCashFlowResponse
+     */
+    'budgeted_expenses'?: number;
+    /**
+     * The monthly dollar amount allocated for goals.
+     * @type {number}
+     * @memberof MonthlyCashFlowResponse
+     */
+    'goals_contribution'?: number;
+    /**
+     * The estimated monthly dollar amount allocated for goals calculated from income and budgets.
+     * @type {number}
+     * @memberof MonthlyCashFlowResponse
+     */
+    'estimated_goals_contribution'?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof MonthlyCashFlowResponse
+     */
+    'uses_estimated_goals_contribution'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface MonthlyCashFlowResponseBody
+ */
+export interface MonthlyCashFlowResponseBody {
+    /**
+     * 
+     * @type {MonthlyCashFlowResponse}
+     * @memberof MonthlyCashFlowResponseBody
+     */
+    'monthly_cash_flow_profile'?: MonthlyCashFlowResponse;
+}
+/**
+ * 
+ * @export
  * @interface OAuthWindowResponse
  */
 export interface OAuthWindowResponse {
@@ -3686,6 +4308,51 @@ export interface PaymentProcessorAuthorizationCodeResponseBody {
 /**
  * 
  * @export
+ * @interface RepositionRequest
+ */
+export interface RepositionRequest {
+    /**
+     * The unique identifier for the goal. Defined by MX.
+     * @type {string}
+     * @memberof RepositionRequest
+     */
+    'guid': string;
+    /**
+     * The priority of the goal in relation to multiple goals.
+     * @type {number}
+     * @memberof RepositionRequest
+     */
+    'position': number;
+}
+/**
+ * 
+ * @export
+ * @interface RepositionRequestBody
+ */
+export interface RepositionRequestBody {
+    /**
+     * 
+     * @type {Array<RepositionRequest>}
+     * @memberof RepositionRequestBody
+     */
+    'goals'?: Array<RepositionRequest>;
+}
+/**
+ * 
+ * @export
+ * @interface RepositionResponseBody
+ */
+export interface RepositionResponseBody {
+    /**
+     * 
+     * @type {Array<GoalsResponse>}
+     * @memberof RepositionResponseBody
+     */
+    'goals'?: Array<GoalsResponse>;
+}
+/**
+ * 
+ * @export
  * @interface RewardResponse
  */
 export interface RewardResponse {
@@ -3743,6 +4410,12 @@ export interface RewardResponse {
      * @memberof RewardResponse
      */
     'unit_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RewardResponse
+     */
+    'updated_at'?: string;
     /**
      * 
      * @type {string}
@@ -3823,6 +4496,12 @@ export interface RewardsResponse {
      * @memberof RewardsResponse
      */
     'unit_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RewardsResponse
+     */
+    'updated_at'?: string;
     /**
      * 
      * @type {string}
@@ -4285,6 +4964,63 @@ export interface SpendingPlansResponseBody {
      * @memberof SpendingPlansResponseBody
      */
     'pagination'?: PaginationResponse;
+}
+/**
+ * 
+ * @export
+ * @interface SplitTransactionRequest
+ */
+export interface SplitTransactionRequest {
+    /**
+     * Amount of money you want to re-categorize.
+     * @type {number}
+     * @memberof SplitTransactionRequest
+     */
+    'amount': number;
+    /**
+     * Description for the split transaction.
+     * @type {string}
+     * @memberof SplitTransactionRequest
+     */
+    'description'?: string;
+    /**
+     * Unique identifier of the category.
+     * @type {string}
+     * @memberof SplitTransactionRequest
+     */
+    'category_guid'?: string;
+    /**
+     * Memo for the split transaction
+     * @type {string}
+     * @memberof SplitTransactionRequest
+     */
+    'memo'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface SplitTransactionRequestBody
+ */
+export interface SplitTransactionRequestBody {
+    /**
+     * 
+     * @type {SplitTransactionRequest}
+     * @memberof SplitTransactionRequestBody
+     */
+    'transactions': SplitTransactionRequest;
+}
+/**
+ * 
+ * @export
+ * @interface SplitTransactionsResponseBody
+ */
+export interface SplitTransactionsResponseBody {
+    /**
+     * 
+     * @type {Array<TransactionResponse>}
+     * @memberof SplitTransactionsResponseBody
+     */
+    'transactions'?: Array<TransactionResponse>;
 }
 /**
  * 
@@ -5191,6 +5927,92 @@ export interface TransactionsResponseBody {
 /**
  * 
  * @export
+ * @interface UpdateGoalRequest
+ */
+export interface UpdateGoalRequest {
+    /**
+     * Unique identifier of the account for the goal.
+     * @type {string}
+     * @memberof UpdateGoalRequest
+     */
+    'account_guid'?: string;
+    /**
+     * Amount of the goal.
+     * @type {number}
+     * @memberof UpdateGoalRequest
+     */
+    'amount'?: number;
+    /**
+     * The goal type.
+     * @type {string}
+     * @memberof UpdateGoalRequest
+     */
+    'goal_type_name'?: string;
+    /**
+     * The category of the goal.
+     * @type {string}
+     * @memberof UpdateGoalRequest
+     */
+    'meta_type_name'?: string;
+    /**
+     * The name of the goal.
+     * @type {string}
+     * @memberof UpdateGoalRequest
+     */
+    'name'?: string;
+    /**
+     * Date and time the goal was completed.
+     * @type {string}
+     * @memberof UpdateGoalRequest
+     */
+    'completed_at'?: string;
+    /**
+     * Determines if the goal has been spent.
+     * @type {boolean}
+     * @memberof UpdateGoalRequest
+     */
+    'has_been_spent'?: boolean;
+    /**
+     * Determines if the goal is complete.
+     * @type {boolean}
+     * @memberof UpdateGoalRequest
+     */
+    'is_complete'?: boolean;
+    /**
+     * Additional information a partner can store on the goal.
+     * @type {string}
+     * @memberof UpdateGoalRequest
+     */
+    'metadata'?: string;
+    /**
+     * The priority of the goal in relation to multiple goals.
+     * @type {number}
+     * @memberof UpdateGoalRequest
+     */
+    'position'?: number;
+    /**
+     * Date and time the goal is to complete. Intended for users to set their own goal completion dates.
+     * @type {string}
+     * @memberof UpdateGoalRequest
+     */
+    'targeted_to_complete_at'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateGoalRequestBody
+ */
+export interface UpdateGoalRequestBody {
+    /**
+     * 
+     * @type {UpdateGoalRequest}
+     * @memberof UpdateGoalRequestBody
+     */
+    'goal'?: UpdateGoalRequest;
+}
+/**
+ * 
+ * @export
  * @interface UserCreateRequest
  */
 export interface UserCreateRequest {
@@ -5511,6 +6333,1037 @@ export interface WidgetResponseBody {
      */
     'widget_url'?: WidgetResponse;
 }
+
+/**
+ * BudgetsApi - axios parameter creator
+ * @export
+ */
+export const BudgetsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Delete a budget.
+         * @summary Delete a budget
+         * @param {string} userGuid The unique identifier for the budget. Defined by MX.
+         * @param {string} budgetGuid The unique identifier for the budget. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidBudgetsBudgetGuidDelete: async (userGuid: string, budgetGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('usersUserGuidBudgetsBudgetGuidDelete', 'userGuid', userGuid)
+            // verify required parameter 'budgetGuid' is not null or undefined
+            assertParamExists('usersUserGuidBudgetsBudgetGuidDelete', 'budgetGuid', budgetGuid)
+            const localVarPath = `/users/{user_guid}/budgets/{budget_guid}`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"budget_guid"}}`, encodeURIComponent(String(budgetGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Read a specific budget.
+         * @summary Read a specific budget
+         * @param {string} budgetGuid The unique identifier for the budget. Defined by MX.
+         * @param {string} userGuid The unique identifier for the budget. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidBudgetsBudgetGuidGet: async (budgetGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'budgetGuid' is not null or undefined
+            assertParamExists('usersUserGuidBudgetsBudgetGuidGet', 'budgetGuid', budgetGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('usersUserGuidBudgetsBudgetGuidGet', 'userGuid', userGuid)
+            const localVarPath = `/users/{user_guid}/budgets/{budget_guid}`
+                .replace(`{${"budget_guid"}}`, encodeURIComponent(String(budgetGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Update a specific budget.
+         * @summary Update a specific budget
+         * @param {string} userGuid The unique identifier for the budget. Defined by MX.
+         * @param {string} budgetGuid The unique identifier for the budget. Defined by MX.
+         * @param {BudgetUpdateRequestBody} [budgetUpdateRequestBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidBudgetsBudgetGuidPut: async (userGuid: string, budgetGuid: string, budgetUpdateRequestBody?: BudgetUpdateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('usersUserGuidBudgetsBudgetGuidPut', 'userGuid', userGuid)
+            // verify required parameter 'budgetGuid' is not null or undefined
+            assertParamExists('usersUserGuidBudgetsBudgetGuidPut', 'budgetGuid', budgetGuid)
+            const localVarPath = `/users/{user_guid}/budgets/{budget_guid}`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"budget_guid"}}`, encodeURIComponent(String(budgetGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(budgetUpdateRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This endpoint will automatically create budgets for several categories based on existing transactions; these budgets are returned as an array. Specifically, budgets will only be generated if the `user` has at least one `transaction` in a given category during each of the two previous calendar months. For example, if the request is made on March 6, and there is at least one \"Bills & Utilities\" `transaction` in both January and February, a budget will be generated for \"Bills & Utilities.\" If there are two \"Bills & Utilities\" transactions in February but none in January, no budget will be generated for that category. If budgets already exist for particular categories, new budgets will be generated and returned based on the available transactions. If one or more budgets remain unchanged, they will nevertheless be returned in the response. If no transaction data for the `user` meet the above criteria, a `422 Unprocessable Entity` error will be returned with status code 4221 along with the message, `There aren\'t enough transactions to automatically create any budgets`.
+         * @summary Auto-generate budgets
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidBudgetsGeneratePost: async (userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('usersUserGuidBudgetsGeneratePost', 'userGuid', userGuid)
+            const localVarPath = `/users/{user_guid}/budgets/generate`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * List all budgets
+         * @summary List all budgets
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidBudgetsGet: async (userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('usersUserGuidBudgetsGet', 'userGuid', userGuid)
+            const localVarPath = `/users/{user_guid}/budgets`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Create a budget. This endpoint accepts the optional `MX-Skip-Webhook` header and `skip_webhook` parameter. You cannot create a duplicate budget. For example, if you attempt to create a budget for \"Gas\", but that budget already exist, the request will fail. You can retrieve a list of all existing categories by using the List Categories endpoint.
+         * @summary Create a budget
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {BudgetCreateRequestBody} budgetCreateRequestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidBudgetsPost: async (userGuid: string, budgetCreateRequestBody: BudgetCreateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('usersUserGuidBudgetsPost', 'userGuid', userGuid)
+            // verify required parameter 'budgetCreateRequestBody' is not null or undefined
+            assertParamExists('usersUserGuidBudgetsPost', 'budgetCreateRequestBody', budgetCreateRequestBody)
+            const localVarPath = `/users/{user_guid}/budgets`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(budgetCreateRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * BudgetsApi - functional programming interface
+ * @export
+ */
+export const BudgetsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = BudgetsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Delete a budget.
+         * @summary Delete a budget
+         * @param {string} userGuid The unique identifier for the budget. Defined by MX.
+         * @param {string} budgetGuid The unique identifier for the budget. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersUserGuidBudgetsBudgetGuidDelete(userGuid: string, budgetGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersUserGuidBudgetsBudgetGuidDelete(userGuid, budgetGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Read a specific budget.
+         * @summary Read a specific budget
+         * @param {string} budgetGuid The unique identifier for the budget. Defined by MX.
+         * @param {string} userGuid The unique identifier for the budget. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersUserGuidBudgetsBudgetGuidGet(budgetGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BudgetResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersUserGuidBudgetsBudgetGuidGet(budgetGuid, userGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Update a specific budget.
+         * @summary Update a specific budget
+         * @param {string} userGuid The unique identifier for the budget. Defined by MX.
+         * @param {string} budgetGuid The unique identifier for the budget. Defined by MX.
+         * @param {BudgetUpdateRequestBody} [budgetUpdateRequestBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersUserGuidBudgetsBudgetGuidPut(userGuid: string, budgetGuid: string, budgetUpdateRequestBody?: BudgetUpdateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BudgetResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersUserGuidBudgetsBudgetGuidPut(userGuid, budgetGuid, budgetUpdateRequestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * This endpoint will automatically create budgets for several categories based on existing transactions; these budgets are returned as an array. Specifically, budgets will only be generated if the `user` has at least one `transaction` in a given category during each of the two previous calendar months. For example, if the request is made on March 6, and there is at least one \"Bills & Utilities\" `transaction` in both January and February, a budget will be generated for \"Bills & Utilities.\" If there are two \"Bills & Utilities\" transactions in February but none in January, no budget will be generated for that category. If budgets already exist for particular categories, new budgets will be generated and returned based on the available transactions. If one or more budgets remain unchanged, they will nevertheless be returned in the response. If no transaction data for the `user` meet the above criteria, a `422 Unprocessable Entity` error will be returned with status code 4221 along with the message, `There aren\'t enough transactions to automatically create any budgets`.
+         * @summary Auto-generate budgets
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersUserGuidBudgetsGeneratePost(userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BudgetResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersUserGuidBudgetsGeneratePost(userGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * List all budgets
+         * @summary List all budgets
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersUserGuidBudgetsGet(userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BudgetResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersUserGuidBudgetsGet(userGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Create a budget. This endpoint accepts the optional `MX-Skip-Webhook` header and `skip_webhook` parameter. You cannot create a duplicate budget. For example, if you attempt to create a budget for \"Gas\", but that budget already exist, the request will fail. You can retrieve a list of all existing categories by using the List Categories endpoint.
+         * @summary Create a budget
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {BudgetCreateRequestBody} budgetCreateRequestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersUserGuidBudgetsPost(userGuid: string, budgetCreateRequestBody: BudgetCreateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BudgetResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersUserGuidBudgetsPost(userGuid, budgetCreateRequestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * BudgetsApi - factory interface
+ * @export
+ */
+export const BudgetsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = BudgetsApiFp(configuration)
+    return {
+        /**
+         * Delete a budget.
+         * @summary Delete a budget
+         * @param {string} userGuid The unique identifier for the budget. Defined by MX.
+         * @param {string} budgetGuid The unique identifier for the budget. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidBudgetsBudgetGuidDelete(userGuid: string, budgetGuid: string, options?: any): AxiosPromise<void> {
+            return localVarFp.usersUserGuidBudgetsBudgetGuidDelete(userGuid, budgetGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Read a specific budget.
+         * @summary Read a specific budget
+         * @param {string} budgetGuid The unique identifier for the budget. Defined by MX.
+         * @param {string} userGuid The unique identifier for the budget. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidBudgetsBudgetGuidGet(budgetGuid: string, userGuid: string, options?: any): AxiosPromise<BudgetResponseBody> {
+            return localVarFp.usersUserGuidBudgetsBudgetGuidGet(budgetGuid, userGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Update a specific budget.
+         * @summary Update a specific budget
+         * @param {string} userGuid The unique identifier for the budget. Defined by MX.
+         * @param {string} budgetGuid The unique identifier for the budget. Defined by MX.
+         * @param {BudgetUpdateRequestBody} [budgetUpdateRequestBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidBudgetsBudgetGuidPut(userGuid: string, budgetGuid: string, budgetUpdateRequestBody?: BudgetUpdateRequestBody, options?: any): AxiosPromise<BudgetResponseBody> {
+            return localVarFp.usersUserGuidBudgetsBudgetGuidPut(userGuid, budgetGuid, budgetUpdateRequestBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This endpoint will automatically create budgets for several categories based on existing transactions; these budgets are returned as an array. Specifically, budgets will only be generated if the `user` has at least one `transaction` in a given category during each of the two previous calendar months. For example, if the request is made on March 6, and there is at least one \"Bills & Utilities\" `transaction` in both January and February, a budget will be generated for \"Bills & Utilities.\" If there are two \"Bills & Utilities\" transactions in February but none in January, no budget will be generated for that category. If budgets already exist for particular categories, new budgets will be generated and returned based on the available transactions. If one or more budgets remain unchanged, they will nevertheless be returned in the response. If no transaction data for the `user` meet the above criteria, a `422 Unprocessable Entity` error will be returned with status code 4221 along with the message, `There aren\'t enough transactions to automatically create any budgets`.
+         * @summary Auto-generate budgets
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidBudgetsGeneratePost(userGuid: string, options?: any): AxiosPromise<BudgetResponseBody> {
+            return localVarFp.usersUserGuidBudgetsGeneratePost(userGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * List all budgets
+         * @summary List all budgets
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidBudgetsGet(userGuid: string, options?: any): AxiosPromise<BudgetResponseBody> {
+            return localVarFp.usersUserGuidBudgetsGet(userGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Create a budget. This endpoint accepts the optional `MX-Skip-Webhook` header and `skip_webhook` parameter. You cannot create a duplicate budget. For example, if you attempt to create a budget for \"Gas\", but that budget already exist, the request will fail. You can retrieve a list of all existing categories by using the List Categories endpoint.
+         * @summary Create a budget
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {BudgetCreateRequestBody} budgetCreateRequestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidBudgetsPost(userGuid: string, budgetCreateRequestBody: BudgetCreateRequestBody, options?: any): AxiosPromise<BudgetResponseBody> {
+            return localVarFp.usersUserGuidBudgetsPost(userGuid, budgetCreateRequestBody, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * BudgetsApi - object-oriented interface
+ * @export
+ * @class BudgetsApi
+ * @extends {BaseAPI}
+ */
+export class BudgetsApi extends BaseAPI {
+    /**
+     * Delete a budget.
+     * @summary Delete a budget
+     * @param {string} userGuid The unique identifier for the budget. Defined by MX.
+     * @param {string} budgetGuid The unique identifier for the budget. Defined by MX.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BudgetsApi
+     */
+    public usersUserGuidBudgetsBudgetGuidDelete(userGuid: string, budgetGuid: string, options?: AxiosRequestConfig) {
+        return BudgetsApiFp(this.configuration).usersUserGuidBudgetsBudgetGuidDelete(userGuid, budgetGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Read a specific budget.
+     * @summary Read a specific budget
+     * @param {string} budgetGuid The unique identifier for the budget. Defined by MX.
+     * @param {string} userGuid The unique identifier for the budget. Defined by MX.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BudgetsApi
+     */
+    public usersUserGuidBudgetsBudgetGuidGet(budgetGuid: string, userGuid: string, options?: AxiosRequestConfig) {
+        return BudgetsApiFp(this.configuration).usersUserGuidBudgetsBudgetGuidGet(budgetGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Update a specific budget.
+     * @summary Update a specific budget
+     * @param {string} userGuid The unique identifier for the budget. Defined by MX.
+     * @param {string} budgetGuid The unique identifier for the budget. Defined by MX.
+     * @param {BudgetUpdateRequestBody} [budgetUpdateRequestBody] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BudgetsApi
+     */
+    public usersUserGuidBudgetsBudgetGuidPut(userGuid: string, budgetGuid: string, budgetUpdateRequestBody?: BudgetUpdateRequestBody, options?: AxiosRequestConfig) {
+        return BudgetsApiFp(this.configuration).usersUserGuidBudgetsBudgetGuidPut(userGuid, budgetGuid, budgetUpdateRequestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This endpoint will automatically create budgets for several categories based on existing transactions; these budgets are returned as an array. Specifically, budgets will only be generated if the `user` has at least one `transaction` in a given category during each of the two previous calendar months. For example, if the request is made on March 6, and there is at least one \"Bills & Utilities\" `transaction` in both January and February, a budget will be generated for \"Bills & Utilities.\" If there are two \"Bills & Utilities\" transactions in February but none in January, no budget will be generated for that category. If budgets already exist for particular categories, new budgets will be generated and returned based on the available transactions. If one or more budgets remain unchanged, they will nevertheless be returned in the response. If no transaction data for the `user` meet the above criteria, a `422 Unprocessable Entity` error will be returned with status code 4221 along with the message, `There aren\'t enough transactions to automatically create any budgets`.
+     * @summary Auto-generate budgets
+     * @param {string} userGuid The unique identifier for the user. Defined by MX.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BudgetsApi
+     */
+    public usersUserGuidBudgetsGeneratePost(userGuid: string, options?: AxiosRequestConfig) {
+        return BudgetsApiFp(this.configuration).usersUserGuidBudgetsGeneratePost(userGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * List all budgets
+     * @summary List all budgets
+     * @param {string} userGuid The unique identifier for the user. Defined by MX.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BudgetsApi
+     */
+    public usersUserGuidBudgetsGet(userGuid: string, options?: AxiosRequestConfig) {
+        return BudgetsApiFp(this.configuration).usersUserGuidBudgetsGet(userGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Create a budget. This endpoint accepts the optional `MX-Skip-Webhook` header and `skip_webhook` parameter. You cannot create a duplicate budget. For example, if you attempt to create a budget for \"Gas\", but that budget already exist, the request will fail. You can retrieve a list of all existing categories by using the List Categories endpoint.
+     * @summary Create a budget
+     * @param {string} userGuid The unique identifier for the user. Defined by MX.
+     * @param {BudgetCreateRequestBody} budgetCreateRequestBody 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BudgetsApi
+     */
+    public usersUserGuidBudgetsPost(userGuid: string, budgetCreateRequestBody: BudgetCreateRequestBody, options?: AxiosRequestConfig) {
+        return BudgetsApiFp(this.configuration).usersUserGuidBudgetsPost(userGuid, budgetCreateRequestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * GoalsApi - axios parameter creator
+ * @export
+ */
+export const GoalsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * List all goals a user can set.
+         * @summary List goals
+         * @param {string} userGuid The unique identifier for the user.
+         * @param {string} [page] Results are returned in paginated sets, this is the page of the results you would like to view. Defaults to page 1 if no page is specified.
+         * @param {string} [recordsPerAge] The supported range is from 10 to 1000. If the records_per_page parameter is not specified or is outside this range, a default of 25 records per page will be used.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidGoalsGet: async (userGuid: string, page?: string, recordsPerAge?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('usersUserGuidGoalsGet', 'userGuid', userGuid)
+            const localVarPath = `/users/{user_guid}/goals`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (recordsPerAge !== undefined) {
+                localVarQueryParameter['records_per_age'] = recordsPerAge;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Delete a goal.
+         * @summary Delete a goal
+         * @param {string} goalGuid The unique identifier for a goal. Defined by MX.
+         * @param {string} userGuid The unique identifier for a user.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidGoalsGoalGuidDelete: async (goalGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'goalGuid' is not null or undefined
+            assertParamExists('usersUserGuidGoalsGoalGuidDelete', 'goalGuid', goalGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('usersUserGuidGoalsGoalGuidDelete', 'userGuid', userGuid)
+            const localVarPath = `/users/{user_guid}/goals/{goal_guid}`
+                .replace(`{${"goal_guid"}}`, encodeURIComponent(String(goalGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Read a specific goal.
+         * @summary Read a goal
+         * @param {string} goalGuid The unique identifier for a goal. Defined by MX.
+         * @param {string} userGuid The unique identifier for a user.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidGoalsGoalGuidGet: async (goalGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'goalGuid' is not null or undefined
+            assertParamExists('usersUserGuidGoalsGoalGuidGet', 'goalGuid', goalGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('usersUserGuidGoalsGoalGuidGet', 'userGuid', userGuid)
+            const localVarPath = `/users/{user_guid}/goals/{goal_guid}`
+                .replace(`{${"goal_guid"}}`, encodeURIComponent(String(goalGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This endpoint updates a specific goal.
+         * @summary Update a goal
+         * @param {string} goalGuid The unique identifier for a goal. Defined by MX.
+         * @param {string} userGuid The unique identifier for a user.
+         * @param {UpdateGoalRequestBody} updateGoalRequestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidGoalsGoalGuidPut: async (goalGuid: string, userGuid: string, updateGoalRequestBody: UpdateGoalRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'goalGuid' is not null or undefined
+            assertParamExists('usersUserGuidGoalsGoalGuidPut', 'goalGuid', goalGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('usersUserGuidGoalsGoalGuidPut', 'userGuid', userGuid)
+            // verify required parameter 'updateGoalRequestBody' is not null or undefined
+            assertParamExists('usersUserGuidGoalsGoalGuidPut', 'updateGoalRequestBody', updateGoalRequestBody)
+            const localVarPath = `/users/{user_guid}/goals/{goal_guid}`
+                .replace(`{${"goal_guid"}}`, encodeURIComponent(String(goalGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateGoalRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Create a goal. This endpoint accepts the optional `MX-Skip-Webhook` header and `skip_webhook` parameter.
+         * @summary Create a goal
+         * @param {string} userGuid The unique identifier for the user.
+         * @param {GoalRequestBody} goalRequestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidGoalsPost: async (userGuid: string, goalRequestBody: GoalRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('usersUserGuidGoalsPost', 'userGuid', userGuid)
+            // verify required parameter 'goalRequestBody' is not null or undefined
+            assertParamExists('usersUserGuidGoalsPost', 'goalRequestBody', goalRequestBody)
+            const localVarPath = `/users/{user_guid}/goals`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(goalRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This endpoint repositions goal priority levels. If one goal is set to a lower priority, then any other goals need to be adjusted accordingly.
+         * @summary Reposition goals
+         * @param {string} userGuid The unique identifier for the user.
+         * @param {RepositionRequestBody} repositionRequestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidGoalsRepositionPut: async (userGuid: string, repositionRequestBody: RepositionRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('usersUserGuidGoalsRepositionPut', 'userGuid', userGuid)
+            // verify required parameter 'repositionRequestBody' is not null or undefined
+            assertParamExists('usersUserGuidGoalsRepositionPut', 'repositionRequestBody', repositionRequestBody)
+            const localVarPath = `/users/{user_guid}/goals/reposition`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(repositionRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * GoalsApi - functional programming interface
+ * @export
+ */
+export const GoalsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = GoalsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * List all goals a user can set.
+         * @summary List goals
+         * @param {string} userGuid The unique identifier for the user.
+         * @param {string} [page] Results are returned in paginated sets, this is the page of the results you would like to view. Defaults to page 1 if no page is specified.
+         * @param {string} [recordsPerAge] The supported range is from 10 to 1000. If the records_per_page parameter is not specified or is outside this range, a default of 25 records per page will be used.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersUserGuidGoalsGet(userGuid: string, page?: string, recordsPerAge?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GoalsResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersUserGuidGoalsGet(userGuid, page, recordsPerAge, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Delete a goal.
+         * @summary Delete a goal
+         * @param {string} goalGuid The unique identifier for a goal. Defined by MX.
+         * @param {string} userGuid The unique identifier for a user.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersUserGuidGoalsGoalGuidDelete(goalGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersUserGuidGoalsGoalGuidDelete(goalGuid, userGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Read a specific goal.
+         * @summary Read a goal
+         * @param {string} goalGuid The unique identifier for a goal. Defined by MX.
+         * @param {string} userGuid The unique identifier for a user.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersUserGuidGoalsGoalGuidGet(goalGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GoalResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersUserGuidGoalsGoalGuidGet(goalGuid, userGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * This endpoint updates a specific goal.
+         * @summary Update a goal
+         * @param {string} goalGuid The unique identifier for a goal. Defined by MX.
+         * @param {string} userGuid The unique identifier for a user.
+         * @param {UpdateGoalRequestBody} updateGoalRequestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersUserGuidGoalsGoalGuidPut(goalGuid: string, userGuid: string, updateGoalRequestBody: UpdateGoalRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GoalResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersUserGuidGoalsGoalGuidPut(goalGuid, userGuid, updateGoalRequestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Create a goal. This endpoint accepts the optional `MX-Skip-Webhook` header and `skip_webhook` parameter.
+         * @summary Create a goal
+         * @param {string} userGuid The unique identifier for the user.
+         * @param {GoalRequestBody} goalRequestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersUserGuidGoalsPost(userGuid: string, goalRequestBody: GoalRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GoalResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersUserGuidGoalsPost(userGuid, goalRequestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * This endpoint repositions goal priority levels. If one goal is set to a lower priority, then any other goals need to be adjusted accordingly.
+         * @summary Reposition goals
+         * @param {string} userGuid The unique identifier for the user.
+         * @param {RepositionRequestBody} repositionRequestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersUserGuidGoalsRepositionPut(userGuid: string, repositionRequestBody: RepositionRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RepositionResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersUserGuidGoalsRepositionPut(userGuid, repositionRequestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * GoalsApi - factory interface
+ * @export
+ */
+export const GoalsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = GoalsApiFp(configuration)
+    return {
+        /**
+         * List all goals a user can set.
+         * @summary List goals
+         * @param {string} userGuid The unique identifier for the user.
+         * @param {string} [page] Results are returned in paginated sets, this is the page of the results you would like to view. Defaults to page 1 if no page is specified.
+         * @param {string} [recordsPerAge] The supported range is from 10 to 1000. If the records_per_page parameter is not specified or is outside this range, a default of 25 records per page will be used.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidGoalsGet(userGuid: string, page?: string, recordsPerAge?: string, options?: any): AxiosPromise<GoalsResponseBody> {
+            return localVarFp.usersUserGuidGoalsGet(userGuid, page, recordsPerAge, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Delete a goal.
+         * @summary Delete a goal
+         * @param {string} goalGuid The unique identifier for a goal. Defined by MX.
+         * @param {string} userGuid The unique identifier for a user.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidGoalsGoalGuidDelete(goalGuid: string, userGuid: string, options?: any): AxiosPromise<void> {
+            return localVarFp.usersUserGuidGoalsGoalGuidDelete(goalGuid, userGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Read a specific goal.
+         * @summary Read a goal
+         * @param {string} goalGuid The unique identifier for a goal. Defined by MX.
+         * @param {string} userGuid The unique identifier for a user.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidGoalsGoalGuidGet(goalGuid: string, userGuid: string, options?: any): AxiosPromise<GoalResponseBody> {
+            return localVarFp.usersUserGuidGoalsGoalGuidGet(goalGuid, userGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This endpoint updates a specific goal.
+         * @summary Update a goal
+         * @param {string} goalGuid The unique identifier for a goal. Defined by MX.
+         * @param {string} userGuid The unique identifier for a user.
+         * @param {UpdateGoalRequestBody} updateGoalRequestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidGoalsGoalGuidPut(goalGuid: string, userGuid: string, updateGoalRequestBody: UpdateGoalRequestBody, options?: any): AxiosPromise<GoalResponseBody> {
+            return localVarFp.usersUserGuidGoalsGoalGuidPut(goalGuid, userGuid, updateGoalRequestBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Create a goal. This endpoint accepts the optional `MX-Skip-Webhook` header and `skip_webhook` parameter.
+         * @summary Create a goal
+         * @param {string} userGuid The unique identifier for the user.
+         * @param {GoalRequestBody} goalRequestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidGoalsPost(userGuid: string, goalRequestBody: GoalRequestBody, options?: any): AxiosPromise<GoalResponseBody> {
+            return localVarFp.usersUserGuidGoalsPost(userGuid, goalRequestBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This endpoint repositions goal priority levels. If one goal is set to a lower priority, then any other goals need to be adjusted accordingly.
+         * @summary Reposition goals
+         * @param {string} userGuid The unique identifier for the user.
+         * @param {RepositionRequestBody} repositionRequestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidGoalsRepositionPut(userGuid: string, repositionRequestBody: RepositionRequestBody, options?: any): AxiosPromise<RepositionResponseBody> {
+            return localVarFp.usersUserGuidGoalsRepositionPut(userGuid, repositionRequestBody, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * GoalsApi - object-oriented interface
+ * @export
+ * @class GoalsApi
+ * @extends {BaseAPI}
+ */
+export class GoalsApi extends BaseAPI {
+    /**
+     * List all goals a user can set.
+     * @summary List goals
+     * @param {string} userGuid The unique identifier for the user.
+     * @param {string} [page] Results are returned in paginated sets, this is the page of the results you would like to view. Defaults to page 1 if no page is specified.
+     * @param {string} [recordsPerAge] The supported range is from 10 to 1000. If the records_per_page parameter is not specified or is outside this range, a default of 25 records per page will be used.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GoalsApi
+     */
+    public usersUserGuidGoalsGet(userGuid: string, page?: string, recordsPerAge?: string, options?: AxiosRequestConfig) {
+        return GoalsApiFp(this.configuration).usersUserGuidGoalsGet(userGuid, page, recordsPerAge, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Delete a goal.
+     * @summary Delete a goal
+     * @param {string} goalGuid The unique identifier for a goal. Defined by MX.
+     * @param {string} userGuid The unique identifier for a user.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GoalsApi
+     */
+    public usersUserGuidGoalsGoalGuidDelete(goalGuid: string, userGuid: string, options?: AxiosRequestConfig) {
+        return GoalsApiFp(this.configuration).usersUserGuidGoalsGoalGuidDelete(goalGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Read a specific goal.
+     * @summary Read a goal
+     * @param {string} goalGuid The unique identifier for a goal. Defined by MX.
+     * @param {string} userGuid The unique identifier for a user.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GoalsApi
+     */
+    public usersUserGuidGoalsGoalGuidGet(goalGuid: string, userGuid: string, options?: AxiosRequestConfig) {
+        return GoalsApiFp(this.configuration).usersUserGuidGoalsGoalGuidGet(goalGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This endpoint updates a specific goal.
+     * @summary Update a goal
+     * @param {string} goalGuid The unique identifier for a goal. Defined by MX.
+     * @param {string} userGuid The unique identifier for a user.
+     * @param {UpdateGoalRequestBody} updateGoalRequestBody 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GoalsApi
+     */
+    public usersUserGuidGoalsGoalGuidPut(goalGuid: string, userGuid: string, updateGoalRequestBody: UpdateGoalRequestBody, options?: AxiosRequestConfig) {
+        return GoalsApiFp(this.configuration).usersUserGuidGoalsGoalGuidPut(goalGuid, userGuid, updateGoalRequestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Create a goal. This endpoint accepts the optional `MX-Skip-Webhook` header and `skip_webhook` parameter.
+     * @summary Create a goal
+     * @param {string} userGuid The unique identifier for the user.
+     * @param {GoalRequestBody} goalRequestBody 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GoalsApi
+     */
+    public usersUserGuidGoalsPost(userGuid: string, goalRequestBody: GoalRequestBody, options?: AxiosRequestConfig) {
+        return GoalsApiFp(this.configuration).usersUserGuidGoalsPost(userGuid, goalRequestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This endpoint repositions goal priority levels. If one goal is set to a lower priority, then any other goals need to be adjusted accordingly.
+     * @summary Reposition goals
+     * @param {string} userGuid The unique identifier for the user.
+     * @param {RepositionRequestBody} repositionRequestBody 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GoalsApi
+     */
+    public usersUserGuidGoalsRepositionPut(userGuid: string, repositionRequestBody: RepositionRequestBody, options?: AxiosRequestConfig) {
+        return GoalsApiFp(this.configuration).usersUserGuidGoalsRepositionPut(userGuid, repositionRequestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
 
 /**
  * InsightsApi - axios parameter creator
@@ -11175,6 +13028,176 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
+         * 
+         * @summary Read monthly cash flow profile
+         * @param {string} userGuid The unique identifier for the user.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidMonthlyCashFlowProfileGet: async (userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('usersUserGuidMonthlyCashFlowProfileGet', 'userGuid', userGuid)
+            const localVarPath = `/users/{user_guid}/monthly_cash_flow_profile`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to update the attributes of a `monthly_cash_flow_profile`.
+         * @summary Update monthly cash flow profile
+         * @param {string} userGuid The unique identifier for the user.
+         * @param {MonthlyCashFlowProfileRequestBody} monthlyCashFlowProfileRequestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidMonthlyCashFlowProfilePut: async (userGuid: string, monthlyCashFlowProfileRequestBody: MonthlyCashFlowProfileRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('usersUserGuidMonthlyCashFlowProfilePut', 'userGuid', userGuid)
+            // verify required parameter 'monthlyCashFlowProfileRequestBody' is not null or undefined
+            assertParamExists('usersUserGuidMonthlyCashFlowProfilePut', 'monthlyCashFlowProfileRequestBody', monthlyCashFlowProfileRequestBody)
+            const localVarPath = `/users/{user_guid}/monthly_cash_flow_profile`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(monthlyCashFlowProfileRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This endpoint deletes all split transactions linked to a parent transaction, but it leaves the parent transaction active. This request will also update the parent transaction\'s has_been_split field to false. This endpoint accepts the optional MX-Skip-Webhook header.
+         * @summary Delete split transactions
+         * @param {string} transactionGuid The unique id for a &#x60;transaction&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidTransactionsTransactionGuidSplitDelete: async (transactionGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'transactionGuid' is not null or undefined
+            assertParamExists('usersUserGuidTransactionsTransactionGuidSplitDelete', 'transactionGuid', transactionGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('usersUserGuidTransactionsTransactionGuidSplitDelete', 'userGuid', userGuid)
+            const localVarPath = `/users/{user_guid}/transactions/{transaction_guid}/split`
+                .replace(`{${"transaction_guid"}}`, encodeURIComponent(String(transactionGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This endpoint creates two or more child transactions that are branched from a previous transaction. This endpoint allows you to link multiple categories, descriptions, and amounts to a parent transaction.  When a split transaction is created, the parent transaction\'s `has_been_split` field will automatically be updated to true and the child transactions\' `parent_guid` will have the transaction guid of the parent. The total amount of the child transactions must equal the amount of the parent transaction. Once a transaction has been split it can\'t be split again.    In order to re-split a transaction, it must first be un-split. This can be done by calling the Delete Split Transactions endpoint. Calling this endpoint will delete the existing child transactions and update the parent transaction\'s `has_been_split` field to false. You can then re-split the parent transaction by calling Create Split Transaction again.
+         * @summary Create split transactions
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} transactionGuid The unique identifier for the transaction. Defined by MX.
+         * @param {SplitTransactionRequestBody} [splitTransactionRequestBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidTransactionsTransactionGuidSplitPost: async (userGuid: string, transactionGuid: string, splitTransactionRequestBody?: SplitTransactionRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('usersUserGuidTransactionsTransactionGuidSplitPost', 'userGuid', userGuid)
+            // verify required parameter 'transactionGuid' is not null or undefined
+            assertParamExists('usersUserGuidTransactionsTransactionGuidSplitPost', 'transactionGuid', transactionGuid)
+            const localVarPath = `/users/{user_guid}/transactions/{transaction_guid}/split`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"transaction_guid"}}`, encodeURIComponent(String(transactionGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(splitTransactionRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * The verify endpoint begins a verification process for a member.
          * @summary Verify member
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -12543,6 +14566,54 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * 
+         * @summary Read monthly cash flow profile
+         * @param {string} userGuid The unique identifier for the user.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersUserGuidMonthlyCashFlowProfileGet(userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MonthlyCashFlowResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersUserGuidMonthlyCashFlowProfileGet(userGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to update the attributes of a `monthly_cash_flow_profile`.
+         * @summary Update monthly cash flow profile
+         * @param {string} userGuid The unique identifier for the user.
+         * @param {MonthlyCashFlowProfileRequestBody} monthlyCashFlowProfileRequestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersUserGuidMonthlyCashFlowProfilePut(userGuid: string, monthlyCashFlowProfileRequestBody: MonthlyCashFlowProfileRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MonthlyCashFlowResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersUserGuidMonthlyCashFlowProfilePut(userGuid, monthlyCashFlowProfileRequestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * This endpoint deletes all split transactions linked to a parent transaction, but it leaves the parent transaction active. This request will also update the parent transaction\'s has_been_split field to false. This endpoint accepts the optional MX-Skip-Webhook header.
+         * @summary Delete split transactions
+         * @param {string} transactionGuid The unique id for a &#x60;transaction&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersUserGuidTransactionsTransactionGuidSplitDelete(transactionGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersUserGuidTransactionsTransactionGuidSplitDelete(transactionGuid, userGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * This endpoint creates two or more child transactions that are branched from a previous transaction. This endpoint allows you to link multiple categories, descriptions, and amounts to a parent transaction.  When a split transaction is created, the parent transaction\'s `has_been_split` field will automatically be updated to true and the child transactions\' `parent_guid` will have the transaction guid of the parent. The total amount of the child transactions must equal the amount of the parent transaction. Once a transaction has been split it can\'t be split again.    In order to re-split a transaction, it must first be un-split. This can be done by calling the Delete Split Transactions endpoint. Calling this endpoint will delete the existing child transactions and update the parent transaction\'s `has_been_split` field to false. You can then re-split the parent transaction by calling Create Split Transaction again.
+         * @summary Create split transactions
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} transactionGuid The unique identifier for the transaction. Defined by MX.
+         * @param {SplitTransactionRequestBody} [splitTransactionRequestBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersUserGuidTransactionsTransactionGuidSplitPost(userGuid: string, transactionGuid: string, splitTransactionRequestBody?: SplitTransactionRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SplitTransactionsResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersUserGuidTransactionsTransactionGuidSplitPost(userGuid, transactionGuid, splitTransactionRequestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * The verify endpoint begins a verification process for a member.
          * @summary Verify member
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
@@ -13777,6 +15848,50 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          */
         updateUser(userGuid: string, userUpdateRequestBody: UserUpdateRequestBody, options?: any): AxiosPromise<UserResponseBody> {
             return localVarFp.updateUser(userGuid, userUpdateRequestBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Read monthly cash flow profile
+         * @param {string} userGuid The unique identifier for the user.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidMonthlyCashFlowProfileGet(userGuid: string, options?: any): AxiosPromise<MonthlyCashFlowResponseBody> {
+            return localVarFp.usersUserGuidMonthlyCashFlowProfileGet(userGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to update the attributes of a `monthly_cash_flow_profile`.
+         * @summary Update monthly cash flow profile
+         * @param {string} userGuid The unique identifier for the user.
+         * @param {MonthlyCashFlowProfileRequestBody} monthlyCashFlowProfileRequestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidMonthlyCashFlowProfilePut(userGuid: string, monthlyCashFlowProfileRequestBody: MonthlyCashFlowProfileRequestBody, options?: any): AxiosPromise<MonthlyCashFlowResponseBody> {
+            return localVarFp.usersUserGuidMonthlyCashFlowProfilePut(userGuid, monthlyCashFlowProfileRequestBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This endpoint deletes all split transactions linked to a parent transaction, but it leaves the parent transaction active. This request will also update the parent transaction\'s has_been_split field to false. This endpoint accepts the optional MX-Skip-Webhook header.
+         * @summary Delete split transactions
+         * @param {string} transactionGuid The unique id for a &#x60;transaction&#x60;.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidTransactionsTransactionGuidSplitDelete(transactionGuid: string, userGuid: string, options?: any): AxiosPromise<void> {
+            return localVarFp.usersUserGuidTransactionsTransactionGuidSplitDelete(transactionGuid, userGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This endpoint creates two or more child transactions that are branched from a previous transaction. This endpoint allows you to link multiple categories, descriptions, and amounts to a parent transaction.  When a split transaction is created, the parent transaction\'s `has_been_split` field will automatically be updated to true and the child transactions\' `parent_guid` will have the transaction guid of the parent. The total amount of the child transactions must equal the amount of the parent transaction. Once a transaction has been split it can\'t be split again.    In order to re-split a transaction, it must first be un-split. This can be done by calling the Delete Split Transactions endpoint. Calling this endpoint will delete the existing child transactions and update the parent transaction\'s `has_been_split` field to false. You can then re-split the parent transaction by calling Create Split Transaction again.
+         * @summary Create split transactions
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} transactionGuid The unique identifier for the transaction. Defined by MX.
+         * @param {SplitTransactionRequestBody} [splitTransactionRequestBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidTransactionsTransactionGuidSplitPost(userGuid: string, transactionGuid: string, splitTransactionRequestBody?: SplitTransactionRequestBody, options?: any): AxiosPromise<SplitTransactionsResponseBody> {
+            return localVarFp.usersUserGuidTransactionsTransactionGuidSplitPost(userGuid, transactionGuid, splitTransactionRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
          * The verify endpoint begins a verification process for a member.
@@ -15215,6 +17330,58 @@ export class MxPlatformApi extends BaseAPI {
      */
     public updateUser(userGuid: string, userUpdateRequestBody: UserUpdateRequestBody, options?: AxiosRequestConfig) {
         return MxPlatformApiFp(this.configuration).updateUser(userGuid, userUpdateRequestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Read monthly cash flow profile
+     * @param {string} userGuid The unique identifier for the user.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public usersUserGuidMonthlyCashFlowProfileGet(userGuid: string, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).usersUserGuidMonthlyCashFlowProfileGet(userGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to update the attributes of a `monthly_cash_flow_profile`.
+     * @summary Update monthly cash flow profile
+     * @param {string} userGuid The unique identifier for the user.
+     * @param {MonthlyCashFlowProfileRequestBody} monthlyCashFlowProfileRequestBody 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public usersUserGuidMonthlyCashFlowProfilePut(userGuid: string, monthlyCashFlowProfileRequestBody: MonthlyCashFlowProfileRequestBody, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).usersUserGuidMonthlyCashFlowProfilePut(userGuid, monthlyCashFlowProfileRequestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This endpoint deletes all split transactions linked to a parent transaction, but it leaves the parent transaction active. This request will also update the parent transaction\'s has_been_split field to false. This endpoint accepts the optional MX-Skip-Webhook header.
+     * @summary Delete split transactions
+     * @param {string} transactionGuid The unique id for a &#x60;transaction&#x60;.
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public usersUserGuidTransactionsTransactionGuidSplitDelete(transactionGuid: string, userGuid: string, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).usersUserGuidTransactionsTransactionGuidSplitDelete(transactionGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This endpoint creates two or more child transactions that are branched from a previous transaction. This endpoint allows you to link multiple categories, descriptions, and amounts to a parent transaction.  When a split transaction is created, the parent transaction\'s `has_been_split` field will automatically be updated to true and the child transactions\' `parent_guid` will have the transaction guid of the parent. The total amount of the child transactions must equal the amount of the parent transaction. Once a transaction has been split it can\'t be split again.    In order to re-split a transaction, it must first be un-split. This can be done by calling the Delete Split Transactions endpoint. Calling this endpoint will delete the existing child transactions and update the parent transaction\'s `has_been_split` field to false. You can then re-split the parent transaction by calling Create Split Transaction again.
+     * @summary Create split transactions
+     * @param {string} userGuid The unique identifier for the user. Defined by MX.
+     * @param {string} transactionGuid The unique identifier for the transaction. Defined by MX.
+     * @param {SplitTransactionRequestBody} [splitTransactionRequestBody] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MxPlatformApi
+     */
+    public usersUserGuidTransactionsTransactionGuidSplitPost(userGuid: string, transactionGuid: string, splitTransactionRequestBody?: SplitTransactionRequestBody, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).usersUserGuidTransactionsTransactionGuidSplitPost(userGuid, transactionGuid, splitTransactionRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
