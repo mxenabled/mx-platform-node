@@ -17,10 +17,10 @@
     "prepare": "npm run build"
   },
   "dependencies": {
-    "axios": "^0.21.4"
+    "axios": "^1.6.8"
   },
   "devDependencies": {
-    "@types/node": "^12.11.5",
-    "typescript": "^3.6.4"
+    "@types/node": "^20.12.7",
+    "typescript": "^5.4.5"
   }
 }
