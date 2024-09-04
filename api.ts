@@ -12488,12 +12488,12 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * This endpoint allows you to update certain attributes of an `account` resource.
+         * This endpoint allows you to update certain attributes of an `account` resource, including manual accounts. For manual accounts, you can update every field listed. For aggregated accounts, you can only update `is_business`, `is_hidden` and `metadata`.
          * @summary Update account by member
          * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {AccountUpdateRequestBody} accountUpdateRequestBody Account object to be created with optional parameters (is_hidden)
+         * @param {AccountUpdateRequestBody} accountUpdateRequestBody 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -14420,12 +14420,12 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * This endpoint allows you to update certain attributes of an `account` resource.
+         * This endpoint allows you to update certain attributes of an `account` resource, including manual accounts. For manual accounts, you can update every field listed. For aggregated accounts, you can only update `is_business`, `is_hidden` and `metadata`.
          * @summary Update account by member
          * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {AccountUpdateRequestBody} accountUpdateRequestBody Account object to be created with optional parameters (is_hidden)
+         * @param {AccountUpdateRequestBody} accountUpdateRequestBody 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -15715,12 +15715,12 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
             return localVarFp.resumeAggregation(memberGuid, userGuid, memberResumeRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
-         * This endpoint allows you to update certain attributes of an `account` resource.
+         * This endpoint allows you to update certain attributes of an `account` resource, including manual accounts. For manual accounts, you can update every field listed. For aggregated accounts, you can only update `is_business`, `is_hidden` and `metadata`.
          * @summary Update account by member
          * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-         * @param {AccountUpdateRequestBody} accountUpdateRequestBody Account object to be created with optional parameters (is_hidden)
+         * @param {AccountUpdateRequestBody} accountUpdateRequestBody 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -17176,12 +17176,12 @@ export class MxPlatformApi extends BaseAPI {
     }
 
     /**
-     * This endpoint allows you to update certain attributes of an `account` resource.
+     * This endpoint allows you to update certain attributes of an `account` resource, including manual accounts. For manual accounts, you can update every field listed. For aggregated accounts, you can only update `is_business`, `is_hidden` and `metadata`.
      * @summary Update account by member
      * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
      * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
      * @param {string} userGuid The unique id for a &#x60;user&#x60;.
-     * @param {AccountUpdateRequestBody} accountUpdateRequestBody Account object to be created with optional parameters (is_hidden)
+     * @param {AccountUpdateRequestBody} accountUpdateRequestBody 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MxPlatformApi
