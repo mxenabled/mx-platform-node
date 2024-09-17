@@ -4068,6 +4068,223 @@ export interface MerchantsResponseBody {
 /**
  * 
  * @export
+ * @interface MicrodepositRequest
+ */
+export interface MicrodepositRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof MicrodepositRequest
+     */
+    'account_number': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MicrodepositRequest
+     */
+    'account_type': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MicrodepositRequest
+     */
+    'routing_number': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MicrodepositRequest
+     */
+    'account_name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MicrodepositRequest
+     */
+    'email'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MicrodepositRequest
+     */
+    'first_name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MicrodepositRequest
+     */
+    'last_name'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface MicrodepositRequestBody
+ */
+export interface MicrodepositRequestBody {
+    /**
+     * 
+     * @type {MicrodepositRequest}
+     * @memberof MicrodepositRequestBody
+     */
+    'micro_deposit'?: MicrodepositRequest;
+}
+/**
+ * 
+ * @export
+ * @interface MicrodepositResponse
+ */
+export interface MicrodepositResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof MicrodepositResponse
+     */
+    'account_name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MicrodepositResponse
+     */
+    'account_number'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MicrodepositResponse
+     */
+    'account_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MicrodepositResponse
+     */
+    'email'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MicrodepositResponse
+     */
+    'first_name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MicrodepositResponse
+     */
+    'last_name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MicrodepositResponse
+     */
+    'routing_number'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MicrodepositResponse
+     */
+    'error_message'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MicrodepositResponse
+     */
+    'guid'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MicrodepositResponse
+     */
+    'institution_code'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MicrodepositResponse
+     */
+    'institution_name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MicrodepositResponse
+     */
+    'status'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MicrodepositResponse
+     */
+    'updated_at'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MicrodepositResponse
+     */
+    'verified_at'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface MicrodepositResponseBody
+ */
+export interface MicrodepositResponseBody {
+    /**
+     * 
+     * @type {MicrodepositResponse}
+     * @memberof MicrodepositResponseBody
+     */
+    'micro_deposit'?: MicrodepositResponse;
+}
+/**
+ * 
+ * @export
+ * @interface MicrodepositVerifyRequest
+ */
+export interface MicrodepositVerifyRequest {
+    /**
+     * 
+     * @type {number}
+     * @memberof MicrodepositVerifyRequest
+     */
+    'deposit_amount_1'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof MicrodepositVerifyRequest
+     */
+    'deposit_amount_2'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface MicrodepositVerifyRequestBody
+ */
+export interface MicrodepositVerifyRequestBody {
+    /**
+     * 
+     * @type {MicrodepositVerifyRequest}
+     * @memberof MicrodepositVerifyRequestBody
+     */
+    'micro_deposit'?: MicrodepositVerifyRequest;
+}
+/**
+ * 
+ * @export
+ * @interface MicrodepositsResponseBody
+ */
+export interface MicrodepositsResponseBody {
+    /**
+     * 
+     * @type {Array<MicrodepositResponse>}
+     * @memberof MicrodepositsResponseBody
+     */
+    'micro_deposits'?: Array<MicrodepositResponse>;
+    /**
+     * 
+     * @type {PaginationResponse}
+     * @memberof MicrodepositsResponseBody
+     */
+    'pagination'?: PaginationResponse;
+}
+/**
+ * 
+ * @export
  * @interface MonthlyCashFlowProfileRequest
  */
 export interface MonthlyCashFlowProfileRequest {
@@ -5443,6 +5660,369 @@ export interface TaxDocumentsResponseBody {
      * @memberof TaxDocumentsResponseBody
      */
     'tax_documents'?: Array<TaxDocumentResponse>;
+}
+/**
+ * 
+ * @export
+ * @interface TransactionCreateRequest
+ */
+export interface TransactionCreateRequest {
+    /**
+     * 
+     * @type {number}
+     * @memberof TransactionCreateRequest
+     */
+    'amount': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateRequest
+     */
+    'date': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateRequest
+     */
+    'description': string;
+    /**
+     * The type of transaction, which must be CREDIT or DEBIT. See Transaction Fields for more information.
+     * @type {string}
+     * @memberof TransactionCreateRequest
+     */
+    'type': string;
+    /**
+     * Unique identifier of the category.
+     * @type {string}
+     * @memberof TransactionCreateRequest
+     */
+    'category_guid'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateRequest
+     */
+    'currency_code'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof TransactionCreateRequest
+     */
+    'has_been_viewed'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof TransactionCreateRequest
+     */
+    'is_hidden'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof TransactionCreateRequest
+     */
+    'is_international'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateRequest
+     */
+    'memo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateRequest
+     */
+    'metadata'?: string;
+    /**
+     * When set to true, this parameter will prevent a webhook from being triggered by the request.
+     * @type {boolean}
+     * @memberof TransactionCreateRequest
+     */
+    'skip_webhook'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface TransactionCreateRequestBody
+ */
+export interface TransactionCreateRequestBody {
+    /**
+     * 
+     * @type {TransactionCreateRequest}
+     * @memberof TransactionCreateRequestBody
+     */
+    'transaction'?: TransactionCreateRequest;
+}
+/**
+ * 
+ * @export
+ * @interface TransactionCreateResponseBody
+ */
+export interface TransactionCreateResponseBody {
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'account_guid'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'account_id'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TransactionCreateResponseBody
+     */
+    'amount'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'category'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'category_guid'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'check_number_string'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'created_at'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'currency_code'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'date'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'description'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'extended_transaction_type'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'guid'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'id'?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof TransactionCreateResponseBody
+     */
+    'is_bill_pay'?: boolean | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof TransactionCreateResponseBody
+     */
+    'is_direct_deposit'?: boolean | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof TransactionCreateResponseBody
+     */
+    'is_expense'?: boolean | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof TransactionCreateResponseBody
+     */
+    'is_fee'?: boolean | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof TransactionCreateResponseBody
+     */
+    'is_income'?: boolean | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof TransactionCreateResponseBody
+     */
+    'is_international'?: boolean | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof TransactionCreateResponseBody
+     */
+    'is_manual'?: boolean | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof TransactionCreateResponseBody
+     */
+    'is_overdraft_fee'?: boolean | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof TransactionCreateResponseBody
+     */
+    'is_payroll_advance'?: boolean | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof TransactionCreateResponseBody
+     */
+    'is_recurring'?: boolean | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof TransactionCreateResponseBody
+     */
+    'is_subscription'?: boolean | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TransactionCreateResponseBody
+     */
+    'latitude'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'localized_description'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'localized_memo'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TransactionCreateResponseBody
+     */
+    'longitude'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'member_guid'?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof TransactionCreateResponseBody
+     */
+    'member_is_managed_by_user'?: boolean | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'memo'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TransactionCreateResponseBody
+     */
+    'merchant_category_code'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'merchant_guid'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'merchant_location_guid'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'metadata'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'original_description'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'posted_at'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'status'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'top_level_category'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'transacted_at'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'updated_at'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'user_guid'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionCreateResponseBody
+     */
+    'user_id'?: string | null;
 }
 /**
  * 
@@ -8215,6 +8795,430 @@ export class InsightsApi extends BaseAPI {
      */
     public updateInsight(userGuid: string, insightGuid: string, insightUpdateRequest: InsightUpdateRequest, options?: AxiosRequestConfig) {
         return InsightsApiFp(this.configuration).updateInsight(userGuid, insightGuid, insightUpdateRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * MicrodepositsApi - axios parameter creator
+ * @export
+ */
+export const MicrodepositsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Use this endpoint to verify the amounts deposited into the account during a microdeposit verification. The verification has not successfully completed until the `status` is `VERIFIED`. Poll the `/users/{user_guid}/micro_deposits/{micro_deposit_guid}` (read microdeposit) endpoint until you see this status or an error state.
+         * @summary Verify a Microdeposit
+         * @param {string} microdepositGuid The unique identifier for the microdeposit. Defined by MX.
+         * @param {MicrodepositVerifyRequestBody} [microdepositVerifyRequestBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        microDepositsMicrodepositGuidVerifyPut: async (microdepositGuid: string, microdepositVerifyRequestBody?: MicrodepositVerifyRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'microdepositGuid' is not null or undefined
+            assertParamExists('microDepositsMicrodepositGuidVerifyPut', 'microdepositGuid', microdepositGuid)
+            const localVarPath = `/micro_deposits/{microdeposit_guid}/verify`
+                .replace(`{${"microdeposit_guid"}}`, encodeURIComponent(String(microdepositGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(microdepositVerifyRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to read the attributes of a specific microdeposit according to its unique GUID.
+         * @summary List all microdeposits for a user
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidMicroDepositsGet: async (userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('usersUserGuidMicroDepositsGet', 'userGuid', userGuid)
+            const localVarPath = `/users/{user_guid}/micro_deposits`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to delete the specified microdeposit.
+         * @summary Delete a microdeposit
+         * @param {string} microDepositGuid The unique identifier for the microdeposit. Defined by MX.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidMicroDepositsMicroDepositGuidDelete: async (microDepositGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'microDepositGuid' is not null or undefined
+            assertParamExists('usersUserGuidMicroDepositsMicroDepositGuidDelete', 'microDepositGuid', microDepositGuid)
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('usersUserGuidMicroDepositsMicroDepositGuidDelete', 'userGuid', userGuid)
+            const localVarPath = `/users/{user_guid}/micro_deposits/{micro_deposit_guid}`
+                .replace(`{${"micro_deposit_guid"}}`, encodeURIComponent(String(microDepositGuid)))
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to read the attributes of a specific microdeposit according to its unique GUID. <br></br> Webhooks for microdeposit status changes are triggered when a status changes. The actual status of the microdeposit guid updates every minute. You may force a status update by calling the read microdeposit endpoint.
+         * @summary Read a microdeposit for a user
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} microDepositGuid The unique identifier for the microdeposit. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidMicroDepositsMicroDepositGuidGet: async (userGuid: string, microDepositGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('usersUserGuidMicroDepositsMicroDepositGuidGet', 'userGuid', userGuid)
+            // verify required parameter 'microDepositGuid' is not null or undefined
+            assertParamExists('usersUserGuidMicroDepositsMicroDepositGuidGet', 'microDepositGuid', microDepositGuid)
+            const localVarPath = `/users/{user_guid}/micro_deposits/{micro_deposit_guid}`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"micro_deposit_guid"}}`, encodeURIComponent(String(microDepositGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to create a microdeposit. The response will include the new microdeposit record with a status of INITIATED.
+         * @summary Create a microdeposit
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {MicrodepositRequestBody} microdepositRequestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidMicroDepositsPost: async (userGuid: string, microdepositRequestBody: MicrodepositRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('usersUserGuidMicroDepositsPost', 'userGuid', userGuid)
+            // verify required parameter 'microdepositRequestBody' is not null or undefined
+            assertParamExists('usersUserGuidMicroDepositsPost', 'microdepositRequestBody', microdepositRequestBody)
+            const localVarPath = `/users/{user_guid}/micro_deposits`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(microdepositRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * MicrodepositsApi - functional programming interface
+ * @export
+ */
+export const MicrodepositsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = MicrodepositsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Use this endpoint to verify the amounts deposited into the account during a microdeposit verification. The verification has not successfully completed until the `status` is `VERIFIED`. Poll the `/users/{user_guid}/micro_deposits/{micro_deposit_guid}` (read microdeposit) endpoint until you see this status or an error state.
+         * @summary Verify a Microdeposit
+         * @param {string} microdepositGuid The unique identifier for the microdeposit. Defined by MX.
+         * @param {MicrodepositVerifyRequestBody} [microdepositVerifyRequestBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async microDepositsMicrodepositGuidVerifyPut(microdepositGuid: string, microdepositVerifyRequestBody?: MicrodepositVerifyRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MicrodepositResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.microDepositsMicrodepositGuidVerifyPut(microdepositGuid, microdepositVerifyRequestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to read the attributes of a specific microdeposit according to its unique GUID.
+         * @summary List all microdeposits for a user
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersUserGuidMicroDepositsGet(userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MicrodepositsResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersUserGuidMicroDepositsGet(userGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to delete the specified microdeposit.
+         * @summary Delete a microdeposit
+         * @param {string} microDepositGuid The unique identifier for the microdeposit. Defined by MX.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersUserGuidMicroDepositsMicroDepositGuidDelete(microDepositGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersUserGuidMicroDepositsMicroDepositGuidDelete(microDepositGuid, userGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to read the attributes of a specific microdeposit according to its unique GUID. <br></br> Webhooks for microdeposit status changes are triggered when a status changes. The actual status of the microdeposit guid updates every minute. You may force a status update by calling the read microdeposit endpoint.
+         * @summary Read a microdeposit for a user
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} microDepositGuid The unique identifier for the microdeposit. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersUserGuidMicroDepositsMicroDepositGuidGet(userGuid: string, microDepositGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MicrodepositResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersUserGuidMicroDepositsMicroDepositGuidGet(userGuid, microDepositGuid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this endpoint to create a microdeposit. The response will include the new microdeposit record with a status of INITIATED.
+         * @summary Create a microdeposit
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {MicrodepositRequestBody} microdepositRequestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersUserGuidMicroDepositsPost(userGuid: string, microdepositRequestBody: MicrodepositRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MicrodepositResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersUserGuidMicroDepositsPost(userGuid, microdepositRequestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * MicrodepositsApi - factory interface
+ * @export
+ */
+export const MicrodepositsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = MicrodepositsApiFp(configuration)
+    return {
+        /**
+         * Use this endpoint to verify the amounts deposited into the account during a microdeposit verification. The verification has not successfully completed until the `status` is `VERIFIED`. Poll the `/users/{user_guid}/micro_deposits/{micro_deposit_guid}` (read microdeposit) endpoint until you see this status or an error state.
+         * @summary Verify a Microdeposit
+         * @param {string} microdepositGuid The unique identifier for the microdeposit. Defined by MX.
+         * @param {MicrodepositVerifyRequestBody} [microdepositVerifyRequestBody] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        microDepositsMicrodepositGuidVerifyPut(microdepositGuid: string, microdepositVerifyRequestBody?: MicrodepositVerifyRequestBody, options?: any): AxiosPromise<MicrodepositResponseBody> {
+            return localVarFp.microDepositsMicrodepositGuidVerifyPut(microdepositGuid, microdepositVerifyRequestBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to read the attributes of a specific microdeposit according to its unique GUID.
+         * @summary List all microdeposits for a user
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidMicroDepositsGet(userGuid: string, options?: any): AxiosPromise<MicrodepositsResponseBody> {
+            return localVarFp.usersUserGuidMicroDepositsGet(userGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to delete the specified microdeposit.
+         * @summary Delete a microdeposit
+         * @param {string} microDepositGuid The unique identifier for the microdeposit. Defined by MX.
+         * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidMicroDepositsMicroDepositGuidDelete(microDepositGuid: string, userGuid: string, options?: any): AxiosPromise<void> {
+            return localVarFp.usersUserGuidMicroDepositsMicroDepositGuidDelete(microDepositGuid, userGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to read the attributes of a specific microdeposit according to its unique GUID. <br></br> Webhooks for microdeposit status changes are triggered when a status changes. The actual status of the microdeposit guid updates every minute. You may force a status update by calling the read microdeposit endpoint.
+         * @summary Read a microdeposit for a user
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {string} microDepositGuid The unique identifier for the microdeposit. Defined by MX.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidMicroDepositsMicroDepositGuidGet(userGuid: string, microDepositGuid: string, options?: any): AxiosPromise<MicrodepositResponseBody> {
+            return localVarFp.usersUserGuidMicroDepositsMicroDepositGuidGet(userGuid, microDepositGuid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to create a microdeposit. The response will include the new microdeposit record with a status of INITIATED.
+         * @summary Create a microdeposit
+         * @param {string} userGuid The unique identifier for the user. Defined by MX.
+         * @param {MicrodepositRequestBody} microdepositRequestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidMicroDepositsPost(userGuid: string, microdepositRequestBody: MicrodepositRequestBody, options?: any): AxiosPromise<MicrodepositResponseBody> {
+            return localVarFp.usersUserGuidMicroDepositsPost(userGuid, microdepositRequestBody, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * MicrodepositsApi - object-oriented interface
+ * @export
+ * @class MicrodepositsApi
+ * @extends {BaseAPI}
+ */
+export class MicrodepositsApi extends BaseAPI {
+    /**
+     * Use this endpoint to verify the amounts deposited into the account during a microdeposit verification. The verification has not successfully completed until the `status` is `VERIFIED`. Poll the `/users/{user_guid}/micro_deposits/{micro_deposit_guid}` (read microdeposit) endpoint until you see this status or an error state.
+     * @summary Verify a Microdeposit
+     * @param {string} microdepositGuid The unique identifier for the microdeposit. Defined by MX.
+     * @param {MicrodepositVerifyRequestBody} [microdepositVerifyRequestBody] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MicrodepositsApi
+     */
+    public microDepositsMicrodepositGuidVerifyPut(microdepositGuid: string, microdepositVerifyRequestBody?: MicrodepositVerifyRequestBody, options?: AxiosRequestConfig) {
+        return MicrodepositsApiFp(this.configuration).microDepositsMicrodepositGuidVerifyPut(microdepositGuid, microdepositVerifyRequestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to read the attributes of a specific microdeposit according to its unique GUID.
+     * @summary List all microdeposits for a user
+     * @param {string} userGuid The unique identifier for the user. Defined by MX.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MicrodepositsApi
+     */
+    public usersUserGuidMicroDepositsGet(userGuid: string, options?: AxiosRequestConfig) {
+        return MicrodepositsApiFp(this.configuration).usersUserGuidMicroDepositsGet(userGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to delete the specified microdeposit.
+     * @summary Delete a microdeposit
+     * @param {string} microDepositGuid The unique identifier for the microdeposit. Defined by MX.
+     * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MicrodepositsApi
+     */
+    public usersUserGuidMicroDepositsMicroDepositGuidDelete(microDepositGuid: string, userGuid: string, options?: AxiosRequestConfig) {
+        return MicrodepositsApiFp(this.configuration).usersUserGuidMicroDepositsMicroDepositGuidDelete(microDepositGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to read the attributes of a specific microdeposit according to its unique GUID. <br></br> Webhooks for microdeposit status changes are triggered when a status changes. The actual status of the microdeposit guid updates every minute. You may force a status update by calling the read microdeposit endpoint.
+     * @summary Read a microdeposit for a user
+     * @param {string} userGuid The unique identifier for the user. Defined by MX.
+     * @param {string} microDepositGuid The unique identifier for the microdeposit. Defined by MX.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MicrodepositsApi
+     */
+    public usersUserGuidMicroDepositsMicroDepositGuidGet(userGuid: string, microDepositGuid: string, options?: AxiosRequestConfig) {
+        return MicrodepositsApiFp(this.configuration).usersUserGuidMicroDepositsMicroDepositGuidGet(userGuid, microDepositGuid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to create a microdeposit. The response will include the new microdeposit record with a status of INITIATED.
+     * @summary Create a microdeposit
+     * @param {string} userGuid The unique identifier for the user. Defined by MX.
+     * @param {MicrodepositRequestBody} microdepositRequestBody 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MicrodepositsApi
+     */
+    public usersUserGuidMicroDepositsPost(userGuid: string, microdepositRequestBody: MicrodepositRequestBody, options?: AxiosRequestConfig) {
+        return MicrodepositsApiFp(this.configuration).usersUserGuidMicroDepositsPost(userGuid, microdepositRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -18700,6 +19704,132 @@ export class SpendingPlanApi extends BaseAPI {
      */
     public updateSpendingPlanIterationItem(userGuid: string, spendingPlanGuid: string, iterationItemGuid: string, spendingPlanIterationItemCreateRequestBody: SpendingPlanIterationItemCreateRequestBody, options?: AxiosRequestConfig) {
         return SpendingPlanApiFp(this.configuration).updateSpendingPlanIterationItem(userGuid, spendingPlanGuid, iterationItemGuid, spendingPlanIterationItemCreateRequestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * TransactionsApi - axios parameter creator
+ * @export
+ */
+export const TransactionsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * This endpoint can only be used to create manual transactions that are under a manual account. This endpoint accepts the optional MX-Skip-Webhook header and skip_webhook parameter.
+         * @summary Create manual transaction
+         * @param {string} userGuid The unique identifier for the user.
+         * @param {string} accountGuid The unique identifier for the account.
+         * @param {TransactionCreateRequestBody} transactionCreateRequestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidAccountsAccountGuidTransactionsPost: async (userGuid: string, accountGuid: string, transactionCreateRequestBody: TransactionCreateRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userGuid' is not null or undefined
+            assertParamExists('usersUserGuidAccountsAccountGuidTransactionsPost', 'userGuid', userGuid)
+            // verify required parameter 'accountGuid' is not null or undefined
+            assertParamExists('usersUserGuidAccountsAccountGuidTransactionsPost', 'accountGuid', accountGuid)
+            // verify required parameter 'transactionCreateRequestBody' is not null or undefined
+            assertParamExists('usersUserGuidAccountsAccountGuidTransactionsPost', 'transactionCreateRequestBody', transactionCreateRequestBody)
+            const localVarPath = `/users/{user_guid}/accounts/{account_guid}/transactions`
+                .replace(`{${"user_guid"}}`, encodeURIComponent(String(userGuid)))
+                .replace(`{${"account_guid"}}`, encodeURIComponent(String(accountGuid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(transactionCreateRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * TransactionsApi - functional programming interface
+ * @export
+ */
+export const TransactionsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = TransactionsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * This endpoint can only be used to create manual transactions that are under a manual account. This endpoint accepts the optional MX-Skip-Webhook header and skip_webhook parameter.
+         * @summary Create manual transaction
+         * @param {string} userGuid The unique identifier for the user.
+         * @param {string} accountGuid The unique identifier for the account.
+         * @param {TransactionCreateRequestBody} transactionCreateRequestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usersUserGuidAccountsAccountGuidTransactionsPost(userGuid: string, accountGuid: string, transactionCreateRequestBody: TransactionCreateRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionCreateResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersUserGuidAccountsAccountGuidTransactionsPost(userGuid, accountGuid, transactionCreateRequestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * TransactionsApi - factory interface
+ * @export
+ */
+export const TransactionsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = TransactionsApiFp(configuration)
+    return {
+        /**
+         * This endpoint can only be used to create manual transactions that are under a manual account. This endpoint accepts the optional MX-Skip-Webhook header and skip_webhook parameter.
+         * @summary Create manual transaction
+         * @param {string} userGuid The unique identifier for the user.
+         * @param {string} accountGuid The unique identifier for the account.
+         * @param {TransactionCreateRequestBody} transactionCreateRequestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersUserGuidAccountsAccountGuidTransactionsPost(userGuid: string, accountGuid: string, transactionCreateRequestBody: TransactionCreateRequestBody, options?: any): AxiosPromise<TransactionCreateResponseBody> {
+            return localVarFp.usersUserGuidAccountsAccountGuidTransactionsPost(userGuid, accountGuid, transactionCreateRequestBody, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * TransactionsApi - object-oriented interface
+ * @export
+ * @class TransactionsApi
+ * @extends {BaseAPI}
+ */
+export class TransactionsApi extends BaseAPI {
+    /**
+     * This endpoint can only be used to create manual transactions that are under a manual account. This endpoint accepts the optional MX-Skip-Webhook header and skip_webhook parameter.
+     * @summary Create manual transaction
+     * @param {string} userGuid The unique identifier for the user.
+     * @param {string} accountGuid The unique identifier for the account.
+     * @param {TransactionCreateRequestBody} transactionCreateRequestBody 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TransactionsApi
+     */
+    public usersUserGuidAccountsAccountGuidTransactionsPost(userGuid: string, accountGuid: string, transactionCreateRequestBody: TransactionCreateRequestBody, options?: AxiosRequestConfig) {
+        return TransactionsApiFp(this.configuration).usersUserGuidAccountsAccountGuidTransactionsPost(userGuid, accountGuid, transactionCreateRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
