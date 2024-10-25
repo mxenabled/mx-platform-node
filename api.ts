@@ -490,6 +490,12 @@ export interface AccountResponse {
      * @type {string}
      * @memberof AccountResponse
      */
+    'federal_insurance_status'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountResponse
+     */
     'guid'?: string | null;
     /**
      * 
@@ -2684,6 +2690,12 @@ export interface InstitutionResponse {
      * @memberof InstitutionResponse
      */
     'supports_oauth'?: boolean | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InstitutionResponse
+     */
+    'supports_tax_document'?: boolean | null;
     /**
      * 
      * @type {boolean}
