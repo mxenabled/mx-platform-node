@@ -3711,6 +3711,12 @@ export interface MemberResponse {
     'successfully_aggregated_at'?: string | null;
     /**
      * 
+     * @type {Array<string>}
+     * @memberof MemberResponse
+     */
+    'use_cases'?: Array<string> | null;
+    /**
+     * 
      * @type {string}
      * @memberof MemberResponse
      */
