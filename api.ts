@@ -3618,6 +3618,12 @@ export interface MemberResponse {
      * @type {string}
      * @memberof MemberResponse
      */
+    'actionable_error'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MemberResponse
+     */
     'aggregated_at'?: string | null;
     /**
      * 
