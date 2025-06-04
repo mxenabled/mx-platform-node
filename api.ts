@@ -3618,12 +3618,6 @@ export interface MemberResponse {
      * @type {string}
      * @memberof MemberResponse
      */
-    'actionable_error'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MemberResponse
-     */
     'aggregated_at'?: string | null;
     /**
      * 
@@ -3642,6 +3636,18 @@ export interface MemberResponse {
      * @type {string}
      * @memberof MemberResponse
      */
+    'connection_status_message'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MemberResponse
+     */
+    'error'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MemberResponse
+     */
     'guid'?: string | null;
     /**
      * 
@@ -3655,6 +3661,12 @@ export interface MemberResponse {
      * @memberof MemberResponse
      */
     'institution_code'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MemberResponse
+     */
+    'institution_guid'?: string;
     /**
      * 
      * @type {boolean}
@@ -3687,22 +3699,34 @@ export interface MemberResponse {
     'metadata'?: string | null;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof MemberResponse
      */
-    'most_recent_job_detail_code'?: string | null;
+    'most_recent_job_detail_code'?: number | null;
     /**
      * 
-     * @type {string}
+     * @type {boolean}
      * @memberof MemberResponse
      */
-    'most_recent_job_detail_text'?: string | null;
+    'most_recent_job_detail_text'?: boolean | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof MemberResponse
+     */
+    'most_recent_job_guid'?: boolean | null;
     /**
      * 
      * @type {string}
      * @memberof MemberResponse
      */
     'name'?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof MemberResponse
+     */
+    'needs_updated_credentials'?: boolean | null;
     /**
      * 
      * @type {string}
@@ -3716,11 +3740,11 @@ export interface MemberResponse {
      */
     'successfully_aggregated_at'?: string | null;
     /**
-     * 
+     * The use case associated with the member. Valid values are `PFM` and/or `MONEY_MOVEMENT`. Only set this if you\'ve met with MX and have opted in to using this field.
      * @type {Array<string>}
      * @memberof MemberResponse
      */
-    'use_cases'?: Array<string> | null;
+    'use_cases'?: Array<MemberResponseUseCasesEnum>;
     /**
      * 
      * @type {string}
@@ -3734,6 +3758,14 @@ export interface MemberResponse {
      */
     'user_id'?: string | null;
 }
+
+export const MemberResponseUseCasesEnum = {
+    MoneyMovement: 'MONEY_MOVEMENT',
+    Pfm: 'PFM'
+} as const;
+
+export type MemberResponseUseCasesEnum = typeof MemberResponseUseCasesEnum[keyof typeof MemberResponseUseCasesEnum];
+
 /**
  * 
  * @export
