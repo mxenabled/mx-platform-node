@@ -391,6 +391,12 @@ export interface AccountResponse {
     'account_number'?: string | null;
     /**
      * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'account_number_set_by'?: number | null;
+    /**
+     * 
      * @type {string}
      * @memberof AccountResponse
      */
@@ -424,7 +430,19 @@ export interface AccountResponse {
      * @type {number}
      * @memberof AccountResponse
      */
+    'apr_set_by'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
     'apy'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'apy_set_by'?: number | null;
     /**
      * 
      * @type {number}
@@ -436,7 +454,19 @@ export interface AccountResponse {
      * @type {number}
      * @memberof AccountResponse
      */
+    'available_balance_set_by'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
     'available_credit'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'available_credit_set_by'?: number | null;
     /**
      * 
      * @type {number}
@@ -448,13 +478,37 @@ export interface AccountResponse {
      * @type {number}
      * @memberof AccountResponse
      */
+    'balance_set_by'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'calculated_apr'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
     'cash_balance'?: number | null;
     /**
      * 
      * @type {number}
      * @memberof AccountResponse
      */
+    'cash_balance_set_by'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
     'cash_surrender_value'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'cash_surrender_value_set_by'?: number | null;
     /**
      * 
      * @type {string}
@@ -469,10 +523,22 @@ export interface AccountResponse {
     'credit_limit'?: number | null;
     /**
      * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'credit_limit_set_by'?: number | null;
+    /**
+     * 
      * @type {string}
      * @memberof AccountResponse
      */
     'currency_code'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'currency_code_set_by'?: number | null;
     /**
      * 
      * @type {number}
@@ -484,13 +550,211 @@ export interface AccountResponse {
      * @type {number}
      * @memberof AccountResponse
      */
+    'day_payment_is_due_set_by'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
     'death_benefit'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'death_benefit_set_by'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
     'federal_insurance_status'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountResponse
+     */
+    'feed_account_number'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'feed_account_subtype'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'feed_account_type'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'feed_apr'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'feed_apy'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'feed_available_balance'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'feed_balance'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'feed_cash_balance'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'feed_cash_surrender_value'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'feed_credit_limit'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountResponse
+     */
+    'feed_currency_code'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'feed_day_payment_is_due'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'feed_death_benefit'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'feed_holdings_value'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'feed_interest_rate'?: number | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AccountResponse
+     */
+    'feed_is_closed'?: boolean | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'feed_last_payment'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountResponse
+     */
+    'feed_last_payment_at'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'feed_loan_amount'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountResponse
+     */
+    'feed_matures_on'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'feed_minimum_balance'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'feed_minimum_payment'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountResponse
+     */
+    'feed_name'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountResponse
+     */
+    'feed_nickname'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'feed_original_balance'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountResponse
+     */
+    'feed_payment_due_at'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'feed_payoff_balance'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountResponse
+     */
+    'feed_routing_number'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountResponse
+     */
+    'feed_started_on'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'feed_statement_balance'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'feed_total_account_value'?: number | null;
     /**
      * 
      * @type {string}
@@ -503,6 +767,12 @@ export interface AccountResponse {
      * @memberof AccountResponse
      */
     'holdings_value'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'holdings_value_set_by'?: number | null;
     /**
      * 
      * @type {string}
@@ -526,6 +796,12 @@ export interface AccountResponse {
      * @type {string}
      * @memberof AccountResponse
      */
+    'institution_guid'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountResponse
+     */
     'insured_name'?: string | null;
     /**
      * 
@@ -535,10 +811,22 @@ export interface AccountResponse {
     'interest_rate'?: number | null;
     /**
      * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'interest_rate_set_by'?: number | null;
+    /**
+     * 
      * @type {boolean}
      * @memberof AccountResponse
      */
     'is_closed'?: boolean | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'is_closed_set_by'?: number | null;
     /**
      * 
      * @type {boolean}
@@ -559,6 +847,12 @@ export interface AccountResponse {
     'last_payment'?: number | null;
     /**
      * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'last_payment_set_by'?: number | null;
+    /**
+     * 
      * @type {string}
      * @memberof AccountResponse
      */
@@ -568,7 +862,19 @@ export interface AccountResponse {
      * @type {number}
      * @memberof AccountResponse
      */
+    'last_payment_at_set_by'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
     'loan_amount'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'loan_amount_set_by'?: number | null;
     /**
      * 
      * @type {number}
@@ -581,6 +887,12 @@ export interface AccountResponse {
      * @memberof AccountResponse
      */
     'matures_on'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'matures_on_set_by'?: number | null;
     /**
      * 
      * @type {string}
@@ -616,13 +928,31 @@ export interface AccountResponse {
      * @type {number}
      * @memberof AccountResponse
      */
+    'minimum_balance_set_by'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
     'minimum_payment'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'minimum_payment_set_by'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
     'name'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'name_set_by'?: number | null;
     /**
      * 
      * @type {string}
@@ -634,7 +964,19 @@ export interface AccountResponse {
      * @type {number}
      * @memberof AccountResponse
      */
+    'nickname_set_by'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
     'original_balance'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'original_balance_set_by'?: number | null;
     /**
      * 
      * @type {number}
@@ -652,19 +994,31 @@ export interface AccountResponse {
      * @type {number}
      * @memberof AccountResponse
      */
+    'payment_due_at_set_by'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
     'payoff_balance'?: number | null;
     /**
      * 
      * @type {number}
      * @memberof AccountResponse
      */
-    'premium_amount'?: number | null;
+    'payoff_balance_set_by'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
-    'property_type'?: string | null;
+    'premium_amount'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'property_type'?: number | null;
     /**
      * 
      * @type {string}
@@ -682,13 +1036,31 @@ export interface AccountResponse {
      * @type {number}
      * @memberof AccountResponse
      */
+    'started_on_set_by'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
     'statement_balance'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'statement_balance_set_by'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof AccountResponse
      */
     'subtype'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'subtype_set_by'?: number | null;
     /**
      * 
      * @type {number}
@@ -712,6 +1084,12 @@ export interface AccountResponse {
      * @type {number}
      * @memberof AccountResponse
      */
+    'total_account_value_set_by'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
     'total_account_value_ugl'?: number | null;
     /**
      * 
@@ -719,6 +1097,12 @@ export interface AccountResponse {
      * @memberof AccountResponse
      */
     'type'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountResponse
+     */
+    'type_set_by'?: number | null;
     /**
      * 
      * @type {string}
