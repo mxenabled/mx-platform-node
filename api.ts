@@ -1009,16 +1009,16 @@ export interface AccountResponse {
     'payoff_balance_set_by'?: number | null;
     /**
      * 
-     * @type {string}
-     * @memberof AccountResponse
-     */
-    'premium_amount'?: string | null;
-    /**
-     * 
      * @type {number}
      * @memberof AccountResponse
      */
-    'property_type'?: number | null;
+    'premium_amount'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountResponse
+     */
+    'property_type'?: string | null;
     /**
      * 
      * @type {string}
@@ -9675,10 +9675,12 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
          * @summary Aggregate member
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {boolean} [includeHoldings] When set to &#x60;false&#x60;, the aggregation will not gather holdings data. Defaults to &#x60;true&#x60;.
+         * @param {boolean} [includeTransactions] When set to &#x60;false&#x60;, the aggregation will not gather transactions data. Defaults to &#x60;true&#x60;.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        aggregateMember: async (memberGuid: string, userGuid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        aggregateMember: async (memberGuid: string, userGuid: string, includeHoldings?: boolean, includeTransactions?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'memberGuid' is not null or undefined
             assertParamExists('aggregateMember', 'memberGuid', memberGuid)
             // verify required parameter 'userGuid' is not null or undefined
@@ -9700,6 +9702,14 @@ export const MxPlatformApiAxiosParamCreator = function (configuration?: Configur
             // authentication basicAuth required
             // http basic authentication required
             setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            if (includeHoldings !== undefined) {
+                localVarQueryParameter['include_holdings'] = includeHoldings;
+            }
+
+            if (includeTransactions !== undefined) {
+                localVarQueryParameter['include_transactions'] = includeTransactions;
+            }
 
 
     
@@ -14698,11 +14708,13 @@ export const MxPlatformApiFp = function(configuration?: Configuration) {
          * @summary Aggregate member
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {boolean} [includeHoldings] When set to &#x60;false&#x60;, the aggregation will not gather holdings data. Defaults to &#x60;true&#x60;.
+         * @param {boolean} [includeTransactions] When set to &#x60;false&#x60;, the aggregation will not gather transactions data. Defaults to &#x60;true&#x60;.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async aggregateMember(memberGuid: string, userGuid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aggregateMember(memberGuid, userGuid, options);
+        async aggregateMember(memberGuid: string, userGuid: string, includeHoldings?: boolean, includeTransactions?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aggregateMember(memberGuid, userGuid, includeHoldings, includeTransactions, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -16084,11 +16096,13 @@ export const MxPlatformApiFactory = function (configuration?: Configuration, bas
          * @summary Aggregate member
          * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
          * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+         * @param {boolean} [includeHoldings] When set to &#x60;false&#x60;, the aggregation will not gather holdings data. Defaults to &#x60;true&#x60;.
+         * @param {boolean} [includeTransactions] When set to &#x60;false&#x60;, the aggregation will not gather transactions data. Defaults to &#x60;true&#x60;.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        aggregateMember(memberGuid: string, userGuid: string, options?: any): AxiosPromise<MemberResponseBody> {
-            return localVarFp.aggregateMember(memberGuid, userGuid, options).then((request) => request(axios, basePath));
+        aggregateMember(memberGuid: string, userGuid: string, includeHoldings?: boolean, includeTransactions?: boolean, options?: any): AxiosPromise<MemberResponseBody> {
+            return localVarFp.aggregateMember(memberGuid, userGuid, includeHoldings, includeTransactions, options).then((request) => request(axios, basePath));
         },
         /**
          * This endpoint operates much like the aggregate member endpoint except that it gathers only account balance information; it does not gather any transaction data.
@@ -17363,12 +17377,14 @@ export class MxPlatformApi extends BaseAPI {
      * @summary Aggregate member
      * @param {string} memberGuid The unique id for a &#x60;member&#x60;.
      * @param {string} userGuid The unique id for a &#x60;user&#x60;.
+     * @param {boolean} [includeHoldings] When set to &#x60;false&#x60;, the aggregation will not gather holdings data. Defaults to &#x60;true&#x60;.
+     * @param {boolean} [includeTransactions] When set to &#x60;false&#x60;, the aggregation will not gather transactions data. Defaults to &#x60;true&#x60;.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MxPlatformApi
      */
-    public aggregateMember(memberGuid: string, userGuid: string, options?: AxiosRequestConfig) {
-        return MxPlatformApiFp(this.configuration).aggregateMember(memberGuid, userGuid, options).then((request) => request(this.axios, this.basePath));
+    public aggregateMember(memberGuid: string, userGuid: string, includeHoldings?: boolean, includeTransactions?: boolean, options?: AxiosRequestConfig) {
+        return MxPlatformApiFp(this.configuration).aggregateMember(memberGuid, userGuid, includeHoldings, includeTransactions, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
