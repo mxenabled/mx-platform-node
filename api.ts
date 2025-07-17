@@ -2816,6 +2816,12 @@ export interface ImageOptionResponse {
      * @type {string}
      * @memberof ImageOptionResponse
      */
+    'guid'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ImageOptionResponse
+     */
     'label'?: string | null;
     /**
      * 
@@ -4854,6 +4860,12 @@ export interface OAuthWindowResponseBody {
  * @interface OptionResponse
  */
 export interface OptionResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof OptionResponse
+     */
+    'guid'?: string | null;
     /**
      * 
      * @type {string}
