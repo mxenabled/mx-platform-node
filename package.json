@@ -1,6 +1,6 @@
 {
   "name": "mx-platform-node",
-  "version": "1.8.2",
+  "version": "1.9.0",
   "description": "A Node library for the MX Platform API.",
   "author": "MX",
   "keywords": [
@@ -17,10 +17,10 @@
     "prepare": "npm run build"
   },
   "dependencies": {
-    "axios": "^1.6.8"
+    "axios": "^0.21.4"
   },
   "devDependencies": {
-    "@types/node": "^20.12.7",
-    "typescript": "^5.4.5"
+    "@types/node": "^12.11.5",
+    "typescript": "^3.6.4"
   }
 }
