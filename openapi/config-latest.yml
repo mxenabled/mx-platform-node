@@ -1,3 +1,5 @@
+# Latest is mapped to v20111101 for now to maintain backwards compatibility.
+# In the future, this will point to the latest version of the API.
 ---
 generatorName: typescript-axios
 npmName: mx-platform-node
