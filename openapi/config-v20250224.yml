@@ -1,0 +1,5 @@
+---
+generatorName: typescript-axios
+npmName: mx-platform-node-v20250224
+npmVersion: 2.0.0
+supportsES6: true
