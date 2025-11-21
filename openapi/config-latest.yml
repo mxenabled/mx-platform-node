@@ -3,5 +3,5 @@
 ---
 generatorName: typescript-axios
 npmName: mx-platform-node
-npmVersion: 1.8.2
+npmVersion: 1.12.0
 supportsES6: true
