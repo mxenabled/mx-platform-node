@@ -3,24 +3,6 @@ name: Generate Publish Release
 on:
   repository_dispatch:
     types: [generate_publish_release]
-  workflow_dispatch:  # NEW - Enable manual testing
-    inputs:
-      api_version:
-        description: 'API Version to generate'
-        default: 'current'
-        type: choice
-        options:
-          - 'current'
-          - 'v20111101'
-          - 'v20250224'
-          - 'latest'
-      test_level:
-        description: 'Testing level'
-        default: 'generate_only'
-        type: choice
-        options:
-          - 'generate_only'        # No commits, no publishing
-          - 'github_packages'      # Publish to GitHub Packages (safe staging)
 
 jobs:
   Generate:
@@ -33,153 +15,23 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.1
-
-      # Determine safety and targets based on branch and inputs
-      - name: Determine safety and targets
-        id: safety
-        run: |
-          BRANCH="${{ github.ref_name }}"
-          TEST_LEVEL="${{ github.event.inputs.test_level || 'generate_only' }}"
-          API_VERSION="${{ github.event.inputs.api_version || 'current' }}"
-          
-          echo "branch=$BRANCH" >> $GITHUB_OUTPUT
-          echo "test_level=$TEST_LEVEL" >> $GITHUB_OUTPUT
-          echo "api_version=$API_VERSION" >> $GITHUB_OUTPUT
-          
-          # Safety checks based on branch
-          if [ "$BRANCH" = "master" ]; then
-            echo "can_commit_to_master=true" >> $GITHUB_OUTPUT
-            echo "can_publish_production=true" >> $GITHUB_OUTPUT
-          else
-            echo "can_commit_to_master=false" >> $GITHUB_OUTPUT
-            echo "can_publish_production=false" >> $GITHUB_OUTPUT
-          fi
-          
-          # GitHub Packages publishing is safe from any branch
-          if [ "$TEST_LEVEL" = "github_packages" ]; then
-            echo "can_publish_github=true" >> $GITHUB_OUTPUT
-          else
-            echo "can_publish_github=false" >> $GITHUB_OUTPUT
-          fi
-          
-          # Determine config and spec URLs
-          if [ "$API_VERSION" = "current" ]; then
-            echo "config_file=./openapi/config.yml" >> $GITHUB_OUTPUT
-            echo "spec_url=https://raw.githubusercontent.com/mxenabled/openapi/master/openapi/mx_platform_api.yml" >> $GITHUB_OUTPUT
-            echo "output_dir=." >> $GITHUB_OUTPUT
-            echo "use_production_flow=true" >> $GITHUB_OUTPUT
-          else
-            echo "config_file=./openapi/config-$API_VERSION.yml" >> $GITHUB_OUTPUT
-            if [ "$API_VERSION" = "latest" ]; then
-              echo "spec_url=https://raw.githubusercontent.com/mxenabled/openapi/master/openapi/v20111101.yml" >> $GITHUB_OUTPUT
-            else
-              echo "spec_url=https://raw.githubusercontent.com/mxenabled/openapi/master/openapi/$API_VERSION.yml" >> $GITHUB_OUTPUT
-            fi
-            echo "output_dir=./test-output-$API_VERSION" >> $GITHUB_OUTPUT
-            echo "use_production_flow=false" >> $GITHUB_OUTPUT
-          fi
-
-      # Original version bump (only for production flow from master)
       - name: Bump version
         id: bump_version
-        if: ${{ steps.safety.outputs.use_production_flow == 'true' && steps.safety.outputs.can_commit_to_master == 'true' }}
-        run: echo "::set-output name=version::$(ruby .github/version.rb ${{ github.event.client_payload.version || 'patch' }} ${{ steps.safety.outputs.config_file }})"
-
-      # Original clean repo (only for production flow)
+        run: echo "::set-output name=version::$(ruby .github/version.rb ${{ github.event.client_payload.version }})"
       - name: Clean repo
-        if: ${{ steps.safety.outputs.use_production_flow == 'true' }}
         run: ruby .github/clean.rb
-
-      # Create output directory for testing versions
-      - name: Prepare test output directory
-        if: ${{ steps.safety.outputs.use_production_flow == 'false' }}
-        run: mkdir -p ${{ steps.safety.outputs.output_dir }}
-
-      # Install OpenAPI Generator
       - name: Install openapi-generator-cli
         run: |
           npm install @openapitools/openapi-generator-cli -g
-
-      # Validate config file exists
-      - name: Validate config file
-        run: |
-          if [ ! -f "${{ steps.safety.outputs.config_file }}" ]; then
-            echo "❌ Config file ${{ steps.safety.outputs.config_file }} not found"
-            echo "Available config files:"
-            ls -la ./openapi/config*.yml || echo "No config files found"
-            exit 1
-          fi
-          echo "✅ Using config file: ${{ steps.safety.outputs.config_file }}"
-
-      # Generate SDK
-      - name: Generate SDK
-        run: |
-          echo "🔧 Generating SDK for version: ${{ steps.safety.outputs.api_version }}"
-          echo "📄 Config: ${{ steps.safety.outputs.config_file }}"
-          echo "🌐 Spec: ${{ steps.safety.outputs.spec_url }}"
-          echo "📁 Output: ${{ steps.safety.outputs.output_dir }}"
-          
+      - run: |
           openapi-generator-cli generate \
-            -i ${{ steps.safety.outputs.spec_url }} \
+            -i https://raw.githubusercontent.com/mxenabled/openapi/master/openapi/mx_platform_api.yml \
             -g typescript-axios \
-            -c ${{ steps.safety.outputs.config_file }} \
-            -t ./openapi/templates \
-            -o ${{ steps.safety.outputs.output_dir }}
-
-      # Test TypeScript compilation
-      - name: Test TypeScript compilation
-        run: |
-          cd ${{ steps.safety.outputs.output_dir }}
-          npm install
-          npm run build
-          echo "✅ TypeScript compilation successful"
-
-      # Archive generated code as artifact for inspection
-      - name: Archive generated code
-        if: ${{ steps.safety.outputs.use_production_flow == 'false' }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: generated-sdk-${{ steps.safety.outputs.api_version }}
-          path: ${{ steps.safety.outputs.output_dir }}
-          retention-days: 7
-
-      # Validation summary for test versions
-      - name: Validation summary
-        if: ${{ steps.safety.outputs.use_production_flow == 'false' }}
-        run: |
-          echo "🎉 Generation successful for ${{ steps.safety.outputs.api_version }}!"
-          
-          # Show package.json name for verification
-          PACKAGE_NAME=$(cat ${{ steps.safety.outputs.output_dir }}/package.json | grep '"name"' | cut -d'"' -f4)
-          echo "📦 Generated package name: $PACKAGE_NAME"
-          
-          # Count API files
-          API_COUNT=$(find ${{ steps.safety.outputs.output_dir }} -name "*.ts" -exec grep -l "export.*Api" {} \; | wc -l)
-          echo "🔍 Generated API count: $API_COUNT"
-
-      # Publish to GitHub Packages (Safe Testing)
-      - name: Publish to GitHub Packages
-        if: ${{ steps.safety.outputs.can_publish_github == 'true' && steps.safety.outputs.use_production_flow == 'false' }}
-        run: |
-          cd ${{ steps.safety.outputs.output_dir }}
-          
-          # Configure for GitHub Packages
-          npm config set registry https://npm.pkg.github.com
-          npm config set //npm.pkg.github.com/:_authToken ${{ secrets.GITHUB_TOKEN }}
-          
-          # Publish the test package
-          npm publish
-          
-          echo "✅ Published test package to GitHub Packages"
-          echo "📦 Package: $(cat package.json | grep '"name"' | cut -d'"' -f4)"
-          echo "🔗 View at: https://github.com/mxenabled/mx-platform-node/packages"
-      # Original production workflow steps (unchanged for backward compatibility)
+            -c ./openapi/config.yml \
+            -t ./openapi/templates
       - name: Checkout master
-        if: ${{ steps.safety.outputs.use_production_flow == 'true' && steps.safety.outputs.can_commit_to_master == 'true' }}
         run: git checkout master
-
       - name: Create commit
-        if: ${{ steps.safety.outputs.use_production_flow == 'true' && steps.safety.outputs.can_commit_to_master == 'true' }}
         run: |
           git config user.name "devexperience"
           git config user.email "devexperience@mx.com"
@@ -187,39 +39,30 @@ jobs:
           git commit -m "Generated version ${{ steps.bump_version.outputs.version }}
 
           This commit was automatically created by a GitHub Action to generate version ${{ steps.bump_version.outputs.version }} of this library."
-
       - name: Push to master
-        if: ${{ steps.safety.outputs.use_production_flow == 'true' && steps.safety.outputs.can_commit_to_master == 'true' }}
         run: git push origin master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Generate access token
-        if: ${{ steps.safety.outputs.use_production_flow == 'true' && steps.safety.outputs.can_commit_to_master == 'true' }}
         id: generate_token
         uses: tibdex/github-app-token@v1
         with:
           app_id: ${{ secrets.PAPI_SDK_APP_ID }}
           installation_id: ${{ secrets.PAPI_SDK_INSTALLATION_ID }}
           private_key: ${{ secrets.PAPI_SDK_PRIVATE_KEY }}
-
       - name: Publish
-        if: ${{ steps.safety.outputs.use_production_flow == 'true' && steps.safety.outputs.can_commit_to_master == 'true' }}
         uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ steps.generate_token.outputs.token }}
           event-type: publish_sdk
-
       - name: Release
-        if: ${{ steps.safety.outputs.use_production_flow == 'true' && steps.safety.outputs.can_commit_to_master == 'true' }}
         uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ steps.generate_token.outputs.token }}
           event-type: release_sdk
-
       - name: Slack notification
-        if: always()
         uses: ravsamhq/notify-slack-action@v2
+        if: always()
         with:
           status: ${{ job.status }}
           token: ${{ secrets.GITHUB_TOKEN }}
