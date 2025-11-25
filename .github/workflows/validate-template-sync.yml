@@ -1,0 +1,113 @@
+name: Validate Template Sync
+
+on:
+  pull_request:
+    paths:
+      - '**/package.json'
+      - 'openapi/templates/package.mustache'
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Find all package.json files
+        id: find_packages
+        run: |
+          # Find all package.json files in version directories and root
+          PACKAGES=$(find . -maxdepth 2 -name "package.json" \( -path "./*/package.json" -o -path "./package.json" \) ! -path "*/node_modules/*" || true)
+          echo "Found package.json files:"
+          echo "$PACKAGES"
+          echo "packages<<EOF" >> $GITHUB_OUTPUT
+          echo "$PACKAGES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+      
+      - name: Extract dependencies from template
+        id: template
+        run: |
+          AXIOS_VERSION=$(grep -A 1 '"dependencies"' openapi/templates/package.mustache | grep axios | sed 's/.*"axios": "\(.*\)".*/\1/')
+          TS_VERSION=$(grep '"typescript"' openapi/templates/package.mustache | sed 's/.*"typescript": "\(.*\)".*/\1/')
+          NODE_VERSION=$(grep '@types/node' openapi/templates/package.mustache | sed 's/.*"@types\/node": "\(.*\)".*/\1/')
+          
+          echo "axios=$AXIOS_VERSION" >> $GITHUB_OUTPUT
+          echo "typescript=$TS_VERSION" >> $GITHUB_OUTPUT
+          echo "node=$NODE_VERSION" >> $GITHUB_OUTPUT
+          
+          echo "📄 Template versions:"
+          echo "  axios: $AXIOS_VERSION"
+          echo "  typescript: $TS_VERSION"
+          echo "  @types/node: $NODE_VERSION"
+      
+      - name: Validate all package.json files
+        run: |
+          TEMPLATE_AXIOS="${{ steps.template.outputs.axios }}"
+          TEMPLATE_TS="${{ steps.template.outputs.typescript }}"
+          TEMPLATE_NODE="${{ steps.template.outputs.node }}"
+          
+          MISMATCH=false
+          MISMATCH_DETAILS=""
+          
+          # Check each package.json file
+          while IFS= read -r package_file; do
+            [ -z "$package_file" ] && continue
+            
+            # Get directory name for clearer output
+            DIR=$(dirname "$package_file")
+            [ "$DIR" = "." ] && DIR="root"
+            
+            echo ""
+            echo "🔍 Checking $DIR/package.json..."
+            
+            # Extract versions from this package.json
+            PKG_AXIOS=$(jq -r '.dependencies.axios // empty' "$package_file")
+            PKG_TS=$(jq -r '.devDependencies.typescript // empty' "$package_file")
+            PKG_NODE=$(jq -r '.devDependencies["@types/node"] // empty' "$package_file")
+            
+            echo "  axios: $PKG_AXIOS"
+            echo "  typescript: $PKG_TS"
+            echo "  @types/node: $PKG_NODE"
+            
+            # Compare versions
+            if [ -n "$PKG_AXIOS" ] && [ "$PKG_AXIOS" != "$TEMPLATE_AXIOS" ]; then
+              echo "  ❌ MISMATCH: axios ($PKG_AXIOS vs template $TEMPLATE_AXIOS)"
+              MISMATCH=true
+              MISMATCH_DETAILS="${MISMATCH_DETAILS}\n  - $DIR: axios $PKG_AXIOS (expected $TEMPLATE_AXIOS)"
+            fi
+            
+            if [ -n "$PKG_TS" ] && [ "$PKG_TS" != "$TEMPLATE_TS" ]; then
+              echo "  ❌ MISMATCH: typescript ($PKG_TS vs template $TEMPLATE_TS)"
+              MISMATCH=true
+              MISMATCH_DETAILS="${MISMATCH_DETAILS}\n  - $DIR: typescript $PKG_TS (expected $TEMPLATE_TS)"
+            fi
+            
+            if [ -n "$PKG_NODE" ] && [ "$PKG_NODE" != "$TEMPLATE_NODE" ]; then
+              echo "  ❌ MISMATCH: @types/node ($PKG_NODE vs template $TEMPLATE_NODE)"
+              MISMATCH=true
+              MISMATCH_DETAILS="${MISMATCH_DETAILS}\n  - $DIR: @types/node $PKG_NODE (expected $TEMPLATE_NODE)"
+            fi
+            
+            if [ "$MISMATCH" = false ]; then
+              echo "  ✅ All versions match template"
+            fi
+          done <<< "${{ steps.find_packages.outputs.packages }}"
+          
+          if [ "$MISMATCH" = true ]; then
+            echo ""
+            echo "❌ ERROR: Template and generated files are out of sync!"
+            echo ""
+            echo "Mismatches found:"
+            echo -e "$MISMATCH_DETAILS"
+            echo ""
+            echo "📝 To fix:"
+            echo "  1. Update openapi/templates/package.mustache with the correct versions"
+            echo "  2. Regenerate all versions to sync package.json files"
+            echo "  3. Or manually update all package.json files to match the template"
+            exit 1
+          fi
+          
+          echo ""
+          echo "✅ All package.json files match the template!"

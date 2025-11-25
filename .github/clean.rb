@@ -6,12 +6,13 @@ ALLOW_LIST = [
   ".openapi-generator-ignore",
   "LICENSE",
   "openapi",
-  "openapitools.json"
+  "openapitools.json",
+  "tmp"
 ].freeze
 
 ::Dir.each_child(::Dir.pwd) do |source|
   next if ALLOW_LIST.include?(source)
-  
+
   # Preserve test-output directories for multi-version POC testing
   next if source.start_with?("test-output-")
 

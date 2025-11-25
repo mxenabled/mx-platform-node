@@ -16,12 +16,13 @@
     "build": "tsc --outDir dist/",
     "prepare": "npm run build"
   },
+  "_comment": "IMPORTANT: Keep these dependency versions in sync with security updates. If package.json is manually updated for security fixes, this template MUST also be updated to prevent automated generation from overwriting the fixes.",
   "dependencies": {
-    "axios": "^0.21.4"
+    "axios": "^1.6.8"
   },
   "devDependencies": {
-    "@types/node": "^12.11.5",
-    "typescript": "^3.6.4"
+    "@types/node": "^20.12.7",
+    "typescript": "^5.4.5"
   }{{#npmRepository}},{{/npmRepository}}
 {{#npmRepository}}
   "publishConfig": {
