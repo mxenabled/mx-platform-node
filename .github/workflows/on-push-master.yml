@@ -1,0 +1,27 @@
+name: On Push to Master
+
+on:
+  push:
+    branches: [master]
+    paths:
+      # Root-level SDK files (current structure)
+      # Only trigger publish/release when SDK code changes
+      - 'api.ts'
+      - 'base.ts'
+      - 'common.ts'
+      - 'configuration.ts'
+      - 'index.ts'
+      - 'package.json'
+      - 'tsconfig.json'
+      - 'tsconfig.esm.json'
+      - 'dist/**'
+      - '.openapi-generator/**'
+
+jobs:
+  Publish:
+    uses: ./.github/workflows/publish.yml
+    secrets: inherit
+
+  Release:
+    uses: ./.github/workflows/release.yml
+    secrets: inherit
