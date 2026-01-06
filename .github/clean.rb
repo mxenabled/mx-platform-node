@@ -5,6 +5,7 @@ ALLOW_LIST = [
   ".github",
   ".openapi-generator-ignore",
   "LICENSE",
+  "node_modules",
   "openapi",
   "openapitools.json",
   "tmp"
