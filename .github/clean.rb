@@ -3,8 +3,14 @@ require "fileutils"
 ALLOW_LIST = [
   ".git",
   ".github",
+  ".gitignore",
+  ".npmignore",
   ".openapi-generator-ignore",
+  "CHANGELOG.md",
   "LICENSE",
+  "MIGRATION.md",
+  "README.md",
+  "node_modules",
   "openapi",
   "openapitools.json",
   "tmp"

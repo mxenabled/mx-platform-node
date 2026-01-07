@@ -28,7 +28,13 @@ jobs:
             -i https://raw.githubusercontent.com/mxenabled/openapi/master/openapi/mx_platform_api.yml \
             -g typescript-axios \
             -c ./openapi/config.yml \
-            -t ./openapi/templates
+            -t ./openapi/templates \
+            -o ./latest
+      - name: Copy documentation to latest
+        run: |
+          cp LICENSE ./latest/LICENSE
+          cp CHANGELOG.md ./latest/CHANGELOG.md
+          cp MIGRATION.md ./latest/MIGRATION.md
       - name: Checkout master
         run: git checkout master
       - name: Create commit

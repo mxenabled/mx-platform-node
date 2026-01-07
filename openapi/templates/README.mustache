@@ -40,7 +40,7 @@ In order to make requests, you will need to [sign up](https://dashboard.mx.com/s
 Please follow the [installation](#installation) procedure and then run the following code to create your first User:
 
 ```javascript
-import { Configuration, MxPlatformApi } from 'mx-platform-node';
+import { Configuration, UsersApi } from 'mx-platform-node';
 
 const configuration = new Configuration({
   // Configure with your Client ID/API Key from https://dashboard.mx.com
@@ -57,7 +57,7 @@ const configuration = new Configuration({
   }
 });
 
-const client = new MxPlatformApi(configuration);
+const usersApi = new UsersApi(configuration);
 
 const requestBody = {
   user: {
@@ -65,10 +65,14 @@ const requestBody = {
   }
 };
 
-const response = await client.createUser(requestBody);
+const response = await usersApi.createUser(requestBody);
 
 console.log(response.data);
 ```
+
+## Upgrading from v1.x?
+
+> **⚠️ Breaking Changes in v2.0.0:** If you're upgrading from v1.10.0 or earlier, the API structure has changed significantly. See the [Migration Guide](MIGRATION.md) for detailed instructions on updating your code.
 
 ## Development
 

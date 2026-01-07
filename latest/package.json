@@ -1,6 +1,6 @@
 {
   "name": "mx-platform-node",
-  "version": "1.12.1",
+  "version": "2.0.0",
   "description": "A Node library for the MX Platform API.",
   "author": "MX",
   "keywords": [
@@ -12,6 +12,12 @@
   "license": "MIT",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
+  "files": [
+    "dist/",
+    "CHANGELOG.md",
+    "README.md",
+    "MIGRATION.md"
+  ],
   "scripts": {
     "build": "tsc --outDir dist/",
     "prepare": "npm run build"
