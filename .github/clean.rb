@@ -9,7 +9,7 @@ ALLOW_LIST = [
   "CHANGELOG.md",
   "LICENSE",
   "MIGRATION.md",
-  "latest",
+  "README.md",
   "node_modules",
   "openapi",
   "openapitools.json",

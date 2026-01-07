@@ -12,6 +12,12 @@
   "license": "MIT",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
+  "files": [
+    "dist/",
+    "CHANGELOG.md",
+    "README.md",
+    "MIGRATION.md"
+  ],
   "scripts": {
     "build": "tsc --outDir dist/",
     "prepare": "npm run build"
