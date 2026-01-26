@@ -1,26 +1,19 @@
 require "fileutils"
 
-ALLOW_LIST = [
-  ".git",
-  ".github",
-  ".gitignore",
-  ".npmignore",
-  ".openapi-generator-ignore",
-  "CHANGELOG.md",
-  "LICENSE",
-  "MIGRATION.md",
-  "README.md",
-  "node_modules",
-  "openapi",
-  "openapitools.json",
-  "tmp"
-].freeze
+# Version-targeted deletion: Deletes specified version directory only
+# All workflows must provide version directory parameter
 
-::Dir.each_child(::Dir.pwd) do |source|
-  next if ALLOW_LIST.include?(source)
+target_dir = ARGV[0]
 
-  # Preserve test-output directories for multi-version POC testing
-  next if source.start_with?("test-output-")
+if target_dir.nil? || target_dir.empty?
+  raise "Error: Version directory parameter required. Usage: ruby clean.rb <version_dir>"
+end
 
-  ::FileUtils.rm_rf("#{::Dir.pwd}/#{source}")
+# Delete only the specified directory
+target_path = "#{::Dir.pwd}/#{target_dir}"
+if ::File.exist?(target_path)
+  ::FileUtils.rm_rf(target_path)
+  puts "Deleted: #{target_path}"
+else
+  puts "Directory not found (will be created during generation): #{target_path}"
 end
