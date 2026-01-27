@@ -4,9 +4,53 @@ on:
   repository_dispatch:
     types: [generate_publish_release]
 
+env:
+  # Default to v20111101 only for backwards compatibility
+  # When openapi repo sends api_versions, use that instead
+  VERSIONS_TO_GENERATE: ${{ github.event.client_payload.api_versions || 'v20111101' }}
+
 jobs:
+  Setup:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Set up matrix
+        id: set-matrix
+        run: |
+          VERSIONS="${{ env.VERSIONS_TO_GENERATE }}"
+          echo "Versions to generate: $VERSIONS"
+          
+          # Build matrix JSON
+          MATRIX_JSON='{"include":['
+          FIRST=true
+          
+          for VERSION in $(echo $VERSIONS | tr ',' ' '); do
+            if [ "$FIRST" = false ]; then
+              MATRIX_JSON+=','
+            fi
+            FIRST=false
+            
+            # Map version to config file and major version
+            if [ "$VERSION" = "v20111101" ]; then
+              CONFIG="openapi/config-v20111101.yml"
+            elif [ "$VERSION" = "v20250224" ]; then
+              CONFIG="openapi/config-v20250224.yml"
+            fi
+            
+            MATRIX_JSON+="{\"api_version\":\"$VERSION\",\"config_file\":\"$CONFIG\"}"
+          done
+          
+          MATRIX_JSON+=']}'
+          echo "matrix=$MATRIX_JSON" >> $GITHUB_OUTPUT
+          echo "Matrix: $MATRIX_JSON"
+
   Generate:
     runs-on: ubuntu-latest
+    needs: Setup
+    strategy:
+      matrix: ${{ fromJson(needs.Setup.outputs.matrix) }}
+      fail-fast: false
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -17,24 +61,114 @@ jobs:
           ruby-version: 3.1
       - name: Bump version
         id: bump_version
-        run: echo "::set-output name=version::$(ruby .github/version.rb ${{ github.event.client_payload.version }})"
+        run: |
+          NEW_VERSION=$(ruby .github/version.rb ${{ github.event.client_payload.version || 'patch' }} ${{ matrix.config_file }})
+          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
       - name: Clean repo
-        run: ruby .github/clean.rb
+        run: ruby .github/clean.rb ${{ matrix.api_version }}
+      - name: Copy generator ignore rules
+        run: cp .openapi-generator-ignore ./${{ matrix.api_version }}/
       - name: Install openapi-generator-cli
+        run: npm install @openapitools/openapi-generator-cli -g
+      - name: Generate SDK
         run: |
-          npm install @openapitools/openapi-generator-cli -g
-      - run: |
+          # Versioned spec URLs with commit SHA to avoid GitHub CDN cache race condition
+          # Problem: GitHub's raw.githubusercontent.com CDN caches files for 5 minutes
+          # If openapi repo commits and immediately triggers this workflow, CDN may serve stale spec
+          # Solution: Use commit SHA in URL to bypass cache and guarantee correct spec version
+          # Falls back to 'master' if openapi doesn't send commit_sha
           openapi-generator-cli generate \
-            -i https://raw.githubusercontent.com/mxenabled/openapi/master/openapi/mx_platform_api.yml \
+            -i https://raw.githubusercontent.com/mxenabled/openapi/${{ github.event.client_payload.commit_sha || 'master' }}/openapi/${{ matrix.api_version }}.yml \
             -g typescript-axios \
-            -c ./openapi/config.yml \
+            -c ${{ matrix.config_file }} \
             -t ./openapi/templates \
-            -o ./latest
-      - name: Copy documentation to latest
+            -o ./${{ matrix.api_version }}
+      - name: Copy documentation
         run: |
-          cp LICENSE ./latest/LICENSE
-          cp CHANGELOG.md ./latest/CHANGELOG.md
-          cp MIGRATION.md ./latest/MIGRATION.md
+          cp LICENSE ./${{ matrix.api_version }}/LICENSE
+          cp CHANGELOG.md ./${{ matrix.api_version }}/CHANGELOG.md
+          cp MIGRATION.md ./${{ matrix.api_version }}/MIGRATION.md
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: generated-${{ matrix.api_version }}
+          path: ./${{ matrix.api_version }}
+
+  Commit-and-Push:
+    runs-on: ubuntu-latest
+    needs: [Setup, Generate]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download all artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: ./generated
+      - name: Move generated files and track versions
+        id: track_versions
+        run: |
+          GENERATED_VERSIONS=""
+          
+          for dir in ./generated/generated-*; do
+            VERSION=$(basename "$dir" | sed 's/generated-//')
+            mv "$dir" "./$VERSION"
+            GENERATED_VERSIONS="$GENERATED_VERSIONS $VERSION"
+          done
+          
+          echo "generated_versions=$GENERATED_VERSIONS" >> $GITHUB_OUTPUT
+      - name: Update CHANGELOG
+        run: |
+          GENERATED_VERSIONS="${{ steps.track_versions.outputs.generated_versions }}"
+          DATE=$(date +%Y-%m-%d)
+          
+          # Only update if something was generated
+          if [ -z "$GENERATED_VERSIONS" ]; then
+            exit 0
+          fi
+          
+          # Initialize version variables as empty
+          V20111101_VERSION=""
+          V20250224_VERSION=""
+          
+          # Read versions only for versions that were actually generated
+          for VERSION in $GENERATED_VERSIONS; do
+            if [ "$VERSION" = "v20111101" ]; then
+              V20111101_VERSION=$(jq -r '.version' ./v20111101/package.json 2>/dev/null)
+            elif [ "$VERSION" = "v20250224" ]; then
+              V20250224_VERSION=$(jq -r '.version' ./v20250224/package.json 2>/dev/null)
+            fi
+          done
+          
+          # Find the line number of the first version entry (first line starting with ##)
+          FIRST_ENTRY_LINE=$(grep -n "^##" CHANGELOG.md | head -1 | cut -d: -f1)
+          
+          # Extract header (everything before first entry)
+          head -n $((FIRST_ENTRY_LINE - 1)) CHANGELOG.md > /tmp/new_changelog.txt
+          
+          # Build and add changelog entries ONLY for versions that were actually generated
+          # v20250224 first (newer API version), then v20111101
+          if [ ! -z "$V20250224_VERSION" ]; then
+            cat >> /tmp/new_changelog.txt << EOF
+          
+          ## [$V20250224_VERSION] - $DATE (v20250224 API)
+          Updated v20250224 API specification.
+          [See full API changelog](https://docs.mx.com/resources/changelog/platform)
+          EOF
+          fi
+          
+          if [ ! -z "$V20111101_VERSION" ]; then
+            cat >> /tmp/new_changelog.txt << EOF
+          
+          ## [$V20111101_VERSION] - $DATE (v20111101 API)
+          Updated v20111101 API specification.
+          [See full API changelog](https://docs.mx.com/resources/changelog/platform)
+          EOF
+          fi
+          
+          # Add rest of file (from first entry onwards)
+          tail -n +$FIRST_ENTRY_LINE CHANGELOG.md >> /tmp/new_changelog.txt
+          
+          # Replace original
+          mv /tmp/new_changelog.txt CHANGELOG.md
       - name: Checkout master
         run: git checkout master
       - name: Create commit
@@ -42,30 +176,30 @@ jobs:
           git config user.name "devexperience"
           git config user.email "devexperience@mx.com"
           git add .
-          git commit -m "Generated version ${{ steps.bump_version.outputs.version }}
+          git commit -m "Generated SDK versions: ${{ env.VERSIONS_TO_GENERATE }}
 
-          This commit was automatically created by a GitHub Action to generate version ${{ steps.bump_version.outputs.version }} of this library."
+          This commit was automatically created by a GitHub Action."
       - name: Push to master
         run: git push origin master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Generate access token
-        id: generate_token
-        uses: tibdex/github-app-token@v1
-        with:
-          app_id: ${{ secrets.PAPI_SDK_APP_ID }}
-          installation_id: ${{ secrets.PAPI_SDK_INSTALLATION_ID }}
-          private_key: ${{ secrets.PAPI_SDK_PRIVATE_KEY }}
+
+  Publish-and-Release:
+    runs-on: ubuntu-latest
+    needs: [Setup, Commit-and-Push]
+    strategy:
+      matrix: ${{ fromJson(needs.Setup.outputs.matrix) }}
+    steps:
       - name: Publish
-        uses: peter-evans/repository-dispatch@v2
+        uses: ./.github/workflows/publish.yml
         with:
-          token: ${{ steps.generate_token.outputs.token }}
-          event-type: publish_sdk
+          version_directory: ${{ matrix.api_version }}
+        secrets: inherit
       - name: Release
-        uses: peter-evans/repository-dispatch@v2
+        uses: ./.github/workflows/release.yml
         with:
-          token: ${{ steps.generate_token.outputs.token }}
-          event-type: release_sdk
+          version_directory: ${{ matrix.api_version }}
+        secrets: inherit
       - name: Slack notification
         uses: ravsamhq/notify-slack-action@v2
         if: always()
@@ -73,7 +207,7 @@ jobs:
           status: ${{ job.status }}
           token: ${{ secrets.GITHUB_TOKEN }}
           notification_title: "{repo}: {workflow} workflow"
-          message_format: "{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}>"
+          message_format: "{emoji} Generated and published ${{ matrix.api_version }}"
           footer: "<{workflow_url}|View Workflow>"
           notify_when: "failure"
         env:
