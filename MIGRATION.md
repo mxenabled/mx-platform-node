@@ -1,5 +1,37 @@
 # Migration Guide
 
+## Upgrading from v20111101 (v2.x) to v20250224 (v3.x)
+
+The v20250224 API is now available, and v3.0.0 of this SDK provides support as an independent major version.
+
+### Installation
+
+The two API versions are published as separate major versions of the same npm package:
+
+**For v20111101 API:**
+```bash
+npm install mx-platform-node@^2
+```
+
+**For v20250224 API:**
+```bash
+npm install mx-platform-node@^3
+```
+
+### Migration Path
+
+1. **Review API Changes**: Consult the [MX Platform API Migration Guide](https://docs.mx.com/api-reference/platform-api/overview/migration) for breaking changes and new features
+2. **Update Package**: Update your `package.json` to use `mx-platform-node@^3`
+3. **Update Imports**: Both APIs have similar structure, but review type definitions for any breaking changes
+4. **Run Tests**: Validate your code works with the new SDK version
+5. **Deploy**: Update production once validated
+
+### Benefits of TypeScript
+
+Since this is a TypeScript SDK, the compiler will help catch most compatibility issues at compile time when you update to v3.x.
+
+---
+
 ## Upgrading to v2.0.0 from v1.10.0 or earlier
 
 ### Breaking Change: API Class Restructure

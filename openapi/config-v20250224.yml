@@ -1,4 +1,5 @@
 ---
+apiVersion: v20250224
 generatorName: typescript-axios
 npmName: mx-platform-node
 npmVersion: 3.0.0
