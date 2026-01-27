@@ -1,10 +1,19 @@
-# SDK Generation, Publishing, and Release Flow
+# SDK Generation, Publishing, and Release Flow (LEGACY - Single-Version)
 
-**Document Purpose**: This document explains how the Node.js SDK is automatically generated, published to npm, and released. It covers both automatic triggers (from the OpenAPI repository) and manual generation flows (for development and testing). This is a reference guide for developers new to this repository.
+> ⚠️ **ARCHIVED DOCUMENTATION** - This document describes the **single-version SDK system** that was in use before multi-version support was added. 
+>
+> **For current documentation**, see:
+> - [Multi-Version-SDK-Flow.md](Multi-Version-SDK-Flow.md) - Current system overview
+> - [Workflow-and-Configuration-Reference.md](Workflow-and-Configuration-Reference.md) - Current technical details
+>
+> This document is kept for **historical reference** and may be useful for repositories that have not yet migrated to multi-version support.
 
-**Last Updated**: January 20, 2026  
+**Document Purpose**: This document explains how the Node.js SDK was automatically generated, published to npm, and released in the single-version system. It covers both automatic triggers (from the OpenAPI repository) and manual generation flows (for development and testing).
+
+**Last Updated**: January 20, 2026 (ARCHIVED)  
 **Repository**: mx-platform-node  
-**Author**: DevExperience Team
+**Author**: DevExperience Team  
+**Status**: Legacy - Superseded by multi-version flows
 
 ---
 
