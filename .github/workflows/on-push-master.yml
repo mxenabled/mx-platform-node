@@ -4,14 +4,58 @@ on:
   push:
     branches: [master]
     paths:
-      # Latest version SDK files
-      - 'latest/**'
+      - 'v20111101/**'
+      - 'v20250224/**'
 
 jobs:
-  Publish:
-    uses: ./.github/workflows/publish.yml
-    secrets: inherit
+  # Check for skip-publish flag in commit message. This allows skipping publish/release for specific scenarios,
+  # such as testing generated code, migrating files to new paths, etc.
+  check-skip-publish:
+    runs-on: ubuntu-latest
+    outputs:
+      skip_publish: ${{ steps.check.outputs.skip_publish }}
+    steps:
+      - name: Check for [skip-publish] flag in commit message
+        id: check
+        run: |
+          COMMIT_MSG="${{ github.event.head_commit.message }}"
+          if [[ "$COMMIT_MSG" == *"[skip-publish]"* ]]; then
+            echo "skip_publish=true" >> $GITHUB_OUTPUT
+            echo "🚫 [skip-publish] flag detected - skipping all publish/release jobs"
+          else
+            echo "skip_publish=false" >> $GITHUB_OUTPUT
+            echo "✅ No skip flag - proceeding with publish/release"
+          fi
 
-  Release:
+  # Matrix-based publish and release: runs one job per version,
+  # conditionally based on path changes
+  # Each matrix iteration only executes if both conditions are true:
+  # 1. [skip-publish] flag is NOT present in commit message
+  # 2. Files in this version's directory were modified in the commit
+  publish:
+    needs: check-skip-publish
+    strategy:
+      matrix:
+        version:
+          - api_version: v20111101
+          - api_version: v20250224
+      fail-fast: false
+    if: needs.check-skip-publish.outputs.skip_publish == 'false' && contains(github.event.head_commit.modified, matrix.version.api_version)
+    uses: ./.github/workflows/publish.yml
+    with:
+      version_directory: ${{ matrix.version.api_version }}
+    secrets: inherit
+    
+  release:
+    needs: [check-skip-publish, publish]
+    strategy:
+      matrix:
+        version:
+          - api_version: v20111101
+          - api_version: v20250224
+      fail-fast: false
+    if: needs.check-skip-publish.outputs.skip_publish == 'false' && contains(github.event.head_commit.modified, matrix.version.api_version)
     uses: ./.github/workflows/release.yml
+    with:
+      version_directory: ${{ matrix.version.api_version }}
     secrets: inherit
