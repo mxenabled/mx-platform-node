@@ -1,7 +1,8 @@
 {
   "name": "{{npmName}}",
   "version": "{{npmVersion}}",
-  "description": "A Node library for the MX Platform API.",
+  "description": "A Node.js SDK for the MX Platform API ({{apiVersion}})",
+  "apiVersion": "{{apiVersion}}",
   "author": "MX",
   "keywords": [
     "mx",
@@ -14,9 +15,7 @@
   "typings": "./dist/index.d.ts",
   "files": [
     "dist/",
-    "CHANGELOG.md",
-    "README.md",
-    "MIGRATION.md"
+    "*.md"
   ],
   "scripts": {
     "build": "tsc --outDir dist/",

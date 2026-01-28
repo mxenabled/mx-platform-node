@@ -3,69 +3,158 @@ name: Generate
 on:
   workflow_dispatch:
     inputs:
-      version_level:
-        description: "Bump version"
+      api_version:
+        description: "API version to generate"
         required: true
-        default: "patch"
         type: choice
         options:
-        - major
-        - minor
-        - patch
+          - v20111101
+          - v20250224
+      version_bump:
+        description: "Version bump type"
+        required: true
+        default: "skip"
+        type: choice
+        options:
+          - skip
+          - minor
+          - patch
 
 jobs:
+  Validate:
+    runs-on: ubuntu-latest
+    outputs:
+      config_file: ${{ steps.validate.outputs.config_file }}
+      spec_url: ${{ steps.validate.outputs.spec_url }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Validate configuration
+        id: validate
+        run: |
+          API_VERSION="${{ github.event.inputs.api_version }}"
+          CONFIG_FILE="openapi/config-${API_VERSION}.yml"
+          # Versioned spec URLs (manual workflow uses 'master' branch)
+          # Note: Manual workflow doesn't need commit SHA since developer controls timing
+          # CDN cache race condition only affects automated repository_dispatch triggers
+          # v20111101 -> https://raw.githubusercontent.com/mxenabled/openapi/master/openapi/v20111101.yml
+          # v20250224 -> https://raw.githubusercontent.com/mxenabled/openapi/master/openapi/v20250224.yml
+          SPEC_URL="https://raw.githubusercontent.com/mxenabled/openapi/master/openapi/${API_VERSION}.yml"
+          
+          # Check config file exists
+          if [ ! -f "$CONFIG_FILE" ]; then
+            echo "❌ Config file not found: $CONFIG_FILE"
+            exit 1
+          fi
+          
+          # Validate semantic versioning (major must match API version)
+          CURRENT_VERSION=$(grep 'npmVersion' "$CONFIG_FILE" | cut -d':' -f2 | tr -d ' ')
+          MAJOR_VERSION=$(echo "$CURRENT_VERSION" | cut -d'.' -f1)
+          
+          if [ "$API_VERSION" = "v20111101" ] && [ "$MAJOR_VERSION" != "2" ]; then
+            echo "❌ Semantic versioning error: v20111101 must have major version 2, found $MAJOR_VERSION"
+            exit 1
+          fi
+          
+          if [ "$API_VERSION" = "v20250224" ] && [ "$MAJOR_VERSION" != "3" ]; then
+            echo "❌ Semantic versioning error: v20250224 must have major version 3, found $MAJOR_VERSION"
+            exit 1
+          fi
+          
+          echo "✅ Validation passed"
+          echo "config_file=$CONFIG_FILE" >> $GITHUB_OUTPUT
+          echo "spec_url=$SPEC_URL" >> $GITHUB_OUTPUT
+
   Generate:
     runs-on: ubuntu-latest
+    needs: Validate
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-    - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 3.1
-    - name: Bump version
-      id: bump_version
-      run: echo "::set-output name=version::$(ruby .github/version.rb ${{ github.event.inputs.version_level }})"
-    - name: Clean repo
-      run: ruby .github/clean.rb
-    - name: Install openapi-generator-cli and Generate SDK
-      run: |
-        npm install @openapitools/openapi-generator-cli -g
-    - run: |
-        openapi-generator-cli generate \
-          -i https://raw.githubusercontent.com/mxenabled/openapi/master/openapi/mx_platform_api.yml \
-          -g typescript-axios \
-          -c ./openapi/config.yml \
-          -t ./openapi/templates \
-          -o ./latest
-    - name: Copy documentation to latest
-      run: |
-        cp LICENSE ./latest/LICENSE
-        cp CHANGELOG.md ./latest/CHANGELOG.md
-        cp MIGRATION.md ./latest/MIGRATION.md
-    - name: Create branch
-      run: git checkout -b "openapi-generator-${{ steps.bump_version.outputs.version }}"
-    - name: Create commit
-      run: |
-        git config user.name "devexperience"
-        git config user.email "devexperience@mx.com"
-        git add .
-        git commit -m "Generated version ${{ steps.bump_version.outputs.version }}
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+      - name: Bump version
+        id: bump_version
+        run: |
+          if [ "${{ github.event.inputs.version_bump }}" != "skip" ]; then
+            NEW_VERSION=$(ruby .github/version.rb ${{ github.event.inputs.version_bump }} ${{ needs.Validate.outputs.config_file }})
+          else
+            NEW_VERSION=$(jq -r '.version' ./${{ github.event.inputs.api_version }}/package.json 2>/dev/null || grep 'npmVersion' ${{ needs.Validate.outputs.config_file }} | cut -d':' -f2 | tr -d ' ')
+          fi
+          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "📦 Version: $NEW_VERSION"
+      - name: Clean repo
+        run: ruby .github/clean.rb ${{ github.event.inputs.api_version }}
+      - name: Copy generator ignore rules
+        run: cp .openapi-generator-ignore ./${{ github.event.inputs.api_version }}/
+      - name: Install openapi-generator-cli and Generate SDK
+        run: npm install @openapitools/openapi-generator-cli -g
+      - name: Generate SDK
+        run: |
+          openapi-generator-cli generate \
+            -i ${{ needs.Validate.outputs.spec_url }} \
+            -g typescript-axios \
+            -c ${{ needs.Validate.outputs.config_file }} \
+            -t ./openapi/templates \
+            -o ./${{ github.event.inputs.api_version }}
+      - name: Update CHANGELOG
+        run: |
+          VERSION=$(jq -r '.version' ./${{ github.event.inputs.api_version }}/package.json)
+          DATE=$(date +%Y-%m-%d)
+          
+          # Find the line number of the first version entry (first line starting with ##)
+          FIRST_ENTRY_LINE=$(grep -n "^##" CHANGELOG.md | head -1 | cut -d: -f1)
+          
+          # Extract header (everything before first entry)
+          head -n $((FIRST_ENTRY_LINE - 1)) CHANGELOG.md > /tmp/new_changelog.txt
+          
+          # Add new entry
+          cat >> /tmp/new_changelog.txt << EOF
+          
+          ## [$VERSION] - $DATE (${{ github.event.inputs.api_version }} API)
+          Updated ${{ github.event.inputs.api_version }} API specification.
+          [See full API changelog](https://docs.mx.com/resources/changelog/platform)
+          EOF
+          
+          # Add rest of file (from first entry onwards)
+          tail -n +$FIRST_ENTRY_LINE CHANGELOG.md >> /tmp/new_changelog.txt
+          
+          # Replace original
+          mv /tmp/new_changelog.txt CHANGELOG.md
+      - name: Copy documentation
+        run: |
+          cp LICENSE ./${{ github.event.inputs.api_version }}/LICENSE
+          cp CHANGELOG.md ./${{ github.event.inputs.api_version }}/CHANGELOG.md
+          cp MIGRATION.md ./${{ github.event.inputs.api_version }}/MIGRATION.md
+      - name: Create branch
+        run: git checkout -b "sdk/generate-api-${{ github.event.inputs.api_version }}-${{ steps.bump_version.outputs.version }}"
+      - name: Create commit
+        run: |
+          git config user.name "devexperience"
+          git config user.email "devexperience@mx.com"
+          git add .
+          git commit -m "Generated API ${{ github.event.inputs.api_version }} SDK for version ${{ steps.bump_version.outputs.version }}
 
-        This pull request was automatically generated by a GitHub Action to generate version ${{ steps.bump_version.outputs.version }} of this library."
-        git push -u origin "openapi-generator-${{ steps.bump_version.outputs.version }}"
-    - name: Create PR
-      run: gh pr create -f
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Slack notification
-      uses: ravsamhq/notify-slack-action@v2
-      if: always()
-      with:
-        status: ${{ job.status }}
-        token: ${{ secrets.GITHUB_TOKEN }}
-        notification_title: "{repo}: {workflow} workflow"
-        message_format: "{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}>"
-        footer: "<{workflow_url}|View Workflow>"
-        notify_when: "failure"
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          This pull request was automatically generated by a GitHub Action.
+          
+          API Version: ${{ github.event.inputs.api_version }}
+          SDK Version: ${{ steps.bump_version.outputs.version }}
+          Version Bump: ${{ github.event.inputs.version_bump }}
+          ${{ github.event.inputs.version_bump == 'skip' && '⚠️  NO VERSION BUMP - This is a review-only generation for validation before release.' || '' }}"
+          git push -u origin "sdk/generate-api-${{ github.event.inputs.api_version }}-${{ steps.bump_version.outputs.version }}"
+      - name: Create PR
+        run: gh pr create -f
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Slack notification
+        uses: ravsamhq/notify-slack-action@v2
+        if: always()
+        with:
+          status: ${{ job.status }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          notification_title: "{repo}: {workflow} workflow"
+          message_format: "{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}>"
+          footer: "<{workflow_url}|View Workflow>"
+          notify_when: "failure"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

@@ -1,6 +1,44 @@
 *This project is currently in **Beta**. Please open up an issue [here](https://github.com/mxenabled/mx-platform-node/issues) to report issues using the MX Platform Node.js library.*
 
-# MX Platform Node.js
+# MX Platform Node.js ({{apiVersion}} API)
+
+**SDK version:** {{npmVersion}}  
+**API version:** {{apiVersion}}
+
+You are using the **{{apiVersion}}** API version of `mx-platform-node`. For other API versions, see [Available API Versions](#available-api-versions) below.
+
+### Checking Your Installed Version
+
+To verify which API version you have installed:
+
+**In package.json:**
+```json
+{
+  "dependencies": {
+    "mx-platform-node": "^{{npmVersion}}"
+  }
+}
+```
+
+**Programmatically in your code:**
+```javascript
+const pkg = require('mx-platform-node/package.json');
+console.log(pkg.apiVersion); // {{apiVersion}}
+```
+
+**Via npm:**
+```shell
+npm view mx-platform-node@{{npmVersion}}
+```
+
+## Available API Versions
+
+- **{{npmName}}@2.x.x** - [v20111101 API](https://docs.mx.com/api-reference/platform-api/v20111101/reference/mx-platform-api/)
+- **{{npmName}}@3.x.x** - [v20250224 API](https://docs.mx.com/api-reference/platform-api/reference/mx-platform-api/)
+
+---
+
+## Overview
 
 The [MX Platform API](https://www.mx.com/products/platform-api) is a powerful, fully-featured API designed to make aggregating and enhancing financial data easy and reliable. It can seamlessly connect your app or website to tens of thousands of financial institutions.
 
