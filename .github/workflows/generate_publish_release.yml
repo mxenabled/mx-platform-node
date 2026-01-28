@@ -83,11 +83,6 @@ jobs:
             -c ${{ matrix.config_file }} \
             -t ./openapi/templates \
             -o ./${{ matrix.api_version }}
-      - name: Copy documentation
-        run: |
-          cp LICENSE ./${{ matrix.api_version }}/LICENSE
-          cp CHANGELOG.md ./${{ matrix.api_version }}/CHANGELOG.md
-          cp MIGRATION.md ./${{ matrix.api_version }}/MIGRATION.md
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -118,57 +113,25 @@ jobs:
       - name: Update CHANGELOG
         run: |
           GENERATED_VERSIONS="${{ steps.track_versions.outputs.generated_versions }}"
-          DATE=$(date +%Y-%m-%d)
           
           # Only update if something was generated
           if [ -z "$GENERATED_VERSIONS" ]; then
+            echo "No versions generated, skipping changelog update"
             exit 0
           fi
           
-          # Initialize version variables as empty
-          V20111101_VERSION=""
-          V20250224_VERSION=""
-          
-          # Read versions only for versions that were actually generated
-          for VERSION in $GENERATED_VERSIONS; do
-            if [ "$VERSION" = "v20111101" ]; then
-              V20111101_VERSION=$(jq -r '.version' ./v20111101/package.json 2>/dev/null)
-            elif [ "$VERSION" = "v20250224" ]; then
-              V20250224_VERSION=$(jq -r '.version' ./v20250224/package.json 2>/dev/null)
+          # Convert space-separated versions to comma-separated for changelog_manager.rb
+          VERSIONS_CSV=$(echo "$GENERATED_VERSIONS" | tr ' ' ',')
+          ruby .github/changelog_manager.rb "$VERSIONS_CSV"
+      - name: Copy documentation
+        run: |
+          for dir in ./v20111101 ./v20250224; do
+            if [ -d "$dir" ]; then
+              cp LICENSE "$dir/LICENSE"
+              cp CHANGELOG.md "$dir/CHANGELOG.md"
+              cp MIGRATION.md "$dir/MIGRATION.md"
             fi
           done
-          
-          # Find the line number of the first version entry (first line starting with ##)
-          FIRST_ENTRY_LINE=$(grep -n "^##" CHANGELOG.md | head -1 | cut -d: -f1)
-          
-          # Extract header (everything before first entry)
-          head -n $((FIRST_ENTRY_LINE - 1)) CHANGELOG.md > /tmp/new_changelog.txt
-          
-          # Build and add changelog entries ONLY for versions that were actually generated
-          # v20250224 first (newer API version), then v20111101
-          if [ ! -z "$V20250224_VERSION" ]; then
-            cat >> /tmp/new_changelog.txt << EOF
-          
-          ## [$V20250224_VERSION] - $DATE (v20250224 API)
-          Updated v20250224 API specification.
-          [See full API changelog](https://docs.mx.com/resources/changelog/platform)
-          EOF
-          fi
-          
-          if [ ! -z "$V20111101_VERSION" ]; then
-            cat >> /tmp/new_changelog.txt << EOF
-          
-          ## [$V20111101_VERSION] - $DATE (v20111101 API)
-          Updated v20111101 API specification.
-          [See full API changelog](https://docs.mx.com/resources/changelog/platform)
-          EOF
-          fi
-          
-          # Add rest of file (from first entry onwards)
-          tail -n +$FIRST_ENTRY_LINE CHANGELOG.md >> /tmp/new_changelog.txt
-          
-          # Replace original
-          mv /tmp/new_changelog.txt CHANGELOG.md
       - name: Checkout master
         run: git checkout master
       - name: Create commit

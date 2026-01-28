@@ -98,29 +98,7 @@ jobs:
             -t ./openapi/templates \
             -o ./${{ github.event.inputs.api_version }}
       - name: Update CHANGELOG
-        run: |
-          VERSION=$(jq -r '.version' ./${{ github.event.inputs.api_version }}/package.json)
-          DATE=$(date +%Y-%m-%d)
-          
-          # Find the line number of the first version entry (first line starting with ##)
-          FIRST_ENTRY_LINE=$(grep -n "^##" CHANGELOG.md | head -1 | cut -d: -f1)
-          
-          # Extract header (everything before first entry)
-          head -n $((FIRST_ENTRY_LINE - 1)) CHANGELOG.md > /tmp/new_changelog.txt
-          
-          # Add new entry
-          cat >> /tmp/new_changelog.txt << EOF
-          
-          ## [$VERSION] - $DATE (${{ github.event.inputs.api_version }} API)
-          Updated ${{ github.event.inputs.api_version }} API specification.
-          [See full API changelog](https://docs.mx.com/resources/changelog/platform)
-          EOF
-          
-          # Add rest of file (from first entry onwards)
-          tail -n +$FIRST_ENTRY_LINE CHANGELOG.md >> /tmp/new_changelog.txt
-          
-          # Replace original
-          mv /tmp/new_changelog.txt CHANGELOG.md
+        run: ruby .github/changelog_manager.rb ${{ github.event.inputs.api_version }}
       - name: Copy documentation
         run: |
           cp LICENSE ./${{ github.event.inputs.api_version }}/LICENSE

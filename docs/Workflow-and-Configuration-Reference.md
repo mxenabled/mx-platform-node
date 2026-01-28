@@ -93,24 +93,29 @@ strategy:
    - Used by CHANGELOG automation to add entries only for generated versions
 
 3. **Update CHANGELOG.md**
-   - Find first version entry: `grep -n "^##" CHANGELOG.md`
-   - Insert new entries after document header, before first existing entry
-   - Format: `## [X.Y.Z] - YYYY-MM-DD (API vXXXXXXXX)`
-   - Only add entries for versions that were actually generated
-   - Example:
+   - Call `ChangelogManager` with comma-separated list of generated versions
+   - Command: `ruby .github/changelog_manager.rb v20111101,v20250224`
+   - The class automatically:
+     - Reads version numbers from each API's `package.json`
+     - Sorts versions by priority (newer API versions first)
+     - Extracts date range from existing entries
+     - Inserts new entries at top of changelog with proper formatting
+   - See [Changelog-Manager.md](Changelog-Manager.md) for full documentation
+   - Example result:
      ```markdown
      # Changelog
      
-     ## [2.0.1] - 2026-01-27 (v20111101 API)
-     Updated v20111101 API specification.
-     
      ## [3.0.1] - 2026-01-27 (v20250224 API)
-     Updated v20250224 API specification.
+     Updated v20250224 API specification...
+     
+     ## [2.0.1] - 2026-01-27 (v20111101 API)
+     Updated v20111101 API specification...
      ```
 
-4. **Copy CHANGELOG to Version Directories**
-   - Copy root `CHANGELOG.md` to each version directory
-   - Each npm package includes changelog for users
+4. **Copy Documentation to Version Directories**
+   - After CHANGELOG update, copy root documentation to each version directory
+   - Files: `LICENSE`, `CHANGELOG.md`, `MIGRATION.md` → `v20111101/` and `v20250224/`
+   - Each npm package includes current changelog for users
 
 #### Step 4: Commit All Changes to Master
 
@@ -210,9 +215,10 @@ Developer manually clicks "Run workflow" on `generate.yml` in GitHub Actions UI
 
 #### Step 5: Update CHANGELOG.md
 
-- Insert new entry after document header, before first existing entry
-- Format: `## [X.Y.Z] - YYYY-MM-DD (API vXXXXXXXX)`
-- Only selected version's CHANGELOG entry added
+- Call `ChangelogManager` with the selected API version
+- Command: `ruby .github/changelog_manager.rb v20111101`
+- The class reads version from `package.json`, formats entry, and inserts at top of changelog
+- See [Changelog-Manager.md](Changelog-Manager.md) for full documentation
 
 #### Step 6: Create Feature Branch
 

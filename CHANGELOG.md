@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.0.0] - 1/7/2026
+## [2.0.0] - 2026-01-07
 
 ### Changed
 - **Versioning Correction:** Re-released as v2.0.0 to properly indicate breaking changes that were inadvertently introduced in v1.10.1
@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Restructured API classes from single `MxPlatformApi` to domain-specific classes
 
-## [1.12.1] - 11/25/2025
+## [1.12.1] - 2025-11-25
 
 ### Fixed
 - Updated package template (`package.mustache`) to fix recurring dependency regression
@@ -42,7 +42,7 @@ These versions (v1.10.1 through v1.12.0) contain the breaking API restructure bu
 
 **If you are on any of these versions:** Please upgrade to v2.0.0.
 
-## [1.10.0] - 11/5/2025
+## [1.10.0] - 2025-11-05
 
 ### Note
 - Last stable version with unified `MxPlatformApi` class
