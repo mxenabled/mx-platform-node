@@ -1,0 +1,38 @@
+name: Run Specs
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        ruby-version: ['3.0', '3.1', '3.2']
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Ruby ${{ matrix.ruby-version }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true
+      
+      - name: Install RSpec
+        run: gem install rspec
+      
+      - name: Run Ruby spec tests
+        run: rspec .github/spec --format progress --color
+      
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rspec-results-${{ matrix.ruby-version }}
+          path: |
+            coverage/
+            rspec_results.xml
+          if-no-files-found: ignore
