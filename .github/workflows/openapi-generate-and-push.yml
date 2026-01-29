@@ -91,7 +91,7 @@ jobs:
           name: generated-${{ matrix.api_version }}
           path: ./${{ matrix.api_version }}
 
-  Commit-and-Push:
+  Process-and-Push:
     runs-on: ubuntu-latest
     needs: [Setup, Generate]
     steps:
@@ -127,12 +127,12 @@ jobs:
           ruby .github/changelog_manager.rb "$VERSIONS_CSV"
       - name: Copy documentation
         run: |
-          for dir in ./v20111101 ./v20250224; do
-            if [ -d "$dir" ]; then
-              cp LICENSE "$dir/LICENSE"
-              cp CHANGELOG.md "$dir/CHANGELOG.md"
-              cp MIGRATION.md "$dir/MIGRATION.md"
-            fi
+          GENERATED_VERSIONS="${{ steps.track_versions.outputs.generated_versions }}"
+          
+          for VERSION in $GENERATED_VERSIONS; do
+            cp LICENSE "./$VERSION/LICENSE"
+            cp CHANGELOG.md "./$VERSION/CHANGELOG.md"
+            cp MIGRATION.md "./$VERSION/MIGRATION.md"
           done
       - name: Checkout master
         run: git checkout master

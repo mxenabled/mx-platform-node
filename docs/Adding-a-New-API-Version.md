@@ -108,15 +108,56 @@ The `ConfigValidator` automatically validates that:
 
 **No workflow changes needed** — the existing validation step in `generate.yml` calls `ConfigValidator` with your new version, and it automatically validates using the updated mapping.
 
-### 2.2 Update openapi-generate-and-push.yml
+### 2.2 Update release.yml and publish.yml
+
+Both the `release.yml` and `publish.yml` workflows use `workflow_dispatch` with choice inputs to allow manual triggering with the correct version directory.
+
+#### 2.2a Update release.yml
+
+**Location: Workflow dispatch options**
+
+In the `on.workflow_dispatch.inputs.version_directory.options` section, add the new version to the dropdown list:
+
+```yaml
+version_directory:
+  description: 'API version directory'
+  required: true
+  type: choice
+  options:
+    - v20111101
+    - v20250224
+    - v20300101    # NEW
+```
+
+#### 2.2b Update publish.yml
+
+**Location: Workflow dispatch options**
+
+In the `on.workflow_dispatch.inputs.version_directory.options` section, add the new version to the dropdown list:
+
+```yaml
+version_directory:
+  description: 'API version directory'
+  required: true
+  type: choice
+  options:
+    - v20111101
+    - v20250224
+    - v20300101    # NEW
+```
+
+**Why both workflows need updating**: These choices allow users to manually trigger release and publish workflows for any version. Adding the new version ensures it can be selected in the GitHub Actions UI when manually triggering these workflows.
+
+### 2.3 Update openapi-generate-and-push.yml
 
 This workflow is automatically triggered by the OpenAPI repository to generate and push SDKs for all versions in parallel.
 
 **Location 1: Version-to-config mapping**
 
-In the `Setup` job's `Set up matrix` step, add an `elif` branch to map your new version to its config file:
+In the `Setup` job's `Set up matrix` step, find the section with the version-to-config mapping and add an `elif` branch for your new version:
 
 ```yaml
+# Map version to config file and major version
 if [ "$VERSION" = "v20111101" ]; then
   CONFIG="openapi/config-v20111101.yml"
 elif [ "$VERSION" = "v20250224" ]; then
@@ -126,7 +167,7 @@ elif [ "$VERSION" = "v20300101" ]; then
 fi
 ```
 
-This dynamically builds the matrix that determines which config file each version uses during generation.
+This dynamically builds the matrix JSON that determines which config file each version uses during generation.
 
 **Location 2: Add version to ChangelogManager priority order**
 
@@ -144,7 +185,7 @@ This ensures when multiple versions are generated, changelog entries appear in o
 - Extracts date ranges from existing entries
 - Inserts properly formatted entries at the top of the changelog
 
-### 2.3 Update on-push-master.yml
+### 2.4 Update on-push-master.yml
 
 This workflow automatically triggers publish and release jobs when version directories are pushed to master. Since individual version jobs use conditional `if` statements based on path changes, you need to add new conditional jobs for your new version.
 
@@ -214,12 +255,14 @@ gate-v20250224-complete:
 - Gate jobs use the `always()` condition so they run even when intermediate jobs are skipped
 - This prevents npm registry race conditions and ensures correct behavior whether one or multiple versions are modified
 
-### 2.4 Verify Workflow Syntax
+### 2.5 Verify Workflow Syntax
 
-Check that your YAML is valid for all three modified files:
+Check that your YAML is valid for all four modified files:
 
 ```bash
 ruby -e "require 'yaml'; puts YAML.load(File.read('.github/workflows/generate.yml'))"
+ruby -e "require 'yaml'; puts YAML.load(File.read('.github/workflows/release.yml'))"
+ruby -e "require 'yaml'; puts YAML.load(File.read('.github/workflows/publish.yml'))"
 ruby -e "require 'yaml'; puts YAML.load(File.read('.github/workflows/openapi-generate-and-push.yml'))"
 ruby -e "require 'yaml'; puts YAML.load(File.read('.github/workflows/on-push-master.yml'))"
 ```
@@ -386,13 +429,15 @@ Use this checklist to verify you've completed all steps:
 - [ ] Major version in config is unique and sequential (4.0.0 for v20300101)
 - [ ] Updated `.github/workflows/generate.yml` with new version in dropdown options
 - [ ] Updated `.github/config_validator.rb` with new version in `SUPPORTED_VERSIONS` mapping
+- [ ] Updated `.github/workflows/release.yml` with new version in dropdown options
+- [ ] Updated `.github/workflows/publish.yml` with new version in dropdown options
 - [ ] Updated `.github/workflows/openapi-generate-and-push.yml` with version-to-config mapping in Setup job
 - [ ] Updated `.github/changelog_manager.rb` with new version in `API_VERSION_ORDER` array
 - [ ] Updated `.github/workflows/on-push-master.yml` path triggers with `v20300101/**`
 - [ ] Updated `.github/workflows/on-push-master.yml` with new publish job for v20300101
 - [ ] Updated `.github/workflows/on-push-master.yml` with new release job for v20300101
 - [ ] Updated `.github/workflows/on-push-master.yml` with new gate job for previous version (v20250224)
-- [ ] Verified workflow YAML syntax is valid for all three modified files
+- [ ] Verified workflow YAML syntax is valid for all five modified files
 - [ ] Updated root `README.md` with new API version table entry
 - [ ] Updated root `README.md` with installation example for new version
 - [ ] Updated `MIGRATION.md` with new migration section

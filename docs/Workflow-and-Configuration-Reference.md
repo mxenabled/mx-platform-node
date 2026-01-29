@@ -129,7 +129,7 @@ strategy:
 
 #### Step 5: Automatic Publish and Release (via on-push-master.yml)
 
-**Architecture**: After `Commit-and-Push` completes and pushes to master, the automatic `on-push-master.yml` workflow is triggered by GitHub's push event.
+**Architecture**: After `Process-and-Push` completes and pushes to master, the automatic `on-push-master.yml` workflow is triggered by GitHub's push event.
 
 **Why This Architecture?**
 - Separates concerns: `openapi-generate-and-push.yml` owns generation, `on-push-master.yml` owns publishing
