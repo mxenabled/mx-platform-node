@@ -10,23 +10,28 @@ on:
         required: false
         type: string
 
-env:
-  # Parse payload from workflow_dispatch if provided, otherwise empty object
-  PARSED_PAYLOAD: ${{ fromJson(github.event.inputs.payload_json || '{}') }}
-  # Default to v20111101 only for backwards compatibility
-  # When openapi repo sends api_versions, use that instead
-  VERSIONS_TO_GENERATE: ${{ github.event.client_payload.api_versions || env.PARSED_PAYLOAD.api_versions || 'v20111101' }}
-
 jobs:
   Setup:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
+      versions_to_generate: ${{ steps.parse-payload.outputs.versions_to_generate }}
     steps:
+      - name: Parse payload
+        id: parse-payload
+        run: |
+          # Parse workflow_dispatch payload if provided, otherwise use repository_dispatch payload
+          if [ -n "${{ github.event.inputs.payload_json }}" ]; then
+            VERSIONS=$(echo '${{ github.event.inputs.payload_json }}' | jq -r '.api_versions // "v20111101"')
+          else
+            VERSIONS="${{ github.event.client_payload.api_versions || 'v20111101' }}"
+          fi
+          echo "versions_to_generate=$VERSIONS" >> $GITHUB_OUTPUT
+      
       - name: Set up matrix
         id: set-matrix
         run: |
-          VERSIONS="${{ env.VERSIONS_TO_GENERATE }}"
+          VERSIONS="${{ steps.parse-payload.outputs.versions_to_generate }}"
           echo "Versions to generate: $VERSIONS"
           
           # Build matrix JSON
@@ -72,7 +77,13 @@ jobs:
       - name: Bump version
         id: bump_version
         run: |
-          NEW_VERSION=$(ruby .github/version.rb ${{ github.event.client_payload.version || env.PARSED_PAYLOAD.version || 'patch' }} ${{ matrix.config_file }})
+          # Parse version from workflow_dispatch or repository_dispatch
+          if [ -n "${{ github.event.inputs.payload_json }}" ]; then
+            VERSION=$(echo '${{ github.event.inputs.payload_json }}' | jq -r '.version // "patch"')
+          else
+            VERSION="${{ github.event.client_payload.version || 'patch' }}"
+          fi
+          NEW_VERSION=$(ruby .github/version.rb "$VERSION" ${{ matrix.config_file }})
           echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
       - name: Clean repo
         run: ruby .github/clean.rb ${{ matrix.api_version }}
@@ -84,13 +95,20 @@ jobs:
         run: npm install @openapitools/openapi-generator-cli -g
       - name: Generate SDK
         run: |
+          # Parse commit_sha from workflow_dispatch or repository_dispatch
+          if [ -n "${{ github.event.inputs.payload_json }}" ]; then
+            COMMIT_SHA=$(echo '${{ github.event.inputs.payload_json }}' | jq -r '.commit_sha // "master"')
+          else
+            COMMIT_SHA="${{ github.event.client_payload.commit_sha || 'master' }}"
+          fi
+          
           # Versioned spec URLs with commit SHA to avoid GitHub CDN cache race condition
           # Problem: GitHub's raw.githubusercontent.com CDN caches files for 5 minutes
           # If openapi repo commits and immediately triggers this workflow, CDN may serve stale spec
           # Using commit SHA in URL to bypass cache and guarantee correct spec version
           # Falls back to 'master' if openapi doesn't send commit_sha
           openapi-generator-cli generate \
-            -i https://raw.githubusercontent.com/mxenabled/openapi/${{ github.event.client_payload.commit_sha || env.PARSED_PAYLOAD.commit_sha || 'master' }}/openapi/${{ matrix.api_version }}.yml \
+            -i https://raw.githubusercontent.com/mxenabled/openapi/$COMMIT_SHA/openapi/${{ matrix.api_version }}.yml \
             -g typescript-axios \
             -c ${{ matrix.config_file }} \
             -t ./openapi/templates \
@@ -151,7 +169,7 @@ jobs:
           git config user.name "devexperience"
           git config user.email "devexperience@mx.com"
           git add .
-          git commit -m "Generated SDK versions: ${{ env.VERSIONS_TO_GENERATE }}
+          git commit -m "Generated SDK versions: ${{ needs.Setup.outputs.versions_to_generate }}
 
           This commit was automatically created by a GitHub Action."
       - name: Push to master
