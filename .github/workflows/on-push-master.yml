@@ -33,7 +33,7 @@ jobs:
   publish-v20111101:
     needs: check-skip-publish
     if: needs.check-skip-publish.outputs.skip_publish == 'false' && contains(github.event.head_commit.modified, 'v20111101')
-    uses: ./.github/workflows/publish.yml@master
+    uses: ./.github/workflows/publish.yml
     with:
       version_directory: v20111101
     secrets: inherit
@@ -41,7 +41,7 @@ jobs:
   release-v20111101:
     needs: [check-skip-publish, publish-v20111101]
     if: needs.check-skip-publish.outputs.skip_publish == 'false' && contains(github.event.head_commit.modified, 'v20111101')
-    uses: ./.github/workflows/release.yml@master
+    uses: ./.github/workflows/release.yml
     with:
       version_directory: v20111101
     secrets: inherit
@@ -61,7 +61,7 @@ jobs:
   publish-v20250224:
     needs: [check-skip-publish, gate-v20111101-complete]
     if: needs.check-skip-publish.outputs.skip_publish == 'false' && contains(github.event.head_commit.modified, 'v20250224')
-    uses: ./.github/workflows/publish.yml@master
+    uses: ./.github/workflows/publish.yml
     with:
       version_directory: v20250224
     secrets: inherit
@@ -69,7 +69,7 @@ jobs:
   release-v20250224:
     needs: [check-skip-publish, publish-v20250224]
     if: needs.check-skip-publish.outputs.skip_publish == 'false' && contains(github.event.head_commit.modified, 'v20250224')
-    uses: ./.github/workflows/release.yml@master
+    uses: ./.github/workflows/release.yml
     with:
       version_directory: v20250224
     secrets: inherit
