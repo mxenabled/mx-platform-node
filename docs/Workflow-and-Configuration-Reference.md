@@ -137,11 +137,12 @@ strategy:
 - Prevents duplicate publishes: Manual generate.yml + PR merge only triggers publish once (via on-push-master.yml)
 
 **Process** (handled by `on-push-master.yml`):
-1. Check-skip-publish job detects if `[skip-publish]` flag is in commit message
-2. For each version with path changes (v20111101/**, v20250224/**):
-   - Publish job: Call `publish.yml` with version-specific directory
-   - Release job: Call `release.yml` after publish completes
-3. Path-based matrix execution ensures only modified versions are published
+1. Detect-changes job uses `dorny/paths-filter@v2` to identify which version directories changed (v20111101/**, v20250224/**)
+2. Check-skip-publish job detects if `[skip-publish]` flag is in commit message
+3. For each version with path changes (output by detect-changes):
+   - Publish job: Call `publish.yml` with version-specific directory (only if paths modified)
+   - Release job: Call `release.yml` after publish completes (only if paths modified)
+4. Path-based filtering ensures only modified versions are published, never in parallel
 
 **Serialization Chain** (for race condition prevention):
 - v20111101 publish runs first (depends on check-skip-publish)
@@ -293,11 +294,12 @@ publish:
 **Serial Approach** (Explicit, safe, maintainable):
 ```yaml
 publish-v20111101:
-  if: skip_publish == false && contains(modified, 'v20111101')
+  needs: [check-skip-publish, detect-changes]
+  if: needs.check-skip-publish.outputs.skip_publish == 'false' && needs.detect-changes.outputs.v20111101 == 'true'
   
 publish-v20250224:
-  needs: [gate-v20111101-complete]  # Must wait
-  if: skip_publish == false && contains(modified, 'v20250224')
+  needs: [check-skip-publish, detect-changes, gate-v20111101-complete]  # Must wait for gate
+  if: needs.check-skip-publish.outputs.skip_publish == 'false' && needs.detect-changes.outputs.v20250224 == 'true'
 ```
 
 **Advantages**:
@@ -382,7 +384,7 @@ Include `[skip-publish]` in commit message to prevent publish/release for this p
 ```yaml
 gate-v20111101-complete:
   runs-on: ubuntu-latest
-  needs: [check-skip-publish, release-v20111101]
+  needs: [check-skip-publish, detect-changes, release-v20111101]
   if: always() && needs.check-skip-publish.outputs.skip_publish == 'false'
   steps:
     - name: Gate complete - ready for v20250224

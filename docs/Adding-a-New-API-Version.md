@@ -187,9 +187,36 @@ This ensures when multiple versions are generated, changelog entries appear in o
 
 ### 2.4 Update on-push-master.yml
 
-This workflow automatically triggers publish and release jobs when version directories are pushed to master. Since individual version jobs use conditional `if` statements based on path changes, you need to add new conditional jobs for your new version.
+This workflow automatically triggers publish and release jobs when version directories are pushed to master. The workflow uses path-based detection (via `dorny/paths-filter`) to determine which versions were modified, then conditionally runs the appropriate publish/release jobs in serial order.
 
-**Location 1: Path trigger**
+**Location 1: Update detect-changes job with new version filter**
+
+In the `detect-changes` job's filter section, add your new version:
+
+```yaml
+detect-changes:
+  runs-on: ubuntu-latest
+  outputs:
+    v20111101: ${{ steps.filter.outputs.v20111101 }}
+    v20250224: ${{ steps.filter.outputs.v20250224 }}
+    v20300101: ${{ steps.filter.outputs.v20300101 }}    # NEW output
+  steps:
+    - uses: actions/checkout@v3
+    - uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: |
+          v20111101:
+            - 'v20111101/**'
+          v20250224:
+            - 'v20250224/**'
+          v20300101:                                    # NEW filter
+            - 'v20300101/**'
+```
+
+This is **critical**: Without this, the path detection won't work for your new version, and the publish/release jobs won't trigger when it's modified.
+
+**Location 2: Add path trigger**
 
 In the `on.push.paths` section, add a new path for your version:
 
@@ -205,55 +232,68 @@ on:
 
 This ensures the workflow triggers when changes to your version directory are pushed to master.
 
-**Location 2: Add publish job for new version**
+**Location 3: Add publish job for new version**
 
 Add a new publish job for your version (copy and modify the existing v20250224 jobs):
 
 ```yaml
 publish-v20300101:
-  runs-on: ubuntu-latest
-  needs: [check-skip-publish, gate-v20250224-complete]    # Gate waits for previous version
-  if: needs.check-skip-publish.outputs.skip_publish == 'false' && contains(github.event.head_commit.modified, 'v20300101')
-  uses: ./.github/workflows/publish.yml@master
+  needs: [check-skip-publish, detect-changes, gate-v20250224-complete]
+  if: needs.check-skip-publish.outputs.skip_publish == 'false' && needs.detect-changes.outputs.v20300101 == 'true'
+  uses: ./.github/workflows/publish.yml
   with:
     version_directory: v20300101
   secrets: inherit
 ```
 
-**Location 3: Add release job for new version**
+**Important**: The `needs` array must include the **previous version's gate job** to enforce serial ordering. This ensures v20250224 finishes before v20300101 starts publishing.
+
+**Location 4: Add release job for new version**
 
 Add a new release job for your version:
 
 ```yaml
 release-v20300101:
-  runs-on: ubuntu-latest
-  needs: [check-skip-publish, publish-v20300101]
-  if: needs.check-skip-publish.outputs.skip_publish == 'false' && contains(github.event.head_commit.modified, 'v20300101')
-  uses: ./.github/workflows/release.yml@master
+  needs: [check-skip-publish, detect-changes, publish-v20300101]
+  if: needs.check-skip-publish.outputs.skip_publish == 'false' && needs.detect-changes.outputs.v20300101 == 'true'
+  uses: ./.github/workflows/release.yml
   with:
     version_directory: v20300101
   secrets: inherit
 ```
 
-**Location 4: Add gate job for previous version**
+**Location 5: Add gate job for previous version**
 
 Add a new gate job after the previous version's release to handle serial ordering:
 
 ```yaml
 gate-v20250224-complete:
   runs-on: ubuntu-latest
-  needs: [check-skip-publish, release-v20250224]
+  needs: [check-skip-publish, detect-changes, release-v20250224]
   if: always() && needs.check-skip-publish.outputs.skip_publish == 'false'
   steps:
-    - name: Gate complete - ready for v20300101
-      run: echo "v20250224 release workflow complete (or skipped)"
+    - name: Gate reached - v20250224 release complete (or skipped)
+      run: echo "Ready to proceed with v20300101 publication"
 ```
 
-**Important Notes**:
-- Each publish job depends on the **previous version's gate job** to maintain serial ordering
-- Each release job depends on its corresponding publish job
-- Gate jobs use the `always()` condition so they run even when intermediate jobs are skipped
-- This prevents npm registry race conditions and ensures correct behavior whether one or multiple versions are modified
+**Critical implementation details**:
+
+1. **Each publish job** depends on the **previous version's gate job** (not the previous release directly)
+   - This prevents race conditions when multiple versions are modified
+   - Ensures strict serial ordering at the npm registry level
+
+2. **Each release job** depends on its corresponding publish job
+   - Ensures publication completes before creating release
+
+3. **Each gate job** uses `needs: [check-skip-publish, detect-changes, release-v<VERSION>]`
+   - Waits for the previous version's release to complete
+   - The `if: always()` condition ensures the gate continues running even when the release job is **skipped**
+   - This is crucial: when the previous version isn't modified, its release is skipped, but the gate still runs and unblocks the next version
+
+4. **Each publish/release if condition** uses `needs.detect-changes.outputs.v<VERSION> == 'true'`
+   - This is more reliable than the older `contains()` pattern
+   - Uses the path-filter outputs to determine which versions changed
+   - Prevents false publishes when only docs change
 
 ### 2.5 Verify Workflow Syntax
 
@@ -434,6 +474,7 @@ Use this checklist to verify you've completed all steps:
 - [ ] Updated `.github/workflows/openapi-generate-and-push.yml` with version-to-config mapping in Setup job
 - [ ] Updated `.github/changelog_manager.rb` with new version in `API_VERSION_ORDER` array
 - [ ] Updated `.github/workflows/on-push-master.yml` path triggers with `v20300101/**`
+- [ ] Updated `detect-changes` job in `.github/workflows/on-push-master.yml` with new version output and filter
 - [ ] Updated `.github/workflows/on-push-master.yml` with new publish job for v20300101
 - [ ] Updated `.github/workflows/on-push-master.yml` with new release job for v20300101
 - [ ] Updated `.github/workflows/on-push-master.yml` with new gate job for previous version (v20250224)
