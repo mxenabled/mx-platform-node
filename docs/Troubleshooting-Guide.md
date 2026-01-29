@@ -259,7 +259,7 @@ fatal: A release with this tag already exists
    ```
 4. If not present, update workflow from latest template
 
-**Technical Details**: See [Workflow-and-Configuration-Reference.md](Workflow-and-Configuration-Reference.md#step-3-gate-job---unblock-v20250224-publishing) for full gate job implementation details.
+**Technical Details**: See [Workflow-and-Configuration-Reference.md](Workflow-and-Configuration-Reference.md#step-3-gate-job---unblock-v20250224-publishing) in the "Publishing via on-push-master.yml" section for full gate job implementation details.
 
 ---
 

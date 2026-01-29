@@ -2,7 +2,7 @@
 
 **Document Purpose**: Step-by-step guide for adding support for a new API version (e.g., `v20300101`) to the mx-platform-node repository.
 
-**Last Updated**: January 27, 2026  
+**Last Updated**: January 28, 2026  
 **Time to Complete**: 30-45 minutes  
 **Prerequisites**: Familiarity with the multi-version architecture (see [Multi-Version-SDK-Flow.md](Multi-Version-SDK-Flow.md))
 
@@ -146,7 +146,7 @@ This ensures when multiple versions are generated, changelog entries appear in o
 
 ### 2.3 Update on-push-master.yml
 
-This workflow automatically triggers publish and release jobs when version directories are pushed to master.
+This workflow automatically triggers publish and release jobs when version directories are pushed to master. Since individual version jobs use conditional `if` statements based on path changes, you need to add new conditional jobs for your new version.
 
 **Location 1: Path trigger**
 
@@ -164,33 +164,55 @@ on:
 
 This ensures the workflow triggers when changes to your version directory are pushed to master.
 
-**Location 2: Publish job matrix**
+**Location 2: Add publish job for new version**
 
-In the `publish` job's strategy matrix, add your version entry:
-
-```yaml
-strategy:
-  matrix:
-    version:
-      - api_version: v20111101
-      - api_version: v20250224
-      - api_version: v20300101    # NEW
-  fail-fast: false
-```
-
-**Location 3: Release job matrix**
-
-In the `release` job's strategy matrix, add your version entry (mirror the publish matrix):
+Add a new publish job for your version (copy and modify the existing v20250224 jobs):
 
 ```yaml
-strategy:
-  matrix:
-    version:
-      - api_version: v20111101
-      - api_version: v20250224
-      - api_version: v20300101    # NEW
-  fail-fast: false
+publish-v20300101:
+  runs-on: ubuntu-latest
+  needs: [check-skip-publish, gate-v20250224-complete]    # Gate waits for previous version
+  if: needs.check-skip-publish.outputs.skip_publish == 'false' && contains(github.event.head_commit.modified, 'v20300101')
+  uses: ./.github/workflows/publish.yml@master
+  with:
+    version_directory: v20300101
+  secrets: inherit
 ```
+
+**Location 3: Add release job for new version**
+
+Add a new release job for your version:
+
+```yaml
+release-v20300101:
+  runs-on: ubuntu-latest
+  needs: [check-skip-publish, publish-v20300101]
+  if: needs.check-skip-publish.outputs.skip_publish == 'false' && contains(github.event.head_commit.modified, 'v20300101')
+  uses: ./.github/workflows/release.yml@master
+  with:
+    version_directory: v20300101
+  secrets: inherit
+```
+
+**Location 4: Add gate job for previous version**
+
+Add a new gate job after the previous version's release to handle serial ordering:
+
+```yaml
+gate-v20250224-complete:
+  runs-on: ubuntu-latest
+  needs: [check-skip-publish, release-v20250224]
+  if: always() && needs.check-skip-publish.outputs.skip_publish == 'false'
+  steps:
+    - name: Gate complete - ready for v20300101
+      run: echo "v20250224 release workflow complete (or skipped)"
+```
+
+**Important Notes**:
+- Each publish job depends on the **previous version's gate job** to maintain serial ordering
+- Each release job depends on its corresponding publish job
+- Gate jobs use the `always()` condition so they run even when intermediate jobs are skipped
+- This prevents npm registry race conditions and ensures correct behavior whether one or multiple versions are modified
 
 ### 2.4 Verify Workflow Syntax
 
@@ -367,8 +389,9 @@ Use this checklist to verify you've completed all steps:
 - [ ] Updated `.github/workflows/openapi-generate-and-push.yml` with version-to-config mapping in Setup job
 - [ ] Updated `.github/changelog_manager.rb` with new version in `API_VERSION_ORDER` array
 - [ ] Updated `.github/workflows/on-push-master.yml` path triggers with `v20300101/**`
-- [ ] Updated `.github/workflows/on-push-master.yml` publish job matrix with new version
-- [ ] Updated `.github/workflows/on-push-master.yml` release job matrix with new version
+- [ ] Updated `.github/workflows/on-push-master.yml` with new publish job for v20300101
+- [ ] Updated `.github/workflows/on-push-master.yml` with new release job for v20300101
+- [ ] Updated `.github/workflows/on-push-master.yml` with new gate job for previous version (v20250224)
 - [ ] Verified workflow YAML syntax is valid for all three modified files
 - [ ] Updated root `README.md` with new API version table entry
 - [ ] Updated root `README.md` with installation example for new version
