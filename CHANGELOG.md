@@ -5,10 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.0.0] - 2026-01-29 (v20250224 API)
+## [3.0.0] - 2026-01-29
+
+### ⚠️ BREAKING CHANGES
+
+This is a major version bump because it targets a new API version. If you are currently using `mx-platform-node@^2`, this is a new API version (`v20250224`) with potentially significant changes. **See the [MX Platform API Migration Guide](https://docs.mx.com/api-reference/platform-api/overview/migration) for detailed API breaking changes and migration instructions.**
+
+### Added
+- Initial support for MX Platform API `v20250224`
+- Published as separate major version to support independent API versions
 
 ### Changed
-- Updated v20250224 API specification to most current version. Please check full [API changelog](https://docs.mx.com/resources/changelog/platform) for any changes.
+- This is a completely new API version (`v20250224`). Refer to the [MX Platform API changelog](https://docs.mx.com/resources/changelog/platform) for detailed API specification changes from `v20111101`
+
+### Migration
+For upgrading from `mx-platform-node@^2` (v20111101 API) to v3.x (v20250224 API):
+```bash
+npm install mx-platform-node@^3
+```
+Consult the [MX Platform API Migration Guide](https://docs.mx.com/api-reference/platform-api/overview/migration) for API-level changes, deprecations and migration steps.
 
 ## [2.0.0] - 2026-01-07 (v20111101 API)
 
