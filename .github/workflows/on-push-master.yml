@@ -31,7 +31,6 @@ jobs:
   # Only runs if [skip-publish] flag is NOT present AND files for that version were modified
   
   publish-v20111101:
-    runs-on: ubuntu-latest
     needs: check-skip-publish
     if: needs.check-skip-publish.outputs.skip_publish == 'false' && contains(github.event.head_commit.modified, 'v20111101')
     uses: ./.github/workflows/publish.yml@master
@@ -40,7 +39,6 @@ jobs:
     secrets: inherit
 
   release-v20111101:
-    runs-on: ubuntu-latest
     needs: [check-skip-publish, publish-v20111101]
     if: needs.check-skip-publish.outputs.skip_publish == 'false' && contains(github.event.head_commit.modified, 'v20111101')
     uses: ./.github/workflows/release.yml@master
@@ -61,7 +59,6 @@ jobs:
         run: echo "v20111101 release workflow complete (or skipped)"
 
   publish-v20250224:
-    runs-on: ubuntu-latest
     needs: [check-skip-publish, gate-v20111101-complete]
     if: needs.check-skip-publish.outputs.skip_publish == 'false' && contains(github.event.head_commit.modified, 'v20250224')
     uses: ./.github/workflows/publish.yml@master
@@ -70,7 +67,6 @@ jobs:
     secrets: inherit
 
   release-v20250224:
-    runs-on: ubuntu-latest
     needs: [check-skip-publish, publish-v20250224]
     if: needs.check-skip-publish.outputs.skip_publish == 'false' && contains(github.event.head_commit.modified, 'v20250224')
     uses: ./.github/workflows/release.yml@master
