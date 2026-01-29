@@ -109,7 +109,9 @@ class ChangelogManager
 
       <<~ENTRY
         ## [#{version_number}] - #{date_str} (#{api_version} API)
-        #{message}
+        
+        ### Changed
+        - #{message}
       ENTRY
     end
 

@@ -106,10 +106,12 @@ strategy:
      # Changelog
      
      ## [3.0.1] - 2026-01-27 (v20250224 API)
-     Updated v20250224 API specification...
+     ### Changed
+     - Updated v20250224 API specification...
      
      ## [2.0.1] - 2026-01-27 (v20111101 API)
-     Updated v20111101 API specification...
+     ### Changed
+     - Updated v20111101 API specification...
      ```
 
 4. **Copy Documentation to Version Directories**

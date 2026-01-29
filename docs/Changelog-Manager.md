@@ -55,10 +55,14 @@ The entries are inserted in version order (v20250224 first, v20111101 second), e
 Result:
 ```markdown
 ## [3.2.0] - 2025-01-28 (v20250224 API)
-Updated v20250224 API specification to most current version...
+
+### Changed
+- Updated v20250224 API specification to most current version...
 
 ## [2.5.3] - 2025-01-28 (v20111101 API)
-Updated v20111101 API specification to most current version...
+
+### Changed
+- Updated v20111101 API specification to most current version...
 ```
 
 ### Example Output
@@ -66,13 +70,17 @@ Updated v20111101 API specification to most current version...
 With a prior entry:
 ```markdown
 ## [3.2.0] - 2025-01-28 (v20250224 API)
-Updated v20250224 API specification to most current version. Please check full [API changelog](https://docs.mx.com/resources/changelog/platform) for any changes made between 2025-01-15 and 2025-01-28.
+
+### Changed
+- Updated v20250224 API specification to most current version. Please check full [API changelog](https://docs.mx.com/resources/changelog/platform) for any changes made between 2025-01-15 and 2025-01-28.
 ```
 
 Without a prior entry:
 ```markdown
 ## [3.2.0] - 2025-01-28 (v20250224 API)
-Updated v20250224 API specification to most current version. Please check full [API changelog](https://docs.mx.com/resources/changelog/platform) for any changes.
+
+### Changed
+- Updated v20250224 API specification to most current version. Please check full [API changelog](https://docs.mx.com/resources/changelog/platform) for any changes.
 ```
 
 ## Location

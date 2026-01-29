@@ -59,6 +59,7 @@ describe ChangelogManager do
 
       updated_content = read_changelog
       expect(updated_content).to include('## [3.0.0] - 2026-01-28 (v20250224 API)')
+      expect(updated_content).to include('### Changed')
       expect(updated_content).to include('Updated v20250224 API specification to most current version')
       expect(updated_content).to include('[API changelog]')
 
@@ -86,6 +87,7 @@ describe ChangelogManager do
       expect(updated_content).to include('## [2.0.0] - 2026-01-28 (v20111101 API)')
       expect(updated_content).to include('Updated v20250224 API specification to most current version')
       expect(updated_content).to include('Updated v20111101 API specification to most current version')
+      expect(updated_content).to include('### Changed')
 
       # v20250224 should come BEFORE v20111101 (sorting)
       v20250224_pos = updated_content.index('[3.0.0]')
@@ -103,6 +105,7 @@ describe ChangelogManager do
       expect(result).to be true
       updated_content = read_changelog
       expect(updated_content).to include('## [3.0.0] - 2026-01-28 (v20250224 API)')
+      expect(updated_content).to include('### Changed')
     end
   end
 
@@ -122,6 +125,21 @@ describe ChangelogManager do
       v20250224_pos = updated_content.index('[3.0.0]')
       v20111101_pos = updated_content.index('[2.0.0]')
       expect(v20250224_pos).to be < v20111101_pos
+    end
+
+    it 'includes changed section for each entry' do
+      setup_changelog
+      setup_version_directory('v20250224', v20250224_package_fixture)
+      setup_version_directory('v20111101', v20111101_package_fixture)
+
+      result = ChangelogManager.update('v20250224,v20111101')
+
+      expect(result).to be true
+      updated_content = read_changelog
+
+      # Count occurrences of ### Changed - should be 2 for the new entries
+      changed_count = updated_content.scan(/### Changed/).length
+      expect(changed_count).to be >= 2 # At least 2 from the new entries
     end
   end
 
@@ -150,6 +168,8 @@ describe ChangelogManager do
       expect(updated_content).to include('Updated v20250224 API specification to most current version. Please check full [API changelog]')
       # Should NOT have a "between" clause
       expect(updated_content).not_to match(/between \d{4}-\d{2}-\d{2} and \d{4}-\d{2}-\d{2}.*v20250224/)
+      # Should include Changed section
+      expect(updated_content).to include('### Changed')
     end
 
     it 'uses correct dates in range for multiple version updates' do
@@ -168,6 +188,8 @@ describe ChangelogManager do
       # v20250224 should NOT have date range (no prior entry)
       v20250224_section = updated_content[/## \[3\.0\.0\].*?(?=##|\z)/m]
       expect(v20250224_section).not_to match(/between.*v20250224/)
+      # Both should have Changed section
+      expect(updated_content).to include('### Changed')
     end
   end
 
@@ -239,6 +261,7 @@ describe ChangelogManager do
       # Verify changelog was updated
       updated_content = read_changelog
       expect(updated_content).to include('## [3.0.0] - 2026-01-28 (v20250224 API)')
+      expect(updated_content).to include('### Changed')
     end
 
     it 'exits with error when versions argument is nil' do
