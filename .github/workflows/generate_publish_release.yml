@@ -146,32 +146,3 @@ jobs:
         run: git push origin master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  Publish-and-Release:
-    runs-on: ubuntu-latest
-    needs: [Setup, Commit-and-Push]
-    strategy:
-      matrix: ${{ fromJson(needs.Setup.outputs.matrix) }}
-    steps:
-      - name: Publish
-        uses: ./.github/workflows/publish.yml
-        with:
-          version_directory: ${{ matrix.api_version }}
-        secrets: inherit
-      - name: Release
-        uses: ./.github/workflows/release.yml
-        with:
-          version_directory: ${{ matrix.api_version }}
-        secrets: inherit
-      - name: Slack notification
-        uses: ravsamhq/notify-slack-action@v2
-        if: always()
-        with:
-          status: ${{ job.status }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          notification_title: "{repo}: {workflow} workflow"
-          message_format: "{emoji} Generated and published ${{ matrix.api_version }}"
-          footer: "<{workflow_url}|View Workflow>"
-          notify_when: "failure"
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
