@@ -108,9 +108,9 @@ The `ConfigValidator` automatically validates that:
 
 **No workflow changes needed** — the existing validation step in `generate.yml` calls `ConfigValidator` with your new version, and it automatically validates using the updated mapping.
 
-### 2.2 Update generate_publish_release.yml
+### 2.2 Update openapi-generate-and-push.yml
 
-This workflow is automatically triggered by the OpenAPI repository to generate and publish SDKs for all versions in parallel.
+This workflow is automatically triggered by the OpenAPI repository to generate and push SDKs for all versions in parallel.
 
 **Location 1: Version-to-config mapping**
 
@@ -198,7 +198,7 @@ Check that your YAML is valid for all three modified files:
 
 ```bash
 ruby -e "require 'yaml'; puts YAML.load(File.read('.github/workflows/generate.yml'))"
-ruby -e "require 'yaml'; puts YAML.load(File.read('.github/workflows/generate_publish_release.yml'))"
+ruby -e "require 'yaml'; puts YAML.load(File.read('.github/workflows/openapi-generate-and-push.yml'))"
 ruby -e "require 'yaml'; puts YAML.load(File.read('.github/workflows/on-push-master.yml'))"
 ```
 
@@ -364,7 +364,7 @@ Use this checklist to verify you've completed all steps:
 - [ ] Major version in config is unique and sequential (4.0.0 for v20300101)
 - [ ] Updated `.github/workflows/generate.yml` with new version in dropdown options
 - [ ] Updated `.github/config_validator.rb` with new version in `SUPPORTED_VERSIONS` mapping
-- [ ] Updated `.github/workflows/generate_publish_release.yml` with version-to-config mapping in Setup job
+- [ ] Updated `.github/workflows/openapi-generate-and-push.yml` with version-to-config mapping in Setup job
 - [ ] Updated `.github/changelog_manager.rb` with new version in `API_VERSION_ORDER` array
 - [ ] Updated `.github/workflows/on-push-master.yml` path triggers with `v20300101/**`
 - [ ] Updated `.github/workflows/on-push-master.yml` publish job matrix with new version
@@ -404,9 +404,9 @@ Use this checklist to verify you've completed all steps:
 **Cause**: Wrong major version in config file  
 **Solution**: Update `npmVersion: 4.0.0` in config file to use unique major version
 
-### generate_publish_release.yml doesn't recognize new version
+### openapi-generate-and-push.yml doesn't recognize new version
 **Cause**: Version-to-config mapping missing in Setup job, ChangelogManager not updated, or ConfigValidator not updated  
-**Solution**: Verify three locations are updated: (1) version-to-config mapping in generate_publish_release.yml Setup job, (2) add version to `API_VERSION_ORDER` in `changelog_manager.rb`, and (3) add version to `SUPPORTED_VERSIONS` in `config_validator.rb`
+**Solution**: Verify three locations are updated: (1) version-to-config mapping in openapi-generate-and-push.yml Setup job, (2) add version to `API_VERSION_ORDER` in `changelog_manager.rb`, and (3) add version to `SUPPORTED_VERSIONS` in `config_validator.rb`
 
 ### on-push-master.yml doesn't trigger after merge
 **Cause**: Path trigger syntax incorrect or matrix not updated  
@@ -426,7 +426,7 @@ Once verified:
 2. **Create PR**: Get code review of workflow changes
 3. **Merge PR**: Once approved, merge to master
 4. **Wait for OpenAPI updates**: New version won't generate until OpenAPI repo sends it in payload
-5. **Monitor first generation**: Watch the automatic `generate_publish_release.yml` run when OpenAPI repo triggers it
+5. **Monitor first generation**: Watch the automatic `openapi-generate-and-push.yml` run when OpenAPI repo triggers it
 
 ---
 

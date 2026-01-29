@@ -1,4 +1,4 @@
-name: Generate Publish Release
+name: "OpenAPI: Automated Generate and Push"
 
 on:
   repository_dispatch:

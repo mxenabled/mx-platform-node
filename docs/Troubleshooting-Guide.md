@@ -33,7 +33,7 @@ Check in this order:
 
 ### Generate Workflow: Configuration Validation Fails
 
-The `generate.yml` and `generate_publish_release.yml` workflows run configuration validation before SDK generation. If validation fails, the workflow stops immediately to prevent invalid configurations from generating code.
+The `generate.yml` and `openapi-generate-and-push.yml` workflows run configuration validation before SDK generation. If validation fails, the workflow stops immediately to prevent invalid configurations from generating code.
 
 **Validator**: `.github/config_validator.rb`
 
@@ -275,7 +275,7 @@ fatal: A release with this tag already exists
 - Workflow runs at 2:02 PM but CDN still has 2:00 PM version
 - SDK generated from stale spec
 
-**Solution**: Already implemented in `generate_publish_release.yml`
+**Solution**: Already implemented in `openapi-generate-and-push.yml`
 - Uses commit SHA in spec URL: `raw.githubusercontent.com/mxenabled/openapi/<commit-sha>/openapi/v20111101.yml`
 - Commit SHA bypasses CDN and guarantees exact spec version
 - Nothing to do—this is automatic

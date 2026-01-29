@@ -28,7 +28,7 @@ Each version is independently generated, tested, published to npm, and released 
 ## Three Ways Things Happen
 
 ### 🤖 Flow 1: Automatic (Upstream Triggers)
-OpenAPI spec changes → `generate_publish_release.yml` runs → SDK generated, published, released
+OpenAPI spec changes → `openapi-generate-and-push.yml` runs → SDK generated, published, released
 
 **When**: OpenAPI repository sends `repository_dispatch` with API versions  
 **Who**: Automated, no human intervention  
@@ -173,15 +173,15 @@ sequenceDiagram
 
 | File | Purpose | Used By |
 |------|---------|---------|
-| `.github/workflows/generate_publish_release.yml` | Automatic generation from upstream API changes | OpenAPI repo |
+| `.github/workflows/openapi-generate-and-push.yml` | Automatic generation from upstream API changes | OpenAPI repo |
 | `.github/workflows/generate.yml` | Manual generation with version selection | Developer |
 | `.github/workflows/on-push-master.yml` | Auto-publish trigger with path-based matrix | Any master push |
 | `.github/workflows/publish.yml` | Publishes SDK to npm | publish_release & on-push-master |
 | `.github/workflows/release.yml` | Creates GitHub release | publish_release & on-push-master |
 | `.github/version.rb` | Bumps version in config files | Workflows |
 | `.github/clean.rb` | Removes old generated files | Workflows |
-| `openapi/config-v20111101.yml` | Config for v20111101 generation | generate_publish_release & generate |
-| `openapi/config-v20250224.yml` | Config for v20250224 generation | generate_publish_release & generate |
+| `openapi/config-v20111101.yml` | Config for v20111101 generation | openapi-generate-and-push & generate |
+| `openapi/config-v20250224.yml` | Config for v20250224 generation | openapi-generate-and-push & generate |
 | `openapi/templates/package.mustache` | npm package.json template | OpenAPI Generator |
 | `openapi/templates/README.mustache` | README.md template | OpenAPI Generator |
 

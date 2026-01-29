@@ -10,7 +10,7 @@
 ## Flow 1: Automatic Multi-Version Generation (Repository Dispatch)
 
 ### Trigger
-OpenAPI specifications change in the upstream `openapi` repository → Repository sends `repository_dispatch` event with optional `api_versions` payload → `generate_publish_release.yml` workflow is triggered
+OpenAPI specifications change in the upstream `openapi` repository → Repository sends `repository_dispatch` event with optional `api_versions` payload → `openapi-generate-and-push.yml` workflow is triggered
 
 ### Backward Compatibility Model
 - **No Payload (v20111101 only)**: If openapi repo sends `repository_dispatch` without `api_versions` field, defaults to generating v20111101 only
@@ -21,7 +21,7 @@ This allows phased migration: current behavior works as-is, and when the openapi
 
 ### Implementation
 
-**Workflow**: `.github/workflows/generate_publish_release.yml`
+**Workflow**: `.github/workflows/openapi-generate-and-push.yml`
 
 #### Step 1: Setup - Determine Versions to Generate
 
@@ -130,7 +130,7 @@ strategy:
 **Architecture**: After `Commit-and-Push` completes and pushes to master, the automatic `on-push-master.yml` workflow is triggered by GitHub's push event.
 
 **Why This Architecture?**
-- Separates concerns: `generate_publish_release.yml` owns generation, `on-push-master.yml` owns publishing
+- Separates concerns: `openapi-generate-and-push.yml` owns generation, `on-push-master.yml` owns publishing
 - Enables consistent publish logic: All publishes (whether from automated generation or manual PR merge) go through the same workflow
 - Prevents duplicate publishes: Manual generate.yml + PR merge only triggers publish once (via on-push-master.yml)
 
@@ -431,7 +431,7 @@ The `npmVersion` field in the config file is the **authoritative source of truth
 
 **When It's Called**:
 - `generate.yml`: After generating a single API version (manual flow)
-- `generate_publish_release.yml`: After generating multiple API versions (automatic flow)
+- `openapi-generate-and-push.yml`: After generating multiple API versions (automatic flow)
 
 **Example Output**:
 ```markdown
@@ -604,7 +604,7 @@ OpenAPI Repo: Commits change to v20111101.yml and v20250224.yml
         ↓
 repository_dispatch: {"api_versions": "v20111101,v20250224"}
         ↓
-generate_publish_release.yml: Triggered
+openapi-generate-and-push.yml: Triggered
         ├─ Setup: Create matrix from api_versions
         ├─ Matrix[v20111101]: Clean, Bump, Generate (parallel)
         ├─ Matrix[v20250224]: Clean, Bump, Generate (parallel)
