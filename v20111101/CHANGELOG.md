@@ -5,7 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.0.0] - 1/7/2026
+## [2.0.0] - 2026-01-29 (v20111101 API)
+
+### Changed
+- Updated v20111101 API specification to most current version. Please check full [API changelog](https://docs.mx.com/resources/changelog/platform) for any changes made between 2026-01-07 and 2026-01-29.
+
+## [3.0.0] - 2026-01-29
+
+### ⚠️ BREAKING CHANGES (from v2.x.x)
+
+This is a major version bump because it targets a new API version `v20250224`. If you are currently using `mx-platform-node@^2`, this is a new API version with potentially significant changes. **See the [MX Platform API Migration Guide](https://docs.mx.com/api-reference/platform-api/overview/migration) for detailed API breaking changes and migration instructions.**
+
+### Added
+- Initial support for MX Platform API `v20250224`
+- Published as separate major version to support independent API versions
+
+### Changed
+- This is a completely new API version (`v20250224`). Refer to the [MX Platform API changelog](https://docs.mx.com/resources/changelog/platform) for detailed API specification changes from `v20111101`
+
+### Migration
+For upgrading from `mx-platform-node@^2` (v20111101 API) to v3.x (v20250224 API):
+```bash
+npm install mx-platform-node@^3
+```
+Consult the [MX Platform API Migration Guide](https://docs.mx.com/api-reference/platform-api/overview/migration) for API-level changes, deprecations and migration steps.
+
+## [2.0.0] - 2026-01-07 (v20111101 API)
 
 ### Changed
 - **Versioning Correction:** Re-released as v2.0.0 to properly indicate breaking changes that were inadvertently introduced in v1.10.1
@@ -23,7 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Restructured API classes from single `MxPlatformApi` to domain-specific classes
 
-## [1.12.1] - 11/25/2025
+## [1.12.1] - 2025-11-25 (v20111101 API)
 
 ### Fixed
 - Updated package template (`package.mustache`) to fix recurring dependency regression
@@ -42,7 +67,7 @@ These versions (v1.10.1 through v1.12.0) contain the breaking API restructure bu
 
 **If you are on any of these versions:** Please upgrade to v2.0.0.
 
-## [1.10.0] - 11/5/2025
+## [1.10.0] - 2025-11-05 (v20111101 API)
 
 ### Note
 - Last stable version with unified `MxPlatformApi` class
