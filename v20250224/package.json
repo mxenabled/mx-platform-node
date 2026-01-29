@@ -1,0 +1,32 @@
+{
+  "name": "mx-platform-node",
+  "version": "3.0.0",
+  "description": "A Node.js SDK for the MX Platform API (v20250224)",
+  "apiVersion": "v20250224",
+  "author": "MX",
+  "keywords": [
+    "mx",
+    "mx.com",
+    "mx platform api",
+    "mx-platform-node"
+  ],
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "files": [
+    "dist/",
+    "*.md"
+  ],
+  "scripts": {
+    "build": "tsc --outDir dist/",
+    "prepare": "npm run build"
+  },
+  "_comment": "IMPORTANT: Keep these dependency versions in sync with security updates. If package.json is manually updated for security fixes, this template MUST also be updated to prevent automated generation from overwriting the fixes.",
+  "dependencies": {
+    "axios": "^1.6.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "typescript": "^5.4.5"
+  }
+}
