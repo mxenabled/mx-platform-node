@@ -151,7 +151,8 @@ jobs:
           fi
           
           # Convert space-separated versions to comma-separated for changelog_manager.rb
-          VERSIONS_CSV=$(echo "$GENERATED_VERSIONS" | tr ' ' ',')
+          # Trim leading/trailing whitespace first
+          VERSIONS_CSV=$(echo "$GENERATED_VERSIONS" | xargs | tr ' ' ',')
           ruby .github/changelog_manager.rb "$VERSIONS_CSV"
       - name: Copy documentation
         run: |
