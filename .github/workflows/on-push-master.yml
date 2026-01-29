@@ -48,9 +48,21 @@ jobs:
       version_directory: v20111101
     secrets: inherit
 
-  publish-v20250224:
+  # Gate job to handle serial ordering when v20111101 is modified
+  # Uses always() to run even if release-v20111101 is skipped, allowing downstream jobs to proceed
+  # This ensures v20250224 can run when only v20250224 is modified, while still maintaining
+  # serial ordering when both versions are modified
+  gate-v20111101-complete:
     runs-on: ubuntu-latest
     needs: [check-skip-publish, release-v20111101]
+    if: always() && needs.check-skip-publish.outputs.skip_publish == 'false'
+    steps:
+      - name: Gate complete - ready for v20250224
+        run: echo "v20111101 release workflow complete (or skipped)"
+
+  publish-v20250224:
+    runs-on: ubuntu-latest
+    needs: [check-skip-publish, gate-v20111101-complete]
     if: needs.check-skip-publish.outputs.skip_publish == 'false' && contains(github.event.head_commit.modified, 'v20250224')
     uses: ./.github/workflows/publish.yml@master
     with:
