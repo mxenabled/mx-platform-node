@@ -69,7 +69,9 @@ jobs:
       - name: Clean repo
         run: ruby .github/clean.rb ${{ matrix.api_version }}
       - name: Copy generator ignore rules
-        run: cp .openapi-generator-ignore ./${{ matrix.api_version }}/
+        run: |
+          mkdir -p ./${{ matrix.api_version }}/
+          cp .openapi-generator-ignore ./${{ matrix.api_version }}/
       - name: Install openapi-generator-cli
         run: npm install @openapitools/openapi-generator-cli -g
       - name: Generate SDK
