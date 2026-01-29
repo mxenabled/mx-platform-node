@@ -214,6 +214,41 @@ fatal: A release with this tag already exists
 
 ---
 
+### Only One Version Doesn't Publish When Only That Version Changed
+
+**Symptom**: Merged a PR that only modified `v20250224/` files, but the publish job didn't run
+
+**Expected Behavior**: `publish-v20250224` should run when only v20250224 is modified
+
+**Root Cause**: Previous versions of the workflow had a dependency chain that broke when intermediate jobs were skipped. This has been fixed with the gate job pattern.
+
+**Current Implementation** (uses gate job pattern):
+- `gate-v20111101-complete` uses GitHub Actions `always()` condition
+- This job runs even when v20111101 jobs are skipped
+- It unblocks downstream v20250224 jobs
+- Result: Publishing works correctly whether one or both versions are modified
+
+**If You're Still Seeing This Issue**:
+1. Verify you have the latest `on-push-master.yml`:
+   ```bash
+   grep -A 3 "gate-v20111101-complete" .github/workflows/on-push-master.yml
+   ```
+2. Confirm the gate job uses `always()` condition:
+   ```yaml
+   gate-v20111101-complete:
+     if: always() && needs.check-skip-publish.outputs.skip_publish == 'false'
+   ```
+3. Ensure `publish-v20250224` depends on the gate job:
+   ```yaml
+   publish-v20250224:
+     needs: [check-skip-publish, gate-v20111101-complete]
+   ```
+4. If not present, update workflow from latest template
+
+**Technical Details**: See [Workflow-and-Configuration-Reference.md](Workflow-and-Configuration-Reference.md#step-3-gate-job---unblock-v20250224-publishing) for full gate job implementation details.
+
+---
+
 ### Generation Produces Stale Spec Files
 
 **Symptom**: Generated SDK doesn't include changes that were in the OpenAPI spec

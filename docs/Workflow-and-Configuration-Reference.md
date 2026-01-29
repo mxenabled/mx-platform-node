@@ -120,42 +120,52 @@ strategy:
 #### Step 4: Commit All Changes to Master
 
 - **Git Config**: Uses `devexperience` bot account
-- **Commit Message**: `"Generated Node.js SDKs [v20111101=2.0.1,v20250224=3.0.1]"`
+- **Commit Message**: `"Generated SDK versions: v20111101,v20250224"`
 - **Files Committed**: Updated config files, generated SDK directories, updated CHANGELOG.md
 - **Target Branch**: Directly commits to `master` (no PR created for automatic flow)
 - **Atomic Operation**: All versions committed together in single commit
 
-#### Step 5: Publish to npm (Parallel Matrix Execution)
+#### Step 5: Automatic Publish and Release (via on-push-master.yml)
 
-**Architecture**: Uses `workflow_call` to invoke `publish.yml` as reusable workflow
+**Architecture**: After `Commit-and-Push` completes and pushes to master, the automatic `on-push-master.yml` workflow is triggered by GitHub's push event.
 
-**Why workflow_call?** Repository dispatch events don't support input parameters. `workflow_call` allows passing `version_directory` to specify which version directory contains the SDK to publish.
+**Why This Architecture?**
+- Separates concerns: `generate_publish_release.yml` owns generation, `on-push-master.yml` owns publishing
+- Enables consistent publish logic: All publishes (whether from automated generation or manual PR merge) go through the same workflow
+- Prevents duplicate publishes: Manual generate.yml + PR merge only triggers publish once (via on-push-master.yml)
 
-**Process**:
-1. Call `publish.yml` with version-specific directory
-2. Navigate to version directory (e.g., `v20111101/`)
-3. Install dependencies: `npm install`
-4. Publish to npm: `npm publish` (no tag for production)
-5. Use `NPM_AUTH_TOKEN` secret for authentication
+**Process** (handled by `on-push-master.yml`):
+1. Check-skip-publish job detects if `[skip-publish]` flag is in commit message
+2. For each version with path changes (v20111101/**, v20250224/**):
+   - Publish job: Call `publish.yml` with version-specific directory
+   - Release job: Call `release.yml` after publish completes
+3. Path-based matrix execution ensures only modified versions are published
+
+**Serialization Chain** (for race condition prevention):
+- v20111101 publish runs first (depends on check-skip-publish)
+- v20111101 release runs second (depends on publish)
+- **gate-v20111101-complete** runs (uses `always()`, runs even if v20111101 jobs are skipped) ⭐ **NEW - Handles conditional dependencies**
+- v20250224 publish runs third (depends on gate job) ← **Serialized to prevent npm race conditions**
+- v20250224 release runs fourth (depends on v20250224 publish)
+
+**The Gate Job Pattern** (Solves Single-Version Publishing):
+Previously, when only v20250224 changed, the workflow would fail because `publish-v20250224` depended on `release-v20111101`, which was skipped (v20111101 not modified). 
+
+Solution: The `gate-v20111101-complete` job uses GitHub Actions' `always()` condition, which runs regardless of whether upstream jobs succeeded, failed, or were skipped. This:
+- ✅ Allows downstream jobs to proceed even when intermediate jobs are skipped
+- ✅ Maintains serial ordering when both versions are modified
+- ✅ Fixes the issue where only modifying v20250224 would cause the publish to hang
+
+**Scenario Examples**:
+- **Both versions modified**: publish v20111101 → release v20111101 → gate (runs) → publish v20250224 → release v20250224
+- **Only v20250224 modified**: (v20111101 jobs skipped) → gate (always runs, unblocks downstream) → publish v20250224 → release v20250224
+- **Only v20111101 modified**: publish v20111101 → release v20111101 → gate (always runs) → publish v20250224 (skipped, not modified) → release v20250224 (skipped)
 
 **Result**:
-- `mx-platform-node@2.0.1` published to npm (v20111101 API)
-- `mx-platform-node@3.0.1` published to npm (v20250224 API)
-- Both major versions coexist on npm registry under same package name
-
-#### Step 6: Create GitHub Releases (Parallel Matrix Execution)
-
-**Same architecture as publish**: Uses `workflow_call` to invoke `release.yml`
-
-**Process**:
-1. Read version from version-specific `package.json`
-2. Create GitHub release with version-specific tag (e.g., `v2.0.1`, `v3.0.1`)
-3. Release body includes API version and links to API documentation
-
-**Result**:
-- GitHub release `v2.0.1` created (v20111101 API)
-- GitHub release `v3.0.1` created (v20250224 API)
-- Both versions have separate release history
+- Versions publish sequentially to npm (prevents registry conflicts)
+- Each version has independent release history on GitHub
+- Only affected versions are published (path-based filtering)
+- Can be skipped with `[skip-publish]` flag in commit message
 
 ---
 
@@ -259,7 +269,7 @@ Include `[skip-publish]` in commit message to prevent publish/release for this p
 
 **Workflow**: `.github/workflows/on-push-master.yml`
 
-**Architectural Approach**: Matrix strategy with conditional execution per iteration eliminates code duplication while maintaining clear, independent version management.
+**Architectural Approach**: Serial job chaining with gate job pattern ensures single-version and multi-version publishing both work correctly while preventing npm race conditions.
 
 #### Step 1: Check Skip-Publish Flag
 
@@ -279,52 +289,67 @@ Include `[skip-publish]` in commit message to prevent publish/release for this p
 - Sets output: `skip_publish` = true/false
 - Used by subsequent jobs to determine execution
 
-#### Step 2: Matrix-Based Publish Jobs
+#### Step 2: Publish and Release v20111101 (First in Serial Chain)
 
-**Matrix Definition**:
+**Jobs**: `publish-v20111101` and `release-v20111101`
+
+**publish-v20111101 executes when**:
+- No `[skip-publish]` flag
+- Files in `v20111101/**` were changed
+
+**release-v20111101 executes when**:
+- No `[skip-publish]` flag
+- Files in `v20111101/**` were changed
+- **AND** `publish-v20111101` completes
+
+**Process**:
+1. Publish job calls `publish.yml` with `version_directory: v20111101`
+2. Release job calls `release.yml` after publish completes
+
+#### Step 3: Gate Job - Unblock v20250224 Publishing
+
+**Job**: `gate-v20111101-complete`
+
 ```yaml
-strategy:
-  matrix:
-    version:
-      - api_version: v20111101
-        npm_version: 2
-      - api_version: v20250224
-        npm_version: 3
+gate-v20111101-complete:
+  runs-on: ubuntu-latest
+  needs: [check-skip-publish, release-v20111101]
+  if: always() && needs.check-skip-publish.outputs.skip_publish == 'false'
+  steps:
+    - name: Gate complete - ready for v20250224
+      run: echo "v20111101 release workflow complete (or skipped)"
 ```
 
-**For Each Version**:
+**Key Feature**: Uses `always()` condition - runs even when `release-v20111101` is skipped
 
-**Job Executes When**:
-- No upstream failures (`!cancelled()`)
+**Why This Exists**:
+- When only v20250224 is modified, `release-v20111101` is skipped, which would normally prevent downstream jobs from running
+- The gate job always runs (via `always()` condition), allowing downstream jobs to proceed
+- Enables correct behavior in all scenarios: single-version or multi-version changes
+
+**Gate Job Executes When**:
 - No `[skip-publish]` flag in commit message
-- Files in this version's directory were changed
+- Always runs regardless of whether v20111101 jobs were skipped
+
+#### Step 4: Publish and Release v20250224 (Second in Serial Chain)
+
+**Jobs**: `publish-v20250224` and `release-v20250224`
+
+**publish-v20250224 executes when**:
+- No `[skip-publish]` flag
+- Files in `v20250224/**` were changed
+- **AND** `gate-v20111101-complete` completes (ensures serial ordering)
+
+**release-v20250224 executes when**:
+- No `[skip-publish]` flag
+- Files in `v20250224/**` were changed
+- **AND** `publish-v20250224` completes
 
 **Process**:
-1. Call `publish.yml` with version-specific directory
-2. Navigate to version directory
-3. Install dependencies and publish to npm
-4. Each version publishes independently with its own version number
+1. Publish job calls `publish.yml` with `version_directory: v20250224`
+2. Release job calls `release.yml` after publish completes
 
-**Result**: Each version publishes independently, no race conditions, parallel execution when both versions changed
-
-#### Step 3: Matrix-Based Release Jobs
-
-**Same Matrix Strategy as Publish**
-
-**For Each Version**:
-
-**Job Executes When**:
-- Same conditions as publish (skip-publish flag, path match)
-- **Plus**: Only after its corresponding publish job succeeds
-
-This ensures each version's release depends only on its own publish job, preventing race conditions.
-
-**Process**:
-1. Call `release.yml` with version-specific directory
-2. Read version from that directory's `package.json`
-3. Create GitHub release with version-specific tag
-
-**Result**: Each version released independently, ordered after its corresponding publish job
+**Serial Chain Benefit**: Even though both versions could publish in parallel, the gate job ensures v20250224 waits for v20111101 release, preventing npm registry race conditions when both versions are modified.
 
 ---
 
@@ -544,17 +569,22 @@ OpenAPI Repo: Commits change to v20111101.yml and v20250224.yml
 repository_dispatch: {"api_versions": "v20111101,v20250224"}
         ↓
 generate_publish_release.yml: Triggered
+        ├─ Setup: Create matrix from api_versions
         ├─ Matrix[v20111101]: Clean, Bump, Generate (parallel)
         ├─ Matrix[v20250224]: Clean, Bump, Generate (parallel)
         ├─ Download artifacts
         ├─ Update CHANGELOG.md
         ├─ Commit to master
-        ├─ publish[v20111101]: npm publish (parallel)
-        ├─ publish[v20250224]: npm publish (parallel)
-        ├─ release[v20111101]: Create tag v2.0.1 (parallel)
-        ├─ release[v20250224]: Create tag v3.0.1 (parallel)
+        ├─ Push to master (triggers on-push-master.yml)
         ↓
-Result: Both versions published and released, CHANGELOG updated
+on-push-master.yml: Triggered (push event)
+        ├─ check-skip-publish: Verify no [skip-publish] flag
+        ├─ publish-v20111101: npm publish (path filter matched)
+        ├─ release-v20111101: Create tag v2.0.1 (after publish)
+        ├─ publish-v20250224: npm publish (serialized, after v20111101 release)
+        ├─ release-v20250224: Create tag v3.0.1 (after publish)
+        ↓
+Result: Both versions published and released sequentially, CHANGELOG updated
 ```
 
 ### Manual Flow Timeline
@@ -563,16 +593,16 @@ Result: Both versions published and released, CHANGELOG updated
 Developer: Runs generate.yml (api_version, version_bump)
         ↓
 generate.yml: Validate, Bump (if needed), Clean, Generate
-        ├─ Update CHANGELOG.md
+        ├─ Update CHANGELOG.md (via changelog_manager.rb)
         ├─ Create feature branch
         ├─ Create Pull Request
         ↓
-Code Review: Developer reviews and merges PR
+Code Review: Developer reviews and merges PR to master
         ↓
-on-push-master.yml: Triggered
-        ├─ check-skip-publish: false
-        ├─ publish[matching_version]: npm publish
-        ├─ release[matching_version]: Create tag
+on-push-master.yml: Triggered (push event)
+        ├─ check-skip-publish: false (no skip flag in merge commit)
+        ├─ publish[matching_version]: npm publish (path filter matches)
+        ├─ release[matching_version]: Create tag (after publish)
         ↓
 Result: Selected version published and released
 ```

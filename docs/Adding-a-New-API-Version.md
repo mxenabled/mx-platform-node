@@ -365,9 +365,7 @@ Use this checklist to verify you've completed all steps:
 - [ ] Updated `.github/workflows/generate.yml` with new version in dropdown options
 - [ ] Updated `.github/workflows/generate.yml` with semantic versioning validation
 - [ ] Updated `.github/workflows/generate_publish_release.yml` with version-to-config mapping in Setup job
-- [ ] Updated `.github/workflows/generate_publish_release.yml` with version variable initialization in Commit-and-Push job
-- [ ] Updated `.github/workflows/generate_publish_release.yml` with version package.json reading logic in Commit-and-Push job
-- [ ] Updated `.github/workflows/generate_publish_release.yml` with CHANGELOG entry generation in Commit-and-Push job
+- [ ] Updated `.github/changelog_manager.rb` with new version in `API_VERSION_ORDER` array
 - [ ] Updated `.github/workflows/on-push-master.yml` path triggers with `v20300101/**`
 - [ ] Updated `.github/workflows/on-push-master.yml` publish job matrix with new version
 - [ ] Updated `.github/workflows/on-push-master.yml` release job matrix with new version
@@ -407,8 +405,8 @@ Use this checklist to verify you've completed all steps:
 **Solution**: Update `npmVersion: 4.0.0` in config file to use unique major version
 
 ### generate_publish_release.yml doesn't recognize new version
-**Cause**: Version-to-config mapping missing or CHANGELOG variable/logic not added  
-**Solution**: Verify all four locations in generate_publish_release.yml are updated: mapping, variable initialization, package.json reading, and CHANGELOG entry generation
+**Cause**: Version-to-config mapping missing in Setup job or ChangelogManager not updated  
+**Solution**: Verify two locations in generate_publish_release.yml are updated: (1) version-to-config mapping in Setup job, and (2) add version to API_VERSION_ORDER in changelog_manager.rb
 
 ### on-push-master.yml doesn't trigger after merge
 **Cause**: Path trigger syntax incorrect or matrix not updated  

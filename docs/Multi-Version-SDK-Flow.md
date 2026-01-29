@@ -124,18 +124,29 @@ sequenceDiagram
 sequenceDiagram
     participant Push as Git Push
     participant Auto as on-push-<br/>master.yml
+    participant skip as check-skip-<br/>publish
     participant pub as publish.yml
     participant rel as release.yml
+    participant gate as gate-<br/>v20111101
     participant npm as npm
     participant GHRel as GitHub
 
     Push->>+Auto: Push to master<br/>(v20111101/** changed)
-    Auto->>pub: Matrix: Publish v20111101
-    pub->>npm: npm publish
-    Auto->>rel: Matrix: Release v20111101
-    rel->>GHRel: Create tag
+    Auto->>skip: Check skip-publish flag
+    skip-->>Auto: skip_publish: false
+    Auto->>pub: publish-v20111101
+    pub->>npm: npm publish v2.x.x
+    Auto->>rel: release-v20111101
+    rel->>GHRel: Create tag v2.x.x
+    rel-->>gate: Release complete
+    gate->>gate: Gate always runs<br/>(even if v20111101 skipped)
+    note right of gate: Unblocks v20250224<br/>when only v20250224 changed
+    gate-->>Auto: Gate complete
+    Auto->>pub: publish-v20250224<br/>(skipped - not modified)
     deactivate Auto
 ```
+
+**Key Feature**: The `gate-v20111101-complete` job uses `always()` to run even when intermediate jobs are skipped, ensuring v20250224 can publish when only v20250224 is modified.
 
 ---
 
