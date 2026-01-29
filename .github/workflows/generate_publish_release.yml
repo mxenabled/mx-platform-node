@@ -59,6 +59,8 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.1
+      - name: Validate configuration
+        run: ruby .github/config_validator.rb "${{ matrix.config_file }}" "${{ matrix.api_version }}"
       - name: Bump version
         id: bump_version
         run: |
@@ -75,7 +77,7 @@ jobs:
           # Versioned spec URLs with commit SHA to avoid GitHub CDN cache race condition
           # Problem: GitHub's raw.githubusercontent.com CDN caches files for 5 minutes
           # If openapi repo commits and immediately triggers this workflow, CDN may serve stale spec
-          # Solution: Use commit SHA in URL to bypass cache and guarantee correct spec version
+          # Using commit SHA in URL to bypass cache and guarantee correct spec version
           # Falls back to 'master' if openapi doesn't send commit_sha
           openapi-generator-cli generate \
             -i https://raw.githubusercontent.com/mxenabled/openapi/${{ github.event.client_payload.commit_sha || 'master' }}/openapi/${{ matrix.api_version }}.yml \

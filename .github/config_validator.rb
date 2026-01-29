@@ -75,3 +75,6 @@ class ConfigValidator
     end
   end
 end
+
+# CLI Interface - allows direct execution from GitHub Actions
+ConfigValidator.validate!(ARGV[0], ARGV[1]) if __FILE__ == $0

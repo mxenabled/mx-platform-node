@@ -2,7 +2,7 @@
 
 **Document Purpose**: Detailed technical reference for the multi-version SDK generation, publishing, and release workflows. Covers implementation details, configuration files, and system architecture.
 
-**Last Updated**: January 27, 2026  
+**Last Updated**: January 28, 2026  
 **Audience**: Developers who need to understand or modify the implementation
 
 ---
@@ -189,11 +189,17 @@ Developer manually clicks "Run workflow" on `generate.yml` in GitHub Actions UI
 
 **Workflow**: `.github/workflows/generate.yml`
 
-#### Step 1: Validate Inputs
+#### Step 1: Validate Configuration
 
-- **Config File Exists**: Verify selected API version config file exists
-- **Semantic Versioning Check**: Verify major version matches API version
-- **Fail Fast**: If validation fails, workflow stops before any generation
+- **Script**: `ruby .github/config_validator.rb <config_file> <api_version>`
+- **Validation Checks**:
+  1. **API Version Supported**: Verifies API version is in supported versions list (v20111101, v20250224)
+  2. **Config File Exists**: Checks that config file exists at specified path
+  3. **Config File Readable**: Validates YAML syntax and structure (must parse to Hash)
+  4. **Semantic Versioning**: Enforces major version matches API version (v20111101→2.x.x, v20250224→3.x.x)
+- **Fail Fast**: If any validation fails, workflow stops before version bumping or generation
+- **Error Messages**: Clear, detailed messages indicate which check failed and how to fix it
+- **See**: [Troubleshooting-Guide.md](Troubleshooting-Guide.md) for specific error messages and solutions
 
 #### Step 2: Version Bumping (Conditional)
 
@@ -407,6 +413,36 @@ The `npmVersion` field in the config file is the **authoritative source of truth
 - Protected files: `.git`, `.github`, `openapi`, other version directories, LICENSE, README, CHANGELOG
 - Required parameter: must provide version directory name
 - Error if parameter missing: raises clear error message
+
+### changelog_manager.rb - Automatic CHANGELOG Updates
+
+**File**: `.github/changelog_manager.rb`
+
+**Purpose**: Maintain a shared CHANGELOG.md across multiple API versions with proper version ordering and date ranges
+
+**Usage**: `ruby .github/changelog_manager.rb v20111101,v20250224`
+
+**Key Features**:
+- **Version Extraction**: Reads version numbers from each API's `package.json` 
+- **Priority Sorting**: Automatically sorts entries by version (newest first), ensuring changelog follows standard conventions regardless of input order
+- **Date Range Tracking**: Calculates date ranges showing what changed since the last update for each API version
+- **Atomic Updates**: Inserts new entries at the top of the changelog with proper formatting
+- **Validation**: Confirms versions are supported before processing
+
+**When It's Called**:
+- `generate.yml`: After generating a single API version (manual flow)
+- `generate_publish_release.yml`: After generating multiple API versions (automatic flow)
+
+**Example Output**:
+```markdown
+## [3.2.0] - 2025-01-28 (v20250224 API)
+Updated v20250224 API specification...
+
+## [2.5.3] - 2025-01-28 (v20111101 API)
+Updated v20111101 API specification...
+```
+
+**For Detailed Implementation**: See [Changelog-Manager.md](Changelog-Manager.md) for class methods, version ordering logic, and how to extend it for new API versions.
 
 ---
 

@@ -2,7 +2,7 @@
 
 **Document Purpose**: Quick reference for diagnosing and fixing issues in the multi-version SDK generation, publishing, and release workflows.
 
-**Last Updated**: January 27, 2026  
+**Last Updated**: January 28, 2026  
 **Audience**: Developers debugging workflow failures
 
 ---
@@ -30,6 +30,20 @@ Check in this order:
 ---
 
 ## Common Issues and Solutions
+
+### Generate Workflow: Configuration Validation Fails
+
+The `generate.yml` and `generate_publish_release.yml` workflows run configuration validation before SDK generation. If validation fails, the workflow stops immediately to prevent invalid configurations from generating code.
+
+**Validator**: `.github/config_validator.rb`
+
+Validation checks (in order):
+1. API version is supported (v20111101 or v20250224)
+2. Config file exists at specified path
+3. Config file contains valid YAML
+4. Major version in config matches API version requirement
+
+---
 
 ### Generate Workflow: Config File Not Found
 

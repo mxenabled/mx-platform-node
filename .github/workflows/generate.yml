@@ -28,37 +28,17 @@ jobs:
       spec_url: ${{ steps.validate.outputs.spec_url }}
     steps:
       - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
       - name: Validate configuration
         id: validate
         run: |
           API_VERSION="${{ github.event.inputs.api_version }}"
           CONFIG_FILE="openapi/config-${API_VERSION}.yml"
-          # Versioned spec URLs (manual workflow uses 'master' branch)
-          # Note: Manual workflow doesn't need commit SHA since developer controls timing
-          # CDN cache race condition only affects automated repository_dispatch triggers
-          # v20111101 -> https://raw.githubusercontent.com/mxenabled/openapi/master/openapi/v20111101.yml
-          # v20250224 -> https://raw.githubusercontent.com/mxenabled/openapi/master/openapi/v20250224.yml
           SPEC_URL="https://raw.githubusercontent.com/mxenabled/openapi/master/openapi/${API_VERSION}.yml"
           
-          # Check config file exists
-          if [ ! -f "$CONFIG_FILE" ]; then
-            echo "❌ Config file not found: $CONFIG_FILE"
-            exit 1
-          fi
-          
-          # Validate semantic versioning (major must match API version)
-          CURRENT_VERSION=$(grep 'npmVersion' "$CONFIG_FILE" | cut -d':' -f2 | tr -d ' ')
-          MAJOR_VERSION=$(echo "$CURRENT_VERSION" | cut -d'.' -f1)
-          
-          if [ "$API_VERSION" = "v20111101" ] && [ "$MAJOR_VERSION" != "2" ]; then
-            echo "❌ Semantic versioning error: v20111101 must have major version 2, found $MAJOR_VERSION"
-            exit 1
-          fi
-          
-          if [ "$API_VERSION" = "v20250224" ] && [ "$MAJOR_VERSION" != "3" ]; then
-            echo "❌ Semantic versioning error: v20250224 must have major version 3, found $MAJOR_VERSION"
-            exit 1
-          fi
+          ruby .github/config_validator.rb "$CONFIG_FILE" "$API_VERSION"
           
           echo "✅ Validation passed"
           echo "config_file=$CONFIG_FILE" >> $GITHUB_OUTPUT

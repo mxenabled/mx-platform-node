@@ -2,7 +2,7 @@
 
 **Document Purpose**: Quick-reference guide to the multi-version SDK generation, publishing, and release system. This is your entry point to understanding how the system works.
 
-**Last Updated**: January 27, 2026  
+**Last Updated**: January 28, 2026  
 **Read Time**: 5-10 minutes  
 **Audience**: Anyone joining the team or needing a system overview
 

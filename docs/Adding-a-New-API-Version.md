@@ -85,28 +85,28 @@ api_version:
     - v20300101    # NEW
 ```
 
-**Location 2: Semantic versioning validation**
+**Location 2: Update ConfigValidator**
 
-In the `Validate` job's validation step, add a new conditional check for your version:
+In `.github/config_validator.rb`, add your new version to the `SUPPORTED_VERSIONS` mapping:
 
-```yaml
-if [ "$API_VERSION" = "v20111101" ] && [ "$MAJOR_VERSION" != "2" ]; then
-  echo "❌ Semantic versioning error: v20111101 must have major version 2, found $MAJOR_VERSION"
-  exit 1
-fi
-
-if [ "$API_VERSION" = "v20250224" ] && [ "$MAJOR_VERSION" != "3" ]; then
-  echo "❌ Semantic versioning error: v20250224 must have major version 3, found $MAJOR_VERSION"
-  exit 1
-fi
-
-if [ "$API_VERSION" = "v20300101" ] && [ "$MAJOR_VERSION" != "4" ]; then
-  echo "❌ Semantic versioning error: v20300101 must have major version 4, found $MAJOR_VERSION"
-  exit 1
-fi
+```ruby
+class ConfigValidator
+  SUPPORTED_VERSIONS = {
+    "v20111101" => 2,  # Major version must be 2
+    "v20250224" => 3,  # Major version must be 3
+    "v20300101" => 4   # Major version must be 4 (NEW)
+  }.freeze
+  # ... rest of class unchanged
+end
 ```
 
-This ensures the major version in your config file matches the expected value for that API version.
+The `ConfigValidator` automatically validates that:
+- The API version is in `SUPPORTED_VERSIONS`
+- The major version in your config file matches the expected value (e.g., v20300101 → major version 4)
+- The config file syntax is valid YAML
+- The file exists at the specified path
+
+**No workflow changes needed** — the existing validation step in `generate.yml` calls `ConfigValidator` with your new version, and it automatically validates using the updated mapping.
 
 ### 2.2 Update generate_publish_release.yml
 
@@ -363,7 +363,7 @@ Use this checklist to verify you've completed all steps:
 - [ ] Created `openapi/config-v20300101.yml` with correct syntax
 - [ ] Major version in config is unique and sequential (4.0.0 for v20300101)
 - [ ] Updated `.github/workflows/generate.yml` with new version in dropdown options
-- [ ] Updated `.github/workflows/generate.yml` with semantic versioning validation
+- [ ] Updated `.github/config_validator.rb` with new version in `SUPPORTED_VERSIONS` mapping
 - [ ] Updated `.github/workflows/generate_publish_release.yml` with version-to-config mapping in Setup job
 - [ ] Updated `.github/changelog_manager.rb` with new version in `API_VERSION_ORDER` array
 - [ ] Updated `.github/workflows/on-push-master.yml` path triggers with `v20300101/**`
@@ -397,16 +397,16 @@ Use this checklist to verify you've completed all steps:
 **Solution**: Verify the version is listed in the `on.workflow_dispatch.inputs.api_version.options` section and YAML syntax is valid
 
 ### Semantic versioning validation fails
-**Cause**: Validation check missing for new version or major version mismatch  
-**Solution**: Ensure the validation check for your version is added to generate.yml and the major version in your config matches the expected value
+**Cause**: ConfigValidator not updated with new version or major version mismatch  
+**Solution**: Ensure the new version is added to `SUPPORTED_VERSIONS` in `.github/config_validator.rb` and the major version in your config file matches the expected value
 
 ### Generated version is 2.x.x or 3.x.x instead of 4.0.0
 **Cause**: Wrong major version in config file  
 **Solution**: Update `npmVersion: 4.0.0` in config file to use unique major version
 
 ### generate_publish_release.yml doesn't recognize new version
-**Cause**: Version-to-config mapping missing in Setup job or ChangelogManager not updated  
-**Solution**: Verify two locations in generate_publish_release.yml are updated: (1) version-to-config mapping in Setup job, and (2) add version to API_VERSION_ORDER in changelog_manager.rb
+**Cause**: Version-to-config mapping missing in Setup job, ChangelogManager not updated, or ConfigValidator not updated  
+**Solution**: Verify three locations are updated: (1) version-to-config mapping in generate_publish_release.yml Setup job, (2) add version to `API_VERSION_ORDER` in `changelog_manager.rb`, and (3) add version to `SUPPORTED_VERSIONS` in `config_validator.rb`
 
 ### on-push-master.yml doesn't trigger after merge
 **Cause**: Path trigger syntax incorrect or matrix not updated  
