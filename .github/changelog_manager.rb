@@ -11,28 +11,15 @@ class ChangelogManager
   API_VERSION_ORDER = ['v20250224', 'v20111101'].freeze
 
   class << self
-    # CLI entry point: validates arguments and updates changelog
-    # Called from GitHub Actions workflows
-    #
-    # @param versions_arg [String, nil] Versions from ARGV[0]
-    # @return [true] Returns true on success
-    # @raise SystemExit If validation fails
     def run(versions_arg)
-      # Validate versions argument
       validate_versions(versions_arg)
       update(versions_arg)
       puts "✅ CHANGELOG updated successfully"
     end
 
-    # Public interface: update CHANGELOG with new version entries
-    #
-    # @param versions [String, Array] Version(s) to update. String format: "v20250224,v20111101"
-    # @return [true] Returns true on success
-    # @raise [StandardError] If versions not found or changelog not readable
     def update(versions)
       versions_array = normalize_versions(versions)
 
-      # Check changelog exists first before doing any processing
       unless File.exist?(CHANGELOG_PATH)
         raise "Changelog not found at #{CHANGELOG_PATH}"
       end
@@ -44,16 +31,11 @@ class ChangelogManager
         [api_version, version_number]
       end
 
-      # Sort by API_VERSION_ORDER to ensure consistent ordering
       sorted_data = sort_versions(version_data)
-
-      # Read existing changelog
       current_changelog = File.read(CHANGELOG_PATH)
 
-      # Build changelog entries for each version
+      # Build changelog entries for each version and updated changelog
       entries = sorted_data.map { |api_version, version_num| build_entry(api_version, version_num, TODAY) }
-
-      # Insert entries at the top of changelog (after header)
       updated_changelog = insert_entries(current_changelog, entries)
 
       # Write back to file
@@ -84,9 +66,6 @@ class ChangelogManager
       invalid_versions.any?
     end
 
-    # Normalize versions parameter to array
-    # @param versions [String, Array]
-    # @return [Array<String>] Array of version strings
     def normalize_versions(versions)
       case versions
       when String
@@ -98,9 +77,6 @@ class ChangelogManager
       end
     end
 
-    # Read version number from a specific API version's package.json
-    # @param api_version [String] e.g., "v20250224"
-    # @return [String] Version number from package.json
     def read_package_version(api_version)
       package_json_path = File.join(BASE_PATH, api_version, 'package.json')
 
@@ -112,9 +88,7 @@ class ChangelogManager
       package_json['version']
     end
 
-    # Sort versions by API_VERSION_ORDER
-    # @param version_data [Array<Array>] Array of [api_version, version_number] pairs
-    # @return [Array<Array>] Sorted array of [api_version, version_number] pairs
+
     def sort_versions(version_data)
       version_data.sort_by do |api_version, _|
         order_index = API_VERSION_ORDER.index(api_version)
@@ -122,16 +96,10 @@ class ChangelogManager
       end
     end
 
-    # Build a single changelog entry
-    # @param api_version [String] e.g., "v20250224"
-    # @param version_number [String] e.g., "3.2.0"
-    # @param date [Date] Entry date
-    # @return [String] Formatted changelog entry
     def build_entry(api_version, version_number, date)
       date_str = date.strftime('%Y-%m-%d')
       last_change_date = extract_last_change_date(api_version)
 
-      # Format the message with last change date if found
       if last_change_date
         last_change_str = last_change_date.strftime('%Y-%m-%d')
         message = "Updated #{api_version} API specification to most current version. Please check full [API changelog](https://docs.mx.com/resources/changelog/platform) for any changes made between #{last_change_str} and #{date_str}."
@@ -147,8 +115,7 @@ class ChangelogManager
 
     # Extract the date of the last change for a given API version from the changelog
     # Finds the first entry in the changelog that mentions the api_version
-    # @param api_version [String] e.g., "v20250224"
-    # @return [Date, nil] Date of last change or nil if not found
+    # such as "v20250224" and returns date of last change or nil if not found
     def extract_last_change_date(api_version)
       return nil unless File.exist?(CHANGELOG_PATH)
 
@@ -166,24 +133,16 @@ class ChangelogManager
 
     # Insert entries into changelog after the header section
     # Finds the first ## entry and inserts new entries before it
-    #
-    # @param changelog [String] Current changelog content
-    # @param entries [Array<String>] Entries to insert
-    # @return [String] Updated changelog
     def insert_entries(changelog, entries)
       lines = changelog.split("\n")
 
-      # Find the line number of the first version entry (first line starting with ##)
       first_entry_index = lines.find_index { |line| line.start_with?('## [') }
 
       if first_entry_index.nil?
         raise "Could not find existing changelog entries. Expected format: ## [version]"
       end
 
-      # Extract header (everything before first entry)
       header = lines[0...first_entry_index]
-
-      # Get the rest (from first entry onwards)
       rest = lines[first_entry_index..]
 
       # Combine: header + new entries + rest

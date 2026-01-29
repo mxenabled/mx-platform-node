@@ -2,23 +2,25 @@ require 'rspec'
 require 'json'
 require 'date'
 require 'fileutils'
-
-# Load the class to test
 require_relative '../changelog_manager'
 
 describe ChangelogManager do
   let(:spec_dir) { File.expand_path('..', __FILE__) }
   let(:fixtures_dir) { File.join(spec_dir, 'fixtures') }
   let(:temp_dir) { File.join(spec_dir, 'tmp') }
+  let(:changelog_path) { File.join(temp_dir, 'CHANGELOG.md') }
+  let(:changelog_sample_fixture) { File.join(fixtures_dir, 'CHANGELOG_sample.md') }
+  let(:v20250224_package_fixture) { File.join(fixtures_dir, 'v20250224_package.json') }
+  let(:v20111101_package_fixture) { File.join(fixtures_dir, 'v20111101_package.json') }
 
   before(:each) do
     # Create temp directory for test files
     FileUtils.mkdir_p(temp_dir)
 
     # Stub constants to use temp directory for tests
-    stub_const('ChangelogManager::CHANGELOG_PATH', File.join(temp_dir, 'CHANGELOG.md'))
+    stub_const('ChangelogManager::CHANGELOG_PATH', changelog_path)
     stub_const('ChangelogManager::BASE_PATH', temp_dir)
-    stub_const('ChangelogManager::TODAY', Date.new(2025, 01, 28))
+    stub_const('ChangelogManager::TODAY', Date.new(2026, 01, 28))
   end
 
   after(:each) do
@@ -26,30 +28,37 @@ describe ChangelogManager do
     FileUtils.rm_rf(temp_dir) if Dir.exist?(temp_dir)
   end
 
+  # Helper methods for test setup
+  def setup_changelog
+    FileUtils.cp(changelog_sample_fixture, changelog_path)
+  end
+
+  def setup_version_directory(version_name, package_fixture)
+    version_dir = File.join(temp_dir, version_name)
+    FileUtils.mkdir_p(version_dir)
+    FileUtils.cp(package_fixture, File.join(version_dir, 'package.json'))
+    version_dir
+  end
+
+  def setup_version_with_changelog(version_name, package_fixture)
+    setup_changelog
+    setup_version_directory(version_name, package_fixture)
+  end
+
+  def read_changelog
+    File.read(changelog_path)
+  end
+
   describe '.update with single version' do
     it 'updates changelog with single version entry' do
-      # Setup
-      changelog_path = File.join(temp_dir, 'CHANGELOG.md')
-      package_dir = File.join(temp_dir, 'v20250224')
+      setup_version_with_changelog('v20250224', v20250224_package_fixture)
 
-      FileUtils.mkdir_p(package_dir)
-      FileUtils.cp(
-        File.join(fixtures_dir, 'CHANGELOG_sample.md'),
-        changelog_path
-      )
-      FileUtils.cp(
-        File.join(fixtures_dir, 'v20250224_package.json'),
-        File.join(package_dir, 'package.json')
-      )
-
-      # Execute
       result = ChangelogManager.update('v20250224')
 
-      # Verify
       expect(result).to be true
 
-      updated_content = File.read(changelog_path)
-      expect(updated_content).to include('## [3.0.0] - 2025-01-28 (v20250224 API)')
+      updated_content = read_changelog
+      expect(updated_content).to include('## [3.0.0] - 2026-01-28 (v20250224 API)')
       expect(updated_content).to include('Updated v20250224 API specification to most current version')
       expect(updated_content).to include('[API changelog]')
 
@@ -62,38 +71,19 @@ describe ChangelogManager do
 
   describe '.update with multiple versions' do
     it 'updates changelog with entries from multiple versions' do
-      # Setup
-      changelog_path = File.join(temp_dir, 'CHANGELOG.md')
-      v20250224_dir = File.join(temp_dir, 'v20250224')
-      v20111101_dir = File.join(temp_dir, 'v20111101')
+      setup_changelog
+      setup_version_directory('v20250224', v20250224_package_fixture)
+      setup_version_directory('v20111101', v20111101_package_fixture)
 
-      FileUtils.mkdir_p(v20250224_dir)
-      FileUtils.mkdir_p(v20111101_dir)
-
-      FileUtils.cp(
-        File.join(fixtures_dir, 'CHANGELOG_sample.md'),
-        changelog_path
-      )
-      FileUtils.cp(
-        File.join(fixtures_dir, 'v20250224_package.json'),
-        File.join(v20250224_dir, 'package.json')
-      )
-      FileUtils.cp(
-        File.join(fixtures_dir, 'v20111101_package.json'),
-        File.join(v20111101_dir, 'package.json')
-      )
-
-      # Execute
       result = ChangelogManager.update('v20250224,v20111101')
 
-      # Verify
       expect(result).to be true
 
-      updated_content = File.read(changelog_path)
+      updated_content = read_changelog
 
       # Both versions should be present
-      expect(updated_content).to include('## [3.0.0] - 2025-01-28 (v20250224 API)')
-      expect(updated_content).to include('## [2.0.0] - 2025-01-28 (v20111101 API)')
+      expect(updated_content).to include('## [3.0.0] - 2026-01-28 (v20250224 API)')
+      expect(updated_content).to include('## [2.0.0] - 2026-01-28 (v20111101 API)')
       expect(updated_content).to include('Updated v20250224 API specification to most current version')
       expect(updated_content).to include('Updated v20111101 API specification to most current version')
 
@@ -106,59 +96,27 @@ describe ChangelogManager do
 
   describe '.update with array versions' do
     it 'accepts versions as an array' do
-      # Setup
-      changelog_path = File.join(temp_dir, 'CHANGELOG.md')
-      package_dir = File.join(temp_dir, 'v20250224')
+      setup_version_with_changelog('v20250224', v20250224_package_fixture)
 
-      FileUtils.mkdir_p(package_dir)
-      FileUtils.cp(
-        File.join(fixtures_dir, 'CHANGELOG_sample.md'),
-        changelog_path
-      )
-      FileUtils.cp(
-        File.join(fixtures_dir, 'v20250224_package.json'),
-        File.join(package_dir, 'package.json')
-      )
-
-      # Execute with array instead of string
       result = ChangelogManager.update(['v20250224'])
 
-      # Verify
       expect(result).to be true
-      updated_content = File.read(changelog_path)
-      expect(updated_content).to include('## [3.0.0] - 2025-01-28 (v20250224 API)')
+      updated_content = read_changelog
+      expect(updated_content).to include('## [3.0.0] - 2026-01-28 (v20250224 API)')
     end
   end
 
   describe '.update sorting behavior' do
     it 'always places v20250224 before v20111101' do
-      # Setup
-      changelog_path = File.join(temp_dir, 'CHANGELOG.md')
-      v20250224_dir = File.join(temp_dir, 'v20250224')
-      v20111101_dir = File.join(temp_dir, 'v20111101')
-
-      FileUtils.mkdir_p(v20250224_dir)
-      FileUtils.mkdir_p(v20111101_dir)
-
-      FileUtils.cp(
-        File.join(fixtures_dir, 'CHANGELOG_sample.md'),
-        changelog_path
-      )
-      FileUtils.cp(
-        File.join(fixtures_dir, 'v20250224_package.json'),
-        File.join(v20250224_dir, 'package.json')
-      )
-      FileUtils.cp(
-        File.join(fixtures_dir, 'v20111101_package.json'),
-        File.join(v20111101_dir, 'package.json')
-      )
+      setup_changelog
+      setup_version_directory('v20250224', v20250224_package_fixture)
+      setup_version_directory('v20111101', v20111101_package_fixture)
 
       # Execute with reversed input order to verify sorting
       result = ChangelogManager.update('v20111101,v20250224')
 
-      # Verify
       expect(result).to be true
-      updated_content = File.read(changelog_path)
+      updated_content = read_changelog
 
       # Despite input order, v20250224 should come first
       v20250224_pos = updated_content.index('[3.0.0]')
@@ -169,52 +127,24 @@ describe ChangelogManager do
 
   describe '.update with date range behavior' do
     it 'includes date range when prior entry exists for API version' do
-      # Setup
-      changelog_path = File.join(temp_dir, 'CHANGELOG.md')
-      package_dir = File.join(temp_dir, 'v20111101')
+      setup_version_with_changelog('v20111101', v20111101_package_fixture)
 
-      FileUtils.mkdir_p(package_dir)
-      FileUtils.cp(
-        File.join(fixtures_dir, 'CHANGELOG_sample.md'),
-        changelog_path
-      )
-      FileUtils.cp(
-        File.join(fixtures_dir, 'v20111101_package.json'),
-        File.join(package_dir, 'package.json')
-      )
-
-      # Execute - updating v20111101 which has an entry dated 2025-01-15 in the fixture
       result = ChangelogManager.update('v20111101')
 
-      # Verify
       expect(result).to be true
-      updated_content = File.read(changelog_path)
+      updated_content = read_changelog
 
       # Should include the date range message
-      expect(updated_content).to include('between 2025-01-15 and 2025-01-28')
+      expect(updated_content).to include('between 2025-01-15 and 2026-01-28')
     end
 
     it 'shows no prior date when entry has no previous version' do
-      # Setup
-      changelog_path = File.join(temp_dir, 'CHANGELOG.md')
-      package_dir = File.join(temp_dir, 'v20250224')
+      setup_version_with_changelog('v20250224', v20250224_package_fixture)
 
-      FileUtils.mkdir_p(package_dir)
-      FileUtils.cp(
-        File.join(fixtures_dir, 'CHANGELOG_sample.md'),
-        changelog_path
-      )
-      FileUtils.cp(
-        File.join(fixtures_dir, 'v20250224_package.json'),
-        File.join(package_dir, 'package.json')
-      )
-
-      # Execute - v20250224 has no prior entry in the fixture
       result = ChangelogManager.update('v20250224')
 
-      # Verify
       expect(result).to be true
-      updated_content = File.read(changelog_path)
+      updated_content = read_changelog
 
       # Should include fallback message without date range
       expect(updated_content).to include('Updated v20250224 API specification to most current version. Please check full [API changelog]')
@@ -223,36 +153,17 @@ describe ChangelogManager do
     end
 
     it 'uses correct dates in range for multiple version updates' do
-      # Setup
-      changelog_path = File.join(temp_dir, 'CHANGELOG.md')
-      v20250224_dir = File.join(temp_dir, 'v20250224')
-      v20111101_dir = File.join(temp_dir, 'v20111101')
+      setup_changelog
+      setup_version_directory('v20250224', v20250224_package_fixture)
+      setup_version_directory('v20111101', v20111101_package_fixture)
 
-      FileUtils.mkdir_p(v20250224_dir)
-      FileUtils.mkdir_p(v20111101_dir)
-
-      FileUtils.cp(
-        File.join(fixtures_dir, 'CHANGELOG_sample.md'),
-        changelog_path
-      )
-      FileUtils.cp(
-        File.join(fixtures_dir, 'v20250224_package.json'),
-        File.join(v20250224_dir, 'package.json')
-      )
-      FileUtils.cp(
-        File.join(fixtures_dir, 'v20111101_package.json'),
-        File.join(v20111101_dir, 'package.json')
-      )
-
-      # Execute
       result = ChangelogManager.update('v20250224,v20111101')
 
-      # Verify
       expect(result).to be true
-      updated_content = File.read(changelog_path)
+      updated_content = read_changelog
 
       # v20111101 should have date range (prior entry on 2025-01-15)
-      expect(updated_content).to include('between 2025-01-15 and 2025-01-28')
+      expect(updated_content).to include('between 2025-01-15 and 2026-01-28')
 
       # v20250224 should NOT have date range (no prior entry)
       v20250224_section = updated_content[/## \[3\.0\.0\].*?(?=##|\z)/m]
@@ -283,63 +194,32 @@ describe ChangelogManager do
     end
 
     it 'raises error when package.json is malformed' do
-      # Setup
-      changelog_path = File.join(temp_dir, 'CHANGELOG.md')
-      package_dir = File.join(temp_dir, 'v20250224')
+      setup_changelog
+      version_dir = setup_version_directory('v20250224', v20250224_package_fixture)
+      File.write(File.join(version_dir, 'package.json'), 'invalid json {]')
 
-      FileUtils.mkdir_p(package_dir)
-      FileUtils.cp(
-        File.join(fixtures_dir, 'CHANGELOG_sample.md'),
-        changelog_path
-      )
-      File.write(
-        File.join(package_dir, 'package.json'),
-        'invalid json {]'
-      )
-
-      # Execute
       expect {
         ChangelogManager.update('v20250224')
       }.to raise_error(JSON::ParserError)
     end
 
     it 'raises error when version is not in package.json' do
-      # Setup
-      changelog_path = File.join(temp_dir, 'CHANGELOG.md')
-      package_dir = File.join(temp_dir, 'v20250224')
-
-      FileUtils.mkdir_p(package_dir)
-      FileUtils.cp(
-        File.join(fixtures_dir, 'CHANGELOG_sample.md'),
-        changelog_path
-      )
+      setup_changelog
+      version_dir = setup_version_directory('v20250224', v20250224_package_fixture)
       File.write(
-        File.join(package_dir, 'package.json'),
-        JSON.generate({ name: '@mx-platform/node' })  # Missing version
+        File.join(version_dir, 'package.json'),
+        JSON.generate({ name: '@mx-platform/node' })
       )
 
-      # Execute
       expect {
         ChangelogManager.update('v20250224')
       }.to raise_error(/Could not read version/)
     end
 
     it 'raises error when changelog has no existing entries' do
-      # Setup
-      changelog_path = File.join(temp_dir, 'CHANGELOG.md')
-      package_dir = File.join(temp_dir, 'v20250224')
+      File.write(changelog_path, "# Changelog\n\nNo entries here")
+      setup_version_directory('v20250224', v20250224_package_fixture)
 
-      FileUtils.mkdir_p(package_dir)
-      File.write(
-        changelog_path,
-        "# Changelog\n\nNo entries here"
-      )
-      FileUtils.cp(
-        File.join(fixtures_dir, 'v20250224_package.json'),
-        File.join(package_dir, 'package.json')
-      )
-
-      # Execute
       expect {
         ChangelogManager.update('v20250224')
       }.to raise_error(/Could not find existing changelog entries/)
@@ -350,28 +230,15 @@ describe ChangelogManager do
 
   describe '.run (CLI entry point)' do
     it 'validates and updates successfully with valid versions' do
-      # Setup
-      changelog_path = File.join(temp_dir, 'CHANGELOG.md')
-      package_dir = File.join(temp_dir, 'v20250224')
+      setup_version_with_changelog('v20250224', v20250224_package_fixture)
 
-      FileUtils.mkdir_p(package_dir)
-      FileUtils.cp(
-        File.join(fixtures_dir, 'CHANGELOG_sample.md'),
-        changelog_path
-      )
-      FileUtils.cp(
-        File.join(fixtures_dir, 'v20250224_package.json'),
-        File.join(package_dir, 'package.json')
-      )
-
-      # Execute
       expect {
         ChangelogManager.run('v20250224')
       }.to output(/✅ CHANGELOG updated successfully/).to_stdout
 
       # Verify changelog was updated
-      updated_content = File.read(changelog_path)
-      expect(updated_content).to include('## [3.0.0] - 2025-01-28 (v20250224 API)')
+      updated_content = read_changelog
+      expect(updated_content).to include('## [3.0.0] - 2026-01-28 (v20250224 API)')
     end
 
     it 'exits with error when versions argument is nil' do
