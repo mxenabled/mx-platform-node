@@ -2,7 +2,7 @@
 
 **Document Purpose**: Quick reference for diagnosing and fixing issues in the multi-version SDK generation, publishing, and release workflows.
 
-**Last Updated**: January 27, 2026  
+**Last Updated**: January 28, 2026  
 **Audience**: Developers debugging workflow failures
 
 ---
@@ -30,6 +30,20 @@ Check in this order:
 ---
 
 ## Common Issues and Solutions
+
+### Generate Workflow: Configuration Validation Fails
+
+The `generate.yml` and `openapi-generate-and-push.yml` workflows run configuration validation before SDK generation. If validation fails, the workflow stops immediately to prevent invalid configurations from generating code.
+
+**Validator**: `.github/config_validator.rb`
+
+Validation checks (in order):
+1. API version is supported (v20111101 or v20250224)
+2. Config file exists at specified path
+3. Config file contains valid YAML
+4. Major version in config matches API version requirement
+
+---
 
 ### Generate Workflow: Config File Not Found
 
@@ -214,6 +228,41 @@ fatal: A release with this tag already exists
 
 ---
 
+### Only One Version Doesn't Publish When Only That Version Changed
+
+**Symptom**: Merged a PR that only modified `v20250224/` files, but the publish job didn't run
+
+**Expected Behavior**: `publish-v20250224` should run when only v20250224 is modified
+
+**Root Cause**: Previous versions of the workflow had a dependency chain that broke when intermediate jobs were skipped. This has been fixed with the gate job pattern.
+
+**Current Implementation** (uses gate job pattern):
+- `gate-v20111101-complete` uses GitHub Actions `always()` condition
+- This job runs even when v20111101 jobs are skipped
+- It unblocks downstream v20250224 jobs
+- Result: Publishing works correctly whether one or both versions are modified
+
+**If You're Still Seeing This Issue**:
+1. Verify you have the latest `on-push-master.yml`:
+   ```bash
+   grep -A 3 "gate-v20111101-complete" .github/workflows/on-push-master.yml
+   ```
+2. Confirm the gate job uses `always()` condition:
+   ```yaml
+   gate-v20111101-complete:
+     if: always() && needs.check-skip-publish.outputs.skip_publish == 'false'
+   ```
+3. Ensure `publish-v20250224` depends on the gate job:
+   ```yaml
+   publish-v20250224:
+     needs: [check-skip-publish, gate-v20111101-complete]
+   ```
+4. If not present, update workflow from latest template
+
+**Technical Details**: See [Workflow-and-Configuration-Reference.md](Workflow-and-Configuration-Reference.md#step-3-gate-job---unblock-v20250224-publishing) in the "Publishing via on-push-master.yml" section for full gate job implementation details.
+
+---
+
 ### Generation Produces Stale Spec Files
 
 **Symptom**: Generated SDK doesn't include changes that were in the OpenAPI spec
@@ -226,7 +275,7 @@ fatal: A release with this tag already exists
 - Workflow runs at 2:02 PM but CDN still has 2:00 PM version
 - SDK generated from stale spec
 
-**Solution**: Already implemented in `generate_publish_release.yml`
+**Solution**: Already implemented in `openapi-generate-and-push.yml`
 - Uses commit SHA in spec URL: `raw.githubusercontent.com/mxenabled/openapi/<commit-sha>/openapi/v20111101.yml`
 - Commit SHA bypasses CDN and guarantees exact spec version
 - Nothing to do—this is automatic

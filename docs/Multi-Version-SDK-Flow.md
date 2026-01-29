@@ -2,7 +2,7 @@
 
 **Document Purpose**: Quick-reference guide to the multi-version SDK generation, publishing, and release system. This is your entry point to understanding how the system works.
 
-**Last Updated**: January 27, 2026  
+**Last Updated**: January 28, 2026  
 **Read Time**: 5-10 minutes  
 **Audience**: Anyone joining the team or needing a system overview
 
@@ -20,24 +20,30 @@ Each version is independently generated, tested, published to npm, and released 
 1. **Separate Directories**: Each API version in its own directory (`v20111101/`, `v20250224/`)
 2. **Reusable Workflows**: `workflow_call` passes version info to publish/release jobs
 3. **One Config Per Version**: `config-v20111101.yml`, `config-v20250224.yml`, etc.
-4. **Matrix Parallelization**: All versions generate/publish simultaneously
+4. **Single Entrypoint for Publishing**: All paths lead through `on-push-master.yml` for serial, controlled publishing
 5. **Safety First**: Skip-publish flags and path-based triggers prevent accidents
 
 ---
 
-## Three Ways Things Happen
+## Two Paths to Publishing
 
-### 🤖 Flow 1: Automatic (Upstream Triggers)
-OpenAPI spec changes → `generate_publish_release.yml` runs → SDK generated, published, released
+Both paths follow the same publishing mechanism: commit changes to master → `on-push-master.yml` handles serial publish/release.
+
+### 🤖 Path 1: Automatic (Upstream Triggers)
+OpenAPI spec changes → `openapi-generate-and-push.yml` generates SDK → commits to master → `on-push-master.yml` publishes and releases
 
 **When**: OpenAPI repository sends `repository_dispatch` with API versions  
 **Who**: Automated, no human intervention  
-**Result**: All specified versions generated in parallel, committed, published, released in single workflow
+**What Happens**:
+1. `openapi-generate-and-push.yml` generates all specified versions in parallel
+2. All generated files committed to master
+3. `on-push-master.yml` automatically triggered by the push
+4. `on-push-master.yml` handles serial publish/release with version gating
 
 **Key Details**: See [Workflow-and-Configuration-Reference.md](Workflow-and-Configuration-Reference.md#flow-1-automatic-multi-version-generation-repository-dispatch)
 
-### 👨‍💻 Flow 2: Manual (Developer Triggers)
-Developer runs `generate.yml` → SDK generated → PR created → Developer merges → Auto-publish triggers
+### 👨‍💻 Path 2: Manual (Developer Triggers)
+Developer runs `generate.yml` → SDK generated in feature branch → PR created → code review & approval → merge to master → `on-push-master.yml` publishes and releases
 
 **When**: Developer clicks "Run workflow" on `generate.yml`  
 **Who**: Developer (controls version selection and bump strategy)  
@@ -45,18 +51,15 @@ Developer runs `generate.yml` → SDK generated → PR created → Developer mer
 - `api_version`: Choose `v20111101` or `v20250224`
 - `version_bump`: Choose `skip`, `minor`, or `patch`
 
-**Result**: SDK generated in feature branch, PR created for review, auto-publishes on merge
+**What Happens**:
+1. `generate.yml` generates SDK in feature branch
+2. PR created for code review
+3. Developer (or team) reviews and approves
+4. PR merged to master
+5. `on-push-master.yml` automatically triggered by the merge
+6. `on-push-master.yml` handles serial publish/release with version gating
 
 **Key Details**: See [Workflow-and-Configuration-Reference.md](Workflow-and-Configuration-Reference.md#flow-2-manual-multi-version-generation-workflow-dispatch)
-
-### 🔄 Flow 3: Auto-Publish (Master Push)
-Changes pushed to `v20111101/**` or `v20250224/**` → `on-push-master.yml` runs → Publishes and releases
-
-**When**: Any commit to master with version directory changes  
-**Who**: Triggered automatically, can be skipped with `[skip-publish]` flag  
-**Safety**: Only affected version(s) published (no cross-version interference)
-
-**Key Details**: See [Workflow-and-Configuration-Reference.md](Workflow-and-Configuration-Reference.md#flow-3-auto-publish-trigger-with-path-based-matrix-execution-on-push-masteryml)
 
 ---
 
@@ -68,28 +71,27 @@ Changes pushed to `v20111101/**` or `v20250224/**` → `on-push-master.yml` runs
 sequenceDiagram
     participant OpenAPI as OpenAPI<br/>Repository
     participant GH as GitHub<br/>Actions
-    participant Gen as generate_publish<br/>_release.yml
+    participant Gen as openapi-generate-<br/>and-push.yml
+    participant Push as Push to<br/>Master
+    participant OnPush as on-push-<br/>master.yml
     participant npm as npm<br/>Registry
     participant GHRel as GitHub<br/>Releases
 
     OpenAPI->>GH: Changes to v20111101.yml<br/>and v20250224.yml<br/>(repository_dispatch)
     GH->>+Gen: Trigger workflow
     Gen->>Gen: Matrix: Generate both versions<br/>in parallel
-    Gen->>Gen: Commit to master<br/>Update CHANGELOG.md
+    Gen->>Push: Commit to master<br/>Update CHANGELOG.md
     deactivate Gen
 
-    rect rgba(0, 255, 0, .1)
-        note right of Gen: Parallel Publishing
-        par publish v20111101
-            npm->>npm: npm publish v2.0.1
-        and publish v20250224
-            npm->>npm: npm publish v3.0.1
-        and release v20111101
-            GHRel->>GHRel: Create tag v2.0.1
-        and release v20250224
-            GHRel->>GHRel: Create tag v3.0.1
-        end
-    end
+    Push->>+OnPush: Push event triggers
+    OnPush->>OnPush: Check skip-publish flag
+    OnPush->>OnPush: Serial: v20111101 publish
+    OnPush->>npm: npm publish v2.x.x
+    OnPush->>GHRel: Create tag v2.x.x
+    OnPush->>OnPush: Serial: v20250224 publish
+    OnPush->>npm: npm publish v3.x.x
+    OnPush->>GHRel: Create tag v3.x.x
+    deactivate OnPush
 ```
 
 ### Manual Flow
@@ -100,7 +102,8 @@ sequenceDiagram
     participant GH as GitHub<br/>Actions
     participant Gen as generate.yml
     participant Review as Code<br/>Review
-    participant Auto as on-push-<br/>master.yml
+    participant Merge as Merge to<br/>Master
+    participant OnPush as on-push-<br/>master.yml
     participant npm as npm
     participant GHRel as GitHub
 
@@ -110,31 +113,14 @@ sequenceDiagram
     deactivate Gen
 
     Review->>Review: Review & Approve
-    Review->>Review: Merge PR to master
+    Review->>Merge: Merge PR to master
 
-    GH->>+Auto: on-push-master.yml
-    Auto->>npm: Publish selected version
-    Auto->>GHRel: Create release
-    deactivate Auto
-```
-
-### Auto-Publish Flow
-
-```mermaid
-sequenceDiagram
-    participant Push as Git Push
-    participant Auto as on-push-<br/>master.yml
-    participant pub as publish.yml
-    participant rel as release.yml
-    participant npm as npm
-    participant GHRel as GitHub
-
-    Push->>+Auto: Push to master<br/>(v20111101/** changed)
-    Auto->>pub: Matrix: Publish v20111101
-    pub->>npm: npm publish
-    Auto->>rel: Matrix: Release v20111101
-    rel->>GHRel: Create tag
-    deactivate Auto
+    Merge->>+OnPush: Push event triggers
+    OnPush->>OnPush: Check skip-publish flag
+    OnPush->>OnPush: Serial: publish<br/>& release
+    OnPush->>npm: npm publish
+    OnPush->>GHRel: Create release
+    deactivate OnPush
 ```
 
 ---
@@ -162,15 +148,15 @@ sequenceDiagram
 
 | File | Purpose | Used By |
 |------|---------|---------|
-| `.github/workflows/generate_publish_release.yml` | Automatic generation from upstream API changes | OpenAPI repo |
+| `.github/workflows/openapi-generate-and-push.yml` | Automatic generation from upstream API changes | OpenAPI repo |
 | `.github/workflows/generate.yml` | Manual generation with version selection | Developer |
-| `.github/workflows/on-push-master.yml` | Auto-publish trigger with path-based matrix | Any master push |
-| `.github/workflows/publish.yml` | Publishes SDK to npm | publish_release & on-push-master |
-| `.github/workflows/release.yml` | Creates GitHub release | publish_release & on-push-master |
+| `.github/workflows/on-push-master.yml` | Publishes and releases SDKs on master push | Both automatic & manual flows |
+| `.github/workflows/publish.yml` | Publishes SDK to npm | on-push-master |
+| `.github/workflows/release.yml` | Creates GitHub release | on-push-master |
 | `.github/version.rb` | Bumps version in config files | Workflows |
 | `.github/clean.rb` | Removes old generated files | Workflows |
-| `openapi/config-v20111101.yml` | Config for v20111101 generation | generate_publish_release & generate |
-| `openapi/config-v20250224.yml` | Config for v20250224 generation | generate_publish_release & generate |
+| `openapi/config-v20111101.yml` | Config for v20111101 generation | openapi-generate-and-push & generate |
+| `openapi/config-v20250224.yml` | Config for v20250224 generation | openapi-generate-and-push & generate |
 | `openapi/templates/package.mustache` | npm package.json template | OpenAPI Generator |
 | `openapi/templates/README.mustache` | README.md template | OpenAPI Generator |
 
@@ -204,11 +190,14 @@ If OpenAPI repo doesn't send new version in payload, the system doesn't break:
 
 | Feature | What It Does | When It Helps |
 |---------|-------------|--------------|
+| **Serial publishing** | Each version publishes sequentially to npm (v20111101 then v20250224) | Prevents npm registry conflicts and race conditions |
 | **Path-based triggers** | Only publish if `v20111101/**` or `v20250224/**` changed | Prevents false publishes from doc-only changes |
 | **[skip-publish] flag** | Skip publish/release for this commit | During directory migrations or refactors |
-| **Matrix conditionals** | Each version publishes only if its path changed | Prevents unintended version bumps |
+| **Conditional jobs** | Each version's jobs only run if their paths changed | Prevents unintended version bumps |
 | **Version validation** | Major version must match API version | Prevents semantic versioning violations |
 | **Config file validation** | Workflow fails if config doesn't exist | Catches typos early |
+
+**Note on Serial Publishing**: We chose explicit job sequences over matrix strategies to ensure safety. See [Workflow-and-Configuration-Reference.md - Architecture Decision section](Workflow-and-Configuration-Reference.md#architecture-decision-serial-publishing-with-conditional-jobs) for detailed reasoning.
 
 ---
 

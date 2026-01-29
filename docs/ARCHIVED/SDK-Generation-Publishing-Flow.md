@@ -31,11 +31,11 @@ Both flows use the same underlying generation logic but differ in how they handl
 ## Flow 1: Automatic Generation (Repository Dispatch)
 
 ### Trigger
-OpenAPI specifications in the upstream `openapi` repository change → Repository sends `repository_dispatch` event to `mx-platform-node` → `generate_publish_release.yml` workflow is triggered
+OpenAPI specifications in the upstream `openapi` repository change → Repository sends `repository_dispatch` event to `mx-platform-node` → `openapi-generate-and-push.yml` workflow is triggered
 
 ### Current Implementation
 
-**Workflow**: `.github/workflows/generate_publish_release.yml`
+**Workflow**: `.github/workflows/openapi-generate-and-push.yml`
 
 This is the **production flow** that automatically generates, publishes, and releases SDKs when upstream APIs change.
 
@@ -233,7 +233,7 @@ supportsES6: true
 
 **Used by**: 
 - `generate.yml` (manual generation)
-- `generate_publish_release.yml` (automatic generation)
+- `openapi-generate-and-push.yml` (automatic generation)
 - `version.rb` script
 
 ### openapi/templates/
@@ -356,9 +356,9 @@ sequenceDiagram
 | `NPM_AUTH_TOKEN` | publish.yml | Authenticate to npm registry for publishing |
 | `GITHUB_TOKEN` | All workflows | GitHub API access (auto-provided, but sometimes explicitly referenced) |
 | `SLACK_WEBHOOK_URL` | All workflows | Send failure notifications to Slack |
-| `PAPI_SDK_APP_ID` | generate_publish_release.yml | GitHub App ID for custom token generation |
-| `PAPI_SDK_INSTALLATION_ID` | generate_publish_release.yml | GitHub App installation ID |
-| `PAPI_SDK_PRIVATE_KEY` | generate_publish_release.yml | GitHub App private key |
+| `PAPI_SDK_APP_ID` | openapi-generate-and-push.yml | GitHub App ID for custom token generation |
+| `PAPI_SDK_INSTALLATION_ID` | openapi-generate-and-push.yml | GitHub App installation ID |
+| `PAPI_SDK_PRIVATE_KEY` | openapi-generate-and-push.yml | GitHub App private key |
 
 ### Environment Setup
 

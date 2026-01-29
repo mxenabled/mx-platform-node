@@ -1,4 +1,4 @@
-name: Generate Publish Release
+name: "OpenAPI: Automated Generate and Push"
 
 on:
   repository_dispatch:
@@ -59,6 +59,8 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.1
+      - name: Validate configuration
+        run: ruby .github/config_validator.rb "${{ matrix.config_file }}" "${{ matrix.api_version }}"
       - name: Bump version
         id: bump_version
         run: |
@@ -75,7 +77,7 @@ jobs:
           # Versioned spec URLs with commit SHA to avoid GitHub CDN cache race condition
           # Problem: GitHub's raw.githubusercontent.com CDN caches files for 5 minutes
           # If openapi repo commits and immediately triggers this workflow, CDN may serve stale spec
-          # Solution: Use commit SHA in URL to bypass cache and guarantee correct spec version
+          # Using commit SHA in URL to bypass cache and guarantee correct spec version
           # Falls back to 'master' if openapi doesn't send commit_sha
           openapi-generator-cli generate \
             -i https://raw.githubusercontent.com/mxenabled/openapi/${{ github.event.client_payload.commit_sha || 'master' }}/openapi/${{ matrix.api_version }}.yml \
@@ -83,18 +85,13 @@ jobs:
             -c ${{ matrix.config_file }} \
             -t ./openapi/templates \
             -o ./${{ matrix.api_version }}
-      - name: Copy documentation
-        run: |
-          cp LICENSE ./${{ matrix.api_version }}/LICENSE
-          cp CHANGELOG.md ./${{ matrix.api_version }}/CHANGELOG.md
-          cp MIGRATION.md ./${{ matrix.api_version }}/MIGRATION.md
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: generated-${{ matrix.api_version }}
           path: ./${{ matrix.api_version }}
 
-  Commit-and-Push:
+  Process-and-Push:
     runs-on: ubuntu-latest
     needs: [Setup, Generate]
     steps:
@@ -118,57 +115,25 @@ jobs:
       - name: Update CHANGELOG
         run: |
           GENERATED_VERSIONS="${{ steps.track_versions.outputs.generated_versions }}"
-          DATE=$(date +%Y-%m-%d)
           
           # Only update if something was generated
           if [ -z "$GENERATED_VERSIONS" ]; then
+            echo "No versions generated, skipping changelog update"
             exit 0
           fi
           
-          # Initialize version variables as empty
-          V20111101_VERSION=""
-          V20250224_VERSION=""
+          # Convert space-separated versions to comma-separated for changelog_manager.rb
+          VERSIONS_CSV=$(echo "$GENERATED_VERSIONS" | tr ' ' ',')
+          ruby .github/changelog_manager.rb "$VERSIONS_CSV"
+      - name: Copy documentation
+        run: |
+          GENERATED_VERSIONS="${{ steps.track_versions.outputs.generated_versions }}"
           
-          # Read versions only for versions that were actually generated
           for VERSION in $GENERATED_VERSIONS; do
-            if [ "$VERSION" = "v20111101" ]; then
-              V20111101_VERSION=$(jq -r '.version' ./v20111101/package.json 2>/dev/null)
-            elif [ "$VERSION" = "v20250224" ]; then
-              V20250224_VERSION=$(jq -r '.version' ./v20250224/package.json 2>/dev/null)
-            fi
+            cp LICENSE "./$VERSION/LICENSE"
+            cp CHANGELOG.md "./$VERSION/CHANGELOG.md"
+            cp MIGRATION.md "./$VERSION/MIGRATION.md"
           done
-          
-          # Find the line number of the first version entry (first line starting with ##)
-          FIRST_ENTRY_LINE=$(grep -n "^##" CHANGELOG.md | head -1 | cut -d: -f1)
-          
-          # Extract header (everything before first entry)
-          head -n $((FIRST_ENTRY_LINE - 1)) CHANGELOG.md > /tmp/new_changelog.txt
-          
-          # Build and add changelog entries ONLY for versions that were actually generated
-          # v20250224 first (newer API version), then v20111101
-          if [ ! -z "$V20250224_VERSION" ]; then
-            cat >> /tmp/new_changelog.txt << EOF
-          
-          ## [$V20250224_VERSION] - $DATE (v20250224 API)
-          Updated v20250224 API specification.
-          [See full API changelog](https://docs.mx.com/resources/changelog/platform)
-          EOF
-          fi
-          
-          if [ ! -z "$V20111101_VERSION" ]; then
-            cat >> /tmp/new_changelog.txt << EOF
-          
-          ## [$V20111101_VERSION] - $DATE (v20111101 API)
-          Updated v20111101 API specification.
-          [See full API changelog](https://docs.mx.com/resources/changelog/platform)
-          EOF
-          fi
-          
-          # Add rest of file (from first entry onwards)
-          tail -n +$FIRST_ENTRY_LINE CHANGELOG.md >> /tmp/new_changelog.txt
-          
-          # Replace original
-          mv /tmp/new_changelog.txt CHANGELOG.md
       - name: Checkout master
         run: git checkout master
       - name: Create commit
@@ -183,32 +148,3 @@ jobs:
         run: git push origin master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  Publish-and-Release:
-    runs-on: ubuntu-latest
-    needs: [Setup, Commit-and-Push]
-    strategy:
-      matrix: ${{ fromJson(needs.Setup.outputs.matrix) }}
-    steps:
-      - name: Publish
-        uses: ./.github/workflows/publish.yml
-        with:
-          version_directory: ${{ matrix.api_version }}
-        secrets: inherit
-      - name: Release
-        uses: ./.github/workflows/release.yml
-        with:
-          version_directory: ${{ matrix.api_version }}
-        secrets: inherit
-      - name: Slack notification
-        uses: ravsamhq/notify-slack-action@v2
-        if: always()
-        with:
-          status: ${{ job.status }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          notification_title: "{repo}: {workflow} workflow"
-          message_format: "{emoji} Generated and published ${{ matrix.api_version }}"
-          footer: "<{workflow_url}|View Workflow>"
-          notify_when: "failure"
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

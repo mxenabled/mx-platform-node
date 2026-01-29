@@ -4,13 +4,16 @@ on:
   workflow_dispatch:
     inputs:
       version_directory:
-        description: 'Version directory to read version from'
+        description: 'API version directory to release from'
         required: true
-        type: string
+        type: choice
+        options:
+          - v20111101
+          - v20250224
   workflow_call:
     inputs:
       version_directory:
-        description: 'Version directory to read version from'
+        description: 'API version directory to release from'
         required: true
         type: string
 

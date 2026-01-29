@@ -1,6 +1,0 @@
-# Archived to support multiple versions. Reference
----
-npmName: mx-platform-node
-npmVersion: 2.0.0-rc.1 # Pre-release for testing new directory structure
-supportsES6: true
-.openapi-generator-ignore: true
