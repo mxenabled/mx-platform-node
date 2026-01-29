@@ -3,11 +3,19 @@ name: "OpenAPI: Automated Generate and Push"
 on:
   repository_dispatch:
     types: [generate_publish_release]
+  workflow_dispatch:
+    inputs:
+      payload_json:
+        description: 'JSON payload (e.g., {"api_versions":"v20111101","version":"patch","commit_sha":"abc123"})'
+        required: false
+        type: string
 
 env:
+  # Parse payload from workflow_dispatch if provided, otherwise empty object
+  PARSED_PAYLOAD: ${{ fromJson(github.event.inputs.payload_json || '{}') }}
   # Default to v20111101 only for backwards compatibility
   # When openapi repo sends api_versions, use that instead
-  VERSIONS_TO_GENERATE: ${{ github.event.client_payload.api_versions || 'v20111101' }}
+  VERSIONS_TO_GENERATE: ${{ github.event.client_payload.api_versions || env.PARSED_PAYLOAD.api_versions || 'v20111101' }}
 
 jobs:
   Setup:
@@ -64,7 +72,7 @@ jobs:
       - name: Bump version
         id: bump_version
         run: |
-          NEW_VERSION=$(ruby .github/version.rb ${{ github.event.client_payload.version || 'patch' }} ${{ matrix.config_file }})
+          NEW_VERSION=$(ruby .github/version.rb ${{ github.event.client_payload.version || env.PARSED_PAYLOAD.version || 'patch' }} ${{ matrix.config_file }})
           echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
       - name: Clean repo
         run: ruby .github/clean.rb ${{ matrix.api_version }}
@@ -82,7 +90,7 @@ jobs:
           # Using commit SHA in URL to bypass cache and guarantee correct spec version
           # Falls back to 'master' if openapi doesn't send commit_sha
           openapi-generator-cli generate \
-            -i https://raw.githubusercontent.com/mxenabled/openapi/${{ github.event.client_payload.commit_sha || 'master' }}/openapi/${{ matrix.api_version }}.yml \
+            -i https://raw.githubusercontent.com/mxenabled/openapi/${{ github.event.client_payload.commit_sha || env.PARSED_PAYLOAD.commit_sha || 'master' }}/openapi/${{ matrix.api_version }}.yml \
             -g typescript-axios \
             -c ${{ matrix.config_file }} \
             -t ./openapi/templates \
