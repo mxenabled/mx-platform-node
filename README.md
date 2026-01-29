@@ -1,5 +1,3 @@
-*This project is currently in **Beta**. Please open up an issue [here](https://github.com/mxenabled/mx-platform-node/issues) to report issues using the MX Platform Node.js library.*
-
 # MX Platform Node.js SDK
 
 This repository contains the Node.js SDK for the [MX Platform API](https://www.mx.com/products/platform-api). The SDK supports multiple API versions, published as independent major versions of the same npm package.
