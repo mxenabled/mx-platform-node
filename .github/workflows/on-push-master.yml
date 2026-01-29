@@ -27,48 +27,67 @@ jobs:
             echo "✅ No skip flag - proceeding with publish/release"
           fi
 
+  # Detect which API versions were modified in this push
+  # Uses dorny/paths-filter to reliably check which directories changed
+  # This allows us to run publish/release jobs only for versions that were actually modified
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      v20111101: ${{ steps.filter.outputs.v20111101 }}
+      v20250224: ${{ steps.filter.outputs.v20250224 }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            v20111101:
+              - 'v20111101/**'
+            v20250224:
+              - 'v20250224/**'
+
   # Publish and release for each version conditionally
   # Only runs if [skip-publish] flag is NOT present AND files for that version were modified
   
   publish-v20111101:
-    needs: check-skip-publish
-    if: needs.check-skip-publish.outputs.skip_publish == 'false' && contains(github.event.head_commit.modified, 'v20111101')
+    needs: [check-skip-publish, detect-changes]
+    if: needs.check-skip-publish.outputs.skip_publish == 'false' && needs.detect-changes.outputs.v20111101 == 'true'
     uses: ./.github/workflows/publish.yml
     with:
       version_directory: v20111101
     secrets: inherit
 
   release-v20111101:
-    needs: [check-skip-publish, publish-v20111101]
-    if: needs.check-skip-publish.outputs.skip_publish == 'false' && contains(github.event.head_commit.modified, 'v20111101')
+    needs: [check-skip-publish, detect-changes, publish-v20111101]
+    if: needs.check-skip-publish.outputs.skip_publish == 'false' && needs.detect-changes.outputs.v20111101 == 'true'
     uses: ./.github/workflows/release.yml
     with:
       version_directory: v20111101
     secrets: inherit
 
   # Gate job to handle serial ordering when v20111101 is modified
-  # Uses always() to run even if release-v20111101 is skipped, allowing downstream jobs to proceed
-  # This ensures v20250224 can run when only v20250224 is modified, while still maintaining
-  # serial ordering when both versions are modified
+  # Depends on release-v20111101 to enforce serial ordering (waits for v20111101 to complete)
+  # Uses always() to continue even when release-v20111101 is skipped (when v20111101 wasn't modified)
+  # This ensures: v20111101 publishes first (serially) → then v20250224 publishes (serially)
   gate-v20111101-complete:
     runs-on: ubuntu-latest
-    needs: [check-skip-publish, release-v20111101]
+    needs: [check-skip-publish, detect-changes, release-v20111101]
     if: always() && needs.check-skip-publish.outputs.skip_publish == 'false'
     steps:
-      - name: Gate complete - ready for v20250224
-        run: echo "v20111101 release workflow complete (or skipped)"
+      - name: Gate reached - v20111101 release complete (or skipped)
+        run: echo "Ready to proceed with v20250224 publication"
 
   publish-v20250224:
-    needs: [check-skip-publish, gate-v20111101-complete]
-    if: needs.check-skip-publish.outputs.skip_publish == 'false' && contains(github.event.head_commit.modified, 'v20250224')
+    needs: [check-skip-publish, detect-changes, gate-v20111101-complete]
+    if: needs.check-skip-publish.outputs.skip_publish == 'false' && needs.detect-changes.outputs.v20250224 == 'true'
     uses: ./.github/workflows/publish.yml
     with:
       version_directory: v20250224
     secrets: inherit
 
   release-v20250224:
-    needs: [check-skip-publish, publish-v20250224]
-    if: needs.check-skip-publish.outputs.skip_publish == 'false' && contains(github.event.head_commit.modified, 'v20250224')
+    needs: [check-skip-publish, detect-changes, publish-v20250224]
+    if: needs.check-skip-publish.outputs.skip_publish == 'false' && needs.detect-changes.outputs.v20250224 == 'true'
     uses: ./.github/workflows/release.yml
     with:
       version_directory: v20250224
