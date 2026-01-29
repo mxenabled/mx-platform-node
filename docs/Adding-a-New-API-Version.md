@@ -2,7 +2,7 @@
 
 **Document Purpose**: Step-by-step guide for adding support for a new API version (e.g., `v20300101`) to the mx-platform-node repository.
 
-**Last Updated**: January 28, 2026  
+**Last Updated**: January 29, 2026  
 **Time to Complete**: 30-45 minutes  
 **Prerequisites**: Familiarity with the multi-version architecture (see [Multi-Version-SDK-Flow.md](Multi-Version-SDK-Flow.md))
 
@@ -238,7 +238,7 @@ Add a new publish job for your version (copy and modify the existing v20250224 j
 
 ```yaml
 publish-v20300101:
-  needs: [check-skip-publish, detect-changes, gate-v20250224-complete]
+  needs: [check-skip-publish, detect-changes, delay-for-v20300101]
   if: needs.check-skip-publish.outputs.skip_publish == 'false' && needs.detect-changes.outputs.v20300101 == 'true'
   uses: ./.github/workflows/publish.yml
   with:
@@ -246,7 +246,7 @@ publish-v20300101:
   secrets: inherit
 ```
 
-**Important**: The `needs` array must include the **previous version's gate job** to enforce serial ordering. This ensures v20250224 finishes before v20300101 starts publishing.
+**Important**: The `needs` array must include the **delay job for this version** to enforce staggered publishing. This creates a small delay before your version starts publishing, ensuring previous versions get first chance at npm registry.
 
 **Location 4: Add release job for new version**
 
@@ -262,38 +262,40 @@ release-v20300101:
   secrets: inherit
 ```
 
-**Location 5: Add gate job for previous version**
+**Location 5: Add delay job for new version**
 
-Add a new gate job after the previous version's release to handle serial ordering:
+Add a new delay job before the publish job to create staggered publishing:
 
 ```yaml
-gate-v20250224-complete:
+delay-for-v20300101:
   runs-on: ubuntu-latest
-  needs: [check-skip-publish, detect-changes, release-v20250224]
-  if: always() && needs.check-skip-publish.outputs.skip_publish == 'false'
+  needs: [check-skip-publish, detect-changes]
+  if: needs.check-skip-publish.outputs.skip_publish == 'false'
   steps:
-    - name: Gate reached - v20250224 release complete (or skipped)
-      run: echo "Ready to proceed with v20300101 publication"
+    - name: Brief delay to stagger v20300101 publish
+      run: sleep 2
 ```
 
 **Critical implementation details**:
 
-1. **Each publish job** depends on the **previous version's gate job** (not the previous release directly)
-   - This prevents race conditions when multiple versions are modified
-   - Ensures strict serial ordering at the npm registry level
+1. **Each delay job** is independent and depends only on safety checks
+   - Does NOT depend on the previous version
+   - Always runs (assuming `[skip-publish]` flag not set)
+   - Provides a 2-second window for previous versions to start publishing
 
-2. **Each release job** depends on its corresponding publish job
+2. **Each publish job** depends on its corresponding delay job
+   - This naturally staggers version publishes without complex dependencies
+   - When only one version is modified, its delay still runs (no blocking)
+   - When multiple versions are modified, they publish sequentially with 2-second gaps
+
+3. **Each release job** depends on its corresponding publish job
    - Ensures publication completes before creating release
 
-3. **Each gate job** uses `needs: [check-skip-publish, detect-changes, release-v<VERSION>]`
-   - Waits for the previous version's release to complete
-   - The `if: always()` condition ensures the gate continues running even when the release job is **skipped**
-   - This is crucial: when the previous version isn't modified, its release is skipped, but the gate still runs and unblocks the next version
-
-4. **Each publish/release if condition** uses `needs.detect-changes.outputs.v<VERSION> == 'true'`
-   - This is more reliable than the older `contains()` pattern
-   - Uses the path-filter outputs to determine which versions changed
-   - Prevents false publishes when only docs change
+4. **Simple, non-blocking design**:
+   - No `always()` conditions needed
+   - No dependencies on other versions' jobs
+   - Delay job always runs independently
+   - Prevents race conditions through simple timing, not complex job logic
 
 ### 2.5 Verify Workflow Syntax
 

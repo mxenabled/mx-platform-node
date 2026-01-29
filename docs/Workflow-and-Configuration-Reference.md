@@ -2,7 +2,7 @@
 
 **Document Purpose**: Detailed technical reference for the multi-version SDK generation, publishing, and release workflows. Covers implementation details, configuration files, and system architecture.
 
-**Last Updated**: January 28, 2026  
+**Last Updated**: January 29, 2026  
 **Audience**: Developers who need to understand or modify the implementation
 
 ---
@@ -145,16 +145,17 @@ strategy:
 4. Path-based filtering ensures only modified versions are published, never in parallel
 
 **Serialization Chain** (for race condition prevention):
-- v20111101 publish runs first (depends on check-skip-publish)
+- v20111101 publish runs immediately (depends on check-skip-publish)
 - v20111101 release runs second (depends on publish) - waits for npm registry confirmation
-- **gate-v20111101-complete** runs (uses `always()`, runs even if v20111101 jobs are skipped) ⭐ **Critical: Enables single-version publishing**
-- v20250224 publish runs third (depends on gate job) ← **Serial ordering enforced**
+- **delay-for-v20250224** waits 2 seconds (prevents race condition by staggering v20250224) ⭐ **Critical: Enables single-version publishing**
+- v20250224 publish runs third (depends on delay) ← **Serial ordering enforced**
 - v20250224 release runs fourth (depends on v20250224 publish) - waits for npm registry confirmation
 
 **Why This Order Matters**:
 - Each version publishes to npm sequentially, never in parallel
 - npm registry expects sequential API calls; parallel publishes can cause conflicts
-- Gate job ensures this ordering works correctly whether 1 or 2 versions are modified
+- Delay job ensures v20250224 doesn't start immediately, giving v20111101 time to publish
+- This ordering works correctly whether 1 or 2 versions are modified
 - Release jobs complete before the next version starts publishing
 
 ---
@@ -289,7 +290,7 @@ publish:
 - ❌ **Harder to understand**: New developers see one job with matrix logic; harder to reason about sequence
 - ❌ **Less flexible**: Adding safety checks per version becomes complicated with matrix expansion
 
-#### Why Serial Conditionals (Our Choice)
+#### Why Serial Conditionals with Delay (Our Choice)
 
 **Serial Approach** (Explicit, safe, maintainable):
 ```yaml
@@ -297,34 +298,44 @@ publish-v20111101:
   needs: [check-skip-publish, detect-changes]
   if: needs.check-skip-publish.outputs.skip_publish == 'false' && needs.detect-changes.outputs.v20111101 == 'true'
   
+delay-for-v20250224:
+  needs: [check-skip-publish, detect-changes]
+  if: needs.check-skip-publish.outputs.skip_publish == 'false'
+  steps:
+    - run: sleep 2
+
 publish-v20250224:
-  needs: [check-skip-publish, detect-changes, gate-v20111101-complete]  # Must wait for gate
+  needs: [check-skip-publish, detect-changes, delay-for-v20250224]  # Wait for delay
   if: needs.check-skip-publish.outputs.skip_publish == 'false' && needs.detect-changes.outputs.v20250224 == 'true'
 ```
 
 **Advantages**:
-- ✅ **Safe**: v20250224 cannot start publishing until v20111101 finishes
-  - Gate job ensures serial ordering at job level, not just workflow level
+- ✅ **Safe**: v20250224 cannot start publishing until delay completes
+  - 2-second delay ensures v20111101 has time to publish first
   - npm registry sees sequential requests, no conflicts
-  - Clear happens-before relationship in GitHub Actions UI
+  - Works whether 1 or 2 versions are modified
+- ✅ **Simple**: No complex gate job logic with `always()` conditions
+  - Just a straightforward 2-second delay between version publishes
+  - Delay job always runs (depends only on safety checks)
+  - Less mental overhead for future developers
 - ✅ **Visible**: Each version has individual jobs that are easy to identify
   - GitHub Actions shows separate rows for each version
-  - Failures are obvious: "publish-v20250224 failed" vs "publish[v20250224] in matrix"
+  - Failures are obvious
   - Each job can have version-specific comments and documentation
 - ✅ **Debuggable**: Clear dependencies make it obvious what blocks what
-  - When only v20250224 is modified, you see: `publish-v20111101 (skipped)` → `gate (runs)` → `publish-v20250224 (runs)`
-  - Matrix approach would be harder to understand why certain jobs run/skip
-- ✅ **Maintainable**: Adding a new version requires adding 3 explicit jobs (publish, release, gate)
-  - More code, but each job is self-documenting
-  - No complex matrix expansion logic to understand
-  - Future developers can see the pattern easily: "oh, each version gets 3 jobs"
+  - v20250224 waits for delay, which doesn't depend on v20111101
+  - When only v20250224 is modified, you see: `delay (runs)` → `publish-v20250224 (runs)`
+  - When both are modified, you see: `publish-v20111101` and `delay` run in parallel, then `publish-v20250224` waits
+- ✅ **Maintainable**: Minimal code addition (one simple delay job)
+  - More explicit than matrix approach
+  - Future developers immediately understand: "oh, there's a delay between version publishes"
 - ✅ **Future-proof**: When you lock master, this structure stays the same
-  - Matrix would need version list hardcoded; serial jobs just live alongside each other
+  - Simple delay job that can be extended if needed
 
 **Tradeoff we accepted**:
-- We have more code (repetition): `publish-v20111101`, `publish-v20250224`, etc.
-- BUT: The repetition is worth it for safety, clarity, and debuggability
-- This is a conscious choice: **explicitness over DRY** for critical infrastructure
+- Slight overhead: 2-second delay added to every publish flow (negligible)
+- BUT: Worth it for simplicity, clarity, and the ability to publish single versions without gates
+- This is a conscious choice: **simplicity over clever infrastructure** for critical workflows
 
 
 
@@ -340,7 +351,7 @@ Include `[skip-publish]` in commit message to prevent publish/release for this p
 
 **Workflow**: `.github/workflows/on-push-master.yml`
 
-**Architectural Approach**: Serial job chaining with gate job pattern ensures single-version and multi-version publishing both work correctly while preventing npm race conditions.
+**Architectural Approach**: Serial job chaining with delay job ensures single-version and multi-version publishing both work correctly while preventing npm race conditions.
 
 #### Step 1: Check Skip-Publish Flag
 
@@ -377,47 +388,49 @@ Include `[skip-publish]` in commit message to prevent publish/release for this p
 1. Publish job calls `publish.yml` with `version_directory: v20111101`
 2. Release job calls `release.yml` after publish completes
 
-#### Step 3: Gate Job - Unblock v20250224 Publishing
+#### Step 3: Delay Job - Stagger v20250224 Publishing
 
-**Job**: `gate-v20111101-complete`
+**Job**: `delay-for-v20250224`
 
 ```yaml
-gate-v20111101-complete:
+delay-for-v20250224:
   runs-on: ubuntu-latest
-  needs: [check-skip-publish, detect-changes, release-v20111101]
-  if: always() && needs.check-skip-publish.outputs.skip_publish == 'false'
+  needs: [check-skip-publish, detect-changes]
+  if: needs.check-skip-publish.outputs.skip_publish == 'false'
   steps:
-    - name: Gate complete - ready for v20250224
-      run: echo "v20111101 release workflow complete (or skipped)"
+    - name: Brief delay to stagger v20250224 publish
+      run: sleep 2
 ```
 
-**Key Feature**: Uses `always()` condition - runs even when `release-v20111101` is skipped
+**Key Feature**: Simple 2-second delay between version publishes
 
 **Why This Pattern Exists**:
 
-The gate job solves a critical dependency problem in serial publishing:
+The delay job solves the dependency problem while keeping things simple:
 
 1. **The Problem**: 
-   - If v20250224 publish job depends on `release-v20111101`, it fails when v20111101 is skipped (not modified)
+   - If v20250224 publish depends directly on `publish-v20111101`, it fails when v20111101 is skipped (not modified)
    - When only v20250224 is modified, we want it to publish, but it's blocked by skipped v20111101 job
    - This would cause the workflow to hang/fail when only one version is modified
+   - A gate job with `always()` is complex and hard to understand
 
 2. **The Solution**:
-   - Gate job uses `always()` so it runs whether v20111101 succeeds, fails, or is skipped
-   - v20250224 jobs depend on the gate job (which always runs), not on v20111101 (which might be skipped)
-   - This unblocks v20250224 while maintaining serial ordering when both versions are modified
+   - Simple delay job that doesn't depend on v20111101
+   - v20250224 publish depends on the delay (which always runs)
+   - 2-second delay gives v20111101 time to start publishing before v20250224 does
+   - This staggering prevents npm registry race conditions without complex job logic
 
 3. **The Behavior**:
-   - **Both versions modified**: publish v20111101 → release v20111101 → gate (runs) → publish v20250224 → release v20250224
-   - **Only v20250224 modified**: (v20111101 jobs skipped) → gate (always runs, unblocks) → publish v20250224 → release v20250224
-   - **Only v20111101 modified**: publish v20111101 → release v20111101 → gate (always runs) → publish v20250224 (skipped) → release v20250224 (skipped)
+   - **Both versions modified**: publish v20111101 starts immediately, delay job starts immediately → after 2s, publish v20250224 runs
+   - **Only v20250224 modified**: delay job runs → after 2s, publish v20250224 runs (v20111101 jobs skipped, don't block)
+   - **Only v20111101 modified**: publish v20111101 runs, delay runs but is unused (no harm)
 
 **Why Not Use Direct Dependencies?**
-If v20250224 jobs depended directly on v20111101's release job, the workflow would fail whenever v20111101 was skipped (not modified). The gate job pattern enables:
+If v20250224 jobs depended directly on v20111101's publish job, the workflow would fail whenever v20111101 was skipped (not modified). The delay job pattern enables:
 - ✅ Correct behavior in single-version and multi-version scenarios
-- ✅ Maintains serial ordering when both versions change
+- ✅ Maintains serial ordering by staggering version publishes
 - ✅ Prevents race conditions at npm registry level
-- ✅ Clear, explicit dependency chain in GitHub Actions UI
+- ✅ Simple, easy-to-understand logic
 
 #### Step 4: Publish and Release v20250224 (Second in Serial Chain)
 
@@ -426,7 +439,7 @@ If v20250224 jobs depended directly on v20111101's release job, the workflow wou
 **publish-v20250224 executes when**:
 - No `[skip-publish]` flag
 - Files in `v20250224/**` were changed
-- **AND** `gate-v20111101-complete` completes (ensures serial ordering)
+- **AND** `delay-for-v20250224` completes (ensures staggered publishing)
 
 **release-v20250224 executes when**:
 - No `[skip-publish]` flag
@@ -437,7 +450,7 @@ If v20250224 jobs depended directly on v20111101's release job, the workflow wou
 1. Publish job calls `publish.yml` with `version_directory: v20250224`
 2. Release job calls `release.yml` after publish completes
 
-**Serial Chain Benefit**: Even though both versions could publish in parallel, the gate job ensures v20250224 waits for v20111101 release, preventing npm registry race conditions when both versions are modified.
+**Serial Chain Benefit**: The 2-second delay before v20250224 starts publishing ensures v20111101 gets first chance at npm registry, preventing race conditions when both versions are modified.
 
 ---
 
