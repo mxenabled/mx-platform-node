@@ -2,7 +2,7 @@
 
 **Document Purpose**: Quick reference for diagnosing and fixing issues in the multi-version SDK generation, publishing, and release workflows.
 
-**Last Updated**: January 28, 2026  
+**Last Updated**: January 29, 2026  
 **Audience**: Developers debugging workflow failures
 
 ---
@@ -234,32 +234,37 @@ fatal: A release with this tag already exists
 
 **Expected Behavior**: `publish-v20250224` should run when only v20250224 is modified
 
-**Root Cause**: Previous versions of the workflow had a dependency chain that broke when intermediate jobs were skipped. This has been fixed with the gate job pattern.
+**Root Cause**: Previous versions of the workflow had dependencies that broke when intermediate jobs were skipped. This has been fixed with the delay job pattern.
 
-**Current Implementation** (uses gate job pattern):
-- `gate-v20111101-complete` uses GitHub Actions `always()` condition
-- This job runs even when v20111101 jobs are skipped
-- It unblocks downstream v20250224 jobs
+**Current Implementation** (uses delay job pattern):
+- `delay-for-v20250224` runs independently of other versions
+- This delay job always runs (depends only on safety checks, not other versions)
+- It provides a 2-second window for previous versions to start publishing first
+- v20250224 publish depends on this delay (not on v20111101's release)
 - Result: Publishing works correctly whether one or both versions are modified
 
 **If You're Still Seeing This Issue**:
 1. Verify you have the latest `on-push-master.yml`:
    ```bash
-   grep -A 3 "gate-v20111101-complete" .github/workflows/on-push-master.yml
+   grep -A 5 "delay-for-v20250224" .github/workflows/on-push-master.yml
    ```
-2. Confirm the gate job uses `always()` condition:
+2. Confirm the delay job is independent:
    ```yaml
-   gate-v20111101-complete:
-     if: always() && needs.check-skip-publish.outputs.skip_publish == 'false'
+   delay-for-v20250224:
+     needs: [check-skip-publish, detect-changes]
+     if: needs.check-skip-publish.outputs.skip_publish == 'false'
+     steps:
+       - name: Brief delay to stagger v20250224 publish
+         run: sleep 2
    ```
-3. Ensure `publish-v20250224` depends on the gate job:
+3. Ensure `publish-v20250224` depends on the delay job:
    ```yaml
    publish-v20250224:
-     needs: [check-skip-publish, gate-v20111101-complete]
+     needs: [check-skip-publish, detect-changes, delay-for-v20250224]
    ```
 4. If not present, update workflow from latest template
 
-**Technical Details**: See [Workflow-and-Configuration-Reference.md](Workflow-and-Configuration-Reference.md#step-3-gate-job---unblock-v20250224-publishing) in the "Publishing via on-push-master.yml" section for full gate job implementation details.
+**Technical Details**: See [Workflow-and-Configuration-Reference.md](Workflow-and-Configuration-Reference.md#step-3-delay-job---stagger-v20250224-publishing) in the "Publishing via on-push-master.yml" section for full delay job implementation details.
 
 ---
 
