@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ⚠️ BREAKING CHANGES (from v2.x.x)
 
-This is a major version bump because it targets a new API version. If you are currently using `mx-platform-node@^2`, this is a new API version (`v20250224`) with potentially significant changes. **See the [MX Platform API Migration Guide](https://docs.mx.com/api-reference/platform-api/overview/migration) for detailed API breaking changes and migration instructions.**
+This is a major version bump because it targets a new API version `v20250224`. If you are currently using `mx-platform-node@^2`, this is a new API version with potentially significant changes. **See the [MX Platform API Migration Guide](https://docs.mx.com/api-reference/platform-api/overview/migration) for detailed API breaking changes and migration instructions.**
 
 ### Added
 - Initial support for MX Platform API `v20250224`
