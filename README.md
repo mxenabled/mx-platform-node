@@ -4,10 +4,10 @@ This repository contains the Node.js SDK for the [MX Platform API](https://www.m
 
 ## Which API Version Do You Need?
 
-| API Version | npm Package | Documentation |
-|---|---|---|
-| **v20111101** | `mx-platform-node@^2` | [v20111101 SDK README](./v20111101/README.md) |
-| **v20250224** | `mx-platform-node@^3` | [v20250224 SDK README](./v20250224/README.md) |
+| API Version | npm Package | Major Versions | Documentation |
+|---|---|---|---|
+| **v20111101** | `mx-platform-node@^2` | 2.x.x | [v20111101 SDK README](./v20111101/README.md), [v20111101 API Docs](https://docs.mx.com/api-reference/platform-api/v20111101/reference/mx-platform-api/)|
+| **v20250224** | `mx-platform-node@^3` | 3.x.x | [v20250224 SDK README](./v20250224/README.md), [v20250224 API Docs](https://docs.mx.com/api-reference/platform-api/reference/mx-platform-api/)|
 
 ## Installation
 
