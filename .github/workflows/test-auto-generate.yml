@@ -133,11 +133,17 @@ jobs:
           echo "📋 Generated files in test-${{ matrix.api_version }}/:"
           ls -la ./test-${{ matrix.api_version }}/
 
-      - name: Upload artifacts
+      - name: Upload SDK artifacts
         uses: actions/upload-artifact@v4
         with:
           name: test-generated-${{ matrix.api_version }}
           path: ./test-${{ matrix.api_version }}
+
+      - name: Upload config artifact (for version bump persistence)
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-config-${{ matrix.api_version }}
+          path: ${{ matrix.config_file }}
 
   Process-and-Push:
     runs-on: ubuntu-latest
@@ -156,6 +162,22 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: ./test-generated
+
+      - name: Restore config files from artifacts
+        run: |
+          echo "📋 Restoring config files from artifacts..."
+          if [ -d "./test-generated/test-config-v20111101" ]; then
+            echo "📋 Restoring test-config-v20111101.yml"
+            cp ./test-generated/test-config-v20111101/* ./openapi/test-config-v20111101.yml 2>/dev/null || echo "  (file not found in artifact)"
+          fi
+          if [ -d "./test-generated/test-config-v20250224" ]; then
+            echo "📋 Restoring test-config-v20250224.yml"
+            cp ./test-generated/test-config-v20250224/* ./openapi/test-config-v20250224.yml 2>/dev/null || echo "  (file not found in artifact)"
+          fi
+          echo "📋 Config files after restoration:"
+          cat ./openapi/test-config-v20111101.yml 2>/dev/null || echo "  test-config-v20111101.yml not available"
+          echo "---"
+          cat ./openapi/test-config-v20250224.yml 2>/dev/null || echo "  test-config-v20250224.yml not available"
 
       - name: Move generated files and track versions
         id: track_versions
@@ -213,9 +235,13 @@ jobs:
           cp CHANGELOG.md CHANGELOG.md.bak
           cp TEST-CHANGELOG.md CHANGELOG.md
 
-          VERSIONS_CSV=$(echo "$GENERATED_VERSIONS" | xargs | tr ' ' ',')
-          echo "📋 Updating TEST-CHANGELOG for versions: $VERSIONS_CSV"
-          ruby .github/changelog_manager.rb "$VERSIONS_CSV"
+          # *** ISSUE 2 FIX: Pass test directory names to changelog_manager.rb ***
+          # Instead of "v20111101", pass "test-v20111101" so changelog_manager reads from
+          # test-v20111101/package.json (version 98.1.0) not v20111101/package.json (version 2.0.0)
+          TEST_VERSIONS_CSV=$(echo "$GENERATED_VERSIONS" | xargs | sed 's/v20111101/test-v20111101/g' | sed 's/v20250224/test-v20250224/g' | tr ' ' ',')
+          echo "📋 Updating TEST-CHANGELOG for versions: $TEST_VERSIONS_CSV"
+          echo "📋 (directory names: converting api versions to test- prefixed directories)"
+          ruby .github/changelog_manager.rb "$TEST_VERSIONS_CSV"
 
           # Move updated changelog to TEST-CHANGELOG and restore real one
           cp CHANGELOG.md TEST-CHANGELOG.md
