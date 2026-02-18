@@ -7,7 +7,7 @@ on:
       - 'v20111101/**'
       - 'v20250224/**'
   repository_dispatch:
-    types: [manual_push_to_master]
+    types: [automated_push_to_master]
 
 jobs:
   # Check for skip-publish flag in commit message. This allows skipping publish/release for specific scenarios,

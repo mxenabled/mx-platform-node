@@ -208,7 +208,7 @@ jobs:
         uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ steps.generate_token.outputs.token }}
-          event-type: manual_push_to_master
+          event-type: automated_push_to_master
       
       - name: Slack notification
         uses: ravsamhq/notify-slack-action@v2

@@ -2,7 +2,7 @@
 
 **Document Purpose**: Step-by-step guide for adding support for a new API version (e.g., `v20300101`) to the mx-platform-node repository.
 
-**Last Updated**: January 29, 2026  
+**Last Updated**: February 18, 2026  
 **Time to Complete**: 30-45 minutes  
 **Prerequisites**: Familiarity with the multi-version architecture (see [Multi-Version-SDK-Flow.md](Multi-Version-SDK-Flow.md))
 
@@ -152,6 +152,8 @@ version_directory:
 
 This workflow is automatically triggered by the OpenAPI repository to generate and push SDKs for all versions in parallel.
 
+**Note**: The existing infrastructure handles config file artifact upload/download between Generate and Process-and-Push jobs automatically. You only need to add the version-to-config mapping below — the artifact pipeline will pick up your new config file without additional changes.
+
 **Location 1: Version-to-config mapping**
 
 In the `Setup` job's `Set up matrix` step, find the section with the version-to-config mapping and add an `elif` branch for your new version:
@@ -228,9 +230,11 @@ on:
       - 'v20111101/**'
       - 'v20250224/**'
       - 'v20300101/**'    # NEW
+  repository_dispatch:
+    types: [automated_push_to_master]  # No changes needed here
 ```
 
-This ensures the workflow triggers when changes to your version directory are pushed to master.
+This ensures the workflow triggers when changes to your version directory are pushed to master. The `repository_dispatch` trigger does not need modification — it is used by `openapi-generate-and-push.yml` to trigger this workflow after automated pushes, and works regardless of which version directories changed.
 
 **Location 3: Add publish job for new version**
 
