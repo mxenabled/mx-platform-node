@@ -17,8 +17,9 @@ jobs:
     steps:
       - name: Check for [skip-publish] flag in commit message
         id: check
+        env:
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
         run: |
-          COMMIT_MSG="${{ github.event.head_commit.message }}"
           if [[ "$COMMIT_MSG" == *"[skip-publish]"* ]]; then
             echo "skip_publish=true" >> $GITHUB_OUTPUT
             echo "🚫 [skip-publish] flag detected - skipping all publish/release jobs"
