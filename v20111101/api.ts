@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * MX Platform API
- * The MX Platform API is a powerful, fully-featured API designed to make aggregating and enhancing financial data easy and reliable. It can seamlessly connect your app or website to tens of thousands of financial institutions.  Just getting started? See our [use case guides](/use-cases/). 
+ * The MX Platform API is a powerful, fully-featured API designed to make aggregating and enhancing financial data easy and reliable. It can seamlessly connect your app or website to tens of thousands of financial institutions.  Just getting started? See our [use case guides](/use-cases/).  
  *
  * The version of the OpenAPI document: 20111101
  * 
@@ -3234,7 +3234,7 @@ export interface InstitutionResponse {
      */
     'forgot_username_url'?: string | null;
     /**
-     * 
+     * Render this text when end users are asked for their credentials, as it helps end users provide the correct credentials when creating a new member. May contain `<a></a>` tags to link to explanatory material.
      * @type {string}
      * @memberof InstitutionResponse
      */
@@ -4627,16 +4627,16 @@ export interface MemberResponse {
     'most_recent_job_detail_code'?: number | null;
     /**
      * 
-     * @type {boolean}
+     * @type {string}
      * @memberof MemberResponse
      */
-    'most_recent_job_detail_text'?: boolean | null;
+    'most_recent_job_detail_text'?: string | null;
     /**
      * 
-     * @type {boolean}
+     * @type {string}
      * @memberof MemberResponse
      */
-    'most_recent_job_guid'?: boolean | null;
+    'most_recent_job_guid'?: string | null;
     /**
      * 
      * @type {string}
@@ -8941,7 +8941,7 @@ export interface WidgetRequest {
      */
     'disable_background_agg'?: boolean;
     /**
-     * Only use this option if the `widget_type` is set to `connect_widget`. This determines whether the institution search is displayed within the Connect Widget. This option must be used with `current_institution_code`, `current_instituion_guid`, or `current_member_guid`. When set to `true`, the institution search feature will be disabled and end users will not be able to navigate to it. Defaults to `false`. 
+     * Only use this option if the `widget_type` is set to `connect_widget`. This determines whether the institution search is displayed within the Connect Widget. This option must be used with `current_institution_code`, `current_instituion_guid`, or `current_member_guid`. When set to `true`, the institution search feature will be disabled and end users will not be able to navigate to it. Defaults to `false`. If you set `disable_institution_search` to `true`, you must also listen for the [backToSearch event](/connect/guides/handling-events/#back-to-search) to intercept the user from navigating back to search during the flow. Don\'t listen for any Primary Action postMessages when you disable search.  All buttons that will take a user to the search institution page are still displayed in the Connect Widget experience and your user can still select them. This may trigger during several steps in the Connect Widget flow, such as Connected, MDV/Microdeposits Verified, Login Error, and Credentials/OAuth (back button). 
      * @type {boolean}
      * @memberof WidgetRequest
      */
@@ -9404,7 +9404,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * This endpoint returns a list of all the accounts associated with the specified `user`.  :::warning This request will not return the full account number. It may return the last four digits of the account number if that information has been provided during aggregation. If you need the full account number, please refer to [List account numbers by member](https://docs.mx.com/api-reference/platform-api/reference/list-account-numbers-by-member/), [List account numbers by account](https://docs.mx.com/api-reference/platform-api/reference/list-account-numbers-by-account/), or the [Fetch Account and Routing Numbers](https://docs.mx.com/products/connectivity/instant-account-verification/fetch-account-routing-number-api/#4-read-the-account-numbers) guide. ::: 
+         * This endpoint returns a list of all the accounts associated with the specified `user`.  :::warning This request will not return the full account number. It may return the last four digits of the account number if that information has been provided during aggregation. If you need the full account number, please refer to [List account numbers by member](/api-reference/platform-api/reference/list-account-numbers-by-member/) or [List account numbers by account](/api-reference/platform-api/reference/list-account-numbers-by-account/). ::: 
          * @summary List accounts
          * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
          * @param {number} [page] Results are paginated. Specify current page.
@@ -9699,7 +9699,7 @@ export const AccountsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * This endpoint returns a list of all the accounts associated with the specified `user`.  :::warning This request will not return the full account number. It may return the last four digits of the account number if that information has been provided during aggregation. If you need the full account number, please refer to [List account numbers by member](https://docs.mx.com/api-reference/platform-api/reference/list-account-numbers-by-member/), [List account numbers by account](https://docs.mx.com/api-reference/platform-api/reference/list-account-numbers-by-account/), or the [Fetch Account and Routing Numbers](https://docs.mx.com/products/connectivity/instant-account-verification/fetch-account-routing-number-api/#4-read-the-account-numbers) guide. ::: 
+         * This endpoint returns a list of all the accounts associated with the specified `user`.  :::warning This request will not return the full account number. It may return the last four digits of the account number if that information has been provided during aggregation. If you need the full account number, please refer to [List account numbers by member](/api-reference/platform-api/reference/list-account-numbers-by-member/) or [List account numbers by account](/api-reference/platform-api/reference/list-account-numbers-by-account/). ::: 
          * @summary List accounts
          * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
          * @param {number} [page] Results are paginated. Specify current page.
@@ -9840,7 +9840,7 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.listMemberAccounts(userGuid, memberGuid, memberIsManagedByUser, page, recordsPerPage, options).then((request) => request(axios, basePath));
         },
         /**
-         * This endpoint returns a list of all the accounts associated with the specified `user`.  :::warning This request will not return the full account number. It may return the last four digits of the account number if that information has been provided during aggregation. If you need the full account number, please refer to [List account numbers by member](https://docs.mx.com/api-reference/platform-api/reference/list-account-numbers-by-member/), [List account numbers by account](https://docs.mx.com/api-reference/platform-api/reference/list-account-numbers-by-account/), or the [Fetch Account and Routing Numbers](https://docs.mx.com/products/connectivity/instant-account-verification/fetch-account-routing-number-api/#4-read-the-account-numbers) guide. ::: 
+         * This endpoint returns a list of all the accounts associated with the specified `user`.  :::warning This request will not return the full account number. It may return the last four digits of the account number if that information has been provided during aggregation. If you need the full account number, please refer to [List account numbers by member](/api-reference/platform-api/reference/list-account-numbers-by-member/) or [List account numbers by account](/api-reference/platform-api/reference/list-account-numbers-by-account/). ::: 
          * @summary List accounts
          * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
          * @param {number} [page] Results are paginated. Specify current page.
@@ -9989,7 +9989,7 @@ export class AccountsApi extends BaseAPI {
     }
 
     /**
-     * This endpoint returns a list of all the accounts associated with the specified `user`.  :::warning This request will not return the full account number. It may return the last four digits of the account number if that information has been provided during aggregation. If you need the full account number, please refer to [List account numbers by member](https://docs.mx.com/api-reference/platform-api/reference/list-account-numbers-by-member/), [List account numbers by account](https://docs.mx.com/api-reference/platform-api/reference/list-account-numbers-by-account/), or the [Fetch Account and Routing Numbers](https://docs.mx.com/products/connectivity/instant-account-verification/fetch-account-routing-number-api/#4-read-the-account-numbers) guide. ::: 
+     * This endpoint returns a list of all the accounts associated with the specified `user`.  :::warning This request will not return the full account number. It may return the last four digits of the account number if that information has been provided during aggregation. If you need the full account number, please refer to [List account numbers by member](/api-reference/platform-api/reference/list-account-numbers-by-member/) or [List account numbers by account](/api-reference/platform-api/reference/list-account-numbers-by-account/). ::: 
      * @summary List accounts
      * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
      * @param {number} [page] Results are paginated. Specify current page.
@@ -13051,7 +13051,7 @@ export const InstitutionsApiAxiosParamCreator = function (configuration?: Config
          * @summary List favorite institutions
          * @param {Array<string>} [isoCountryCode] An array of strings that filters institutions in the widget by the specified country code. Acceptable codes include &#x60;US&#x60;, &#x60;CA&#x60;, and &#x60;MX&#x60; (Mexico).
          * @param {number} [page] Results are paginated. Specify current page.
-         * @param {number} [recordsPerPage] This specifies the number of records to be returned on each page. Defaults to &#x60;25&#x60;. The valid range is from &#x60;10&#x60; to &#x60;100&#x60;. If the value exceeds &#x60;100&#x60;, the default value of &#x60;25&#x60; will be used instead.
+         * @param {number} [recordsPerPage] This specifies the number of records to be returned on each page. Defaults to &#x60;25&#x60;. The valid range is from &#x60;10&#x60; to &#x60;1000&#x60;. If the value exceeds &#x60;1000&#x60;, the default value of &#x60;25&#x60; will be used instead.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13149,7 +13149,7 @@ export const InstitutionsApiAxiosParamCreator = function (configuration?: Config
          * @param {string} [name] This will list only institutions in which the appended string appears.
          * @param {Array<string>} [isoCountryCode] An array of strings that filters institutions in the widget by the specified country code. Acceptable codes include &#x60;US&#x60;, &#x60;CA&#x60;, and &#x60;MX&#x60; (Mexico).
          * @param {number} [page] Results are paginated. Specify current page.
-         * @param {number} [recordsPerPage] This specifies the number of records to be returned on each page. Defaults to &#x60;25&#x60;. The valid range is from &#x60;10&#x60; to &#x60;100&#x60;. If the value exceeds &#x60;100&#x60;, the default value of &#x60;25&#x60; will be used instead.
+         * @param {number} [recordsPerPage] This specifies the number of records to be returned on each page. Defaults to &#x60;25&#x60;. The valid range is from &#x60;10&#x60; to &#x60;1000&#x60;. If the value exceeds &#x60;1000&#x60;, the default value of &#x60;25&#x60; will be used instead.
          * @param {boolean} [supportsAccountIdentification] Filter only institutions which support account identification.
          * @param {boolean} [supportsAccountStatement] Filter only institutions which support account statements.
          * @param {boolean} [supportsAccountVerification] Filter only institutions which support account verification.
@@ -13270,7 +13270,7 @@ export const InstitutionsApiFp = function(configuration?: Configuration) {
          * @summary List favorite institutions
          * @param {Array<string>} [isoCountryCode] An array of strings that filters institutions in the widget by the specified country code. Acceptable codes include &#x60;US&#x60;, &#x60;CA&#x60;, and &#x60;MX&#x60; (Mexico).
          * @param {number} [page] Results are paginated. Specify current page.
-         * @param {number} [recordsPerPage] This specifies the number of records to be returned on each page. Defaults to &#x60;25&#x60;. The valid range is from &#x60;10&#x60; to &#x60;100&#x60;. If the value exceeds &#x60;100&#x60;, the default value of &#x60;25&#x60; will be used instead.
+         * @param {number} [recordsPerPage] This specifies the number of records to be returned on each page. Defaults to &#x60;25&#x60;. The valid range is from &#x60;10&#x60; to &#x60;1000&#x60;. If the value exceeds &#x60;1000&#x60;, the default value of &#x60;25&#x60; will be used instead.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13297,7 +13297,7 @@ export const InstitutionsApiFp = function(configuration?: Configuration) {
          * @param {string} [name] This will list only institutions in which the appended string appears.
          * @param {Array<string>} [isoCountryCode] An array of strings that filters institutions in the widget by the specified country code. Acceptable codes include &#x60;US&#x60;, &#x60;CA&#x60;, and &#x60;MX&#x60; (Mexico).
          * @param {number} [page] Results are paginated. Specify current page.
-         * @param {number} [recordsPerPage] This specifies the number of records to be returned on each page. Defaults to &#x60;25&#x60;. The valid range is from &#x60;10&#x60; to &#x60;100&#x60;. If the value exceeds &#x60;100&#x60;, the default value of &#x60;25&#x60; will be used instead.
+         * @param {number} [recordsPerPage] This specifies the number of records to be returned on each page. Defaults to &#x60;25&#x60;. The valid range is from &#x60;10&#x60; to &#x60;1000&#x60;. If the value exceeds &#x60;1000&#x60;, the default value of &#x60;25&#x60; will be used instead.
          * @param {boolean} [supportsAccountIdentification] Filter only institutions which support account identification.
          * @param {boolean} [supportsAccountStatement] Filter only institutions which support account statements.
          * @param {boolean} [supportsAccountVerification] Filter only institutions which support account verification.
@@ -13335,7 +13335,7 @@ export const InstitutionsApiFactory = function (configuration?: Configuration, b
          * @summary List favorite institutions
          * @param {Array<string>} [isoCountryCode] An array of strings that filters institutions in the widget by the specified country code. Acceptable codes include &#x60;US&#x60;, &#x60;CA&#x60;, and &#x60;MX&#x60; (Mexico).
          * @param {number} [page] Results are paginated. Specify current page.
-         * @param {number} [recordsPerPage] This specifies the number of records to be returned on each page. Defaults to &#x60;25&#x60;. The valid range is from &#x60;10&#x60; to &#x60;100&#x60;. If the value exceeds &#x60;100&#x60;, the default value of &#x60;25&#x60; will be used instead.
+         * @param {number} [recordsPerPage] This specifies the number of records to be returned on each page. Defaults to &#x60;25&#x60;. The valid range is from &#x60;10&#x60; to &#x60;1000&#x60;. If the value exceeds &#x60;1000&#x60;, the default value of &#x60;25&#x60; will be used instead.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13360,7 +13360,7 @@ export const InstitutionsApiFactory = function (configuration?: Configuration, b
          * @param {string} [name] This will list only institutions in which the appended string appears.
          * @param {Array<string>} [isoCountryCode] An array of strings that filters institutions in the widget by the specified country code. Acceptable codes include &#x60;US&#x60;, &#x60;CA&#x60;, and &#x60;MX&#x60; (Mexico).
          * @param {number} [page] Results are paginated. Specify current page.
-         * @param {number} [recordsPerPage] This specifies the number of records to be returned on each page. Defaults to &#x60;25&#x60;. The valid range is from &#x60;10&#x60; to &#x60;100&#x60;. If the value exceeds &#x60;100&#x60;, the default value of &#x60;25&#x60; will be used instead.
+         * @param {number} [recordsPerPage] This specifies the number of records to be returned on each page. Defaults to &#x60;25&#x60;. The valid range is from &#x60;10&#x60; to &#x60;1000&#x60;. If the value exceeds &#x60;1000&#x60;, the default value of &#x60;25&#x60; will be used instead.
          * @param {boolean} [supportsAccountIdentification] Filter only institutions which support account identification.
          * @param {boolean} [supportsAccountStatement] Filter only institutions which support account statements.
          * @param {boolean} [supportsAccountVerification] Filter only institutions which support account verification.
@@ -13396,7 +13396,7 @@ export class InstitutionsApi extends BaseAPI {
      * @summary List favorite institutions
      * @param {Array<string>} [isoCountryCode] An array of strings that filters institutions in the widget by the specified country code. Acceptable codes include &#x60;US&#x60;, &#x60;CA&#x60;, and &#x60;MX&#x60; (Mexico).
      * @param {number} [page] Results are paginated. Specify current page.
-     * @param {number} [recordsPerPage] This specifies the number of records to be returned on each page. Defaults to &#x60;25&#x60;. The valid range is from &#x60;10&#x60; to &#x60;100&#x60;. If the value exceeds &#x60;100&#x60;, the default value of &#x60;25&#x60; will be used instead.
+     * @param {number} [recordsPerPage] This specifies the number of records to be returned on each page. Defaults to &#x60;25&#x60;. The valid range is from &#x60;10&#x60; to &#x60;1000&#x60;. If the value exceeds &#x60;1000&#x60;, the default value of &#x60;25&#x60; will be used instead.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof InstitutionsApi
@@ -13425,7 +13425,7 @@ export class InstitutionsApi extends BaseAPI {
      * @param {string} [name] This will list only institutions in which the appended string appears.
      * @param {Array<string>} [isoCountryCode] An array of strings that filters institutions in the widget by the specified country code. Acceptable codes include &#x60;US&#x60;, &#x60;CA&#x60;, and &#x60;MX&#x60; (Mexico).
      * @param {number} [page] Results are paginated. Specify current page.
-     * @param {number} [recordsPerPage] This specifies the number of records to be returned on each page. Defaults to &#x60;25&#x60;. The valid range is from &#x60;10&#x60; to &#x60;100&#x60;. If the value exceeds &#x60;100&#x60;, the default value of &#x60;25&#x60; will be used instead.
+     * @param {number} [recordsPerPage] This specifies the number of records to be returned on each page. Defaults to &#x60;25&#x60;. The valid range is from &#x60;10&#x60; to &#x60;1000&#x60;. If the value exceeds &#x60;1000&#x60;, the default value of &#x60;25&#x60; will be used instead.
      * @param {boolean} [supportsAccountIdentification] Filter only institutions which support account identification.
      * @param {boolean} [supportsAccountStatement] Filter only institutions which support account statements.
      * @param {boolean} [supportsAccountVerification] Filter only institutions which support account verification.
@@ -17004,7 +17004,7 @@ export const MicrodepositsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Use this endpoint to read the attributes of a specific microdeposit according to its unique GUID. <br /><br /> Webhooks for microdeposit status changes are triggered when a status changes. The actual status of the microdeposit guid updates every minute. You may force a status update by calling the read microdeposit endpoint.
+         * Use this endpoint to read the attributes of a specific microdeposit according to its unique GUID. <br></br> Webhooks for microdeposit status changes are triggered when a status changes. The actual status of the microdeposit guid updates every minute. You may force a status update by calling the read microdeposit endpoint.
          * @summary Read a microdeposit for a user
          * @param {string} microDepositGuid The unique identifier for the microdeposit. Defined by MX.
          * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
@@ -17144,7 +17144,7 @@ export const MicrodepositsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Use this endpoint to read the attributes of a specific microdeposit according to its unique GUID. <br /><br /> Webhooks for microdeposit status changes are triggered when a status changes. The actual status of the microdeposit guid updates every minute. You may force a status update by calling the read microdeposit endpoint.
+         * Use this endpoint to read the attributes of a specific microdeposit according to its unique GUID. <br></br> Webhooks for microdeposit status changes are triggered when a status changes. The actual status of the microdeposit guid updates every minute. You may force a status update by calling the read microdeposit endpoint.
          * @summary Read a microdeposit for a user
          * @param {string} microDepositGuid The unique identifier for the microdeposit. Defined by MX.
          * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
@@ -17220,7 +17220,7 @@ export const MicrodepositsApiFactory = function (configuration?: Configuration, 
             return localVarFp.listUserVerifications(userGuid, options).then((request) => request(axios, basePath));
         },
         /**
-         * Use this endpoint to read the attributes of a specific microdeposit according to its unique GUID. <br /><br /> Webhooks for microdeposit status changes are triggered when a status changes. The actual status of the microdeposit guid updates every minute. You may force a status update by calling the read microdeposit endpoint.
+         * Use this endpoint to read the attributes of a specific microdeposit according to its unique GUID. <br></br> Webhooks for microdeposit status changes are triggered when a status changes. The actual status of the microdeposit guid updates every minute. You may force a status update by calling the read microdeposit endpoint.
          * @summary Read a microdeposit for a user
          * @param {string} microDepositGuid The unique identifier for the microdeposit. Defined by MX.
          * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
@@ -17302,7 +17302,7 @@ export class MicrodepositsApi extends BaseAPI {
     }
 
     /**
-     * Use this endpoint to read the attributes of a specific microdeposit according to its unique GUID. <br /><br /> Webhooks for microdeposit status changes are triggered when a status changes. The actual status of the microdeposit guid updates every minute. You may force a status update by calling the read microdeposit endpoint.
+     * Use this endpoint to read the attributes of a specific microdeposit according to its unique GUID. <br></br> Webhooks for microdeposit status changes are triggered when a status changes. The actual status of the microdeposit guid updates every minute. You may force a status update by calling the read microdeposit endpoint.
      * @summary Read a microdeposit for a user
      * @param {string} microDepositGuid The unique identifier for the microdeposit. Defined by MX.
      * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
@@ -22174,7 +22174,7 @@ export const TransactionsApiAxiosParamCreator = function (configuration?: Config
             };
         },
         /**
-         * Requests to this endpoint return a list of transactions associated with the specified account. <br /><br />Enhanced transaction data may be requested using the `includes` parameter. To use this optional parameter, the value should include the optional metadata requested such as `repeating_transactions`, `merchants`, `classifications`, `geolocations`. For more information, see the [Optional Enhancement Query Parameter guide](/api-reference/platform-api/reference/transactions-overview#enhanced-transactions#optional-enhancement-query-parameter).
+         * Requests to this endpoint return a list of transactions associated with the specified account. <br /><br /> Enhanced transaction data may be requested using the `includes` parameter. To use this optional parameter, the value should include the optional metadata requested such as `repeating_transactions`, `merchants`, `classifications`, `geolocations`. For more information, see the [Optional Enhancement Query Parameter guide](/api-reference/platform-api/reference/transactions-overview#enhanced-transactions#optional-enhancement-query-parameter).
          * @summary List transactions by account
          * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
          * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
@@ -22500,7 +22500,7 @@ export const TransactionsApiAxiosParamCreator = function (configuration?: Config
             };
         },
         /**
-         * Requests to this endpoint will return the attributes of the specified `transaction`. To read a manual transaction, use the manual transaction guid in the path as the `transactionGuid`. <br /><br />Enhanced transaction data may be requested using the `includes` parameter. To use this optional parameter, the value should include the optional metadata requested such as `repeating_transactions`, `merchants`, `classifications`, `geolocations`. For more information, see the [Optional Enhancement Query Parameter guide](/api-reference/platform-api/reference/transactions-overview#enhanced-transactions#optional-enhancement-query-parameter).
+         * Requests to this endpoint will return the attributes of the specified `transaction`. To read a manual transaction, use the manual transaction guid in the path as the `transactionGuid`. <br /><br /> Enhanced transaction data may be requested using the `includes` parameter. To use this optional parameter, the value should include the optional metadata requested such as `repeating_transactions`, `merchants`, `classifications`, `geolocations`. For more information, see the [Optional Enhancement Query Parameter guide](/api-reference/platform-api/reference/transactions-overview#enhanced-transactions#optional-enhancement-query-parameter).
          * @summary Read transaction
          * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
          * @param {string} transactionGuid The unique id for a &#x60;transaction&#x60;.
@@ -22547,7 +22547,7 @@ export const TransactionsApiAxiosParamCreator = function (configuration?: Config
             };
         },
         /**
-         * Retrieve a list of all recurring transactions for a user. <br /><br />For more see the [Repeating Transactions guide](repeating-transactions-overview.mdx).
+         * Retrieve a list of all recurring transactions for a user. <br /><br />For more see the [Repeating Transactions guide](/api-reference/platform-api/v20111101/reference/transactions-overview#repeating-transactions).
          * @summary List Repeating Transactions
          * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
          * @param {*} [options] Override http request option.
@@ -22585,7 +22585,7 @@ export const TransactionsApiAxiosParamCreator = function (configuration?: Config
             };
         },
         /**
-         * Get a Specific Repeating Transaction. <br /><br />List For more see the [Repeating Transactions guide](repeating-transactions-overview.mdx)
+         * Get a Specific Repeating Transaction. <br /><br />List For more see the  [Repeating Transactions guide](/api-reference/platform-api/v20111101/reference/transactions-overview#repeating-transactions)
          * @summary Get a Repeating Transaction
          * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
          * @param {string} repeatingTransactionGuid The unique id for a recurring transaction.
@@ -22851,7 +22851,7 @@ export const TransactionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Requests to this endpoint return a list of transactions associated with the specified account. <br /><br />Enhanced transaction data may be requested using the `includes` parameter. To use this optional parameter, the value should include the optional metadata requested such as `repeating_transactions`, `merchants`, `classifications`, `geolocations`. For more information, see the [Optional Enhancement Query Parameter guide](/api-reference/platform-api/reference/transactions-overview#enhanced-transactions#optional-enhancement-query-parameter).
+         * Requests to this endpoint return a list of transactions associated with the specified account. <br /><br /> Enhanced transaction data may be requested using the `includes` parameter. To use this optional parameter, the value should include the optional metadata requested such as `repeating_transactions`, `merchants`, `classifications`, `geolocations`. For more information, see the [Optional Enhancement Query Parameter guide](/api-reference/platform-api/reference/transactions-overview#enhanced-transactions#optional-enhancement-query-parameter).
          * @summary List transactions by account
          * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
          * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
@@ -22927,7 +22927,7 @@ export const TransactionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Requests to this endpoint will return the attributes of the specified `transaction`. To read a manual transaction, use the manual transaction guid in the path as the `transactionGuid`. <br /><br />Enhanced transaction data may be requested using the `includes` parameter. To use this optional parameter, the value should include the optional metadata requested such as `repeating_transactions`, `merchants`, `classifications`, `geolocations`. For more information, see the [Optional Enhancement Query Parameter guide](/api-reference/platform-api/reference/transactions-overview#enhanced-transactions#optional-enhancement-query-parameter).
+         * Requests to this endpoint will return the attributes of the specified `transaction`. To read a manual transaction, use the manual transaction guid in the path as the `transactionGuid`. <br /><br /> Enhanced transaction data may be requested using the `includes` parameter. To use this optional parameter, the value should include the optional metadata requested such as `repeating_transactions`, `merchants`, `classifications`, `geolocations`. For more information, see the [Optional Enhancement Query Parameter guide](/api-reference/platform-api/reference/transactions-overview#enhanced-transactions#optional-enhancement-query-parameter).
          * @summary Read transaction
          * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
          * @param {string} transactionGuid The unique id for a &#x60;transaction&#x60;.
@@ -22940,7 +22940,7 @@ export const TransactionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Retrieve a list of all recurring transactions for a user. <br /><br />For more see the [Repeating Transactions guide](repeating-transactions-overview.mdx).
+         * Retrieve a list of all recurring transactions for a user. <br /><br />For more see the [Repeating Transactions guide](/api-reference/platform-api/v20111101/reference/transactions-overview#repeating-transactions).
          * @summary List Repeating Transactions
          * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
          * @param {*} [options] Override http request option.
@@ -22951,7 +22951,7 @@ export const TransactionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Get a Specific Repeating Transaction. <br /><br />List For more see the [Repeating Transactions guide](repeating-transactions-overview.mdx)
+         * Get a Specific Repeating Transaction. <br /><br />List For more see the  [Repeating Transactions guide](/api-reference/platform-api/v20111101/reference/transactions-overview#repeating-transactions)
          * @summary Get a Repeating Transaction
          * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
          * @param {string} repeatingTransactionGuid The unique id for a recurring transaction.
@@ -23103,7 +23103,7 @@ export const TransactionsApiFactory = function (configuration?: Configuration, b
             return localVarFp.listTransactions(userGuid, page, recordsPerPage, fromDate, toDate, fromCreatedAt, toCreatedAt, fromUpdatedAt, toUpdatedAt, categoryGuid, categoryGuid2, topLevelCategoryGuid, topLevelCategoryGuid2, useCase, includes, options).then((request) => request(axios, basePath));
         },
         /**
-         * Requests to this endpoint return a list of transactions associated with the specified account. <br /><br />Enhanced transaction data may be requested using the `includes` parameter. To use this optional parameter, the value should include the optional metadata requested such as `repeating_transactions`, `merchants`, `classifications`, `geolocations`. For more information, see the [Optional Enhancement Query Parameter guide](/api-reference/platform-api/reference/transactions-overview#enhanced-transactions#optional-enhancement-query-parameter).
+         * Requests to this endpoint return a list of transactions associated with the specified account. <br /><br /> Enhanced transaction data may be requested using the `includes` parameter. To use this optional parameter, the value should include the optional metadata requested such as `repeating_transactions`, `merchants`, `classifications`, `geolocations`. For more information, see the [Optional Enhancement Query Parameter guide](/api-reference/platform-api/reference/transactions-overview#enhanced-transactions#optional-enhancement-query-parameter).
          * @summary List transactions by account
          * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
          * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
@@ -23176,7 +23176,7 @@ export const TransactionsApiFactory = function (configuration?: Configuration, b
             return localVarFp.listTransactionsByTag(userGuid, tagGuid, page, recordsPerPage, fromDate, toDate, fromCreatedAt, toCreatedAt, fromUpdatedAt, toUpdatedAt, categoryGuid, categoryGuid2, topLevelCategoryGuid, topLevelCategoryGuid2, useCase, includes, options).then((request) => request(axios, basePath));
         },
         /**
-         * Requests to this endpoint will return the attributes of the specified `transaction`. To read a manual transaction, use the manual transaction guid in the path as the `transactionGuid`. <br /><br />Enhanced transaction data may be requested using the `includes` parameter. To use this optional parameter, the value should include the optional metadata requested such as `repeating_transactions`, `merchants`, `classifications`, `geolocations`. For more information, see the [Optional Enhancement Query Parameter guide](/api-reference/platform-api/reference/transactions-overview#enhanced-transactions#optional-enhancement-query-parameter).
+         * Requests to this endpoint will return the attributes of the specified `transaction`. To read a manual transaction, use the manual transaction guid in the path as the `transactionGuid`. <br /><br /> Enhanced transaction data may be requested using the `includes` parameter. To use this optional parameter, the value should include the optional metadata requested such as `repeating_transactions`, `merchants`, `classifications`, `geolocations`. For more information, see the [Optional Enhancement Query Parameter guide](/api-reference/platform-api/reference/transactions-overview#enhanced-transactions#optional-enhancement-query-parameter).
          * @summary Read transaction
          * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
          * @param {string} transactionGuid The unique id for a &#x60;transaction&#x60;.
@@ -23188,7 +23188,7 @@ export const TransactionsApiFactory = function (configuration?: Configuration, b
             return localVarFp.readTransaction(userGuid, transactionGuid, includes, options).then((request) => request(axios, basePath));
         },
         /**
-         * Retrieve a list of all recurring transactions for a user. <br /><br />For more see the [Repeating Transactions guide](repeating-transactions-overview.mdx).
+         * Retrieve a list of all recurring transactions for a user. <br /><br />For more see the [Repeating Transactions guide](/api-reference/platform-api/v20111101/reference/transactions-overview#repeating-transactions).
          * @summary List Repeating Transactions
          * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
          * @param {*} [options] Override http request option.
@@ -23198,7 +23198,7 @@ export const TransactionsApiFactory = function (configuration?: Configuration, b
             return localVarFp.repeatingTransactions(userGuid, options).then((request) => request(axios, basePath));
         },
         /**
-         * Get a Specific Repeating Transaction. <br /><br />List For more see the [Repeating Transactions guide](repeating-transactions-overview.mdx)
+         * Get a Specific Repeating Transaction. <br /><br />List For more see the  [Repeating Transactions guide](/api-reference/platform-api/v20111101/reference/transactions-overview#repeating-transactions)
          * @summary Get a Repeating Transaction
          * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
          * @param {string} repeatingTransactionGuid The unique id for a recurring transaction.
@@ -23363,7 +23363,7 @@ export class TransactionsApi extends BaseAPI {
     }
 
     /**
-     * Requests to this endpoint return a list of transactions associated with the specified account. <br /><br />Enhanced transaction data may be requested using the `includes` parameter. To use this optional parameter, the value should include the optional metadata requested such as `repeating_transactions`, `merchants`, `classifications`, `geolocations`. For more information, see the [Optional Enhancement Query Parameter guide](/api-reference/platform-api/reference/transactions-overview#enhanced-transactions#optional-enhancement-query-parameter).
+     * Requests to this endpoint return a list of transactions associated with the specified account. <br /><br /> Enhanced transaction data may be requested using the `includes` parameter. To use this optional parameter, the value should include the optional metadata requested such as `repeating_transactions`, `merchants`, `classifications`, `geolocations`. For more information, see the [Optional Enhancement Query Parameter guide](/api-reference/platform-api/reference/transactions-overview#enhanced-transactions#optional-enhancement-query-parameter).
      * @summary List transactions by account
      * @param {string} accountGuid The unique id for an &#x60;account&#x60;.
      * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
@@ -23442,7 +23442,7 @@ export class TransactionsApi extends BaseAPI {
     }
 
     /**
-     * Requests to this endpoint will return the attributes of the specified `transaction`. To read a manual transaction, use the manual transaction guid in the path as the `transactionGuid`. <br /><br />Enhanced transaction data may be requested using the `includes` parameter. To use this optional parameter, the value should include the optional metadata requested such as `repeating_transactions`, `merchants`, `classifications`, `geolocations`. For more information, see the [Optional Enhancement Query Parameter guide](/api-reference/platform-api/reference/transactions-overview#enhanced-transactions#optional-enhancement-query-parameter).
+     * Requests to this endpoint will return the attributes of the specified `transaction`. To read a manual transaction, use the manual transaction guid in the path as the `transactionGuid`. <br /><br /> Enhanced transaction data may be requested using the `includes` parameter. To use this optional parameter, the value should include the optional metadata requested such as `repeating_transactions`, `merchants`, `classifications`, `geolocations`. For more information, see the [Optional Enhancement Query Parameter guide](/api-reference/platform-api/reference/transactions-overview#enhanced-transactions#optional-enhancement-query-parameter).
      * @summary Read transaction
      * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
      * @param {string} transactionGuid The unique id for a &#x60;transaction&#x60;.
@@ -23456,7 +23456,7 @@ export class TransactionsApi extends BaseAPI {
     }
 
     /**
-     * Retrieve a list of all recurring transactions for a user. <br /><br />For more see the [Repeating Transactions guide](repeating-transactions-overview.mdx).
+     * Retrieve a list of all recurring transactions for a user. <br /><br />For more see the [Repeating Transactions guide](/api-reference/platform-api/v20111101/reference/transactions-overview#repeating-transactions).
      * @summary List Repeating Transactions
      * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
      * @param {*} [options] Override http request option.
@@ -23468,7 +23468,7 @@ export class TransactionsApi extends BaseAPI {
     }
 
     /**
-     * Get a Specific Repeating Transaction. <br /><br />List For more see the [Repeating Transactions guide](repeating-transactions-overview.mdx)
+     * Get a Specific Repeating Transaction. <br /><br />List For more see the  [Repeating Transactions guide](/api-reference/platform-api/v20111101/reference/transactions-overview#repeating-transactions)
      * @summary Get a Repeating Transaction
      * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
      * @param {string} repeatingTransactionGuid The unique id for a recurring transaction.
@@ -23560,7 +23560,7 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Use this endpoint to delete the specified `user`. The response will have a status of `204 No Content` without an object.  :::warning Deleting a user is permanent. Deleted users can never be restored. For more info, see [Deleting Objects](https://docs.mx.com/api-reference/platform-api/overview/deleting-objects). ::: 
+         * Use this endpoint to delete the specified `user`. The response will have a status of `204 No Content` without an object.  :::warning Deleting a user is permanent. Deleted users can never be restored. For more info, see [Deleting Objects](/api-reference/platform-api/overview/deleting-objects). ::: 
          * @summary Delete user
          * @param {string} accept Specifies the media type expected in the response.
          * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
@@ -23767,7 +23767,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Use this endpoint to delete the specified `user`. The response will have a status of `204 No Content` without an object.  :::warning Deleting a user is permanent. Deleted users can never be restored. For more info, see [Deleting Objects](https://docs.mx.com/api-reference/platform-api/overview/deleting-objects). ::: 
+         * Use this endpoint to delete the specified `user`. The response will have a status of `204 No Content` without an object.  :::warning Deleting a user is permanent. Deleted users can never be restored. For more info, see [Deleting Objects](/api-reference/platform-api/overview/deleting-objects). ::: 
          * @summary Delete user
          * @param {string} accept Specifies the media type expected in the response.
          * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
@@ -23837,7 +23837,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.createUser(userCreateRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
-         * Use this endpoint to delete the specified `user`. The response will have a status of `204 No Content` without an object.  :::warning Deleting a user is permanent. Deleted users can never be restored. For more info, see [Deleting Objects](https://docs.mx.com/api-reference/platform-api/overview/deleting-objects). ::: 
+         * Use this endpoint to delete the specified `user`. The response will have a status of `204 No Content` without an object.  :::warning Deleting a user is permanent. Deleted users can never be restored. For more info, see [Deleting Objects](/api-reference/platform-api/overview/deleting-objects). ::: 
          * @summary Delete user
          * @param {string} accept Specifies the media type expected in the response.
          * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
@@ -23905,7 +23905,7 @@ export class UsersApi extends BaseAPI {
     }
 
     /**
-     * Use this endpoint to delete the specified `user`. The response will have a status of `204 No Content` without an object.  :::warning Deleting a user is permanent. Deleted users can never be restored. For more info, see [Deleting Objects](https://docs.mx.com/api-reference/platform-api/overview/deleting-objects). ::: 
+     * Use this endpoint to delete the specified `user`. The response will have a status of `204 No Content` without an object.  :::warning Deleting a user is permanent. Deleted users can never be restored. For more info, see [Deleting Objects](/api-reference/platform-api/overview/deleting-objects). ::: 
      * @summary Delete user
      * @param {string} accept Specifies the media type expected in the response.
      * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.

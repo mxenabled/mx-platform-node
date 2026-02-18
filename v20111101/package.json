@@ -1,7 +1,8 @@
 {
   "name": "mx-platform-node",
-  "version": "2.0.0",
-  "description": "A Node library for the MX Platform API.",
+  "version": "2.1.0",
+  "description": "A Node.js SDK for the MX Platform API (v20111101)",
+  "apiVersion": "v20111101",
   "author": "MX",
   "keywords": [
     "mx",
@@ -14,9 +15,7 @@
   "typings": "./dist/index.d.ts",
   "files": [
     "dist/",
-    "CHANGELOG.md",
-    "README.md",
-    "MIGRATION.md"
+    "*.md"
   ],
   "scripts": {
     "build": "tsc --outDir dist/",
