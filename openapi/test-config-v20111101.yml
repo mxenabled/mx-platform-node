@@ -2,6 +2,6 @@
 apiVersion: v20111101
 generatorName: typescript-axios
 npmName: mx-platform-node
-npmVersion: 98.0.1
+npmVersion: 98.1.0
 supportsES6: true
 ".openapi-generator-ignore": true
