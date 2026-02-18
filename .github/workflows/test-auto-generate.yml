@@ -179,6 +179,10 @@ jobs:
           echo "---"
           cat ./openapi/test-config-v20250224.yml 2>/dev/null || echo "  test-config-v20250224.yml not available"
 
+          # Clean up config artifact directories so they don't get committed
+          rm -rf ./test-generated/test-config-v20111101 ./test-generated/test-config-v20250224
+          echo "📋 Cleaned up config artifact directories"
+
       - name: Move generated files and track versions
         id: track_versions
         run: |
