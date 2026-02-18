@@ -209,6 +209,7 @@ jobs:
         with:
           token: ${{ steps.generate_token.outputs.token }}
           event-type: automated_push_to_master
+          client-payload: '{"api_versions": "${{ needs.Setup.outputs.versions_to_generate }}"}'
       
       - name: Slack notification
         uses: ravsamhq/notify-slack-action@v2

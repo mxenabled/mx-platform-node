@@ -30,22 +30,45 @@ jobs:
             echo "✅ No skip flag - proceeding with publish/release"
           fi
 
-  # Detect which API versions were modified
-  # Uses dorny/paths-filter to check which version directories changed.
-  # For push events: default base (empty) uses github.event.before/after automatically.
-  # For repository_dispatch events: setting base to 'master' (same branch) triggers
-  # paths-filter's "last commit" comparison mode per the docs.
+  # Detect which API versions were modified.
+  # Two strategies based on event type:
+  # - repository_dispatch: Read versions directly from the dispatch payload (api_versions).
+  #   This is reliable because openapi-generate-and-push.yml knows exactly which versions
+  #   it generated and passes them through. Using dorny/paths-filter for dispatch events
+  #   is unreliable (no before/after SHAs, falls back to "last commit" mode which can
+  #   misdetect changes depending on git history and shallow clone depth).
+  # - push: Use dorny/paths-filter which works correctly with push event before/after SHAs.
   detect-changes:
     runs-on: ubuntu-latest
     outputs:
-      v20111101: ${{ steps.filter.outputs.v20111101 }}
-      v20250224: ${{ steps.filter.outputs.v20250224 }}
+      v20111101: ${{ steps.dispatch-changes.outputs.v20111101 || steps.filter.outputs.v20111101 }}
+      v20250224: ${{ steps.dispatch-changes.outputs.v20250224 || steps.filter.outputs.v20250224 }}
     steps:
+      # For repository_dispatch: trust the payload from openapi-generate-and-push
+      - name: Parse dispatch payload
+        id: dispatch-changes
+        if: github.event_name == 'repository_dispatch'
+        run: |
+          API_VERSIONS="${{ github.event.client_payload.api_versions }}"
+          echo "Dispatch payload api_versions: $API_VERSIONS"
+
+          # Default all versions to false
+          echo "v20111101=false" >> $GITHUB_OUTPUT
+          echo "v20250224=false" >> $GITHUB_OUTPUT
+
+          # Set true for each version in the payload
+          for VERSION in $(echo "$API_VERSIONS" | tr ',' ' '); do
+            echo "${VERSION}=true" >> $GITHUB_OUTPUT
+            echo "  Detected version: $VERSION"
+          done
+
+      # For push events: use dorny/paths-filter (works correctly with push before/after SHAs)
       - uses: actions/checkout@v3
+        if: github.event_name == 'push'
       - uses: dorny/paths-filter@v2
+        if: github.event_name == 'push'
         id: filter
         with:
-          base: ${{ github.event_name == 'repository_dispatch' && 'master' || '' }}
           filters: |
             v20111101:
               - 'v20111101/**'
