@@ -109,7 +109,7 @@ class ChangelogManager
 
       <<~ENTRY
         ## [#{version_number}] - #{date_str} (#{api_version} API)
-        
+
         ### Changed
         - #{message}
       ENTRY
@@ -148,7 +148,9 @@ class ChangelogManager
       rest = lines[first_entry_index..]
 
       # Combine: header + new entries + rest
-      (header + entries.map { |e| e.rstrip } + [''] + rest).join("\n")
+      # Each entry is separated by a blank line for readability
+      entry_lines = entries.flat_map { |e| e.rstrip.split("\n") + [''] }
+      (header + entry_lines + rest).join("\n")
     end
   end
 end

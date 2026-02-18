@@ -141,6 +141,28 @@ describe ChangelogManager do
       changed_count = updated_content.scan(/### Changed/).length
       expect(changed_count).to be >= 2 # At least 2 from the new entries
     end
+
+    it 'separates multiple entries with blank lines' do
+      setup_changelog
+      setup_version_directory('v20250224', v20250224_package_fixture)
+      setup_version_directory('v20111101', v20111101_package_fixture)
+
+      result = ChangelogManager.update('v20250224,v20111101')
+
+      expect(result).to be true
+      updated_content = read_changelog
+
+      # The v20250224 entry block should be followed by a blank line before the v20111101 entry
+      # Match: end of v20250224 entry's Changed bullet, blank line, then v20111101 header
+      expect(updated_content).to match(
+        /Updated v20250224 API specification.*?\n\n## \[\d+\.\d+\.\d+\] - \d{4}-\d{2}-\d{2} \(v20111101 API\)/m
+      )
+
+      # The v20111101 entry block should be followed by a blank line before existing entries
+      expect(updated_content).to match(
+        /Updated v20111101 API specification.*?\n\n## \[2\.0\.0\]/m
+      )
+    end
   end
 
   describe '.update with date range behavior' do
