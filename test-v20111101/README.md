@@ -1,6 +1,6 @@
 # MX Platform Node.js (v20111101 API)
 
-**SDK version:** 98.1.0  
+**SDK version:** 98.2.0  
 **API version:** v20111101
 
 You are using the **v20111101** API version of `mx-platform-node`. For other API versions, see [Available API Versions](#available-api-versions) below.
@@ -13,7 +13,7 @@ To verify which API version you have installed:
 ```json
 {
   "dependencies": {
-    "mx-platform-node": "^98.1.0"
+    "mx-platform-node": "^98.2.0"
   }
 }
 ```
@@ -26,7 +26,7 @@ console.log(pkg.apiVersion); // v20111101
 
 **Via npm:**
 ```shell
-npm view mx-platform-node@98.1.0
+npm view mx-platform-node@98.2.0
 ```
 
 ## Available API Versions

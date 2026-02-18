@@ -1,6 +1,6 @@
 {
   "name": "mx-platform-node",
-  "version": "98.1.0",
+  "version": "98.2.0",
   "description": "A Node.js SDK for the MX Platform API (v20111101)",
   "apiVersion": "v20111101",
   "author": "MX",
