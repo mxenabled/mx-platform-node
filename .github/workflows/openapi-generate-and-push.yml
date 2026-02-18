@@ -3,12 +3,6 @@ name: "OpenAPI: Automated Generate and Push"
 on:
   repository_dispatch:
     types: [generate_publish_release]
-  workflow_dispatch:
-    inputs:
-      payload_json:
-        description: 'JSON payload (e.g., {"api_versions":"v20111101","version":"patch","commit_sha":"abc123"})'
-        required: false
-        type: string
 
 jobs:
   Setup:
@@ -20,12 +14,7 @@ jobs:
       - name: Parse payload
         id: parse-payload
         run: |
-          # Parse workflow_dispatch payload if provided, otherwise use repository_dispatch payload
-          if [ -n "${{ github.event.inputs.payload_json }}" ]; then
-            VERSIONS=$(echo '${{ github.event.inputs.payload_json }}' | jq -r '.api_versions // "v20111101"')
-          else
-            VERSIONS="${{ github.event.client_payload.api_versions || 'v20111101' }}"
-          fi
+          VERSIONS="${{ github.event.client_payload.api_versions || 'v20111101' }}"
           echo "versions_to_generate=$VERSIONS" >> $GITHUB_OUTPUT
       
       - name: Set up matrix
@@ -74,33 +63,28 @@ jobs:
           ruby-version: 3.1
       - name: Validate configuration
         run: ruby .github/config_validator.rb "${{ matrix.config_file }}" "${{ matrix.api_version }}"
+      
       - name: Bump version
         id: bump_version
         run: |
-          # Parse version from workflow_dispatch or repository_dispatch
-          if [ -n "${{ github.event.inputs.payload_json }}" ]; then
-            VERSION=$(echo '${{ github.event.inputs.payload_json }}' | jq -r '.version // "patch"')
-          else
-            VERSION="${{ github.event.client_payload.version || 'patch' }}"
-          fi
-          NEW_VERSION=$(ruby .github/version.rb "$VERSION" ${{ matrix.config_file }})
+          VERSION="${{ github.event.client_payload.version || 'patch' }}"
+          NEW_VERSION=$(ruby .github/version.rb $VERSION ${{ matrix.config_file }})
           echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+      
       - name: Clean repo
         run: ruby .github/clean.rb ${{ matrix.api_version }}
+      
       - name: Copy generator ignore rules
         run: |
           mkdir -p ./${{ matrix.api_version }}/
           cp .openapi-generator-ignore ./${{ matrix.api_version }}/
+      
       - name: Install openapi-generator-cli
         run: npm install @openapitools/openapi-generator-cli -g
+      
       - name: Generate SDK
         run: |
-          # Parse commit_sha from workflow_dispatch or repository_dispatch
-          if [ -n "${{ github.event.inputs.payload_json }}" ]; then
-            COMMIT_SHA=$(echo '${{ github.event.inputs.payload_json }}' | jq -r '.commit_sha // "master"')
-          else
-            COMMIT_SHA="${{ github.event.client_payload.commit_sha || 'master' }}"
-          fi
+          COMMIT_SHA="${{ github.event.client_payload.commit_sha || 'master' }}"
           
           # Versioned spec URLs with commit SHA to avoid GitHub CDN cache race condition
           # Problem: GitHub's raw.githubusercontent.com CDN caches files for 5 minutes
@@ -113,11 +97,18 @@ jobs:
             -c ${{ matrix.config_file }} \
             -t ./openapi/templates \
             -o ./${{ matrix.api_version }}
-      - name: Upload artifacts
+      
+      - name: Upload SDK artifacts
         uses: actions/upload-artifact@v4
         with:
           name: generated-${{ matrix.api_version }}
           path: ./${{ matrix.api_version }}
+      
+      - name: Upload config artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: config-${{ matrix.api_version }}
+          path: ${{ matrix.config_file }}
 
   Process-and-Push:
     runs-on: ubuntu-latest
@@ -128,6 +119,22 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: ./generated
+      
+      - name: Restore config files from artifacts
+        run: |
+          # Config files are bumped in the Generate job (separate runner).
+          # Restore them here so the version bump persists in the commit.
+          for dir in ./generated/config-*; do
+            [ -d "$dir" ] || continue
+            VERSION=$(basename "$dir" | sed 's/config-//')
+            CONFIG_FILE="openapi/config-${VERSION}.yml"
+            cp "$dir"/* "./$CONFIG_FILE" 2>/dev/null || echo "Config not found in $dir"
+            echo "Restored $CONFIG_FILE"
+          done
+
+          # Clean up config artifact directories so they don't get committed
+          rm -rf ./generated/config-*
+      
       - name: Move generated files and track versions
         id: track_versions
         run: |
@@ -135,11 +142,18 @@ jobs:
           
           for dir in ./generated/generated-*; do
             VERSION=$(basename "$dir" | sed 's/generated-//')
+
+            # Remove target directory before moving to prevent nesting
+            if [ -d "./$VERSION" ]; then
+              rm -rf "./$VERSION"
+            fi
+
             mv "$dir" "./$VERSION"
             GENERATED_VERSIONS="$GENERATED_VERSIONS $VERSION"
           done
           
           echo "generated_versions=$GENERATED_VERSIONS" >> $GITHUB_OUTPUT
+      
       - name: Update CHANGELOG
         run: |
           GENERATED_VERSIONS="${{ steps.track_versions.outputs.generated_versions }}"
@@ -154,6 +168,7 @@ jobs:
           # Trim leading/trailing whitespace first
           VERSIONS_CSV=$(echo "$GENERATED_VERSIONS" | xargs | tr ' ' ',')
           ruby .github/changelog_manager.rb "$VERSIONS_CSV"
+      
       - name: Copy documentation
         run: |
           GENERATED_VERSIONS="${{ steps.track_versions.outputs.generated_versions }}"
@@ -163,6 +178,7 @@ jobs:
             cp CHANGELOG.md "./$VERSION/CHANGELOG.md"
             cp MIGRATION.md "./$VERSION/MIGRATION.md"
           done
+      
       - name: Checkout master
         run: git checkout master
       - name: Create commit
@@ -170,10 +186,38 @@ jobs:
           git config user.name "devexperience"
           git config user.email "devexperience@mx.com"
           git add .
-          git commit -m "Generated SDK versions: ${{ needs.Setup.outputs.versions_to_generate }}
+          git commit -m "Automated Generated SDK versions: ${{ needs.Setup.outputs.versions_to_generate }}
 
-          This commit was automatically created by a GitHub Action."
+          This commit was automatically created by openapi-generate-and-push GitHub Action."
       - name: Push to master
         run: git push origin master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # GitHub security feature: pushes using GITHUB_TOKEN don't trigger other workflows.
+      # We must explicitly trigger on-push-master.yml using a GitHub App token.
+      - name: Generate access token
+        id: generate_token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.PAPI_SDK_APP_ID }}
+          installation_id: ${{ secrets.PAPI_SDK_INSTALLATION_ID }}
+          private_key: ${{ secrets.PAPI_SDK_PRIVATE_KEY }}
+      
+      - name: Trigger publish and release workflow
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ steps.generate_token.outputs.token }}
+          event-type: automated_push_to_master
+      
+      - name: Slack notification
+        uses: ravsamhq/notify-slack-action@v2
+        if: always()
+        with:
+          status: ${{ job.status }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          notification_title: "{repo}: {workflow} workflow"
+          message_format: "{emoji} *<{workflow_url}|{workflow}>* {status_message} in <{repo_url}|{repo}>"
+          notify_when: "failure"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

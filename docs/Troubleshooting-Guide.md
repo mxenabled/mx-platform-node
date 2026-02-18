@@ -2,7 +2,7 @@
 
 **Document Purpose**: Quick reference for diagnosing and fixing issues in the multi-version SDK generation, publishing, and release workflows.
 
-**Last Updated**: January 29, 2026  
+**Last Updated**: February 18, 2026  
 **Audience**: Developers debugging workflow failures
 
 ---
@@ -289,6 +289,33 @@ fatal: A release with this tag already exists
 
 ---
 
+### Generated Files Placed in Nested Subdirectory
+
+**Symptom**: After automated generation, SDK files appear at `v20111101/generated-v20111101/api.ts` instead of `v20111101/api.ts`
+
+**Cause**: The `Process-and-Push` job in `openapi-generate-and-push.yml` downloads generated artifacts and moves them into the version directory. If the version directory already exists (from a prior commit), `mv` places the source *inside* the existing directory as a subdirectory rather than replacing it.
+
+**Solution**: Already fixed in `openapi-generate-and-push.yml`. The workflow now runs `rm -rf ./$VERSION` before `mv` to ensure the target directory doesn't exist, so the move replaces rather than nests. If you see this issue, verify the workflow includes the `rm -rf` step before the `mv` command in the Process-and-Push job.
+
+---
+
+### Version Bump Not Applied During Automated Generation
+
+**Symptom**: Automated generation completes but the version in `package.json` didn't increment (stays at the previous version)
+
+**Cause**: The `version.rb` script argument was quoted incorrectly in the workflow. Passing `"$VERSION"` (with surrounding quotes in the shell script) causes bash to pass the literal string `$VERSION` instead of its value, so `version.rb` receives an unrecognized bump type and silently fails.
+
+**Solution**: Already fixed in `openapi-generate-and-push.yml`. The `$VERSION` variable is now passed unquoted to `version.rb`. If you see this issue, verify the workflow calls `version.rb` with `$VERSION` (not `"$VERSION"`):
+```bash
+# Correct
+NEW_VERSION=$(ruby .github/version.rb $VERSION ${{ matrix.config_file }})
+
+# Wrong — passes literal string
+NEW_VERSION=$(ruby .github/version.rb "$VERSION" ${{ matrix.config_file }})
+```
+
+---
+
 ### Workflow Not Triggering on Push
 
 **Symptom**: Merged a PR with changes to `v20111101/` directory, but `on-push-master.yml` didn't run
@@ -298,6 +325,7 @@ fatal: A release with this tag already exists
 - Changes were not actually in the version directory
 - Commit was made to wrong branch
 - Workflow file has syntax error
+- (Automated flow only) The push was made with `GITHUB_TOKEN`, which does not trigger `push` events for other workflows
 
 **Solutions**:
 1. Verify path filter syntax is correct:
@@ -308,6 +336,8 @@ fatal: A release with this tag already exists
        paths:
          - 'v20111101/**'     # Correct format
          - 'v20250224/**'
+     repository_dispatch:
+       types: [automated_push_to_master]
    ```
 2. Check what files were actually changed:
    ```bash
@@ -322,6 +352,7 @@ fatal: A release with this tag already exists
    ```bash
    ruby -e "require 'yaml'; puts YAML.load(File.read('.github/workflows/on-push-master.yml'))"
    ```
+5. **For automated flows**: Verify that `openapi-generate-and-push.yml` sends a `repository_dispatch` event after pushing. The `push` trigger only works for manual PR merges. Automated pushes from workflows use `GITHUB_TOKEN`, which does not trigger other workflows — the generate workflow must send an explicit `repository_dispatch` (type: `automated_push_to_master`) using a GitHub App token.
 
 ---
 
@@ -344,6 +375,36 @@ git commit -m "Migrate SDK structure [SKIP-PUBLISH]"
 git commit -m "Migrate SDK structure (skip-publish)"
 git commit -m "Migrate SDK structure skip-publish"
 ```
+
+---
+
+### Skip-Publish Check Fails with Bash Error
+
+**Symptom**: The `check-skip-publish` step in `on-push-master.yml` errors with something like `SDK: command not found` (exit code 127), and downstream jobs skip unexpectedly
+
+**Cause**: The commit message contains double quotes (e.g., `Revert "Generated SDK versions: v20111101"`). If the workflow uses inline `${{ }}` interpolation to assign the commit message, the inner quotes close the outer quotes in bash, causing the remaining text to be interpreted as commands.
+
+**Example of broken pattern**:
+```yaml
+# BROKEN - double quotes in commit message break this
+COMMIT_MSG="${{ github.event.head_commit.message }}"
+```
+
+**Solution**: The workflow should use an `env:` block to pass the commit message safely:
+```yaml
+- name: Check for [skip-publish] flag in commit message
+  id: check
+  env:
+    COMMIT_MSG: ${{ github.event.head_commit.message }}
+  run: |
+    if [[ "$COMMIT_MSG" == *"[skip-publish]"* ]]; then
+      echo "skip_publish=true" >> $GITHUB_OUTPUT
+    else
+      echo "skip_publish=false" >> $GITHUB_OUTPUT
+    fi
+```
+
+This fix is already applied to `on-push-master.yml`. If you see this error, verify that the workflow is using the `env:` block pattern and not inline interpolation.
 
 ---
 

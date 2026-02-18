@@ -2,7 +2,7 @@
 
 **Document Purpose**: Quick-reference guide to the multi-version SDK generation, publishing, and release system. This is your entry point to understanding how the system works.
 
-**Last Updated**: January 28, 2026  
+**Last Updated**: February 18, 2026  
 **Read Time**: 5-10 minutes  
 **Audience**: Anyone joining the team or needing a system overview
 
@@ -37,7 +37,7 @@ OpenAPI spec changes → `openapi-generate-and-push.yml` generates SDK → commi
 **What Happens**:
 1. `openapi-generate-and-push.yml` generates all specified versions in parallel
 2. All generated files committed to master
-3. `on-push-master.yml` automatically triggered by the push
+3. `openapi-generate-and-push.yml` sends a `repository_dispatch` event (`automated_push_to_master`) to trigger `on-push-master.yml` (required because `GITHUB_TOKEN` pushes don't trigger other workflows)
 4. `on-push-master.yml` handles serial publish/release with version gating
 
 **Key Details**: See [Workflow-and-Configuration-Reference.md](Workflow-and-Configuration-Reference.md#flow-1-automatic-multi-version-generation-repository-dispatch)
@@ -83,7 +83,7 @@ sequenceDiagram
     Gen->>Push: Commit to master<br/>Update CHANGELOG.md
     deactivate Gen
 
-    Push->>+OnPush: Push event triggers
+    Push->>+OnPush: repository_dispatch<br/>(automated_push_to_master)
     OnPush->>OnPush: Check skip-publish flag
     OnPush->>OnPush: Serial: v20111101 publish
     OnPush->>npm: npm publish v2.x.x

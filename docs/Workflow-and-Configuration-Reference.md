@@ -2,7 +2,7 @@
 
 **Document Purpose**: Detailed technical reference for the multi-version SDK generation, publishing, and release workflows. Covers implementation details, configuration files, and system architecture.
 
-**Last Updated**: January 29, 2026  
+**Last Updated**: February 18, 2026  
 **Audience**: Developers who need to understand or modify the implementation
 
 ---
@@ -81,14 +81,21 @@ strategy:
 
 6. **Upload Artifacts**
    - Upload generated SDK to workflow artifact storage
+   - Upload bumped config file as separate artifact (config file version bump happens on Generate runner, but Process-and-Push runs on a different runner with a fresh checkout — without this, the version bump would be lost)
    - Allows atomic multi-version commit after all matrix jobs complete
 
 #### Step 3: Post-Generation Processing (After All Matrix Jobs Complete)
 
 1. **Download Artifacts**
    - Retrieve generated SDKs for all versions from artifact storage
+   - Retrieve config file artifacts and restore them to `openapi/` directory
+   - Clean up config artifact directories (`rm -rf ./generated/config-*`) to prevent them from being committed
 
-2. **Track Generated Versions**
+2. **Move Generated Files to Version Directories**
+   - Remove existing version directory contents before moving: `rm -rf ./$VERSION` then `mv` generated files into place
+   - This prevents the generated files from being placed in a nested subdirectory (e.g., `v20111101/generated-v20111101/` instead of `v20111101/`)
+
+3. **Track Generated Versions**
    - Record which directories were actually generated
    - Used by CHANGELOG automation to add entries only for generated versions
 
@@ -129,7 +136,11 @@ strategy:
 
 #### Step 5: Automatic Publish and Release (via on-push-master.yml)
 
-**Architecture**: After `Process-and-Push` completes and pushes to master, the automatic `on-push-master.yml` workflow is triggered by GitHub's push event.
+**Architecture**: After `Process-and-Push` completes and pushes to master, it explicitly triggers `on-push-master.yml` via a `repository_dispatch` event (type: `automated_push_to_master`).
+
+**Why `repository_dispatch` instead of relying on the push event?** GitHub's security model prevents workflows triggered by `GITHUB_TOKEN` from triggering other workflows. Since `openapi-generate-and-push.yml` pushes to master using `GITHUB_TOKEN`, that push does **not** trigger `on-push-master.yml`'s `push` event. To solve this, `openapi-generate-and-push.yml` generates a GitHub App token (via `tibdex/github-app-token@v1`) and uses it to send a `repository_dispatch` event (via `peter-evans/repository-dispatch@v2`), which does trigger `on-push-master.yml`.
+
+**Note**: The `push` trigger on `on-push-master.yml` still exists and works for manual PR merges — only automated pushes from workflows need the `repository_dispatch` workaround.
 
 **Why This Architecture?**
 - Separates concerns: `openapi-generate-and-push.yml` owns generation, `on-push-master.yml` owns publishing
@@ -137,7 +148,7 @@ strategy:
 - Prevents duplicate publishes: Manual generate.yml + PR merge only triggers publish once (via on-push-master.yml)
 
 **Process** (handled by `on-push-master.yml`):
-1. Detect-changes job uses `dorny/paths-filter@v2` to identify which version directories changed (v20111101/**, v20250224/**)
+1. Detect-changes job uses `dorny/paths-filter@v2` to identify which version directories changed (v20111101/**, v20250224/**). For `repository_dispatch` events, uses `base: HEAD~1` to compare against the previous commit (push events use default `before`/`after` automatically).
 2. Check-skip-publish job detects if `[skip-publish]` flag is in commit message
 3. For each version with path changes (output by detect-changes):
    - Publish job: Call `publish.yml` with version-specific directory (only if paths modified)
@@ -339,8 +350,13 @@ publish-v20250224:
 
 
 
-### Trigger
-Push to `master` branch with changes in version-specific directories (`v20111101/**` or `v20250224/**`)
+### Triggers
+
+`on-push-master.yml` responds to two trigger types:
+1. **`push`** — activated when changes are pushed to `master` (e.g., PR merges)
+2. **`repository_dispatch`** (type: `automated_push_to_master`) — activated by `openapi-generate-and-push.yml` after it pushes generated SDK files to master (needed because `GITHUB_TOKEN` pushes don't trigger `push` events for other workflows)
+
+Both triggers require changes in version-specific directories (`v20111101/**` or `v20250224/**`) to proceed to publishing.
 
 ### Skip-Publish Safety Mechanism
 Include `[skip-publish]` in commit message to prevent publish/release for this push.
@@ -358,15 +374,21 @@ Include `[skip-publish]` in commit message to prevent publish/release for this p
 **Job**: `check-skip-publish`
 
 ```yaml
-- name: Check for skip-publish flag
+- name: Check for [skip-publish] flag in commit message
+  id: check
+  env:
+    COMMIT_MSG: ${{ github.event.head_commit.message }}
   run: |
-    if [[ "${{ github.event.head_commit.message }}" == *"[skip-publish]"* ]]; then
+    if [[ "$COMMIT_MSG" == *"[skip-publish]"* ]]; then
       echo "skip_publish=true" >> $GITHUB_OUTPUT
+      echo "🚫 [skip-publish] flag detected - skipping all publish/release jobs"
     else
       echo "skip_publish=false" >> $GITHUB_OUTPUT
+      echo "✅ No skip flag - proceeding with publish/release"
     fi
 ```
 
+- Uses `env:` block to safely pass commit message (avoids bash errors when commit messages contain double quotes — e.g., `Revert "Generated SDK versions: v20111101"` would break inline `${{ }}` interpolation)
 - Parses HEAD commit message
 - Sets output: `skip_publish` = true/false
 - Used by subsequent jobs to determine execution
@@ -451,6 +473,22 @@ If v20250224 jobs depended directly on v20111101's publish job, the workflow wou
 2. Release job calls `release.yml` after publish completes
 
 **Serial Chain Benefit**: The 2-second delay before v20250224 starts publishing ensures v20111101 gets first chance at npm registry, preventing race conditions when both versions are modified.
+
+---
+
+## Slack Failure Notifications
+
+All workflows send Slack notifications on failure to the channel configured via `SLACK_WEBHOOK_URL`. Notifications include a clickable link to the specific failed workflow run URL for quick diagnosis.
+
+| Workflow | Notification Scope |
+|----------|--------------------|
+| `openapi-generate-and-push.yml` | Generate job failures, Process-and-Push job failures |
+| `on-push-master.yml` | Orchestration job failures (check-skip-publish, detect-changes, delay). Publish/release jobs have their own notifications via `publish.yml` and `release.yml`. |
+| `generate.yml` | Generation failures |
+| `publish.yml` | Publish failures |
+| `release.yml` | Release failures |
+
+**Message format**: The workflow name in Slack messages links directly to the failed run URL, making it easy to jump straight to the failing step without navigating through the GitHub Actions UI.
 
 ---
 
@@ -643,7 +681,11 @@ on:
       # - 'openapi/**'       (config changes alone)
       # - 'docs/**'          (documentation changes)
       # - 'README.md'        (root documentation)
+  repository_dispatch:
+    types: [automated_push_to_master]  # Triggered by openapi-generate-and-push.yml
 ```
+
+The `repository_dispatch` trigger is required because automated pushes from `openapi-generate-and-push.yml` use `GITHUB_TOKEN`, which does not trigger `push` events for other workflows (GitHub security feature). The generate workflow sends this dispatch explicitly using a GitHub App token.
 
 **Benefits**:
 - Enhancement PRs (docs only) don't trigger publish
@@ -680,6 +722,8 @@ The repository uses **semantic versioning with major version = API version**:
 | `NPM_AUTH_TOKEN` | publish.yml | Authenticate to npm registry for publishing |
 | `GITHUB_TOKEN` | All workflows | GitHub API access (auto-provided by GitHub Actions) |
 | `SLACK_WEBHOOK_URL` | All workflows | Send failure notifications to Slack |
+| `APP_ID` | openapi-generate-and-push.yml | GitHub App ID for generating tokens that can trigger cross-workflow events |
+| `APP_PRIVATE_KEY` | openapi-generate-and-push.yml | GitHub App private key (used with `tibdex/github-app-token@v1` to create tokens for `repository_dispatch`) |
 
 ### Environment Setup
 
@@ -706,13 +750,15 @@ openapi-generate-and-push.yml: Triggered
         ├─ Download artifacts
         ├─ Update CHANGELOG.md
         ├─ Commit to master
-        ├─ Push to master (triggers on-push-master.yml)
+        ├─ Push to master
+        ├─ Send repository_dispatch (automated_push_to_master)
         ↓
-on-push-master.yml: Triggered (push event)
+on-push-master.yml: Triggered (repository_dispatch)
         ├─ check-skip-publish: Verify no [skip-publish] flag
+        ├─ detect-changes: paths-filter with base: HEAD~1
         ├─ publish-v20111101: npm publish (path filter matched)
         ├─ release-v20111101: Create tag v2.0.1 (after publish)
-        ├─ publish-v20250224: npm publish (serialized, after v20111101 release)
+        ├─ publish-v20250224: npm publish (serialized, after delay)
         ├─ release-v20250224: Create tag v3.0.1 (after publish)
         ↓
 Result: Both versions published and released sequentially, CHANGELOG updated
