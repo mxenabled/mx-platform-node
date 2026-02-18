@@ -39,22 +39,51 @@ jobs:
             echo "✅ No skip flag - proceeding with publish/release"
           fi
 
-  # Detect which test API versions were modified in this push
+  # Detect which test API versions were modified
+  # On repository_dispatch: versions come from client payload (paths-filter can't
+  # detect changes correctly because dispatch runs on master, not test-auto-generate)
+  # On push: use paths-filter as normal (push events have correct git context)
+  # NOTE: This is a SANDBOX-ONLY workaround. Production on-push-master.yml does NOT
+  # need this because both push and dispatch target master (same branch = correct context).
   detect-changes:
     runs-on: ubuntu-latest
     outputs:
-      test_v20111101: ${{ steps.filter.outputs.test_v20111101 }}
-      test_v20250224: ${{ steps.filter.outputs.test_v20250224 }}
+      test_v20111101: ${{ steps.result.outputs.test_v20111101 }}
+      test_v20250224: ${{ steps.result.outputs.test_v20250224 }}
     steps:
       - uses: actions/checkout@v3
-      - uses: dorny/paths-filter@v2
+      - name: Detect from dispatch payload
+        id: dispatch
+        if: github.event_name == 'repository_dispatch'
+        run: |
+          VERSIONS="${{ github.event.client_payload.versions }}"
+          echo "📋 Dispatch payload versions: $VERSIONS"
+          [[ "$VERSIONS" == *"v20111101"* ]] && echo "test_v20111101=true" >> $GITHUB_OUTPUT || echo "test_v20111101=false" >> $GITHUB_OUTPUT
+          [[ "$VERSIONS" == *"v20250224"* ]] && echo "test_v20250224=true" >> $GITHUB_OUTPUT || echo "test_v20250224=false" >> $GITHUB_OUTPUT
+      - name: Detect from push paths
         id: filter
+        if: github.event_name == 'push'
+        uses: dorny/paths-filter@v2
         with:
           filters: |
             test_v20111101:
               - 'test-v20111101/**'
             test_v20250224:
               - 'test-v20250224/**'
+      - name: Set outputs
+        id: result
+        run: |
+          if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
+            echo "test_v20111101=${{ steps.dispatch.outputs.test_v20111101 }}" >> $GITHUB_OUTPUT
+            echo "test_v20250224=${{ steps.dispatch.outputs.test_v20250224 }}" >> $GITHUB_OUTPUT
+            echo "📋 Using dispatch-based detection"
+          else
+            echo "test_v20111101=${{ steps.filter.outputs.test_v20111101 }}" >> $GITHUB_OUTPUT
+            echo "test_v20250224=${{ steps.filter.outputs.test_v20250224 }}" >> $GITHUB_OUTPUT
+            echo "📋 Using paths-filter-based detection"
+          fi
+          echo "📋 test_v20111101=${{ steps.dispatch.outputs.test_v20111101 || steps.filter.outputs.test_v20111101 }}"
+          echo "📋 test_v20250224=${{ steps.dispatch.outputs.test_v20250224 || steps.filter.outputs.test_v20250224 }}"
 
   # Simulated publish and release for each version conditionally
   # Same conditional structure as production but echoes success instead of real npm publish/GitHub release
