@@ -32,9 +32,9 @@ jobs:
 
   # Detect which API versions were modified
   # Uses dorny/paths-filter to check which version directories changed.
-  # For push events: paths-filter uses github.event.before/after automatically.
-  # For repository_dispatch events: both push and dispatch target master (same branch),
-  # so we compare HEAD against HEAD~1 to detect changes from the just-pushed commit.
+  # For push events: default base (empty) uses github.event.before/after automatically.
+  # For repository_dispatch events: setting base to 'master' (same branch) triggers
+  # paths-filter's "last commit" comparison mode per the docs.
   detect-changes:
     runs-on: ubuntu-latest
     outputs:
@@ -42,12 +42,10 @@ jobs:
       v20250224: ${{ steps.filter.outputs.v20250224 }}
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 2
       - uses: dorny/paths-filter@v2
         id: filter
         with:
-          base: ${{ github.event_name == 'repository_dispatch' && 'HEAD~1' || '' }}
+          base: ${{ github.event_name == 'repository_dispatch' && 'master' || '' }}
           filters: |
             v20111101:
               - 'v20111101/**'
