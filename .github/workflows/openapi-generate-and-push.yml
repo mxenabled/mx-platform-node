@@ -63,20 +63,25 @@ jobs:
           ruby-version: 3.1
       - name: Validate configuration
         run: ruby .github/config_validator.rb "${{ matrix.config_file }}" "${{ matrix.api_version }}"
+      
       - name: Bump version
         id: bump_version
         run: |
           VERSION="${{ github.event.client_payload.version || 'patch' }}"
           NEW_VERSION=$(ruby .github/version.rb $VERSION ${{ matrix.config_file }})
           echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+      
       - name: Clean repo
         run: ruby .github/clean.rb ${{ matrix.api_version }}
+      
       - name: Copy generator ignore rules
         run: |
           mkdir -p ./${{ matrix.api_version }}/
           cp .openapi-generator-ignore ./${{ matrix.api_version }}/
+      
       - name: Install openapi-generator-cli
         run: npm install @openapitools/openapi-generator-cli -g
+      
       - name: Generate SDK
         run: |
           COMMIT_SHA="${{ github.event.client_payload.commit_sha || 'master' }}"
@@ -92,11 +97,13 @@ jobs:
             -c ${{ matrix.config_file }} \
             -t ./openapi/templates \
             -o ./${{ matrix.api_version }}
+      
       - name: Upload SDK artifacts
         uses: actions/upload-artifact@v4
         with:
           name: generated-${{ matrix.api_version }}
           path: ./${{ matrix.api_version }}
+      
       - name: Upload config artifact
         uses: actions/upload-artifact@v4
         with:
@@ -112,6 +119,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: ./generated
+      
       - name: Restore config files from artifacts
         run: |
           # Config files are bumped in the Generate job (separate runner).
@@ -126,6 +134,7 @@ jobs:
 
           # Clean up config artifact directories so they don't get committed
           rm -rf ./generated/config-*
+      
       - name: Move generated files and track versions
         id: track_versions
         run: |
@@ -144,6 +153,7 @@ jobs:
           done
           
           echo "generated_versions=$GENERATED_VERSIONS" >> $GITHUB_OUTPUT
+      
       - name: Update CHANGELOG
         run: |
           GENERATED_VERSIONS="${{ steps.track_versions.outputs.generated_versions }}"
@@ -158,6 +168,7 @@ jobs:
           # Trim leading/trailing whitespace first
           VERSIONS_CSV=$(echo "$GENERATED_VERSIONS" | xargs | tr ' ' ',')
           ruby .github/changelog_manager.rb "$VERSIONS_CSV"
+      
       - name: Copy documentation
         run: |
           GENERATED_VERSIONS="${{ steps.track_versions.outputs.generated_versions }}"
@@ -167,6 +178,7 @@ jobs:
             cp CHANGELOG.md "./$VERSION/CHANGELOG.md"
             cp MIGRATION.md "./$VERSION/MIGRATION.md"
           done
+      
       - name: Checkout master
         run: git checkout master
       - name: Create commit
@@ -181,3 +193,31 @@ jobs:
         run: git push origin master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # GitHub security feature: pushes using GITHUB_TOKEN don't trigger other workflows.
+      # We must explicitly trigger on-push-master.yml using a GitHub App token.
+      - name: Generate access token
+        id: generate_token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.PAPI_SDK_APP_ID }}
+          installation_id: ${{ secrets.PAPI_SDK_INSTALLATION_ID }}
+          private_key: ${{ secrets.PAPI_SDK_PRIVATE_KEY }}
+      
+      - name: Trigger publish and release workflow
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ steps.generate_token.outputs.token }}
+          event-type: manual_push_to_master
+      
+      - name: Slack notification
+        uses: ravsamhq/notify-slack-action@v2
+        if: always()
+        with:
+          status: ${{ job.status }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          notification_title: "{repo}: {workflow} workflow"
+          message_format: "{emoji} *<{workflow_url}|{workflow}>* {status_message} in <{repo_url}|{repo}>"
+          notify_when: "failure"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
