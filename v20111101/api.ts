@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * MX Platform API
- * The MX Platform API is a powerful, fully-featured API designed to make aggregating and enhancing financial data easy and reliable. It can seamlessly connect your app or website to tens of thousands of financial institutions.  Just getting started? See our [use case guides](/use-cases/).  
+ * The MX Platform API is a powerful, fully-featured API designed to make aggregating and enhancing financial data easy and reliable. It can seamlessly connect your app or website to tens of thousands of financial institutions.  Just getting started? See our [use case guides](/use-cases/). 
  *
  * The version of the OpenAPI document: 20111101
  * 
@@ -4627,16 +4627,16 @@ export interface MemberResponse {
     'most_recent_job_detail_code'?: number | null;
     /**
      * 
-     * @type {string}
+     * @type {boolean}
      * @memberof MemberResponse
      */
-    'most_recent_job_detail_text'?: string | null;
+    'most_recent_job_detail_text'?: boolean | null;
     /**
      * 
-     * @type {string}
+     * @type {boolean}
      * @memberof MemberResponse
      */
-    'most_recent_job_guid'?: string | null;
+    'most_recent_job_guid'?: boolean | null;
     /**
      * 
      * @type {string}
@@ -13073,7 +13073,7 @@ export const InstitutionsApiAxiosParamCreator = function (configuration?: Config
             setBasicAuthToObject(localVarRequestOptions, configuration)
 
             if (isoCountryCode) {
-                localVarQueryParameter['iso_country_code'] = isoCountryCode;
+                localVarQueryParameter['iso_country_code'] = isoCountryCode.join(COLLECTION_FORMATS.csv);
             }
 
             if (page !== undefined) {
@@ -13179,7 +13179,7 @@ export const InstitutionsApiAxiosParamCreator = function (configuration?: Config
             }
 
             if (isoCountryCode) {
-                localVarQueryParameter['iso_country_code'] = isoCountryCode;
+                localVarQueryParameter['iso_country_code'] = isoCountryCode.join(COLLECTION_FORMATS.csv);
             }
 
             if (page !== undefined) {
@@ -22143,7 +22143,7 @@ export const TransactionsApiAxiosParamCreator = function (configuration?: Config
             }
 
             if (categoryGuid2) {
-                localVarQueryParameter['category_guid[]'] = categoryGuid2;
+                localVarQueryParameter['category_guid[]'] = categoryGuid2.join(COLLECTION_FORMATS.csv);
             }
 
             if (topLevelCategoryGuid !== undefined) {
@@ -22151,7 +22151,7 @@ export const TransactionsApiAxiosParamCreator = function (configuration?: Config
             }
 
             if (topLevelCategoryGuid2) {
-                localVarQueryParameter['top_level_category_guid[]'] = topLevelCategoryGuid2;
+                localVarQueryParameter['top_level_category_guid[]'] = topLevelCategoryGuid2.join(COLLECTION_FORMATS.csv);
             }
 
             if (useCase !== undefined) {
@@ -22254,7 +22254,7 @@ export const TransactionsApiAxiosParamCreator = function (configuration?: Config
             }
 
             if (categoryGuid2) {
-                localVarQueryParameter['category_guid[]'] = categoryGuid2;
+                localVarQueryParameter['category_guid[]'] = categoryGuid2.join(COLLECTION_FORMATS.csv);
             }
 
             if (topLevelCategoryGuid !== undefined) {
@@ -22262,7 +22262,7 @@ export const TransactionsApiAxiosParamCreator = function (configuration?: Config
             }
 
             if (topLevelCategoryGuid2) {
-                localVarQueryParameter['top_level_category_guid[]'] = topLevelCategoryGuid2;
+                localVarQueryParameter['top_level_category_guid[]'] = topLevelCategoryGuid2.join(COLLECTION_FORMATS.csv);
             }
 
             if (includes !== undefined) {
@@ -22361,7 +22361,7 @@ export const TransactionsApiAxiosParamCreator = function (configuration?: Config
             }
 
             if (categoryGuid2) {
-                localVarQueryParameter['category_guid[]'] = categoryGuid2;
+                localVarQueryParameter['category_guid[]'] = categoryGuid2.join(COLLECTION_FORMATS.csv);
             }
 
             if (topLevelCategoryGuid !== undefined) {
@@ -22369,7 +22369,7 @@ export const TransactionsApiAxiosParamCreator = function (configuration?: Config
             }
 
             if (topLevelCategoryGuid2) {
-                localVarQueryParameter['top_level_category_guid[]'] = topLevelCategoryGuid2;
+                localVarQueryParameter['top_level_category_guid[]'] = topLevelCategoryGuid2.join(COLLECTION_FORMATS.csv);
             }
 
             if (includes !== undefined) {
@@ -22469,7 +22469,7 @@ export const TransactionsApiAxiosParamCreator = function (configuration?: Config
             }
 
             if (categoryGuid2) {
-                localVarQueryParameter['category_guid[]'] = categoryGuid2;
+                localVarQueryParameter['category_guid[]'] = categoryGuid2.join(COLLECTION_FORMATS.csv);
             }
 
             if (topLevelCategoryGuid !== undefined) {
@@ -22477,7 +22477,7 @@ export const TransactionsApiAxiosParamCreator = function (configuration?: Config
             }
 
             if (topLevelCategoryGuid2) {
-                localVarQueryParameter['top_level_category_guid[]'] = topLevelCategoryGuid2;
+                localVarQueryParameter['top_level_category_guid[]'] = topLevelCategoryGuid2.join(COLLECTION_FORMATS.csv);
             }
 
             if (useCase !== undefined) {
@@ -22585,7 +22585,7 @@ export const TransactionsApiAxiosParamCreator = function (configuration?: Config
             };
         },
         /**
-         * Get a Specific Repeating Transaction. <br /><br />List For more see the  [Repeating Transactions guide](/api-reference/platform-api/v20111101/reference/transactions-overview#repeating-transactions)
+         * Get a Specific Repeating Transaction. <br /><br />List For more see the [Repeating Transactions guide](/api-reference/platform-api/v20111101/reference/transactions-overview#repeating-transactions)
          * @summary Get a Repeating Transaction
          * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
          * @param {string} repeatingTransactionGuid The unique id for a recurring transaction.
@@ -22951,7 +22951,7 @@ export const TransactionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Get a Specific Repeating Transaction. <br /><br />List For more see the  [Repeating Transactions guide](/api-reference/platform-api/v20111101/reference/transactions-overview#repeating-transactions)
+         * Get a Specific Repeating Transaction. <br /><br />List For more see the [Repeating Transactions guide](/api-reference/platform-api/v20111101/reference/transactions-overview#repeating-transactions)
          * @summary Get a Repeating Transaction
          * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
          * @param {string} repeatingTransactionGuid The unique id for a recurring transaction.
@@ -23198,7 +23198,7 @@ export const TransactionsApiFactory = function (configuration?: Configuration, b
             return localVarFp.repeatingTransactions(userGuid, options).then((request) => request(axios, basePath));
         },
         /**
-         * Get a Specific Repeating Transaction. <br /><br />List For more see the  [Repeating Transactions guide](/api-reference/platform-api/v20111101/reference/transactions-overview#repeating-transactions)
+         * Get a Specific Repeating Transaction. <br /><br />List For more see the [Repeating Transactions guide](/api-reference/platform-api/v20111101/reference/transactions-overview#repeating-transactions)
          * @summary Get a Repeating Transaction
          * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
          * @param {string} repeatingTransactionGuid The unique id for a recurring transaction.
@@ -23468,7 +23468,7 @@ export class TransactionsApi extends BaseAPI {
     }
 
     /**
-     * Get a Specific Repeating Transaction. <br /><br />List For more see the  [Repeating Transactions guide](/api-reference/platform-api/v20111101/reference/transactions-overview#repeating-transactions)
+     * Get a Specific Repeating Transaction. <br /><br />List For more see the [Repeating Transactions guide](/api-reference/platform-api/v20111101/reference/transactions-overview#repeating-transactions)
      * @summary Get a Repeating Transaction
      * @param {string} userGuid The unique identifier for a &#x60;user&#x60;, beginning with the prefix &#x60;USR-&#x60;.
      * @param {string} repeatingTransactionGuid The unique id for a recurring transaction.

@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * MX Platform API
- * The MX Platform API is a powerful, fully-featured API designed to make aggregating and enhancing financial data easy and reliable. It can seamlessly connect your app or website to tens of thousands of financial institutions.  Just getting started? See our [use case guides](/use-cases/).  
+ * The MX Platform API is a powerful, fully-featured API designed to make aggregating and enhancing financial data easy and reliable. It can seamlessly connect your app or website to tens of thousands of financial institutions.  Just getting started? See our [use case guides](/use-cases/). 
  *
  * The version of the OpenAPI document: 20111101
  * 
